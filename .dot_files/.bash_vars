@@ -1,0 +1,17 @@
+export PYTHONUNBUFFERED=1
+export IBUS_ENABLE_SYNC_MODE=1
+export GRADLE_USER_HOME=/media/andrew/Miscellaneous/.gradle
+export EDITOR=vim
+
+export http="http:/"
+export https="https:/"
+
+# Some nice variables
+# Mounted Drives
+export E="/media/andrew/Miscellaneous"
+export C="/media/andrew/C"
+
+export CONFIGS_HOME="$HOME/.configs"
+export CONFIGS_DOTS="$HOME/.dot_files"
+export CONFIGS_PACS="$HOME/.packages"
+export CONFIGS_BACKUP="$HOME/.configs_backup"
