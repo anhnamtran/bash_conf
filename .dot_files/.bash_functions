@@ -178,7 +178,9 @@ configs() {
 
 configs-restore() {
   local src=$1
-  cp --remove-destination "$CONFIGS_BACKUP/$src" "$HOME"
+  rm "$src"
+  rm -rf "$CONFIGS_DOTS/$src"
+  cp -r "$CONFIGS_BACKUP/$src" "$HOME"
 
   configs reset HEAD
   configs checkout --
@@ -186,13 +188,11 @@ configs-restore() {
 
 configs-adddot() {
   local src=$1
-  local dst="$CONFIGS_DOTS/$src"
-  local backup="$CONFIGS_BACKUP/$src"
 
-  cp "$src" "$CONFIGS_BACKUP/$src"
-  mv "$src" "$dst" 
-  ln -s "$dst" "$src" 
+  cp -r "$src" "$CONFIGS_BACKUP"
+  mv "$src" "$CONFIGS_DOTS"
+  ln -s "$CONFIGS_DOTS/$src" "$(basename "$src")"
 
-  configs add "$dst"
-  configs add "$backup"
+  configs add "$CONFIGS_DOTS/$src"
+  configs add "$CONFIGS_BACKUP/$src"
 }
