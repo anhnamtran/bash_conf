@@ -68,6 +68,11 @@ let g:loaded_netrwPlugin = 1
 let g:airline_theme='onedark'
 let g:airline_highlighting_cache=1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#alt_sep = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#close_symbol = ''
+let g:airline#extensions#tabline#formatter = 'short_path'
 
 " YouCompleteMe settings
 let g:ycm_autoclose_preview_window_after_completion = 1
