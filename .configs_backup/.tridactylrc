@@ -1,0 +1,18 @@
+set editorcmd tmux new-window -n firefox 'nvim -f %f; tmux wait-for -S firefox-tridactyl-edit' \; wait-for firefox-tridactyl-edit
+
+command ignore mode ignore
+bind --mode=ignore <C-Enter> mode normal
+
+bind L tabnext
+bind H tabprev
+bind yt tabduplicate
+bind ;t tabdetach
+
+bind <C-]> forward
+bind <C-[> back
+
+bind --mode=ex <C-w> text.backward_kill_word
+bind --mode=input <C-w> text.backward_kill_word
+bind --mode=insert <C-w> text.backward_kill_word
+
+unbind <C-f>

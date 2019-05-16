@@ -68,10 +68,8 @@ let g:loaded_netrwPlugin = 1
 let g:airline_theme='onedark'
 let g:airline_highlighting_cache=1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#alt_sep = 1
-let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#show_tab_count = 0
-let g:airline#extensions#tabline#close_symbol = ''
+let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#formatter = 'short_path'
 
 " YouCompleteMe settings
@@ -79,6 +77,19 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_max_num_candidates = 5
 let g:ycm_max_num_identifier_candidates = 5
+let g:ycm_filetype_blacklist = {
+  \ 'tagbar': 1,
+  \ 'notes': 1,
+  \ 'markdown': 1,
+  \ 'netrw': 1,
+  \ 'unite': 1,
+  \ 'text': 1,
+  \ 'vimwiki': 1,
+  \ 'pandoc': 1,
+  \ 'infolog': 1,
+  \ 'mail': 1,
+  \ 'tex' : 1
+\}
 
 " Trigger configuration. Do not use <tab>
 " if you use https://github.com/Valloric/YouCompleteMe.
@@ -93,10 +104,10 @@ let g:UltiSnipsEditSplit = "context"
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
 let g:tex_conceal='abdmg'
 let g:vimtex_imaps_leader='!'
 let g:polyglot_disabled = ['latex']
+set conceallevel=1
 
 " Fugitive and GitGutter
 set diffopt=vertical
@@ -209,6 +220,18 @@ nnoremap <leader>cd :lcd %:p:h<CR>
 
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
+
+"------------------------------ EXTRA FUNCTIONS -------------------------------
+function! HandleURL()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
+  echo s:uri
+  if s:uri != ""
+    silent exec "!open '".s:uri."'"
+  else
+    echo "No URI found in line."
+  endif
+endfunction
+map gx :call HandleURL()<cr>
 
 
 "-------------------------------- THEMES AND GUI ------------------------------
