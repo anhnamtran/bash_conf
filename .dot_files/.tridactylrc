@@ -6,6 +6,7 @@ set hintchars 1234567890
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
+bind i mode ignore
 
 bind j scrollline 5
 bind k scrollline -5
