@@ -12,29 +12,35 @@ Plug 'Valloric/YouCompleteMe'
 
 " Themes and GUIs
 Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Syntax handling
+Plug 'sheerun/vim-polyglot'
+Plug 'lervag/vimtex'
+
+" System navigation
+Plug 'junegunn/fzf'
+Plug 'justinmk/vim-dirvish'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Git integration
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'kristijanhusak/vim-dirvish-git'
+
+" Session tracking
+Plug 'tpope/vim-obsession'
+
+" Utility
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-eunuch'
-Plug 'airblade/vim-gitgutter'
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
 
 " UltiSnips requires Vim 7.4+
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-Plug 'lervag/vimtex'
-
-Plug 'junegunn/fzf'
-
-Plug 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -55,6 +61,8 @@ filetype plugin indent on    " required
 " -------------------------------- SETTINGS -----------------------------------
 " View `man` pages and add new file types
 runtime ftplugin/man.vim
+
+" New file types
 au BufRead,BufNewFile *.bats set filetype=sh
 
 " Obsession
@@ -115,6 +123,8 @@ set updatetime=100
 
 " line numbers
 set number
+" Don't show keys pressed
+set noshowcmd
 
 " split windows to the right instead
 set splitright
@@ -125,6 +135,7 @@ set cursorline
 
 " wrapping
 set wrap linebreak nolist
+
 " tabbing
 set tabstop=2
 set shiftwidth=2
@@ -168,9 +179,6 @@ inoremap jj <ESC>
 inoremap qq <ESC>:x<CR>
 
 " Auto-close
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ` ``<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
@@ -200,8 +208,6 @@ nnoremap <Tab> a<C-Tab><Esc>
 " Ctrl+S to save
 nnoremap <c-s> :w<CR><x><u>
 
-" Quitting
-nnoremap <F4> :x<CR>
 " Tabs
 nnoremap tl :tabn<CR>
 nnoremap th :tabp<CR>
@@ -209,7 +215,7 @@ nnoremap th :tabp<CR>
 " Buffers
 nnoremap H :bp<CR>
 nnoremap L :bn<CR>
-nnoremap <leader>bq :bp <BAR> bd #<CR>
+nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap <leader>ls :ls<CR>
 
 " Remove trailing white spaces
@@ -250,7 +256,9 @@ if !has('nvim')
   set ttymouse=xterm2
 endif
 
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+endif
 
 syntax on
 
