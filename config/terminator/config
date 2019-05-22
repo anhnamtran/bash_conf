@@ -1,0 +1,9 @@
+[global_config]
+	borderless = True
+
+[profiles]
+  [[default]]
+    show_titlebar = False
+    cursor_shape = ibeam
+    background_color = '#282C34'
+    scrollbar_position = disabled

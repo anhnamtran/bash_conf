@@ -1,0 +1,38 @@
+global !p
+def add_space(t):
+	if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', '\'']:
+			return ' '
+	return ''
+
+def fix_indent(snip):
+    vim.eval('feedkeys("\<c-f>")')
+endglobal
+
+snippet doc "Begin document" b
+\begin{document}
+$1
+\end{document}
+endsnippet
+
+snippet mk "Inline Math" wA
+$${1}$`!p snip.rv = add_space(t)`$2
+endsnippet
+
+snippet dm "Newline Math" wA
+\[
+$1
+.\] $0
+endsnippet
+
+snippet " "Quotes" iA
+\`\`$1''
+endsnippet
+
+post_expand "fix_indent(snip)"
+snippet it "Individual item" b
+\item $0
+endsnippet
+
+snippet code "\code{...}" i
+\code{$1}
+endsnippet
