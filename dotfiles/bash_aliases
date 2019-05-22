@@ -1,0 +1,77 @@
+# Classes
+alias 452="cd ~/docs/classes/cse452"
+alias 484="cd ~/docs/classes/cse484"
+alias CHI="cd ~/docs/classes/chin103"
+
+################## Should work for most Linux distributions ##################
+alias miles="ssh atran35@miles.cs.washington.edu"
+alias klaatu="ssh atran35@klaatu.cs.washington.edu"
+
+# turns input command echo off
+alias no-echo="stty -echo"
+
+# quality of life
+alias status="git status"
+alias pull="git pull"
+alias push="git push"
+alias commit="git pull && git commit"
+alias add="git add"
+
+alias today="date +%Y-%m-%d"
+
+alias clipboard="xargs echo -n | xclip -sel clip" # needs to have "xclip installed"
+alias cpwd="pwd | clipboard"
+
+alias mkdir="mkdir -pv"
+alias rmf="rm -rf"
+
+alias cdc="clear ; cd"
+alias ..="cd .."
+alias ~="cd ~ && clear"
+
+alias q=exit
+alias e=ranger # must have ranger installed
+alias c=clear
+
+alias open="xdg-open"
+alias browser="sensible-browser"
+
+alias trash="gvfs-trash"
+alias lstrash="gvfs-ls trash://"
+
+# listings
+alias lt="ls -lt"
+alias lss="ls -lSs"
+alias l1="ls -1"
+alias lv="vim ."
+
+alias refresh="clear && source $HOME/.bashrc"
+
+# permissions
+alias cx="chmod +x"
+
+# needs to have "tmux" installed
+alias newmux="tmux new -s"
+alias attachmux="tmux attach-session -t"
+alias lsmux="tmux ls"
+
+# needs to have grip installed
+alias grip="grip --quiet"
+alias killGrip="pgrep -f \"grip\" | xargs kill"
+
+# Start vim with a Session file
+alias vis="nvim -S"
+alias vi="nvim"
+alias vid="nvim -d"
+
+# needs fzf installed
+alias vzf="fzf | xargs nvim"
+alias pzf="fzf | xargs zathura"
+alias ozf="fzf | xargs xdg-open"
+
+# needs to have jupyter note book installed in a virtualenv
+JUPYTER=
+alias jupyter="svenv ${JUPYTER}/venv && jupyter"
+
+# Requires i3lock-color
+alias i3lock="i3lock --blur=5 --clock"

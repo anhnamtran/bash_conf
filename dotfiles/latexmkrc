@@ -1,0 +1,5 @@
+$view = 'pdf';
+$pdf_viewer = 'zathura';
+$pdf_previewer = 'zathura';
+$pdf_mode = 1;
+$out_dir = 'out';

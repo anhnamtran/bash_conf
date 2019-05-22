@@ -1,0 +1,198 @@
+# vi:ft=sh
+
+################## UW CSE attu (delete if no longer at UW) ##################
+# attu
+attu() {
+  ssh "atran35@attu$1.cs.washington.edu"
+}
+
+to_attu() {
+  USAGE="Usage: to_attu /path/to/file /path/to/place --home"
+  if [ $# -eq 0 ]; then
+    echo $USAGE
+  fi
+
+  from="$1"
+
+  to="$2"
+  if [ "$3" = "--home" ]; then
+    from="/homes/iws/atran35/$to"
+  fi
+
+  scp -r "$from" "atran35@attu.cs.washington.edu:$to"
+}
+
+# Activates virtualenv from the given start folder
+svenv() {
+  source "$1/bin/activate"
+}
+
+# Default download application: aria2c
+# The first argument is the link, the second is the output file
+# Output file is optional
+download() {
+  USAGE="Usage: download link [output file]"
+  if [ $# -eq 0 ]; then
+    echo $USAGE
+  elif [ -z "$2" ]; then
+    echo "Link: $1"
+    aria2c $1 && alert
+  else
+    echo "Link: $1"
+    echo "Name: $2"
+    aria2c $1 -o "$2" && alert
+  fi
+}
+
+# Checks if the current shell is a TMUX session
+check_tmux() {
+  if [ -z "$TMUX" ]; then
+    echo "Not In TMUX."
+  fi
+}
+
+vimail() {
+  USAGE="Usage: vimail RECIPIENT SUBJECT"
+  if [ $# -eq 0 ] || [ "$1" = "-h" ]; then
+    echo "$USAGE"
+    return 0
+  fi
+
+  TO="$1"
+  SUB="$2"
+
+  SUB_FILE=$(echo "$SUB" | sed 's/ /-/g')
+  TO_FILE=$(echo "$TO" | cut -d "@" -f 1)
+  FILE=$(mktemp /tmp/${SUB_FILE}-${TO_FILE}:XXXXXX.mail)
+
+  vi -c "set colorcolumn=120" -c "set ft=text" -c "set tw=120" "$FILE"
+
+  if [ $? -ne 0 ]; then
+    DRAFT="${SUB_FILE}-${TO_FILE}:$(date +%F--%H-%M-%S).mail"
+    mv "$FILE" "/home/andrew/.mail/drafts/$DRAFT"
+    if [ $? -ne 0 ]; then
+      echo "Draft not saved..."
+    else
+      echo "Saved draft... $DRAFT"
+    fi
+  else
+    mailx -s "$SUB" "$TO" < "$FILE"
+    if [ $? -eq 0 ]; then
+      echo "Mail sent to $TO"
+      rm -f "$FILE"
+    else
+      mv "$FILE" "/home/andrew/.mail/drafts/$DRAFT"
+      echo "Mail sent unsuccessful. Saved draft... $DRAFT"
+    fi
+  fi
+}
+
+# Lists all the files in the given directory and allows you to select one
+lc() {
+  USAGE="Usage: lc DIR [--help]"
+  if [ "$1" = "--help" ]; then
+    echo "$USAGE"
+  fi
+
+  DIR=$1
+  options=( $(ls -aQF $DIR) )
+
+  select opt in "${options[@]}" ; do
+    if [ "$REPLY" = "q" ]; then
+      return
+    fi
+
+    if [[ -d $opt ]]; then
+      cd "$opt"
+      echo "--------------------------------------------------"
+      echo "$(basename $PWD)"
+      lc
+      break
+    elif [[ -f $opt ]]; then
+      read -p 'Command: ' CMD
+      echo "$CMD $opt"
+      $CMD $opt
+      break
+    else
+      echo "Unknown option."
+    fi
+  done
+}
+
+# extract several common file types
+extract() {
+  if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+  else
+    for n in "$@"
+    do
+      if [ -f "$n" ] ; then
+        case "${n%,}" in
+          *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
+                       tar xvf "$n"       ;;
+          *.lzma)      unlzma ./"$n"      ;;
+          *.bz2)       bunzip2 ./"$n"     ;;
+          *.cbr|*.rar)       unrar x -ad ./"$n" ;;
+          *.gz)        gunzip ./"$n"      ;;
+          *.cbz|*.epub|*.zip)       unzip ./"$n"       ;;
+          *.z)         uncompress ./"$n"  ;;
+          *.7z|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
+                       7z x ./"$n"        ;;
+          *.xz)        unxz ./"$n"        ;;
+          *.exe)       cabextract ./"$n"  ;;
+          *.cpio)      cpio -id < ./"$n"  ;;
+          *.cba|*.ace)      unace x ./"$n"      ;;
+          *)
+                       echo "extract: '$n' - unknown archive method"
+                       return 1
+                       ;;
+        esac
+      else
+        echo "'$n' - file does not exist"
+        return 1
+      fi
+    done
+  fi
+}
+
+# Configuration functions, these aliases only work on wherever $CONFIGS_HOME is
+# set to, if it is empty, then $HOME/.configs will be used.
+if [[ -z "$CONFIGS_HOME" ]]; then
+  CONFIGS_HOME="$HOME/.configs"
+  CONFIGS_DOTS="$HOME/.dot_files"
+  CONFIGS_PACS="$HOME/.packages"
+  CONFIGS_BACKUP="$HOME/.configs_backup"
+fi
+
+# Enables git autocompletion if $CONFIGS_HOME if present
+if [[ -d "$CONFIGS_HOME" ]]; then
+  _completion_loader git
+  eval "$(complete -p git | sed -r 's/(\s)git$/\1configs/')"
+fi
+
+configs() {
+  git --git-dir="$CONFIGS_HOME" --work-tree="$HOME" "$@"
+}
+
+configs-restore() {
+  local src=$1
+  rm "$src"
+  rm -rf "$CONFIGS_DOTS/$src"
+  cp -r "$CONFIGS_BACKUP/$src" "$HOME"
+
+  configs reset HEAD
+  configs checkout --
+}
+
+configs-adddot() {
+  local src=$1
+
+  cp -r "$src" "$CONFIGS_BACKUP"
+  mv "$src" "$CONFIGS_DOTS"
+  ln -s "$CONFIGS_DOTS/$src" "$(basename "$src")"
+
+  configs add "$CONFIGS_DOTS/$src"
+  configs add "$CONFIGS_BACKUP/$src"
+}
