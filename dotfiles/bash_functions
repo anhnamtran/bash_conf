@@ -196,3 +196,10 @@ configs-adddot() {
   configs add "$CONFIGS_DOTS/$src"
   configs add "$CONFIGS_BACKUP/$src"
 }
+
+# package management
+pac() {
+  sudo pacman "$@" && \
+  sudo pacman -Qn > ~/nat-pac-list && \
+  sudo pacman -Qm > ~/aur-pac-list
+}
