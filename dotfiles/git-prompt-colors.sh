@@ -1,0 +1,68 @@
+##############################################################################
+# Changes the prompt to a Debian-style one that truncates pwd to a max length
+# depending on the terminal column width. Also uses the prompt_callback
+# function of bash-git-prompt to set the window title to almost the same
+# Debian-style. This version has been tweaked for Ubuntu standard terminal 
+# fonts.
+#
+# The prompt will use a Debian-style on the form
+#
+# relative-path-from-git-toplevel-dir bash-git-prompt-info <exit status>
+# HH:MM:SS User@Host ▶
+#
+# The window title will have the form
+# relative-path-from-git-toplevel-dir
+#
+# Example usage:
+# if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
+#   GIT_PROMPT_THEME=Custom
+#   source ~/.bash-git-prompt/gitprompt.sh
+# fi
+#
+# Based on Minimal UserHost by Imbibinebe <imbibinebe@gmail.com>
+# [https://github.com/imbibinebe]
+##############################################################################
+override_git_prompt_colors() {
+  BoldPurple="\[\033[01;38;2;205;0;205m\]"
+
+  GIT_PROMPT_THEME_NAME="Minimal_UserHost_NoExitStatus"
+
+  #Overrides the prompt_callback function used by bash-git-prompt
+  function prompt_callback {
+    GIT_CONTAINER_FOLDER_FULLPATH=$(git rev-parse --show-toplevel 2> /dev/null)
+    GIT_CONTAINER_FOLDER=$(basename $GIT_CONTAINER_FOLDER_FULLPATH 2> /dev/null)
+    CURRENT_FULLPATH=$(pwd)
+    local PS1=$GIT_CONTAINER_FOLDER${CURRENT_FULLPATH#$GIT_CONTAINER_FOLDER_FULLPATH}
+    gp_set_window_title "$PS1"
+    echo -n "${BoldYellow}${PS1}${ResetColor}"
+  }
+  
+  Time12a="\$(date +%H:%M:%S)"
+  if [ "$(id -u)" != "0" ]; then
+     UserHost_Color="${BoldPurple}"
+  else
+     UserHost_Color="${BoldRed}"
+  fi
+
+  GIT_PROMPT_BRANCH="${White}"        # the git branch that is active in the current directory
+  GIT_PROMPT_MASTER_BRANCH="${GIT_PROMPT_MASTER_BRANCH}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
+  GIT_PROMPT_PREFIX=""                 # start of the git info string
+  GIT_PROMPT_SUFFIX=""                 # the end of the git info string
+  GIT_PROMPT_SEPARATOR=""              # separates each item
+  GIT_PROMPT_STAGED=" ${Green}●"           # the number of staged files/directories
+  GIT_PROMPT_CONFLICTS=" ${BoldRed}✖"       # the number of files in conflict
+  GIT_PROMPT_CHANGED=" ${BoldBlue}✚"        # the number of changed files
+
+  # GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
+  GIT_PROMPT_UNTRACKED=" ${Green}…"       # the number of untracked files/dirs
+  GIT_PROMPT_STASHED=" ${BoldGreen}⚑"    # the number of stashed files/dir
+  GIT_PROMPT_CLEAN=" ${BoldGreen}✔"      # a colored flag indicating a "clean" repo
+
+  local gp_end="\n${White}${Time12a} ${UserHost_Color}$(whoami)@$(hostname)${ResetColor}"
+
+  GIT_PROMPT_START_USER=""
+  GIT_PROMPT_END_USER="${gp_end} $ "
+  GIT_PROMPT_END_ROOT="${gp_end} /!!!\ "
+}
+
+reload_git_prompt_colors "Custom"

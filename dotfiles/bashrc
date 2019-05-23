@@ -56,13 +56,9 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-function parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
 # These colors only work if the terminal supports True Color!
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}[\[\033[01;38;2;205;0;205m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]]\[\033[00;38;2;190;190;0m\]$(parse_git_branch)\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}[\[\033[01;38;2;205;0;205m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]]\[\033[00;38;2;190;190;0m\]\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}[\u:\W]\[\033[00;33m\]$(parse_git_branch)\[\033[00m\]\$ '
 fi
@@ -146,11 +142,15 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    GIT_PROMPT_THEME=Custom
+    source ~/.bash-git-prompt/gitprompt.sh
+fi
+
 # disables silent mode `Ctrl-S`
 stty -ixon
 
-# Start up command
-# echo -e "\033[1;35m~(OwO)~ What dew we have hewe? Sumwun wants to do sum pwogwammy wogammy! Have fuan! ~(OwO)~\033[0m"
 check_tmux
 
 set -o vi
