@@ -4,6 +4,9 @@ alias 484="cd ~/docs/classes/cse484"
 alias 374="cd ~/docs/classes/cse374"
 alias CHI="cd ~/docs/classes/chin103"
 
+alias Tellina-exp="cd ~/docs/research/tellina_user_experiment"
+alias Tellina-notes="cd ~/docs/research/tellina_user_study"
+
 ################## Should work for most Linux distributions ##################
 # turns input command echo off
 alias no-echo="stty -echo"
