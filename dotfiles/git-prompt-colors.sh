@@ -34,7 +34,7 @@ override_git_prompt_colors() {
     CURRENT_FULLPATH=$(pwd)
     local PS1=$GIT_CONTAINER_FOLDER${CURRENT_FULLPATH#$GIT_CONTAINER_FOLDER_FULLPATH}
     gp_set_window_title "$PS1"
-    echo -n "${BoldYellow}${PS1}${ResetColor}"
+    echo -n "\n${BoldBlue}${PS1}${ResetColor}"
   }
   
   Time12a="\$(date +%H:%M:%S)"
@@ -44,19 +44,19 @@ override_git_prompt_colors() {
      UserHost_Color="${BoldRed}"
   fi
 
-  GIT_PROMPT_BRANCH="${White}"        # the git branch that is active in the current directory
+  GIT_PROMPT_BRANCH="${Yellow}"        # the git branch that is active in the current directory
   GIT_PROMPT_MASTER_BRANCH="${GIT_PROMPT_MASTER_BRANCH}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
   GIT_PROMPT_PREFIX=""                 # start of the git info string
   GIT_PROMPT_SUFFIX=""                 # the end of the git info string
   GIT_PROMPT_SEPARATOR=""              # separates each item
-  GIT_PROMPT_STAGED=" ${Green}●"           # the number of staged files/directories
-  GIT_PROMPT_CONFLICTS=" ${BoldRed}✖"       # the number of files in conflict
-  GIT_PROMPT_CHANGED=" ${BoldBlue}✚"        # the number of changed files
+  GIT_PROMPT_STAGED=" ${BoldGreen}*"           # the number of staged files/directories
+  GIT_PROMPT_CONFLICTS=" ${BoldRed}x"       # the number of files in conflict
+  GIT_PROMPT_CHANGED=" ${BoldBlue}+"        # the number of changed files
 
   # GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
-  GIT_PROMPT_UNTRACKED=" ${Green}…"       # the number of untracked files/dirs
-  GIT_PROMPT_STASHED=" ${BoldGreen}⚑"    # the number of stashed files/dir
-  GIT_PROMPT_CLEAN=" ${BoldGreen}✔"      # a colored flag indicating a "clean" repo
+  GIT_PROMPT_UNTRACKED=" ${Red}…"       # the number of untracked files/dirs
+  GIT_PROMPT_STASHED=" ${Green}⚑ "    # the number of stashed files/dir
+  GIT_PROMPT_CLEAN=" ${Green}✔ "      # a colored flag indicating a "clean" repo
 
   local gp_end="\n${White}${Time12a} ${UserHost_Color}$(whoami)@$(hostname)${ResetColor}"
 
@@ -65,4 +65,4 @@ override_git_prompt_colors() {
   GIT_PROMPT_END_ROOT="${gp_end} /!!!\ "
 }
 
-reload_git_prompt_colors "Custom"
+reload_git_prompt_colors "Minimal_UserHost_NoExitStatus"
