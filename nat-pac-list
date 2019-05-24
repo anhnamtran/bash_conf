@@ -24,6 +24,7 @@ autoconf 2.69-5
 automake 1.16.1-1
 avahi 0.7+18+g1b5f401-2
 bash 5.0.007-1
+bash-bats 0.4.0-2
 bash-completion 2.9-1
 bc 1.07.1-3
 binutils 2.32-1
@@ -60,6 +61,7 @@ confuse 3.2.2-1
 coreutils 8.31-1
 cracklib 2.9.7-1
 cryptsetup 2.1.0-1
+ctags 1:r20190522+g3fdf28bc-1
 cups 2.2.11-2
 cups-filters 1.22.5-2
 cups-pk-helper 0.2.6-3
@@ -630,6 +632,7 @@ rest 0.8.1-1
 rhash 1.3.8-1
 rofi 1.5.2-1
 rpcbind 1.2.5-2
+rsync 3.1.3-1
 rtkit 0.12-1
 rtmpdump 1:2.4.r96.fa8646d-4
 run-parts 4.8.6.1-1
