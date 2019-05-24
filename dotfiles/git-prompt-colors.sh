@@ -2,7 +2,7 @@
 # Changes the prompt to a Debian-style one that truncates pwd to a max length
 # depending on the terminal column width. Also uses the prompt_callback
 # function of bash-git-prompt to set the window title to almost the same
-# Debian-style. This version has been tweaked for Ubuntu standard terminal 
+# Debian-style. This version has been tweaked for Ubuntu standard terminal
 # fonts.
 #
 # The prompt will use a Debian-style on the form
@@ -25,18 +25,19 @@
 override_git_prompt_colors() {
   BoldPurple="\[\033[01;38;2;205;0;205m\]"
 
-  GIT_PROMPT_THEME_NAME="Minimal_UserHost_NoExitStatus"
+  GIT_PROMPT_THEME_NAME="Minimal_User_NoHost_NoExitStatus"
 
   #Overrides the prompt_callback function used by bash-git-prompt
   function prompt_callback {
     GIT_CONTAINER_FOLDER_FULLPATH=$(git rev-parse --show-toplevel 2> /dev/null)
     GIT_CONTAINER_FOLDER=$(basename $GIT_CONTAINER_FOLDER_FULLPATH 2> /dev/null)
     CURRENT_FULLPATH=$(pwd)
-    local PS1=$GIT_CONTAINER_FOLDER${CURRENT_FULLPATH#$GIT_CONTAINER_FOLDER_FULLPATH}
+    CURRENT_BASE=$(basename $CURRENT_FULLPATH 2> /dev/null)
+    local PS1="$GIT_CONTAINER_FOLDER"
     gp_set_window_title "$PS1"
-    echo -n "\n${BoldBlue}${PS1}${ResetColor}"
+    echo -n "\n${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}"
   }
-  
+
   Time12a="\$(date +%H:%M:%S)"
   if [ "$(id -u)" != "0" ]; then
      UserHost_Color="${BoldPurple}"
@@ -58,11 +59,11 @@ override_git_prompt_colors() {
   GIT_PROMPT_STASHED=" ${Green}⚑ "    # the number of stashed files/dir
   GIT_PROMPT_CLEAN=" ${Green}✔ "      # a colored flag indicating a "clean" repo
 
-  local gp_end="\n${White}${Time12a} ${UserHost_Color}$(whoami)@$(hostname)${ResetColor}"
+  local gp_end="\n${Time12a} [${UserHost_Color}$(whoami)${ResetColor}]"
 
   GIT_PROMPT_START_USER=""
-  GIT_PROMPT_END_USER="${gp_end} $ "
-  GIT_PROMPT_END_ROOT="${gp_end} /!!!\ "
+  GIT_PROMPT_END_USER="${gp_end}$ "
+  GIT_PROMPT_END_ROOT="${gp_end}/!!!\ "
 }
 
-reload_git_prompt_colors "Minimal_UserHost_NoExitStatus"
+reload_git_prompt_colors "Minimal_User_NoHost_NoExitStatus"
