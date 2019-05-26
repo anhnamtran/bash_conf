@@ -9,7 +9,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
-font xft:URWGothic-Book 32
+font xft:Iosevka 32
 
 floating_modifier $mod
 

@@ -3,6 +3,8 @@
 
 [profiles]
   [[default]]
+    font = Iosevka Term Medium 10
+    use_system_font = False
     show_titlebar = False
     cursor_shape = ibeam
     background_color = '#282C34'

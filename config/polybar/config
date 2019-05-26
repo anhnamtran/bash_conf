@@ -143,7 +143,7 @@ type = internal/pulseaudio
 sink = alsa_output.pci-0000_12_00.3.analog-stereo
 use-ui-max = true
 
-interval = 5
+interval = 2
 
 format-volume = <ramp-volume> <label-volume>
 format-volume-foreground = #5d2070
@@ -151,8 +151,8 @@ format-muted = <label-muted>
 
 label-volume = %percentage%%
 
-label-muted =  muted
-label-muted-foreground = #666
+label-muted = 
+label-muted-foreground = #5d2070
 
 ramp-volume-0 = 
 ramp-volume-1 = 
