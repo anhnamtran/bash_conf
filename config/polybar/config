@@ -20,8 +20,8 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = "Source Code Pro Semibold:size=24;1"
-font-1 = "Font Awesome 5 Free:style=Solid:size=24;1"
-font-2 = "Font Awesome 5 Brands:size=24;1"
+font-1 = "Material Design Icons:size=24;1"
+font-2 = "Material Design Icons:size=24;1"
 
 modules-left = i3
 modules-center = date
@@ -64,37 +64,20 @@ label-urgent-padding = 2
 
 [module/wlan]
 type = internal/network
-interface = wpl2s0
+interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-foreground = #162025
-format-connected-background = #193a48
-format-connected-padding = 2
+format-connected-foreground = #5d2070
 label-connected = %essid%
 
 format-disconnected =
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = #ffffff
-
-[module/eth]
-type = internal/network
-interface = enp0s3
-interval = 3.0
-
-format-connected-padding = 2
-format-connected-foreground = #162025
-format-connected-background = #193a48
-format-connected-prefix = " "
-format-connected-prefix-foreground = #162025
-label-connected = %local_ip%
-
-format-disconnected =
+ramp-signal-0 = 冷
+ramp-signal-1 = 爛
+ramp-signal-2 = 嵐
+ramp-signal-3 = 襤
+ramp-signal-4 = 蠟
 
 [module/date]
 type = internal/date
@@ -106,7 +89,7 @@ date-alt =
 time = %H:%M:%S
 time-alt = %H:%M
 
-format-prefix = 
+format-prefix = 
 format-foreground = #162025
 format-background = #5d2070
 format-padding = 2
@@ -120,18 +103,23 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = #5d2070
-label-close =  cancel
+label-close =  cancel
 label-close-foreground = #5d2070
 label-separator = |
-label-separator-foreground = #193a48
+label-separator-foreground = #5d2070
 
 menu-0-0 = reboot
+menu-0-0-foreground = #5d2070
 menu-0-0-exec = menu-open-1
+
 menu-0-1 = power off
+menu-0-1-foreground = #5d2070
 menu-0-1-exec = menu-open-2
+
 menu-0-2 = log off
+menu-0-2-foreground = #5d2070
 menu-0-2-exec = menu-open-3
 
 menu-1-0 = cancel
@@ -140,7 +128,7 @@ menu-1-1 = reboot
 menu-1-1-exec = reboot
 
 menu-2-0 = power off
-menu-2-0-exec = poweroff
+menu-2-0-exec = shutdown now
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
@@ -157,17 +145,18 @@ use-ui-max = true
 
 interval = 5
 
-format-volume = vol <label-volume>
+format-volume = <ramp-volume> <label-volume>
+format-volume-foreground = #5d2070
 format-muted = <label-muted>
 
 label-volume = %percentage%%
 
-label-muted = 🔇 muted
+label-muted =  muted
 label-muted-foreground = #666
 
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
 [module/battery]
 type = internal/battery
@@ -180,10 +169,13 @@ adapter = ADP1
 poll-interval = 5
 
 format-charging = <animation-charging> <label-charging>
+format-charging-foreground = #5d2070
 
 format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-foreground = #5d2070
 
 format-full = <ramp-capacity> <label-full>
+format-volume-foreground = #5d2070
 
 label-charging = %percentage%%
 
@@ -191,28 +183,28 @@ label-discharging = %percentage%%
 
 label-full =
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
 bar-capacity-width = 10
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
 
 ; Framerate in milliseconds
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
 ; Framerate in milliseconds
 animation-discharging-framerate = 500
 
