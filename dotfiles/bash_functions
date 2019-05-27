@@ -199,7 +199,10 @@ configs-adddot() {
 
 # package management
 pac() {
-  sudo pacman "$@" && \
-  sudo pacman -Qn > ~/nat-pac-list && \
+  sudo pacman "$@" && pac-list
+}
+
+pac-list() {
+  sudo pacman -Qn > ~/nat-pac-list
   sudo pacman -Qm > ~/aur-pac-list
 }
