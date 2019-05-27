@@ -3,7 +3,7 @@
 
 [profiles]
   [[default]]
-    font = Iosevka Term Medium 10
+    font = Iosevka Term Medium 11
     use_system_font = False
     show_titlebar = False
     cursor_shape = ibeam

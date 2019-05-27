@@ -50,9 +50,9 @@ override_git_prompt_colors() {
   GIT_PROMPT_PREFIX=""                 # start of the git info string
   GIT_PROMPT_SUFFIX=""                 # the end of the git info string
   GIT_PROMPT_SEPARATOR=""              # separates each item
-  GIT_PROMPT_STAGED=" ${BoldGreen}*"           # the number of staged files/directories
-  GIT_PROMPT_CONFLICTS=" ${BoldRed}x"       # the number of files in conflict
-  GIT_PROMPT_CHANGED=" ${BoldBlue}+"        # the number of changed files
+  GIT_PROMPT_STAGED=" ${BoldGreen}●"           # the number of staged files/directories
+  GIT_PROMPT_CONFLICTS=" ${BoldRed}✖"       # the number of files in conflict
+  GIT_PROMPT_CHANGED=" ${BoldBlue}✚"        # the number of changed files
 
   # GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
   GIT_PROMPT_UNTRACKED=" ${Red}…"       # the number of untracked files/dirs

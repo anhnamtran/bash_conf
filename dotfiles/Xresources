@@ -29,7 +29,7 @@ URxvt*internalBorder: 5
 URxvt*geometry: 70x19
 
 rofi.color-enabled: true
-rofi.color-window: #282C34, #510863, #510863
+rofi.color-window: #282C34, #162025, #162025
 rofi.color-normal: #282C34, #bfbfbf, #282C34, #510863, #162025
 rofi.color-active: #282C34, #bfbfbf, #282C34, #510863, #162025
 rofi.color-urgent: #282C34, #bfbfbf, #282C34, #510863, #162025
