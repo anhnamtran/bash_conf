@@ -1,11 +1,10 @@
-map jj <ESC>
-map L :action NextTab<CR>
-map H :action PreviousTab<CR>
+set vim-surround
 
-" splitting windows are mapped in the IDEA itself
-" Map verticle split to <C-W>, v
-" Map horizontal split to <C-W>, s
-map <C-l> :action VimWindowRight<CR>
-map <C-h> :action VimWindowLeft<CR>
-map <C-j> :action VimWindowDown<CR>
-map <C-k> :action VimWindowUp<CR>
+inoremap jj <ESC>
+nnoremap L :action NextTab<CR>
+nnoremap H :action PreviousTab<CR>
+
+nnoremap <C-l> :action VimWindowRight<CR>
+nnoremap <C-h> :action VimWindowLeft<CR>
+nnoremap <C-j> :action VimWindowDown<CR>
+nnoremap <C-k> :action VimWindowUp<CR>
