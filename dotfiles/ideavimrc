@@ -2,6 +2,9 @@ map jj <ESC>
 map L :action NextTab<CR>
 map H :action PreviousTab<CR>
 
+" splitting windows are mapped in the IDEA itself
+" Map verticle split to <C-W>, v
+" Map horizontal split to <C-W>, s
 map <C-l> :action VimWindowRight<CR>
 map <C-h> :action VimWindowLeft<CR>
 map <C-j> :action VimWindowDown<CR>
