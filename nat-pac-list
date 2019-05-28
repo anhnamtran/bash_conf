@@ -1,6 +1,7 @@
 aalib 1.4rc5-13
 accountsservice 0.6.55-1
 acl 2.2.53-1
+acpi 1.7-2
 adobe-source-code-pro-fonts 2.030ro+1.050it-5
 adwaita-icon-theme 3.32.0-1
 alsa-lib 1.1.9-1
@@ -97,6 +98,7 @@ expat 2.2.6-1
 faac 1.29.9.2-1
 faad2 2.8.8-1
 fakeroot 1.23-1
+fcron 3.2.1-4
 feh 3.1.3-1
 ffmpeg 1:4.1.3-1
 fftw 3.3.8-1
@@ -125,6 +127,8 @@ gcc 8.3.0-1
 gcc-libs 8.3.0-1
 gcr 3.28.1-1
 gd 2.2.5-2
+gdb 8.3-1
+gdb-common 8.3-1
 gdbm 1.18.1-2
 gdk-pixbuf2 2.38.1-1
 geoclue 2.5.3-1
@@ -179,6 +183,7 @@ gtkmm 1:2.24.5-3
 gtkmm3 3.24.1-1
 gtksourceview3 3.24.11-1
 guile 2.2.4-2
+guile2.0 2.0.14-3
 gupnp 1.2.1-1
 gupnp-dlna 0.10.5+4+gc947eed-1
 gupnp-igd 0.2.5+3+gedd78a6-2
@@ -204,6 +209,7 @@ ilmbase 2.3.0-1
 imagemagick 7.0.8.46-1
 imlib2 1.5.1-1
 inetutils 1.9.4-7
+inotify-tools 3.20.1-1
 intel-ucode 20190514.a-1
 intellij-idea-community-edition 2:2019.1.2-1
 intltool 0.51.0-4
