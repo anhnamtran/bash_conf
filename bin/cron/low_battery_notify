@@ -1,9 +1,14 @@
 #!/bin/bash
 # Sends a notification using notify-send when the battery percentage is below
 # MIN_LEVEL
-MIN_LEVEL=100
+export DISPLAY=:0
+export XAUTHORITY=$HOME/.Xauthority
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+
+MIN_LEVEL=10
 
 battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 if [ $battery_level -le $MIN_LEVEL ]; then
-    /usr/bin/notify-send "Battery Low" "Battery level is at or below ${battery_level}%."
+    /usr/bin/notify-send "Battery Low" "Battery level is at ${battery_level}%."
 fi
