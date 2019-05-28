@@ -82,7 +82,7 @@ ramp-signal-4 = 
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date = " %Y-%m-%d"
 date-alt =
