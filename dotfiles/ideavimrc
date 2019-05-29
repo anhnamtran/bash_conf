@@ -1,6 +1,9 @@
 set vim-surround
 
 inoremap jj <ESC>
+
+nnoremap <leader>r :action RenameElement<CR>
+
 nnoremap L :action NextTab<CR>
 nnoremap H :action PreviousTab<CR>
 
