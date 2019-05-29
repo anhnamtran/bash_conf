@@ -73,6 +73,7 @@ label-connected = %essid%
 label-connected-maxlen = 15
 
 format-disconnected = 
+format-disconnected-foreground = #5d2070
 
 ramp-signal-0 = 
 ramp-signal-1 = 

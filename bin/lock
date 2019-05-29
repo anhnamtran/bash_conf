@@ -33,3 +33,5 @@ i3lock \
 --indicator                 \
 --timestr="%H:%M:%S"        \
 --datestr="%A, %Y-%m-%d"    \
+\
+--veriftext="verifying"     \

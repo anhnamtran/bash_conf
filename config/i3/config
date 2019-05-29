@@ -277,8 +277,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2db- unmute
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10    # increase brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10  # decrease brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5    # increase brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5  # decrease brightness
 
 # touchpad on and off controller on laptop with Fn+<touchpad control functional key>
 bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0
