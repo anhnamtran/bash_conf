@@ -103,7 +103,7 @@ feh 3.1.3-1
 ffmpeg 1:4.1.3-1
 fftw 3.3.8-1
 file 5.37-1
-filesystem 2018.12-2
+filesystem 2019.05-2
 findutils 4.6.0-4
 firefox 67.0-1
 flac 1.3.2-2
@@ -201,12 +201,12 @@ i3blocks 1.4-6
 i3status 2.12-2
 iana-etc 20190504-1
 ibus 1.5.20-2
-ibus-libpinyin 1.11.0-1
+ibus-libpinyin 1.11.1-1
 ibus-unikey 0.6.1-5
 icu 64.2-1
 ijs 0.35-2
 ilmbase 2.3.0-1
-imagemagick 7.0.8.46-1
+imagemagick 7.0.8.47-1
 imlib2 1.5.1-1
 inetutils 1.9.4-7
 inotify-tools 3.20.1-1
@@ -374,14 +374,14 @@ libpulse 12.2-2
 libpwquality 1.4.0-2
 libquvi 0.9.4-5
 libquvi-scripts 0.9.20131130-4
-libraqm 0.6.0-1
+libraqm 0.7.0-1
 libraw1394 2.1.2-2
 librsvg 2:2.44.14-1
 libsamplerate 0.1.9-2
 libsasl 2.1.27-1
 libseccomp 2.4.0-1
 libsecret 0.18.8-2
-libshout 1:2.4.1-4
+libshout 1:2.4.2-1
 libsigc++ 2.10.1-1
 libsigsegv 2.12-1
 libsm 1.2.3-1
@@ -446,7 +446,7 @@ libxkbcommon-x11 0.8.4-1
 libxkbfile 1.1.0-1
 libxklavier 5.4-2
 libxml2 2.9.9-2
-libxmlb 0.1.9-1
+libxmlb 0.1.10-1
 libxmu 1.1.3-1
 libxpm 3.5.12-2
 libxrandr 1.5.2-1
@@ -463,7 +463,7 @@ libxxf86vm 1.1.4-2
 libyaml 0.2.1-1
 licenses 20181104-1
 light 1.2-2
-linux 5.1.4.arch1-1
+linux 5.1.5.arch1-2
 linux-api-headers 5.0.7-1
 linux-firmware 20190514.711d329-1
 llvm-libs 8.0.0-2
@@ -521,7 +521,7 @@ npth 1.6-1
 nspr 4.21-1
 nss 3.44-1
 numactl 2.0.12-2
-nvidia 430.14-4
+nvidia 430.14-6
 nvidia-utils 430.14-1
 oath-toolkit 2.6.2-6
 oniguruma 6.9.2-1
@@ -559,7 +559,7 @@ perl-uri 1.76-1
 perl-xml-parser 2.44-7
 phodav 2.3-1
 pinentry 1.1.0-4
-pipewire 0.2.5+3+g371da358-1
+pipewire 0.2.6-1
 pixman 0.38.4-1
 pkgconf 1.6.1-1
 pkgstats 2.3-10
@@ -604,7 +604,7 @@ python-packaging 19.0-1
 python-pep517 0.5.0-1
 python-pip 19.0.3-1
 python-progress 1.5-1
-python-pygments 2.4.1-1
+python-pygments 2.4.2-1
 python-pyparsing 2.4.0-1
 python-pytoml 0.1.20-1
 python-pytz 2019.1-1
@@ -621,7 +621,7 @@ python-sphinxcontrib-htmlhelp 1.0.1-1
 python-sphinxcontrib-jsmath 1.0.1-1
 python-sphinxcontrib-qthelp 1.0.2-1
 python-sphinxcontrib-serializinghtml 1.1.3-1
-python-urllib3 1.25.2-1
+python-urllib3 1.25.3-1
 python-webencodings 0.5.1-2
 python-xdg 0.26-2
 python-yaml 3.13-2
@@ -817,7 +817,7 @@ xorg-xwd 1.0.7-1
 xorg-xwininfo 1.1.4-1
 xorg-xwud 1.0.5-1
 xorgproto 2018.4-1
-xterm 345-1
+xterm 346-1
 xvidcore 1.3.5-1
 xz 5.2.4-1
 yajl 2.1.0-2
@@ -828,6 +828,7 @@ zathura-pdf-mupdf 0.3.4-2
 zathura-ps 0.2.6-1
 zenity 3.32.0-1
 zeromq 4.3.1-2
+zip 3.0-8
 zita-alsa-pcmi 0.3.2-1
 zita-resampler 1.6.2-1
 zlib 1:1.2.11-3
