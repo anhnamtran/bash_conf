@@ -23,10 +23,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id rofi -show run
 
 # change focus
-bindsym $mod+l focus left
+bindsym $mod+l focus right
 bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod+h focus right
+bindsym $mod+h focus left
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -34,10 +34,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Ctrl+l move left
+bindsym $mod+Ctrl+l move right
 bindsym $mod+Ctrl+j move down
 bindsym $mod+Ctrl+k move up
-bindsym $mod+Ctrl+h move right
+bindsym $mod+Ctrl+h move left
 
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
