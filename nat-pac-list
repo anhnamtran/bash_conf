@@ -9,7 +9,6 @@ alsa-plugins 1.1.9-2
 alsa-utils 1.1.9-1
 aom 1.0.0-1
 appstream-glib 0.7.15-1
-arandr 0.1.10-3
 arc-gtk-theme 20190330-1
 archlinux-keyring 20190123-2
 argon2 20171227-3
@@ -23,6 +22,7 @@ audit 2.8.4-3
 augeas 1.12.0-1
 autoconf 2.69-5
 automake 1.16.1-1
+autorandr 1.8.1-1
 avahi 0.7+18+g1b5f401-2
 bash 5.0.007-1
 bash-bats 0.4.0-2
@@ -83,6 +83,7 @@ dnssec-anchors 20181003-1
 docbook-xml 4.5-8
 docbook-xsl 1.79.2-5
 dosfstools 4.1-2
+dunst 1.4.0-1
 e2fsprogs 1.45.1-1
 efibootmgr 16-1
 efivar 37-1
@@ -514,6 +515,7 @@ network-manager-applet 1.8.21dev+3+gb4c365b1-1
 networkmanager 1.18.0-1
 nitrogen 1.6.1-2
 nm-connection-editor 1.8.21dev+3+gb4c365b1-1
+notification-daemon 3.20.0-3
 notmuch-runtime 0.28.3-1
 noto-fonts 20190111-1
 noto-fonts-cjk 20190409-1
