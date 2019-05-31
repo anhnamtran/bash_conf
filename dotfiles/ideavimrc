@@ -1,4 +1,4 @@
-set vim-surround
+set surround
 
 inoremap jj <ESC>
 
