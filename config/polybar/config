@@ -19,13 +19,13 @@ padding-left = 0
 padding-right = 2
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
 font-0 = "Source Code Pro Semibold:size=24;1"
 font-1 = "Material Design Icons:size=24;1"
 font-2 = "Material Design Icons:size=24;1"
 
-modules-left = i3
+modules-left = i3 wintitle
 modules-center = date
 modules-right = wlan backlight pulseaudio battery
 
@@ -63,6 +63,18 @@ label-visible-padding = 2
 label-urgent = %index%
 label-urgent-background = #BA2922
 label-urgent-padding = 2
+
+[module/wintitle]
+type = internal/xwindow
+
+format = <label>
+format-foreground = #5d2070
+format-padding = 2
+
+label = %title%
+label-maxlen = 30
+
+label-empty =
 
 [module/wlan]
 type = internal/network

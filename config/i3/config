@@ -3,7 +3,8 @@ set $mod Mod4
 new_window pixel 1
 new_float normal
 
-hide_edge_borders none
+hide_edge_borders both
+focus_follows_mouse no
 
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
@@ -50,8 +51,8 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+minus split h;exec notify-send 'tile horizontally'
-bindsym $mod+\ split v;exec notify-send 'tile vertically'
+bindsym $mod+minus split v;exec notify-send 'tile vertically'
+bindsym $mod+backslash split h;exec notify-send 'tile horizontally'
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
