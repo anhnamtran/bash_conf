@@ -1,0 +1,10 @@
+[user]
+	name = Andrew Tran
+	email = andremail03@gmail.com
+[merge]
+	tool = vimdiff
+[alias]
+	compactdiff = diff --compact-summary
+	patch = commit -p
+[credential]
+	helper = cache --timeout=600
