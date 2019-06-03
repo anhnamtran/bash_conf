@@ -166,12 +166,6 @@ if [[ -z "$CONFIGS_HOME" ]]; then
   CONFIGS_BACKUP="$HOME/.configs_backup"
 fi
 
-# Enables git autocompletion if $CONFIGS_HOME if present
-if [[ -d "$CONFIGS_HOME" ]]; then
-  _completion_loader git
-  eval "$(complete -p git | sed -r 's/(\s)git$/\1configs/')"
-fi
-
 configs() {
   git --git-dir="$CONFIGS_HOME" --work-tree="$HOME" "$@"
 }
