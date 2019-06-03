@@ -18,8 +18,6 @@ bind ;t tabdetach
 bind <C-]> forward
 bind <C-[> back
 
-bind <Space> nohlsearch
-
 bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
