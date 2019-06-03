@@ -12,6 +12,7 @@ appstream-glib 0.7.15-1
 arc-gtk-theme 20190330-1
 archlinux-keyring 20190123-2
 argon2 20171227-3
+aria2 1.34.0-2
 aspell 0.60.7rc1-1
 at-spi2-atk 2.32.0-1
 at-spi2-core 2.32.1-1
@@ -38,6 +39,7 @@ brotli 1.0.7-1
 btrfs-progs 5.1-1
 bubblewrap 0.3.3-1
 bzip2 1.0.6-8
+c-ares 1.15.0-1
 ca-certificates 20181109-1
 ca-certificates-mozilla 3.44-1
 ca-certificates-utils 20181109-1
