@@ -22,5 +22,5 @@ if [ $battery_level -le $MIN_LEVEL ]; then
   bat_notify "Battery Low" "critical"
 elif [[ $battery_level -lt $HALF_LEVEL_UPPER ]] && \
       [[ $battery_level -gt $HALF_LEVEL_LOWER ]]; then
-  bat_notify "Battery At Half" "normal"
+  bat_notify "Battery At Half Or Less" "normal"
 fi

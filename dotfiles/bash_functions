@@ -157,6 +157,12 @@ extract() {
   fi
 }
 
+no_space() {
+  find -name "$@" -print0 | sort -rz | \
+    while read -d $'\0' f; do \
+      mv -v "$f" "$(dirname "$f")/$(basename "${f// /_}")"; done
+}
+
 # Configuration functions, these aliases only work on wherever $CONFIGS_HOME is
 # set to, if it is empty, then $HOME/.configs will be used.
 if [[ -z "$CONFIGS_HOME" ]]; then
