@@ -57,10 +57,6 @@ alias newmux="tmux new -s"
 alias attachmux="tmux attach-session -t"
 alias lsmux="tmux ls"
 
-# needs to have grip installed
-alias grip="grip --quiet"
-alias killGrip="pgrep -f \"grip\" | xargs kill"
-
 # Start vim with a Session file
 alias vis="nvim -S"
 alias vi="nvim"
