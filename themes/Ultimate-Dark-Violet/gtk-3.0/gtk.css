@@ -63,7 +63,7 @@
     background-color: #2f2f2f;
     color: #FFFFFF; }
   .gtkstyle-fallback:disabled {
-    background-color: #484848;
+    background-color: #282C34;
     color: rgba(255, 255, 255, 0.4); }
   .gtkstyle-fallback:selected {
     background-color: #9b59b6;
@@ -94,7 +94,7 @@ rubberband,
 flowbox rubberband,
 treeview.view rubberband,
 .content-view rubberband {
-  border: 1px solid #888888;
+  border: 1px solid #1D1D1D;
   background-color: rgba(136, 136, 136, 0.3); }
 
 flowbox flowboxchild {
