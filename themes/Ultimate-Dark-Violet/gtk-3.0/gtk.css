@@ -187,7 +187,7 @@ entry {
   notebook > stack:not(:only-child) revealer spinbutton:disabled:not(.vertical),
   entry:disabled {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    background-color: #444444;
+    background-color: #282C34;
     color: rgba(255, 255, 255, 0.4); }
   spinbutton.flat:not(.vertical), notebook > stack:not(:only-child) entry,
   notebook > stack:not(:only-child) spinbutton:not(.vertical), notebook > stack:not(:only-child) revealer entry.flat,
@@ -273,7 +273,7 @@ entry {
     spinbutton.error:disabled:not(.vertical), notebook > stack:not(:only-child) revealer entry.error:disabled,
     entry.error:disabled {
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      background-color: #444444;
+      background-color: #282C34;
       color: rgba(255, 255, 255, 0.4); }
     spinbutton.error.flat:not(.vertical), notebook > stack:not(:only-child) entry.error,
     notebook > stack:not(:only-child) spinbutton.error:not(.vertical), colorchooser .popover.osd spinbutton.error:not(.vertical), layoutpane entry.error.search, editortweak entry.error.search, #login_window entry.error,
@@ -309,7 +309,7 @@ entry {
     spinbutton.warning:disabled:not(.vertical), notebook > stack:not(:only-child) revealer entry.warning:disabled,
     entry.warning:disabled {
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      background-color: #444444;
+      background-color: #282C34;
       color: rgba(255, 255, 255, 0.4); }
     spinbutton.warning.flat:not(.vertical), notebook > stack:not(:only-child) entry.warning,
     notebook > stack:not(:only-child) spinbutton.warning:not(.vertical), colorchooser .popover.osd spinbutton.warning:not(.vertical), layoutpane entry.warning.search, editortweak entry.warning.search, #login_window entry.warning,
@@ -2263,7 +2263,7 @@ levelbar trough {
   color: #FFFFFF; }
   levelbar trough:disabled {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    background-color: #444444;
+    background-color: #282C34;
     color: rgba(255, 255, 255, 0.4); }
 levelbar.horizontal.discrete block {
   margin: 0 1px; }
@@ -2777,7 +2777,7 @@ decoration {
   .solid-csd decoration {
     margin: 0;
     padding: 4px;
-    box-shadow: inset 0 0 0 4px #444444; }
+    box-shadow: inset 0 0 0 4px #1D1D1D; }
 
 .view:selected, iconview:selected, .view text selection, iconview text selection,
 textview text selection, flowbox flowboxchild:selected, spinbutton:not(.vertical) selection, notebook > stack:not(:only-child) revealer entry selection,
@@ -2983,7 +2983,7 @@ stackswitcher button.text-button.circular {
   font-size: smaller; }
 
 .gedit-document-panel {
-  background-color: #444444; }
+  background-color: #282C34; }
 
 .gedit-document-panel-group-row,
 .gedit-document-panel-group-row:hover {
@@ -3037,7 +3037,7 @@ notebook > stack:not(:only-child) revealer .gedit-search-slider .linked:not(.ver
  * Tweak Tool *
  **************/
 .tweak-categories {
-  background-image: image(#444444); }
+  background-image: image(#282C34); }
   .tweak-categories separator {
     min-width: 0;
     min-height: 0;
@@ -3240,7 +3240,7 @@ overlay grid.horizontal > revealer > scrolledwindow.frame:dir(rtl) {
   border-color: rgba(0, 0, 0, 0.2); }
 
 .side-panel .view, .side-panel iconview {
-  background-image: image(#444444); }
+  background-image: image(#282C34); }
   .side-panel .view:hover, .side-panel iconview:hover {
     background-image: image(#4d4d4d); }
 
@@ -3442,7 +3442,7 @@ window.background > box.vertical > widget > widget:selected {
 
 #PanelPlug,
 PanelToplevel.background {
-  background-color: #444444;
+  background-color: #282C34;
   color: #FFFFFF;
   font-weight: 500; }
 
@@ -3634,7 +3634,7 @@ button.raven-trigger {
   padding-right: 2px; }
 
 .budgie-panel {
-  background-color: #444444;
+  background-color: #282C34;
   color: #FFFFFF;
   font-weight: 500; }
   .budgie-panel button {
@@ -3738,7 +3738,7 @@ frame.raven-frame > border {
     margin-top: -8px; }
   .raven .raven-background {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    background-color: #444444; }
+    background-color: #282C34; }
     .raven .raven-background.frame {
       border-style: none none solid; }
     .raven .raven-background > overlay > image {
@@ -3786,13 +3786,13 @@ calendar.raven-calendar {
   padding: 3px;
   border-radius: 2px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #444444; }
+  background-color: #1D1D1D; }
   .drop-shadow .linked > button {
     border-radius: 2px; }
 
 .budgie-session-dialog, .budgie-polkit-dialog, .budgie-run-dialog {
   border-radius: 2px;
-  background-color: #444444; }
+  background-color: #282C34; }
   .budgie-session-dialog decoration, .budgie-polkit-dialog decoration, .budgie-run-dialog decoration {
     border-radius: 2px; }
 
@@ -3856,7 +3856,7 @@ window.background.chromium > menu > menuitem label:disabled {
   margin: 8px;
   border-radius: 2px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #444444; }
+  background-color: #282C34; }
 
 #content_frame {
   padding-bottom: 20px;
