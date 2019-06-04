@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Ultimate-Dark-(Flat)-Violet
+Comment=Easy On The Eyes Gnome Theme By Bolimage
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Ultimate-Dark-(Flat)-Violet
+ButtonLayout=:minimize,maximize,close
