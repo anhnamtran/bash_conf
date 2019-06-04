@@ -1,10 +1,9 @@
 set $mod Mod4
 
-new_window pixel 1
-new_float normal
-
 hide_edge_borders both
 focus_follows_mouse no
+default_border none
+default_floating_border none
 
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
@@ -127,34 +126,12 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="Calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Thus"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="Nitrogen"] floating enable sticky enable
+for_window [class="(?i)System-config-printer.py"] floating enable
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable border normal
+for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -167,23 +144,6 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
-
-# Set shut down, restart and locking features
-bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -210,19 +170,10 @@ mode "resize" {
 }
 
 # Autostart applications
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id light -s sysfs/leds/dell::kbd_backlight -S 100
 exec_always --no-startup-id /$HOME/.config/polybar/launcher.sh
-
-# Theme colors
-client.focused #bfbfbf #162025 #bfbfbf #193a48 #193a48
-client.focused_inactive #bfbfbf #162025 #bfbfbf #193a48 #193a48
-client.unfocused #bfbfbf #162025 #bfbfbf #193a48 #193a48
-client.urgent #bfbfbf #162025 #bfbfbf #193a48 #193a48
-client.placeholder #bfbfbf #162025 #bfbfbf #193a48 #193a48
-
-client.background #162025
 
 # Gaps
 gaps inner 0

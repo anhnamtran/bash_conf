@@ -28,21 +28,8 @@ URxvt*saveLines:                  5000
 URxvt*internalBorder: 5
 URxvt*geometry: 70x19
 
-rofi.color-enabled: true
-rofi.color-window: #282C34, #162025, #162025
-rofi.color-normal: #282C34, #bfbfbf, #282C34, #510863, #162025
-rofi.color-active: #282C34, #bfbfbf, #282C34, #510863, #162025
-rofi.color-urgent: #282C34, #bfbfbf, #282C34, #510863, #162025
-
-rofi.separator-style: solid
-rofi.sidebar-mode: false
-rofi.lines: 5
-rofi.font: Iosevka Bold 32
-rofi.bw: 1
-rofi.columns: 2
-rofi.padding: 5
-rofi.fixed-num-lines: true
-rofi.hide-scrollbar: true
+rofi.theme: onedark
+rofi.terminal: terminator
 
 Xft.dpi: 200
 Xft.rgba: rgb
