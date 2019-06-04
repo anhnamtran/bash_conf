@@ -56,7 +56,7 @@ label-unfocused-foreground = #162025
 label-unfocused-padding = 2
 
 label-visible = %index%
-label-visible-background = #510863
+label-visible-background = #5d2070
 label-visible-foreground = #162025
 label-visible-padding = 2
 
@@ -69,7 +69,7 @@ type = internal/xwindow
 
 format = <label>
 format-foreground = #5d2070
-format-padding = 2
+format-padding = 1
 
 label = %title%
 label-maxlen = 30
