@@ -1,0 +1,11 @@
+/* This file is to fix Firefox's issue with dark themes. Put it in you profile
+ * folder (about:profiles) in chrome/userContent.css */
+input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='checkbox']):not([type='radio']), textarea, select {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+
+#downloads-indicator-counter {
+    color: white;
+}
