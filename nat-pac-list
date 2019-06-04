@@ -158,6 +158,7 @@ go 2:1.12.5-1
 gobject-introspection-runtime 1.60.1-1
 gperftools 2.7-1
 gpgme 1.13.0-1
+gpick 0.2.6rc1-5
 gpm 1.20.7.r27.g1fd1941-1
 gptfdisk 1.0.4-1
 graphene 1.8.6-1
