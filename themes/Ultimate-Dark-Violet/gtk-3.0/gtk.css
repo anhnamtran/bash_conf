@@ -57,10 +57,10 @@
   background-color: #282C34;
   color: #FFFFFF; }
   .gtkstyle-fallback:hover {
-    background-color: #3b3b3b;
+    background-color: #282C34;
     color: #FFFFFF; }
   .gtkstyle-fallback:active {
-    background-color: #2f2f2f;
+    background-color: #282C34;
     color: #FFFFFF; }
   .gtkstyle-fallback:disabled {
     background-color: #282C34;
@@ -2565,11 +2565,11 @@ placessidebar row {
 
 filechooser placessidebar.sidebar,
 .nautilus-window placessidebar.sidebar {
-  background-color: #363636; }
+  background-color: #282C34; }
 
 .nemo-window .sidebar {
   color: #BAC3CF;
-  background-color: #363636; }
+  background-color: #282C34; }
   .nemo-window .sidebar .view, .nemo-window .sidebar iconview, .nemo-window .sidebar row {
     background-color: transparent;
     color: #BAC3CF; }
@@ -2924,7 +2924,7 @@ stackswitcher button.text-button.circular {
 
 .nautilus-window headerbar .path-bar-box.width-maximized {
   color: #e1e1e1;
-  background-color: #333333;
+  background-color: #282C34;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
@@ -3071,14 +3071,14 @@ workbench:not(.tiled):not(.maximized):not(.fullscreen) stack.titlebar headerbar 
   border-radius: 2px 2px 0 0; }
 
 perspectiveswitcher {
-  background-color: #484848; }
+  background-color: #282C34; }
 
 perspectiveswitcher button:checked {
   color: #9b59b6; }
 
 layouttabbar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #484848; }
+  background-color: #282C34; }
 
 layouttabbar > box > button {
   margin: 2px 0; }
@@ -3126,12 +3126,12 @@ dockpaned {
 eggsearchbar box.search-bar {
   padding: 0 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #484848; }
+  background-color: #282C34; }
 
 docktabstrip {
   padding: 0 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #484848; }
+  background-color: #282C34; }
 
 docktab {
   transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
@@ -3153,7 +3153,7 @@ docktab {
     color: #FFFFFF; }
 
 dockoverlayedge {
-  background-color: #484848; }
+  background-color: #282C34; }
 
 dockoverlayedge docktabstrip {
   padding: 0;
@@ -3170,7 +3170,7 @@ dockoverlayedge.right-edge docktab:checked {
   box-shadow: inset 2px 0 #9b59b6; }
 
 pillbox {
-  background-color: #484848;
+  background-color: #282C34;
   border-radius: 2px; }
 
 buildperspective row {
@@ -3242,7 +3242,7 @@ overlay grid.horizontal > revealer > scrolledwindow.frame:dir(rtl) {
 .side-panel .view, .side-panel iconview {
   background-image: image(#282C34); }
   .side-panel .view:hover, .side-panel iconview:hover {
-    background-image: image(#4d4d4d); }
+    background-image: image(#1D1D1D); }
 
 .side-panel .view:selected, .side-panel iconview:selected {
   background-image: image(#9b59b6); }
@@ -3411,7 +3411,7 @@ window.background:not(.csd) > widget window.background:not(.csd) > window.backgr
   color: rgba(0, 0, 0, 0.2); }
 
 window.background > menu > menuitem > label:disabled {
-  color: #868686; }
+  color: #2b2b2b; }
 
 window.background > widget > checkbutton > check,
 window.background > widget > radiobutton > radio {
@@ -3471,7 +3471,7 @@ MatePanelAppletFrameDBus {
 
 PanelApplet.wnck-applet .wnck-pager {
   background-color: transparent;
-  color: #888888; }
+  color: #282C34; }
   PanelApplet.wnck-applet .wnck-pager:hover {
     background-color: alpha(currentColor, 0.15); }
   PanelApplet.wnck-applet .wnck-pager:active {
@@ -3501,7 +3501,7 @@ na-tray-applet {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-    background-color: #484848; }
+    background-color: #282C34; }
     .mate-panel-applet-slider frame frame {
       all: unset; }
     .mate-panel-applet-slider frame > border {
@@ -3542,7 +3542,7 @@ na-tray-applet {
 
 #caja-extra-view-widget {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #484848; }
+  background-color: #282C34; }
   #caja-extra-view-widget > box > box > label {
     font-weight: bold; }
 
@@ -3828,7 +3828,7 @@ calendar.raven-calendar {
     border-top: 1px solid rgba(0, 0, 0, 0.2); }
 
 window.background.chromium  {
-  background-color: #3C3C3C;
+  background-color: #282C34;
 }
 
 window.background.chromium > menu > menuitem:disabled {
@@ -3906,7 +3906,7 @@ panel-toplevel.background button:active:not(#tasklist-button), .xfce4-panel .bud
 }
 
 .xfce4-panel.panel {
-  background-color: #27282b;
+  background-color: #282C34;
   text-shadow: none;
   -gtk-icon-shadow: none;
   border: none;
@@ -3914,12 +3914,12 @@ panel-toplevel.background button:active:not(#tasklist-button), .xfce4-panel .bud
 
 .XfceHeading {
   border: 0 none transparent;
-  background-color: #38393a;
+  background-color: #282C34;
   color: #eff2f4;
 }
 
 .xfce4-panel {
-  background-color: #27282b;
+  background-color: #282C34;
   color: #e6ebee;
   font-weight: 700;
   text-shadow: none;
@@ -3998,7 +3998,7 @@ XfdesktopIconView.view:active, XfdesktopIconView.view:checked {
 }
 
 window.thunar treeview.view {
-  background-color: #38393a;
+  background-color: #282C34;
 }
 
 window.thunar treeview.view:hover {
