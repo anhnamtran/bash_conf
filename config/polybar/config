@@ -27,7 +27,7 @@ font-2 = "Material Design Icons:size=24;1"
 
 modules-left = i3 wintitle
 modules-center = date
-modules-right = wlan backlight pulseaudio battery
+modules-right = wlan backlight pulseaudio battery ibus
 
 tray-position =
 ;tray-padding =
@@ -191,6 +191,24 @@ animation-charging-framerate = 750
 animation-discharging-0 = 
 ; Framerate in milliseconds
 animation-discharging-framerate = 500
+
+[module/keyboard]
+type = internal/xkeyboard
+
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+format = <label-layout>
+
+[module/ibus]
+type = custom/script
+
+interval = 1
+
+format = <label>
+format-foreground = #5d2070
+
+exec = ~/.config/polybar/scripts/ibus-engine.sh
 
 [settings]
 screenchange-reload = true
