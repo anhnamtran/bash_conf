@@ -4,11 +4,13 @@
 [profiles]
   [[default]]
     font = Iosevka Term Medium 11
-    use_system_font = False
+
     show_titlebar = False
-    cursor_shape = ibeam
-    background_color = '#282C34'
     scrollbar_position = disabled
+
+    cursor_shape = ibeam
+    use_system_font = False
+    background_color = '#282C34'
     cursor_color = "#676c76"
-    foreground_color = "#5c6370"
+    foreground_color = "#fffefe"
     palette = "#000000:#e06c75:#98c379:#d19a66:#61afef:#c678dd:#56b6c2:#abb2bf:#5c6370:#e06c75:#98c379:#d19a66:#61afef:#c678dd:#56b6c2:#fffefe"
