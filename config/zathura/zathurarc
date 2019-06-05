@@ -1,3 +1,7 @@
+set selection-clipboard clipboard
+
+set window-title-basename true
+
 # Base16 OneDark
 # Author: Lalit Magant (http://github.com/tilal6991)
 
