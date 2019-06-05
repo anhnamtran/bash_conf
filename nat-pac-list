@@ -158,7 +158,6 @@ go
 gobject-introspection-runtime
 gperftools
 gpgme
-gpick
 gpm
 gptfdisk
 graphene
@@ -641,6 +640,7 @@ qpdf
 ranger
 raptor
 readline
+reflector
 reiserfsprogs
 rest
 rhash
