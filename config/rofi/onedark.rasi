@@ -26,7 +26,7 @@
   spacing: 0;
   background-color: transparent;
 
-  font: "Iosevka Term 28";
+  font: "Iosevka Term Bold 28";
   text-color: @text;
 }
 
