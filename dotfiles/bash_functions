@@ -209,6 +209,6 @@ pac() {
 }
 
 pac-list() {
-  sudo pacman -Qn > ~/nat-pac-list
-  sudo pacman -Qm > ~/aur-pac-list
+  sudo pacman -Qqqn > ~/nat-pac-list
+  sudo pacman -Qqqm > ~/aur-pac-list
 }
