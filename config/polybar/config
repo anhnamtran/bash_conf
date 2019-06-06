@@ -68,7 +68,7 @@ label-urgent-padding = 2
 type = internal/xwindow
 
 format = <label>
-format-foreground = #c20ef9
+format-foreground = #c678dd
 format-padding = 1
 
 label = %title%
