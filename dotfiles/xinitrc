@@ -1,7 +1,6 @@
 #!/bin/sh
 
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+xrandr --auto --mode "1920x1080_59.96"
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
