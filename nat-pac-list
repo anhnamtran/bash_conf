@@ -77,11 +77,13 @@ dbus-glib
 dconf
 desktop-file-utils
 device-mapper
+dex
 dhcpcd
 dialog
 diffstat
 diffutils
 djvulibre
+dkms
 dmraid
 dnssec-anchors
 docbook-xml
@@ -203,6 +205,7 @@ hspell
 htop
 hunspell
 hwids
+hwinfo
 hyphen
 i3-gaps
 i3blocks
@@ -436,6 +439,7 @@ libwbclient
 libwebp
 libwnck
 libx11
+libx86emu
 libxau
 libxaw
 libxcb
@@ -477,6 +481,7 @@ light
 linux
 linux-api-headers
 linux-firmware
+linux-lts-headers
 llvm-libs
 lm_sensors
 lmdb
@@ -539,7 +544,6 @@ npth
 nspr
 nss
 numactl
-nvidia
 nvidia-utils
 oath-toolkit
 oniguruma
@@ -742,6 +746,8 @@ vid.stab
 vim
 vim-runtime
 virglrenderer
+virtualbox-guest-modules-arch
+virtualbox-guest-utils
 volume_key
 vte-common
 vte3
