@@ -31,7 +31,7 @@ URxvt*geometry: 70x19
 rofi.theme: onedark
 rofi.terminal: terminator
 
-Xft.dpi: 200
+Xft.dpi: 100
 Xft.rgba: rgb
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
