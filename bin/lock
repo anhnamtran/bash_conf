@@ -7,7 +7,6 @@ T='#ee00eeee'  # text
 W='#880000bb'  # wrong
 V='#bb00bbbb'  # verifying
 
-sleep 1
 i3lock \
 --insidevercolor=$C         \
 --ringvercolor=$V           \
