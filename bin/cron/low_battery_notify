@@ -6,21 +6,26 @@ export XAUTHORITY=$HOME/.Xauthority
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 
-MIN_LEVEL=10
+WARN_LEVEL=20
+CRITICAL_LEVEL=10
 HALF_LEVEL_UPPER=50
 HALF_LEVEL_LOWER=45
 
 bat_notify() {
-  /usr/bin/notify-send --urgency="$2" "$1" \
+  /usr/bin/notify-send --icon batter-symbolic.symbolic \
+    --category="device" --urgency="$2" "$1" \
     "Battery level is at ${battery_level}%."
 }
 
 battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 echo "Battery at ${battery_level}%"
 
-if [ $battery_level -le $MIN_LEVEL ]; then
-  bat_notify "Battery Low" "critical"
+if [ $battery_level -le $CRITICAL_LEVEL ]; then
+  bat_notify "Battery Critically Low - Connect to Power Source" "critical"
+elif [[ $battery_level -lt $WARN_LEVEL ]] && \
+      [[ $battery_level -gt $CRITICAL_LEVEL ]]; then
+  bat_notify "Battery Low - Consider Plugging In" "normal"
 elif [[ $battery_level -lt $HALF_LEVEL_UPPER ]] && \
       [[ $battery_level -gt $HALF_LEVEL_LOWER ]]; then
-  bat_notify "Battery At Half Or Less" "normal"
+  bat_notify "Battery Between $HALF_LEVEL_LOWER - $HALF_LEVEL_UPPER" "normal"
 fi
