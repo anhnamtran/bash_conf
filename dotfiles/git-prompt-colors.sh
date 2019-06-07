@@ -40,7 +40,7 @@ override_git_prompt_colors() {
 
     local PS1="$GIT_CONTAINER_FOLDER"
     gp_set_window_title "$PS1"
-    echo -n "${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}${DETACHED:-}"
+    echo -n "→ ${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}"
   }
 
   Time12a="\$(date +%H:%M:%S)"
