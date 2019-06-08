@@ -85,7 +85,6 @@ dnssec-anchors
 docbook-xml
 docbook-xsl
 dosfstools
-dunst
 e2fsprogs
 efibootmgr
 efivar
