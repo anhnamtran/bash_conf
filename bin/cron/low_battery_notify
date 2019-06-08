@@ -11,8 +11,12 @@ CRITICAL_LEVEL=10
 HALF_LEVEL_UPPER=50
 HALF_LEVEL_LOWER=45
 
+color-msg() {
+  echo "<span foreground=\"$1\">$2</span>"
+}
+
 bat_notify() {
-  /usr/bin/notify-send --icon batter-symbolic.symbolic \
+  /usr/bin/notify-send --icon battery-symbolic.symbolic \
     --category="device" --urgency="$2" "$1" \
     "Battery level is at ${battery_level}%."
 }
