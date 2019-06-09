@@ -6,10 +6,9 @@ export XAUTHORITY=$HOME/.Xauthority
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 
+HALF_LEVEL=50
 WARN_LEVEL=20
-CRITICAL_LEVEL=10
-HALF_LEVEL_UPPER=50
-HALF_LEVEL_LOWER=45
+CRIT_LEVEL=10
 
 color-msg() {
   echo "<span foreground=\"$1\">$2</span>"
@@ -18,18 +17,18 @@ color-msg() {
 bat_notify() {
   /usr/bin/notify-send --icon battery-symbolic.symbolic \
     --category="device" --urgency="$2" "$1" \
-    "Battery level is at ${battery_level}%."
+    "$(color-msg "$3" "Battery level is at ${battery_level}%.")"
 }
 
 battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 echo "Battery at ${battery_level}%"
 
-if [ $battery_level -le $CRITICAL_LEVEL ]; then
-  bat_notify "Battery Critically Low - Connect to Power Source" "critical"
+if [ $battery_level -le $CRIT_LEVEL ]; then
+  bat_notify "Battery Critically Low - Connect to Power Source" "critical" "red"
 elif [[ $battery_level -lt $WARN_LEVEL ]] && \
       [[ $battery_level -gt $CRITICAL_LEVEL ]]; then
-  bat_notify "Battery Low - Consider Plugging In" "normal"
-elif [[ $battery_level -lt $HALF_LEVEL_UPPER ]] && \
-      [[ $battery_level -gt $HALF_LEVEL_LOWER ]]; then
-  bat_notify "Battery Between $HALF_LEVEL_LOWER - $HALF_LEVEL_UPPER" "normal"
+  bat_notify "Battery Low - Consider Plugging In" "normal" "yellow"
+elif [[ $battery_level -lt $HALF_LEVEL ]] && \
+      [[ $battery_level -gt $WARN_LEVEL ]]; then
+  bat_notify "Battery Less Than $HALF_LEVEL" "normal" "white"
 fi
