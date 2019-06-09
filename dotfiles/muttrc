@@ -1,0 +1,13 @@
+# Theme
+source ~/.mutt/dracula.muttrc
+# Passwords
+source "gpg -dq ~/.mutt/passwds.gpg |"
+
+# Folder hooks
+folder-hook 'com.gmail.andremail03' 'source ~/.mutt/accounts/account.com.gmail.andremail03'
+
+# Default account
+source ~/.mutt/accounts/account.com.gmail.andremail03
+
+# Key bindings
+bind index R imap-fetch-mail
