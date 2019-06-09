@@ -247,6 +247,7 @@ kyotocabinet
 l-smash
 ladspa
 lame
+lastpass-cli
 lcms2
 ldb
 ldns
@@ -279,6 +280,7 @@ libcue
 libcups
 libdaemon
 libdatrie
+libdbi
 libdbusmenu-glib
 libdc1394
 libdca
@@ -674,6 +676,7 @@ sshfs
 startup-notification
 sudo
 sysfsutils
+syslog-ng
 systemd
 systemd-libs
 systemd-sysvcompat
