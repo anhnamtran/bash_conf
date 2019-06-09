@@ -1,14 +1,14 @@
 # Configure Internet Message Protocol for reading mail
 # Username and password command for Gmail
 set imap_user = "andremail03@gmail.com"
-set imap_pass = $my_gmail_gen_pass
+set imap_pass = $my_account_com_gmail_andremail03_pass
 
 # Specifies the default location of the mailboxes
 set folder = "imaps://imap.gmail.com:993"
 
 # Configure Simple Mail Transfer Protocal for sending mail
 set smtp_url = "smtp://andremail03@smtp.gmail.com:587"
-set smtp_pass = $my_gmail_gen_pass
+set smtp_pass = $my_account_com_gmail_andremail03_pass
 
 # Location of inbox
 set spoolfile = "+INBOX"
