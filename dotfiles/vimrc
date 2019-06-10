@@ -226,6 +226,12 @@ nnoremap <leader>cd :lcd %:p:h<CR>
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
 
+" automatically opens the quickfix and location windows on specific
+" quick fix commands
+command -nargs=+ Make make <args> | cwindow
+command -nargs=+ Grep grep <args> | cwindow
+command -nargs=+ Vim vim <args> | cwindow
+
 "------------------------------ EXTRA FUNCTIONS -------------------------------
 function! HandleURL()
   let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
