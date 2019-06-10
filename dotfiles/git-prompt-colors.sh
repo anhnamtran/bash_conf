@@ -31,11 +31,18 @@ override_git_prompt_colors() {
   function prompt_callback {
     GIT_CONTAINER_FOLDER_FULLPATH=$(git rev-parse --show-toplevel 2> /dev/null)
     GIT_CONTAINER_FOLDER=$(basename $GIT_CONTAINER_FOLDER_FULLPATH 2> /dev/null)
+
     CURRENT_FULLPATH=$(pwd)
     CURRENT_BASE=$(basename $CURRENT_FULLPATH 2> /dev/null)
+
+    # Distinguish between detached and not.
+    if ! git symbolic-ref -q HEAD > /dev/null; then
+      DETACHED=" ${BoldYellow}DETACHED${ResetColor}"
+    fi
+
     local PS1="$GIT_CONTAINER_FOLDER"
     gp_set_window_title "$PS1"
-    echo -n "${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}"
+    echo -n "${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}${DETACHED:-}"
   }
 
   Time12a="\$(date +%H:%M:%S)"
@@ -46,6 +53,7 @@ override_git_prompt_colors() {
   fi
 
   GIT_PROMPT_BRANCH="${Yellow}"        # the git branch that is active in the current directory
+
   GIT_PROMPT_MASTER_BRANCH="${Red}${GIT_PROMPT_MASTER_BRANCH}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
   GIT_PROMPT_PREFIX=""                 # start of the git info string
   GIT_PROMPT_SUFFIX=""                 # the end of the git info string
