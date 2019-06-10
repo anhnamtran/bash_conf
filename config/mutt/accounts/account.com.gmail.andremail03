@@ -13,7 +13,7 @@ set smtp_pass = $my_account_com_gmail_andremail03_pass
 # Location of inbox
 set spoolfile = "+INBOX"
 # Location of sent
-set record = "+[Gmail]/'Sent Mail'"
+set record = "+[Gmail]/Sent"
 # Location of drafts
 set postponed = "+[Gmail]/Drafts"
 

@@ -1,13 +1,29 @@
 # Theme
 source ~/.mutt/dracula.muttrc
+
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width = 20
+set mail_check_stats
+
+set edit_headers = yes
+
+# Vim key bindings
+source ~/.mutt/vim-keys.muttrc
+
 # Passwords
 source "gpg -dq ~/.mutt/passwds.gpg |"
 
 # Folder hooks
 folder-hook 'com.gmail.andremail03' 'source ~/.mutt/accounts/account.com.gmail.andremail03'
+folder-hook 'cs.washington.edu.atran35' 'source ~/.mutt/accounts/account.cs.washington.edu.atran35'
 
 # Default account
-source ~/.mutt/accounts/account.com.gmail.andremail03
+source ~/.mutt/accounts/account.cs.washington.edu.atran35
+
+# Macros to switch account
+macro index <Esc>1 '<sync-mailbox><enter-command>source ~/.mutt/accounts/account.cs.washington.edu.atran35<enter><change-folder>!<enter>'
+macro index <Esc>2 '<sync-mailbox><enter-command>source ~/.mutt/accounts/account.com.gmail.andremail03<enter><change-folder>!<enter>'
 
 # Key bindings
 bind index R imap-fetch-mail
