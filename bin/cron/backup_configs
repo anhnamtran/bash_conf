@@ -2,14 +2,8 @@
 #
 # Backs up all files tracked by the git repository CONFIGS_HOME by commiting and
 # pushing it to the repository.
+CONFIGS_HOME=".cfg"
 
-if [[ -z ${CONFIGS_HOME:-} ]]; then
-  echo "No configs repository found."
-  echo "Defaulting to .cfg"
-  CONFIGS_HOME=".cfg"
-fi
-
-echo $CONFIGS_HOME
 FROM="$(whoami)@$(hostname)"
 GIT_CONF="git --git-dir=\"$CONFIGS_HOME\" --work-tree=\"$HOME\""
 
