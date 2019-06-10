@@ -35,7 +35,7 @@ override_git_prompt_colors() {
     CURRENT_BASE=$(basename $CURRENT_FULLPATH 2> /dev/null)
     local PS1="$GIT_CONTAINER_FOLDER"
     gp_set_window_title "$PS1"
-    echo -n "→ ${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}"
+    echo -n "${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}"
   }
 
   Time12a="\$(date +%H:%M:%S)"
@@ -59,9 +59,11 @@ override_git_prompt_colors() {
   GIT_PROMPT_STASHED=" ${Green}⚑ "    # the number of stashed files/dir
   GIT_PROMPT_CLEAN=" ${Green}✔ "      # a colored flag indicating a "clean" repo
 
-  local gp_end="\n${Time12a} [${UserHost_Color}$(whoami)${ResetColor}]"
+  GIT_PROMPT_COMMAND_FAIL="${BoldRed}✘"
 
-  GIT_PROMPT_START_USER=""
+  local gp_end="\n_LAST_COMMAND_INDICATOR_ ${Time12a} [${UserHost_Color}$(whoami)${ResetColor}]"
+
+  GIT_PROMPT_START_USER="→ "
   GIT_PROMPT_END_USER="${gp_end}$ "
   GIT_PROMPT_END_ROOT="${gp_end}/!!!\ "
 }

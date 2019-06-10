@@ -69,6 +69,7 @@ cups
 cups-filters
 cups-pk-helper
 curl
+cyrus-sasl
 db
 dbus
 dbus-glib
@@ -87,7 +88,6 @@ dnssec-anchors
 docbook-xml
 docbook-xsl
 dosfstools
-dunst
 e2fsprogs
 efibootmgr
 efivar
@@ -251,6 +251,7 @@ kyotocabinet
 l-smash
 ladspa
 lame
+lastpass-cli
 lcms2
 ldb
 ldns
@@ -283,6 +284,7 @@ libcue
 libcups
 libdaemon
 libdatrie
+libdbi
 libdbusmenu-glib
 libdc1394
 libdca
@@ -679,6 +681,7 @@ sshfs
 startup-notification
 sudo
 sysfsutils
+syslog-ng
 systemd
 systemd-libs
 systemd-sysvcompat

@@ -1,0 +1,20 @@
+#!/bin/bash
+# Uses LastPass to generate a gpg password file
+set -e
+
+ACCOUNTS=$(ls accounts)
+FILE_NAME="passwds"
+
+> $FILE_NAME
+for account in $ACCOUNTS; do
+  read -p "LastPass Name for $account: " lpass_name
+
+  pass_name="my_${account//./_}_pass"
+  acc_passwd=$(lpass show -pG "$lpass_name")
+  
+  pass_string="set $pass_name = \"$acc_passwd\""
+  echo "$pass_string" >> $FILE_NAME
+done
+
+gpg --recipient $(whoami) --encrypt $FILE_NAME
+rm -f $FILE_NAME

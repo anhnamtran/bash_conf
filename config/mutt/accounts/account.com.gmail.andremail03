@@ -1,0 +1,26 @@
+# Configure Internet Message Protocol for reading mail
+# Username and password command for Gmail
+set imap_user = "andremail03@gmail.com"
+set imap_pass = $my_account_com_gmail_andremail03_pass
+
+# Specifies the default location of the mailboxes
+set folder = "imaps://imap.gmail.com:993"
+
+# Configure Simple Mail Transfer Protocal for sending mail
+set smtp_url = "smtp://andremail03@smtp.gmail.com:587"
+set smtp_pass = $my_account_com_gmail_andremail03_pass
+
+# Location of inbox
+set spoolfile = "+INBOX"
+# Location of sent
+set record = "+[Gmail]/Sent"
+# Location of drafts
+set postponed = "+[Gmail]/Drafts"
+
+# Active caching, as it can improve speed
+set header_cache = "~/.cache/mutt/com.gmail.andremail03/headers"
+set message_cachedir = "~/.cache/mutt/com.gmail.andremail03/bodies"
+set certificate_file = "~/.cache/mutt/com.gmail.andremail03/certificates"
+
+set from = 'Andrew Tran <andremail03@gmail.com>'
+set realname = 'Andrew Tran'

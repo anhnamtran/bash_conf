@@ -19,13 +19,14 @@ alias cpwd="pwd | clipboard"
 
 alias mkdir="mkdir -pv"
 
-alias cdc="clear ; cd"
+alias cdc="clear -x; cd"
 alias ..="cd .."
 alias ~="cd ~ && clear"
 
 alias q=exit
 alias e=ranger # must have ranger installed
-alias c=clear
+alias c="clear -x"
+alias clear="clear -x"
 
 alias open="xdg-open"
 alias browser="sensible-browser"
@@ -36,7 +37,7 @@ alias lss="ls -lSs"
 alias l1="ls -1"
 alias lv="vim ."
 
-alias refresh="clear && source $HOME/.bashrc"
+alias refresh="clear -x && source $HOME/.bashrc"
 
 # permissions
 alias cr="chmod +r"

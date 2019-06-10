@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Backs up all files tracked by the git repository CONFIGS_HOME by commiting and
+# pushing it to the repository.
+CONFIGS_HOME=".cfg"
+
+FROM="$(whoami)@$(hostname)"
+GIT_CONF="git --git-dir=\"$CONFIGS_HOME\" --work-tree=\"$HOME\""
+
+eval "$GIT_CONF commit --allow-empty -am \"[$FROM] Automatic backup of tracked files\""
+eval "$GIT_CONF push"
