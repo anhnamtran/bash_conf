@@ -96,7 +96,8 @@ let g:ycm_filetype_blacklist = {
   \ 'pandoc': 1,
   \ 'infolog': 1,
   \ 'mail': 1,
-  \ 'tex' : 1
+  \ 'tex' : 1,
+  \ 'log' : 1
 \}
 
 " Trigger configuration. Do not use <tab>
