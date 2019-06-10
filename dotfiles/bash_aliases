@@ -1,9 +1,3 @@
-# Classes
-alias 452="cd ~/docs/classes/cse452"
-alias 484="cd ~/docs/classes/cse484"
-alias 374="cd ~/docs/classes/cse374"
-alias CHI="cd ~/docs/classes/chin103"
-
 alias Tellina-exp="cd ~/docs/research/tellina_user_experiment"
 alias Tellina-notes="cd ~/docs/research/tellina_user_study"
 

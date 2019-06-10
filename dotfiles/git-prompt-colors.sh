@@ -46,7 +46,7 @@ override_git_prompt_colors() {
   fi
 
   GIT_PROMPT_BRANCH="${Yellow}"        # the git branch that is active in the current directory
-  GIT_PROMPT_MASTER_BRANCH="${Yellow}${GIT_PROMPT_MASTER_BRANCH}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
+  GIT_PROMPT_MASTER_BRANCH="${Red}${GIT_PROMPT_MASTER_BRANCH}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
   GIT_PROMPT_PREFIX=""                 # start of the git info string
   GIT_PROMPT_SUFFIX=""                 # the end of the git info string
   GIT_PROMPT_SEPARATOR=""              # separates each item
