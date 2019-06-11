@@ -1,4 +1,5 @@
 set surround
+set clipboard+=unnamed
 
 inoremap jj <ESC>
 

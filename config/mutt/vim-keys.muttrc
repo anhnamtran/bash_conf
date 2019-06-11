@@ -25,9 +25,6 @@ bind index                      \Cy previous-line
 bind pager,index                d   noop
 bind pager,index                dd  delete-message
 
-# Mail & Reply
-bind index                      \Cm list-reply # Doesn't work currently
-
 # Threads
 bind browser,pager,index        N   search-opposite
 bind pager,index                dT  delete-thread
