@@ -311,6 +311,7 @@ libgovirt
 libgpg-error
 libgrss
 libgsf
+libgssglue
 libgtop
 libgudev
 libgusb
@@ -491,6 +492,7 @@ mailcap
 make
 man-db
 man-pages
+mbedtls
 mdadm
 meld
 mesa
@@ -556,6 +558,7 @@ patch
 pciutils
 pcre
 pcre2
+pcsclite
 perl
 perl-error
 perl-file-which
