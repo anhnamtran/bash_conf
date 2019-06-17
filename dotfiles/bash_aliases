@@ -1,11 +1,6 @@
-# Classes
-alias 452="cd ~/docs/classes/cse452"
-alias 484="cd ~/docs/classes/cse484"
 alias 374="cd ~/docs/classes/cse374"
-alias CHI="cd ~/docs/classes/chin103"
 
 alias Tellina-exp="cd ~/docs/research/tellina_user_experiment"
-alias Tellina-notes="cd ~/docs/research/tellina_user_study"
 
 ################## Should work for most Linux distributions ##################
 # turns input command echo off
@@ -75,7 +70,4 @@ alias ozf="fzf | xargs xdg-open"
 
 # needs to have jupyter note book installed in a virtualenv
 JUPYTER=
-alias jupyter="svenv ${JUPYTER}/venv && jupyter"
-
-# Requires i3lock-color
-alias i3lock="i3lock --blur=5 --clock"
+alias jupyter="svenv ${JUPYTER:.}/venv && jupyter"
