@@ -24,7 +24,9 @@ battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 echo "Battery at ${battery_level}%"
 
 if [ $battery_level -le $CRIT_LEVEL ]; then
-  bat_notify "Battery Critically Low - Connect to Power Source" "critical" "red"
+  if ! (acpi -b | grep "Charging") &> /dev/null; then
+    bat_notify "Battery Critically Low - Connect to Power Source" "critical" "red"
+  fi
 elif [[ $battery_level -lt $WARN_LEVEL ]] && \
       [[ $battery_level -gt $CRITICAL_LEVEL ]]; then
   bat_notify "Battery Low - Consider Plugging In" "normal" "yellow"
