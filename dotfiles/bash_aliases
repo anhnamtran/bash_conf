@@ -70,4 +70,4 @@ alias ozf="fzf | xargs xdg-open"
 
 # needs to have jupyter note book installed in a virtualenv
 JUPYTER=
-alias jupyter="svenv ${JUPYTER:.}/venv && jupyter"
+alias jupyter="svenv ${JUPYTER:-.}/venv && jupyter"
