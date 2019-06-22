@@ -1,3 +1,15 @@
+[neon_colors]
+background          = #282C34
+
+bright_purple       = #8826a5
+
+dark_purple         = #470059
+dark_blue           = #162025
+
+yellow              = #e5c07b
+purple              = #73208c
+red                 = #bA2922
+
 [bar/mainbar]
 monitor = ${env:MONITOR:}
 
@@ -6,7 +18,7 @@ height = 25
 radius = 0
 fixed-center = true
 
-background = #282C34
+background = ${neon_colors.background}
 foreground = #bfbfbf
 
 line-size = 1
@@ -42,17 +54,17 @@ index-sort = true
 wrapping-scroll = false
 
 label-mode-padding = 2
-label-mode-foreground = #162025
+label-mode-foreground = ${neon_colors.dark_blue}
 label-mode-background = #193a48
 
 label-focused = %index%
-label-focused-background = #510863
-label-focused-foreground = #6b7443
+label-focused-background = ${neon_colors.bright_purple}
+label-focused-foreground = ${neon_colors.yellow}
 label-focused-padding = 2
 
 label-unfocused = %index%
-label-unfocused-background = #470059
-label-unfocused-foreground = #162025
+label-unfocused-background = ${neon_colors.dark_purple}
+label-unfocused-foreground = ${neon_colors.dark_blue}
 label-unfocused-padding = 2
 
 label-visible = %index%
@@ -61,7 +73,7 @@ label-visible-foreground = #162025
 label-visible-padding = 2
 
 label-urgent = %index%
-label-urgent-background = #BA2922
+label-urgent-background = ${neon_colors.red}
 label-urgent-padding = 2
 
 [module/wintitle]
