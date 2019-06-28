@@ -58,7 +58,7 @@ label-mode-foreground = ${neon_colors.dark_blue}
 label-mode-background = #193a48
 
 label-focused = %index%
-label-focused-background = ${neon_colors.bright_purple}
+label-focused-background = ${neon_colors.purple}
 label-focused-foreground = ${neon_colors.yellow}
 label-focused-padding = 2
 
@@ -68,8 +68,8 @@ label-unfocused-foreground = ${neon_colors.dark_blue}
 label-unfocused-padding = 2
 
 label-visible = %index%
-label-visible-background = #5d2070
-label-visible-foreground = #162025
+label-visible-background = ${neon_colors.purple}
+label-visible-foreground = ${neon_colors.dark_blue}
 label-visible-padding = 2
 
 label-urgent = %index%
@@ -80,7 +80,7 @@ label-urgent-padding = 2
 type = internal/xwindow
 
 format = <label>
-format-foreground = #c678dd
+format-foreground = ${neon_colors.bright_purple}
 format-padding = 1
 
 label = %title%
@@ -94,12 +94,12 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-foreground = #5d2070
+format-connected-foreground = ${neon_colors.bright_purple}
 label-connected = %essid%
 label-connected-maxlen = 15
 
 format-disconnected = 
-format-disconnected-foreground = #5d2070
+format-disconnected-foreground = ${neon_colors.bright_purple}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -118,8 +118,8 @@ time = %H:%M:%S
 time-alt = %H:%M
 
 format-prefix = 肋
-format-foreground = #162025
-format-background = #5d2070
+format-foreground = ${neon_colors.dark_blue}
+format-background = ${neon_colors.purple}
 format-padding = 2
 
 label = %date% %time%
@@ -133,13 +133,13 @@ use-ui-max = true
 interval = 2
 
 format-volume = <ramp-volume> <label-volume>
-format-volume-foreground = #5d2070
+format-volume-foreground = ${neon_colors.bright_purple}
 format-muted = <label-muted>
 
 label-volume = %percentage%%
 
 label-muted = 
-label-muted-foreground = #5d2070
+label-muted-foreground = ${neon_colors.bright_purple}
 
 ramp-volume-0 = 
 ramp-volume-1 = 
@@ -151,10 +151,10 @@ type = internal/backlight
 card = intel_backlight
 
 format = <ramp> <label>
-format-foreground = #5d2070
+format-foreground = ${neon_colors.bright_purple}
 
 label = %percentage%%
-label-foreground = #5d2070
+label-foreground =  ${neon_colors.bright_purple}
 
 ramp-0 = 
 ramp-1 = 
@@ -173,13 +173,13 @@ adapter = ADP1
 poll-interval = 5
 
 format-charging = <ramp-capacity> <label-charging>
-format-charging-foreground = #5d2070
+format-charging-foreground = ${neon_colors.bright_purple}
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-foreground = #5d2070
+format-discharging-foreground = ${neon_colors.bright_purple}
 
 format-full = <ramp-capacity><label-full>
-format-full-foreground = #5d2070
+format-full-foreground = ${neon_colors.bright_purple}
 
 label-charging = %percentage%%
 
@@ -209,7 +209,7 @@ type = custom/script
 interval = 1
 
 format = <label>
-format-foreground = #5d2070
+format-foreground = ${neon_colors.bright_purple}
 
 exec = ~/.config/polybar/scripts/ibus-engine.sh
 
