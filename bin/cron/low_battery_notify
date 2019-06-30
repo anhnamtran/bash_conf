@@ -29,7 +29,9 @@ if [ $battery_level -le $CRIT_LEVEL ]; then
   fi
 elif [[ $battery_level -lt $WARN_LEVEL ]] && \
       [[ $battery_level -gt $CRITICAL_LEVEL ]]; then
-  bat_notify "Battery Low - Consider Plugging In" "normal" "yellow"
+  if ! (acpi -b | grep "Charging") &> /dev/null; then
+    bat_notify "Battery Low - Consider Plugging In" "normal" "yellow"
+  fi
 elif [[ $battery_level -lt $HALF_LEVEL ]] && \
       [[ $battery_level -gt $WARN_LEVEL ]]; then
   bat_notify "Battery Less Than $HALF_LEVEL" "normal" "white"
