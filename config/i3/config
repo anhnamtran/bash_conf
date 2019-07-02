@@ -177,7 +177,7 @@ exec --no-startup-id light -s sysfs/leds/dell::kbd_backlight -S 100
 exec_always --no-startup-id /$HOME/.config/polybar/launcher.sh
 
 # Gaps
-gaps inner 0
+gaps inner 5
 gaps outer 0
 
 smart_gaps on
