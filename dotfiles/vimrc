@@ -224,6 +224,9 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 " Change current window's directory to current file's
 nnoremap <leader>cd :lcd %:p:h<CR>
 
+" Opens FZF in the current directory
+nnoremap _ :FZF<CR>
+
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
 
