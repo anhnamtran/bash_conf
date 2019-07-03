@@ -23,8 +23,6 @@
 # [https://github.com/imbibinebe]
 ##############################################################################
 override_git_prompt_colors() {
-  BoldPurple="\[\033[01;38;2;205;0;205m\]"
-
   GIT_PROMPT_THEME_NAME="Minimal_User_NoHost_NoExitStatus"
 
   #Overrides the prompt_callback function used by bash-git-prompt
@@ -47,7 +45,7 @@ override_git_prompt_colors() {
 
   Time12a="\$(date +%H:%M:%S)"
   if [ "$(id -u)" != "0" ]; then
-     UserHost_Color="${BoldPurple}"
+     UserHost_Color="${BoldMagenta}"
   else
      UserHost_Color="${BoldRed}"
   fi
