@@ -150,6 +150,7 @@ glibmm
 glu
 glusterfs
 gmime
+gmime3
 gmp
 gnome-desktop
 gnupg
@@ -166,6 +167,7 @@ grep
 grilo
 groff
 grub
+gsasl
 gsettings-desktop-schemas
 gsfonts
 gsm
@@ -505,6 +507,8 @@ mozilla-common
 mpfr
 mpg123
 msgpack-c
+msmtp
+msmtp-mta
 mtdev
 mtools
 nano
