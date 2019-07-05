@@ -160,6 +160,10 @@ check_tmux
 
 set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
+bind -m vi-insert '"jj": vi-movement-mode'
+
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
 
 shopt -qs autocd
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
