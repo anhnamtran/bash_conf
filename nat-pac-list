@@ -139,6 +139,7 @@ gdbm
 gdk-pixbuf2
 geoclue
 geocode-glib
+getmail
 gettext
 ghostscript
 giflib
@@ -525,10 +526,13 @@ network-manager-applet
 networkmanager
 nitrogen
 nm-connection-editor
+node-gyp
+nodejs
 notification-daemon
 notmuch-runtime
 noto-fonts
 noto-fonts-cjk
+npm
 npth
 nspr
 nss
@@ -663,6 +667,7 @@ sdl
 sdl2
 seabios
 sed
+semver
 shadow
 shared-color-targets
 shared-mime-info
