@@ -33,6 +33,7 @@ binutils
 bison
 bluez
 bluez-libs
+bluez-utils
 bolt
 boost-libs
 brotli
