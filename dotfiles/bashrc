@@ -169,6 +169,9 @@ bind 'set visible-stats on'
 bind 'set echo-control-characters off'
 bind 'TAB:menu-complete'
 
+# Allows backward movement through menu complete
+bind -m vi-insert '"\033[Z": menu-complete-backward'
+
 shopt -qs autocd
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
