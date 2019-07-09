@@ -33,8 +33,14 @@ snippet it "Individual item" b
 \item $0
 endsnippet
 
-snippet code "\code{...}" i
+snippet ilc "\code{...}" iA
 \code{$1}
+endsnippet
+
+snippet cbl "\begin{lstlisting}[...] ... \end{lstlisting}" bA
+\begin{lstlisting}${1:[language=${2:Language}]}
+	$0
+\end{lstlisting}
 endsnippet
 
 snippet ^ "math ^{...}" iA
