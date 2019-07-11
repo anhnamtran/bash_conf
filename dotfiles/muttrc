@@ -19,7 +19,7 @@ folder-hook 'com.gmail.andremail03' 'source ~/.mutt/accounts/account.com.gmail.a
 folder-hook 'cs.washington.edu.atran35' 'source ~/.mutt/accounts/account.cs.washington.edu.atran35'
 
 # Default account
-source ~/.mutt/accounts/account.cs.washington.edu.atran35
+source ~/.mutt/accounts/account.com.gmail.andremail03
 
 # Macros to switch account
 macro index <Esc>1 '<sync-mailbox><enter-command>source ~/.mutt/accounts/account.cs.washington.edu.atran35<enter><change-folder>!<enter>'
