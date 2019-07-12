@@ -168,6 +168,8 @@ bind 'set colored-stats on'
 bind 'set visible-stats on'
 bind 'set echo-control-characters off'
 bind 'TAB:menu-complete'
+bind 'set menu-complete-display-prefix on'
+bind 'set colored-completion-prefix on'
 
 # Allows backward movement through menu complete
 bind -m vi-insert '"\033[Z": menu-complete-backward'
