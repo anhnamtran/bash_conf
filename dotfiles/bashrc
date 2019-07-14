@@ -113,6 +113,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Enables Z for bash
+if [ -f /usr/share/z/z.sh ]; then
+  . /usr/share/z/z.sh
+fi
+
 # PATH additions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_paths, instead of adding them here directly.
