@@ -1,7 +1,3 @@
-alias 374="cd ~/docs/classes/cse374"
-
-alias Tellina-exp="cd ~/docs/research/tellina_user_experiment"
-
 ################## Should work for most Linux distributions ##################
 # turns input command echo off
 alias no-echo="stty -echo"
@@ -67,6 +63,8 @@ alias lessR="less -R"
 alias vzf="fzf | xargs nvim"
 alias pzf="fzf | xargs zathura"
 alias ozf="fzf | xargs xdg-open"
+
+alias fucking="sudo"
 
 # needs to have jupyter note book installed in a virtualenv
 JUPYTER=
