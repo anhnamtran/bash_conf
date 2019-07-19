@@ -515,6 +515,7 @@ mtdev
 mtools
 nano
 nautilus-sendto
+ncdu
 ncurses
 ndctl
 neofetch
@@ -640,6 +641,7 @@ python-sphinxcontrib-htmlhelp
 python-sphinxcontrib-jsmath
 python-sphinxcontrib-qthelp
 python-sphinxcontrib-serializinghtml
+python-termcolor
 python-urllib3
 python-webencodings
 python-xdg
@@ -718,6 +720,7 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 thin-provisioning-tools
+tldr
 tlp
 tmux
 totem-plparser
