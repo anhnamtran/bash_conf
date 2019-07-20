@@ -21,7 +21,7 @@ alias ..="cd .."
 alias ~="cd ~ && clear"
 
 alias q=exit
-alias e=ranger # must have ranger installed
+alias r=ranger # must have ranger installed
 alias c="clear -x"
 alias clear="clear -x"
 
