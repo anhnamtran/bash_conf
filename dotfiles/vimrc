@@ -82,23 +82,9 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 
 " YouCompleteMe settings
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_max_num_candidates = 5
 let g:ycm_max_num_identifier_candidates = 5
-let g:ycm_filetype_blacklist = {
-  \ 'tagbar': 1,
-  \ 'notes': 1,
-  \ 'markdown': 1,
-  \ 'netrw': 1,
-  \ 'unite': 1,
-  \ 'text': 1,
-  \ 'vimwiki': 1,
-  \ 'pandoc': 1,
-  \ 'infolog': 1,
-  \ 'mail': 1,
-  \ 'tex' : 1,
-  \ 'log' : 1
-\}
 
 " Trigger configuration. Do not use <tab>
 " if you use https://github.com/Valloric/YouCompleteMe.
