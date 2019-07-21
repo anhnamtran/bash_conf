@@ -13,14 +13,15 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE='q:exit:quit:~:history:clear:refresh'
+export HISTIGNORE='q:exit:quit:~:history:clear:refresh:ls:bg:fg:'
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+# HUGE history
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000000
 
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
@@ -164,9 +165,18 @@ stty -ixon
 
 check_tmux
 
+# Turn on recursive globbing (enables ** to recurse all directories)
+shopt -s globstar 2> /dev/null
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
 set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
 bind -m vi-insert '"jj": vi-movement-mode'
+
+# Enable incremental history search
+bind -m vi-command '"k": history-search-backward'
+bind -m vi-command '"j": history-search-forward'
 
 bind 'set show-all-if-ambiguous on'
 bind 'set colored-stats on'
@@ -175,6 +185,8 @@ bind 'set echo-control-characters off'
 bind 'TAB:menu-complete'
 bind 'set menu-complete-display-prefix on'
 bind 'set colored-completion-prefix on'
+bind "set completion-map-case on"
+bind "set completion-ignore-case on"
 
 # Allows backward movement through menu complete
 bind -m vi-insert '"\033[Z": menu-complete-backward'
