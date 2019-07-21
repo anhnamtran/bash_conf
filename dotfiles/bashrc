@@ -166,7 +166,7 @@ stty -ixon
 check_tmux
 
 # Turn on recursive globbing (enables ** to recurse all directories)
-shopt -s globstar 2> /dev/null
+shopt -s globstar
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
@@ -174,7 +174,7 @@ set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
 bind -m vi-insert '"jj": vi-movement-mode'
 
-# Enable incremental history search
+# Enables history search using the current characters.
 bind -m vi-command '"k": history-search-backward'
 bind -m vi-command '"j": history-search-forward'
 
