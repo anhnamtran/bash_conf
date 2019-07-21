@@ -13,7 +13,7 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE='q:exit:quit:~:history:clear:refresh:ls:bg:fg:'
+export HISTIGNORE='~:q:exit:quit:~:history:clear:refresh:ls:bg:fg:'
 
 # append to the history file, don't overwrite it
 shopt -s histappend
