@@ -175,7 +175,6 @@ exec --no-startup-id VBoxClient-all
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id light -s sysfs/leds/dell::kbd_backlight -S 100
-exec --no-startup-id xautolock -corners 0-00 -cornersize 20 -time 5 -locker $HOME/bin/lock
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 
 # Gaps
