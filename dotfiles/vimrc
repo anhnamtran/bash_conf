@@ -36,6 +36,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-commentary'
 
 " UltiSnips requires Vim 7.4+
 Plug 'SirVer/ultisnips'
