@@ -173,6 +173,7 @@ shopt -s nocaseglob
 set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
 bind -m vi-insert '"jj": vi-movement-mode'
+bind -m vi-insert -x '"qq": exit'
 
 # Enables history search using the current characters.
 bind -m vi-command '"k": history-search-backward'
