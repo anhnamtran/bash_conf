@@ -149,6 +149,7 @@ glib2
 glib2-docs
 glibc
 glibmm
+glslang
 glu
 glusterfs
 gmime
@@ -233,12 +234,15 @@ java-environment-common
 java-runtime-common
 jbig2dec
 jdk-openjdk
+jdk11-openjdk
 jdk8-openjdk
 jemalloc
 jfsutils
 jq
 jre-openjdk
 jre-openjdk-headless
+jre11-openjdk
+jre11-openjdk-headless
 jre8-openjdk
 jre8-openjdk-headless
 js60
@@ -330,7 +334,6 @@ libid3tag
 libidn
 libidn2
 libiec61883
-libimobiledevice
 libinput
 libiptcdata
 libiscsi
@@ -348,6 +351,7 @@ libmodplug
 libmp4v2
 libmpc
 libmpcdec
+libmpdclient
 libmpeg2
 libnautilus-extension
 libndp
@@ -377,7 +381,6 @@ libpciaccess
 libpgm
 libpinyin
 libpipeline
-libplist
 libpng
 libproxy
 libpsl
@@ -418,7 +421,6 @@ libunistring
 libunwind
 liburcu
 libusb
-libusbmuxd
 libutempter
 libutil-linux
 libuv
@@ -508,6 +510,7 @@ mobile-broadband-provider-info
 mozilla-common
 mpfr
 mpg123
+mpv
 msgpack-c
 msmtp
 msmtp-mta
@@ -657,6 +660,7 @@ qpdf
 ranger
 raptor
 readline
+redshift
 reflector
 reiserfsprogs
 rest
@@ -666,6 +670,7 @@ rpcbind
 rsync
 rtkit
 rtmpdump
+rubberband
 run-parts
 s-nail
 sbc
@@ -674,6 +679,7 @@ sdl2
 seabios
 sed
 semver
+shaderc
 shadow
 shared-color-targets
 shared-mime-info
@@ -687,6 +693,7 @@ speex
 speexdsp
 spice
 spice-gtk
+spirv-tools
 sqlite
 srt
 sshfs
@@ -729,16 +736,16 @@ ttf-font-awesome
 ttf-hannom
 twolame
 tzdata
+uchardet
 udisks2
 unclutter
 unibilium
 unzip
-upower
-usbmuxd
 usbredir
 usbutils
 util-linux
 v4l-utils
+vamp-plugin-sdk
 vde2
 vi
 vid.stab
@@ -781,7 +788,6 @@ xfce4-battery-plugin
 xfce4-dev-tools
 xfce4-notifyd
 xfce4-panel
-xfce4-power-manager
 xfce4-pulseaudio-plugin
 xfce4-screenshooter
 xfconf
