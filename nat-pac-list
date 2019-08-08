@@ -71,6 +71,7 @@ cups-filters
 cups-pk-helper
 curl
 cyrus-sasl
+dav1d
 db
 dbus
 dbus-glib
@@ -207,6 +208,7 @@ hwids
 hyphen
 i3-gaps
 i3blocks
+i3lock-color
 i3status
 iana-etc
 ibus
