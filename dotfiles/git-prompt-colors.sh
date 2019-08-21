@@ -31,7 +31,7 @@ override_git_prompt_colors() {
     GIT_CONTAINER_FOLDER=$(basename $GIT_CONTAINER_FOLDER_FULLPATH 2> /dev/null)
 
     CURRENT_FULLPATH=$(pwd)
-    CURRENT_BASE=$(basename $CURRENT_FULLPATH 2> /dev/null)
+    CURRENT_GIT_FULLPATH=${CURRENT_FULLPATH#$(dirname ${GIT_CONTAINER_FOLDER_FULLPATH})/}
 
     # Distinguish between detached and not.
     if ! git symbolic-ref -q HEAD > /dev/null; then
@@ -40,7 +40,7 @@ override_git_prompt_colors() {
 
     local PS1="$GIT_CONTAINER_FOLDER"
     gp_set_window_title "$PS1"
-    echo -n "${BoldBlue}${PS1}${ResetColor}:${BoldBlue}${CURRENT_BASE}${ResetColor}${DETACHED:-}"
+    echo -n "git@${BoldBlue}${CURRENT_GIT_FULLPATH}${ResetColor}${DETACHED:-}"
   }
 
   Time12a="\$(date +%H:%M:%S)"

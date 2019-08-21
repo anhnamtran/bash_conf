@@ -64,7 +64,10 @@ fi
 
 # These colors only work if the terminal supports True Color!
 if [ "$color_prompt" = yes ]; then
-  PS1='${debian_chroot:+($debian_chroot)}→ \[\033[01;34m\]$(pwd)\[\033[00m\]\n\[\033[01;35m\]\u\[\033[00m\] $(if [[ $? == 0 ]]; then echo -e "\[\033[01;32m\]\$"; else echo -e "\[\033[01;31m\]\$"; fi)\[\033[00m\] '
+  CURR_DIR=""
+  USER_START=""
+  PROMPT_END=""
+  PS1='${debian_chroot:+($debian_chroot)}→ \[\033[01;34m\]$(pwd)\[\033[00m\]\n$(date +%H:%M:%S) \[\033[01;35m\]\u\[\033[00m\] $(if [[ $? == 0 ]]; then echo -e "\[\033[01;32m\]\$"; else echo -e "\[\033[01;31m\]\$"; fi)\[\033[00m\] '
 else
   PS1='${debian_chroot:+($debian_chroot)}[\u:\W]\[\033[00;33m\]\[\033[00m\]\$ '
 fi
