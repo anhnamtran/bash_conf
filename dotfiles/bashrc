@@ -23,8 +23,6 @@ shopt -s histappend
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
 
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -62,16 +60,42 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+PROMPT_COMMAND=__prompt_command
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
 # These colors only work if the terminal supports True Color!
 if [ "$color_prompt" = yes ]; then
-  CURR_DIR=""
-  USER_START=""
-  PROMPT_END=""
-  PS1='${debian_chroot:+($debian_chroot)}→ \[\033[01;34m\]$(pwd)\[\033[00m\]\n$(date +%H:%M:%S) \[\033[01;35m\]\u\[\033[00m\] $(if [[ $? == 0 ]]; then echo -e "\[\033[01;32m\]\$"; else echo -e "\[\033[01;31m\]\$"; fi)\[\033[00m\] '
+  __prompt_command() {
+    # Work around to bash-git-prompt to still capture the correct exit code.
+    local LAST_COMMAND_STATE=${GIT_PROMPT_LAST_COMMAND_STATE:-$?}
+    PS1=""
+
+    local COLOR_RESET='\[\033[00m\]'
+    local COLOR_RED='\[\033[01;31m\]'
+    local COLOR_GREEN='\[\033[01;32m\]'
+    local COLOR_BLUE='\[\033[01;34m\]'
+    local COLOR_PURPLE='\[\033[01;35m\]'
+
+    local TIME=$(date +%H:%M:%S)
+    local DIR=$(pwd)
+
+    PS1="→ ${COLOR_BLUE}${DIR}\n${COLOR_RESET}${TIME} "
+    PS1+="${COLOR_PURPLE}\u${COLOR_RESET} "
+
+    if [[ $LAST_COMMAND_STATE == 0 ]]; then
+      PS1+="${COLOR_GREEN}"
+    else
+      PS1+="${COLOR_RED}"
+    fi
+    PS1+="\$ ${COLOR_RESET}"
+  }
 else
-  PS1='${debian_chroot:+($debian_chroot)}[\u:\W]\[\033[00;33m\]\[\033[00m\]\$ '
+  __prompt_command() {
+    PS1='${debian_chroot:+($debian_chroot)}[\u:\W]\[\033[00;33m\]\[\033[00m\]\$ '
+  }
 fi
 unset color_prompt force_color_prompt
+
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -172,6 +196,8 @@ check_tmux
 shopt -s globstar
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
+# Change directory without cd
+shopt -s autocd
 
 set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
@@ -195,8 +221,11 @@ bind "set completion-ignore-case on"
 # Allows backward movement through menu complete
 bind -m vi-insert '"\033[Z": menu-complete-backward'
 
-shopt -qs autocd
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -d /usr/share/fzf ]; then
+  . /usr/share/fzf/completion.bash
+  . /usr/share/fzf/key-bindings.bash
+fi
 
 # Set window title if not in TMUX
 trap 'printf "\033]0;%s\007" "${BASH_COMMAND//[^[:print:]]/}"' DEBUG
