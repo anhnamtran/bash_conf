@@ -383,6 +383,7 @@ libpciaccess
 libpgm
 libpinyin
 libpipeline
+libplacebo
 libpng
 libproxy
 libpsl
@@ -439,6 +440,7 @@ libwacom
 libwbclient
 libwebp
 libwnck
+libwnck3
 libx11
 libxau
 libxaw
@@ -606,6 +608,7 @@ pygobject2-devel
 python
 python-anytree
 python-appdirs
+python-attrs
 python-babel
 python-cachecontrol
 python-cairo
@@ -620,6 +623,7 @@ python-gobject
 python-html5lib
 python-idna
 python-imagesize
+python-importlib-metadata
 python-jinja
 python-lockfile
 python-lxml
@@ -651,6 +655,7 @@ python-urllib3
 python-webencodings
 python-xdg
 python-yaml
+python-zipp
 python2
 python2-cairo
 python2-dbus
@@ -667,6 +672,7 @@ reflector
 reiserfsprogs
 rest
 rhash
+ripgrep
 rofi
 rpcbind
 rsync
@@ -861,6 +867,7 @@ zathura-cb
 zathura-djvu
 zathura-pdf-mupdf
 zathura-ps
+zbar
 zenity
 zeromq
 zip
