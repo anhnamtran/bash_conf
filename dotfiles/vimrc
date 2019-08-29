@@ -21,6 +21,7 @@ Plug 'lervag/vimtex'
 
 " System navigation
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'christoomey/vim-tmux-navigator'
 
