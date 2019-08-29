@@ -117,8 +117,6 @@ set noshowcmd
 set splitright
 set equalalways
 
-" highlights the current line
-set cursorline
 
 " wrapping
 set wrap linebreak nolist
@@ -237,9 +235,9 @@ map gx :call HandleURL()<cr>
 
 
 "-------------------------------- THEMES AND GUI ------------------------------
-" Columns limits
+" Columns limit and cursor line highlights
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=#4e4e4e
+set cursorline
 
 " themes
 " 24-bit colors
