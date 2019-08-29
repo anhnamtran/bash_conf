@@ -211,7 +211,7 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 nnoremap <leader>cd :lcd %:p:h<CR>
 
 " Opens FZF in the current directory
-nnoremap _ :FZF<CR>
+nnoremap _ :FZF %:p:h<CR>
 
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
