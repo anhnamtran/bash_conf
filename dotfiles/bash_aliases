@@ -50,9 +50,9 @@ alias attachmux="tmux attach-session -t"
 alias lsmux="tmux ls"
 
 # Start vim with a Session file
-alias vis="nvim -S"
-alias vi="nvim"
-alias vid="nvim -d"
+alias vis="${EDITOR} -S"
+alias vi="${EDITOR}"
+alias vimdiff="${EDITOR} -d"
 
 # more convenient less
 # view raw characters
@@ -60,7 +60,7 @@ alias lessr="less -r"
 alias lessR="less -R"
 
 # needs fzf installed
-alias vzf="fzf | xargs nvim"
+alias vzf="fzf | xargs ${EDITOR}"
 alias pzf="fzf | xargs zathura"
 alias ozf="fzf | xargs xdg-open"
 

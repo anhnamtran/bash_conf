@@ -628,6 +628,7 @@ python-jinja
 python-lockfile
 python-lxml
 python-markupsafe
+python-more-itertools
 python-msgpack
 python-packaging
 python-pep517
