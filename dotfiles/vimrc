@@ -105,8 +105,9 @@ let g:vimtex_imaps_leader='!'
 let g:polyglot_disabled = ['latex']
 set conceallevel=1
 
-" Fugitive and GitGutter
-set diffopt=vertical
+" Fugitive, GitGutter, and diff options
+set diffopt=vertical,filler,context:5
+set foldopen-=search
 set updatetime=100
 
 " line numbers
