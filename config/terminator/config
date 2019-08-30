@@ -8,7 +8,6 @@
     show_titlebar = False
     scrollbar_position = disabled
 
-    cursor_shape = ibeam
     use_system_font = False
     background_color = '#282C34'
     foreground_color = '#aab2bf'
