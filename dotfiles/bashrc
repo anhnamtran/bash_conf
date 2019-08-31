@@ -79,7 +79,7 @@ if [ "$color_prompt" = yes ]; then
     local TIME=$(date +%H:%M:%S)
     local DIR=$(pwd)
 
-    PS1="→ ${COLOR_BLUE}${DIR}\n${COLOR_RESET}${TIME} "
+    PS1="→ ${COLOR_BLUE}${DIR}${COLOR_RESET}\n${TIME} "
     PS1+="${COLOR_PURPLE}\u${COLOR_RESET} "
 
     if [[ $LAST_COMMAND_STATE == 0 ]]; then
@@ -208,6 +208,9 @@ set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
 bind -m vi-insert '"jj": vi-movement-mode'
 bind -m vi-insert -x '"qq": exit'
+bind 'set show-mode-in-prompt on'
+bind 'set vi-cmd-mode-string "\1\033[00;32m\2"'
+bind 'set vi-ins-mode-string "\1\033[00;34m\2"'
 
 # Enables history search using the current characters.
 bind -m vi-command '"k": history-search-backward'

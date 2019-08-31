@@ -34,7 +34,7 @@ alias lss="ls -lSs"
 alias l1="ls -1"
 alias lv="vim ."
 
-alias refresh="clear -x && source $HOME/.bashrc"
+alias refresh="clear -x && exec bash"
 
 # permissions
 alias cr="chmod +r"
