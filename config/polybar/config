@@ -55,7 +55,7 @@ wrapping-scroll = false
 
 label-mode-padding = 2
 label-mode-foreground = ${neon_colors.dark_blue}
-label-mode-background = #193a48
+label-mode-background = ${neon_colors.dark_purple}
 
 label-focused = %index%
 label-focused-background = ${neon_colors.purple}
