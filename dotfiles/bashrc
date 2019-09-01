@@ -65,6 +65,9 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; h
 
 # These colors only work if the terminal supports True Color!
 if [ "$color_prompt" = yes ]; then
+  bind 'set show-mode-in-prompt on'
+  bind 'set vi-cmd-mode-string "\1\033[00;32m\2"'
+  bind 'set vi-ins-mode-string "\1\033[00;34m\2"'
   __prompt_command() {
     # Work around to bash-git-prompt to still capture the correct exit code.
     local LAST_COMMAND_STATE=${GIT_PROMPT_LAST_COMMAND_STATE:-$?}
@@ -208,9 +211,6 @@ set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
 bind -m vi-insert '"jj": vi-movement-mode'
 bind -m vi-insert -x '"qq": exit'
-bind 'set show-mode-in-prompt on'
-bind 'set vi-cmd-mode-string "\1\033[00;32m\2"'
-bind 'set vi-ins-mode-string "\1\033[00;34m\2"'
 
 # Enables history search using the current characters.
 bind -m vi-command '"k": history-search-backward'
