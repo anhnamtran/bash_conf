@@ -174,7 +174,7 @@ mode "resize" {
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id light -s sysfs/leds/dell::kbd_backlight -S 100
-exec --no-startup-id xautolock -detectsleep -corners 0-0- -cornersize 20 -time 5 -locker $HOME/bin/lock
+exec --no-startup-id xautolock -notify 30 -corners 0-0- -cornersize 20 -time 5 -locker $HOME/bin/lock
 exec --no-startup-id redshift
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 
