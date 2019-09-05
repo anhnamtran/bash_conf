@@ -65,6 +65,7 @@ alias pzf="fzf | xargs zathura"
 alias ozf="fzf | xargs xdg-open"
 
 alias fucking="sudo"
+alias please="sudo"
 
 # needs to have jupyter note book installed in a virtualenv
 JUPYTER=
