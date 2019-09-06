@@ -267,5 +267,9 @@ endif
 
 syntax on
 
+let g:onedark_color_overrides = {
+  \ "cursor_grey" : { "gui": "#3E4452", "cterm": "237", "cterm16": "8" }
+\}
+
 set background=dark
 colorscheme onedark
