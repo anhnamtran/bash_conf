@@ -3,7 +3,7 @@
 
 [profiles]
   [[default]]
-    font = Iosevka Term Medium 10
+    font = Iosevka Term Medium 9
 
     show_titlebar = False
     scrollbar_position = disabled
