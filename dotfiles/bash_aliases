@@ -3,51 +3,34 @@
 alias no-echo="stty -echo"
 
 # quality of life
-alias Gstatus="git status"
-alias Gpull="git pull"
-alias Gpush="git push"
-alias Gcommit="git commit"
-alias Gadd="git add"
-
 alias today="date +%Y-%m-%d"
 
 alias clipboard="xargs echo -n | xclip -sel clip" # needs to have "xclip installed"
-alias cpwd="pwd | clipboard"
 
 alias mkdir="mkdir -pv"
 
-alias cdc="clear -x; cd"
 alias ..="cd .."
 alias ~="cd ~ && clear"
 
 alias q=exit
-alias r=ranger # must have ranger installed
-alias c="clear -x"
+
+type ranger 2>&1 >/dev/null && alias r=ranger
 alias clear="clear -x"
 
 alias open="xdg-open"
-alias browser="sensible-browser"
 
 # listings
 alias lt="ls -lt"
 alias lss="ls -lSs"
 alias l1="ls -1"
-alias lv="vim ."
 
 alias refresh="clear -x && exec bash"
 
-# permissions
-alias cr="chmod +r"
-alias cw="chmod +w"
-alias cx="chmod +x"
-alias c-r="chmod -r"
-alias c-w="chmod -w"
-alias c-x="chmod -x"
-
 # needs to have "tmux" installed
-alias newmux="tmux new -s"
-alias attachmux="tmux attach-session -t"
-alias lsmux="tmux ls"
+if type tmux 2>&1 >/dev/null; then
+  alias attachmux="tmux attach-session -t"
+  alias lsmux="tmux ls"
+fi
 
 # Start vim with a Session file
 alias vis="${EDITOR} -S"
@@ -59,14 +42,7 @@ alias vimdiff="${EDITOR} -d"
 alias lessr="less -r"
 alias lessR="less -R"
 
-# needs fzf installed
-alias vzf="fzf | xargs ${EDITOR}"
-alias pzf="fzf | xargs zathura"
-alias ozf="fzf | xargs xdg-open"
-
 alias fucking="sudo"
 alias please="sudo"
 
-# needs to have jupyter note book installed in a virtualenv
-JUPYTER=
-alias jupyter="svenv ${JUPYTER:-.}/venv && jupyter"
+# vim: ft=sh

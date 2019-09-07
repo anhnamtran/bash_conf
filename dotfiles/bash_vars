@@ -1,11 +1,8 @@
 export PYTHONUNBUFFERED=1
 export IBUS_ENABLE_SYNC_MODE=1
+export CHECK_TMUX="true"
 export EDITOR=nvim
 
-export http="http:/"
-export https="https:/"
+export CONFIGS_GIT_DIR="$HOME/.cfg"
 
-export CONFIGS_HOME="$HOME/.cfg"
-export CONFIGS_DOTS="$HOME/dotfiles"
-export CONFIGS_PACS="$HOME/packages"
-export CONFIGS_BACKUP="$HOME/Backups"
+# vim: ft=sh
