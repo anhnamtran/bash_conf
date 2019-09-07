@@ -1,4 +1,6 @@
 #!/bin/sh
+# If i3lock isn't installed bail.
+type i3lock 2>&1 >/dev/null || return 1
 
 B='#00000000'  # blank
 C='#ffffff22'  # clear ish
