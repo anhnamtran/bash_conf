@@ -1,1 +1,1 @@
-Scripts specifically made to be used in Cron jobs.
+Scripts specifically made to be used in FCron jobs.
