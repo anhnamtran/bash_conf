@@ -74,8 +74,10 @@ no_space() {
       mv -v "$f" "$(dirname "$f")/$(basename "${f// /_}")"; done
 }
 
+CONFIGS_GIT_DIR="${CONFIGS_GIT_DIR:-"$HOME/.cfg"}"
+
 # Enables git autocompletion if $CONFIGS_GIT_DIR if present.
-if [[ -d "${CONFIGS_GIT_DIR:-"$HOME/.cfg"}" ]]; then
+if [[ -d "$CONFIGS_GIT_DIR" ]]; then
   # load bash-completion if necessary
   declare -F _completion_loader &>/dev/null || {
     if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -96,7 +98,7 @@ if [[ -d "${CONFIGS_GIT_DIR:-"$HOME/.cfg"}" ]]; then
 fi
 
 configs() {
-  git --git-dir="$CONFIGS_HOME" --work-tree="$HOME" "$@"
+  git --git-dir="$CONFIGS_GIT_DIR" --work-tree="$HOME" "$@"
 }
 
 pac-list() {
