@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-curl https://github.com/anhnamtran/bash_conf/blob/master/configure -O configure
+curl https://raw.githubusercontent.com/anhnamtran/bash_conf/master/configure -o configure
 chmod +x configure
 ```
 
