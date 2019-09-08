@@ -1,0 +1,199 @@
+#!/bin/bash
+# This script will install packages, configs, and dotfiles to the user's $HOME
+# directory.
+
+# Associative arrays aren't available until Bash 4.0.
+if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+  echo "This script requires Bash 4+ to run. Current version: ${BASH_VERSION}"
+  exit 1
+fi
+
+# If a file is provided, source it first.
+if [ -n "$2" ] && [ -f "$2" ]; then
+  echo "Sourcing $2."
+  . "$2"
+fi
+
+declare -A CONFIGS=(
+  # This will be the directory for git.
+  ["GIT_DIR"]="${CONFIGS_GIT_DIR:-$HOME/.cfg}"
+  # The branch name for used to track files for this system.
+  ["GIT_BRANCH_NAME"]=${CONFIGS_GIT_BRANCH_NAME:-$(hostname)}
+  # Install native packages in nat-pac-list.
+  ["INSTALL_PACKAGES"]="${CONFIGS_INSTALL_PACKAGES:-false}"
+  # Install AUR packages in aur-pac-list.
+  ["INSTALL_AUR"]="${CONFIGS_INSTALL_AUR:-false}"
+  # Install .config directories.
+  ["INSTALL_CONFIGS"]="${CONFIGS_INSTALL_CONFIGS:-true}"
+  # Install dotfiles.
+  ["INSTALL_DOT_FILES"]="${CONFIGS_INSTALL_DOT:-true}"
+  ["INSTALL_THEMES"]="${CONFIGS_INSTALL_THEMES:-true}"
+
+  # The Git url of the git repository to use for the dotfiles.
+  ["REMOTE"]="${CONFIGS_REMOTE:-https://github.com/anhnamtran/bash_conf.git}"
+  # Where to find and put the configuration files.
+  ["ROOT"]="${CONFIGS_ROOT:-$HOME}"
+  # Where to put old configuration files.
+  ["BACKUP_DIR"]="${CONFIGS_BACKUP_DIR:-$HOME/.configs_backup}"
+)
+
+err() {
+  >&2 echo -e "\033[00;31m$@\033[00m"
+  return 1
+}
+
+show_help() {
+  cat<<EOF
+Usage: ./configure COMMAND [file]
+Commands:
+  show      Show the current variables that are used for installation.
+  install   Start the installation process.
+  file      The script will source this file before running any commands.
+EOF
+}
+
+backup() {
+  local SOURCE="$1"
+  local DESTINATION="$2"
+
+  # There's a possibilty that a symlink already exists, in which case, copy
+  # the symlink before deleting it.
+  if [ -f "$SOURCE" ]; then
+    echo "Backing up $SOURCE (regular)."
+    mv "$SOURCE" "$DESTINATION"
+  elif [ -L "$DST_DIR/$file" ]; then
+    echo "Backing up $SOURCE (symlink)."
+    cp -P "$SOURCE" "$DESTINATION"
+    rm "$SOURCE"
+  fi
+}
+
+configs() {
+  git --git-dir="${CONFIGS["GIT_DIR"]}" --work-tree="${CONFIGS["DIR"]}" "$@"
+}
+
+show_vars() {
+  for var in "${!CONFIGS[@]}"; do
+    echo "CONFIGS_$var=\"${CONFIGS[$var]}\""
+  done
+}
+
+# This assumes the package manager is pacman.
+configure_INSTALL_PACKAGES() {
+  sudo pacman -S --needed - < "${CONFIGS["ROOT"]}/nat-pac-list"
+}
+
+# This assumes the package manager is yay.
+configure_INSTALL_AUR() {
+  # Install yay if it's not already installed.
+  type yay 2>&1 >/dev/null || {
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+  }
+  yay -S --needed - < "${CONFIGS["ROOT"]}/aur-pac-list"
+}
+
+configure_INSTALL_CONFIGS() {
+  local BACKUP_DIR="${CONFIGS["BACKUP_DIR"]}/configs"
+  local SRC_DIR="${CONFIGS["ROOT"]}/config"
+  local DST_DIR="${CONFIGS["ROOT"]}/.config"
+  if ! [ -d "$BACKUP_DIR" ]; then
+    mkdir -p "$BACKUP_DIR"
+  fi
+  if ! [ -d "$DST_DIR" ]; then
+    mkdir -p "$DST_DIR"
+  fi
+
+  for dir in "$(ls "$SRC_DIR")"; do
+    # Special cases for some config folders. Some needs to just go to ROOT
+    # instead of .config
+    case $dir in
+      vim|UltiSnips)
+        backup "${CONFIGS["ROOT"]}/.$dir" "$BACKUP_DIR/$dir"
+        ln -s "$SRC_DIR/$dir" "${CONFIGS["ROOT"]}/.$dir"
+        ;;
+      mozilla)
+        ;;
+      *)
+        backup "$DST_DIR/$dir" "$BACKUP_DIR/$dir"
+        ln -s "$SRC_DIR/$dir" "$DST_DIR/$dir"
+    esac
+  done
+}
+
+configure_INSTALL_DOT_FILES() {
+  local BACKUP_DIR="${CONFIGS["BACKUP_DIR"]}/dotfiles"
+  local SRC_DIR="${CONFIGS["ROOT"]}/dotfiles"
+  local DST_DIR="${CONFIGS["ROOT"]}"
+
+  if ! [ -d "$BACKUP_DIR" ]; then
+    mkdir -p "$BACKUP_DIR"
+  fi
+  if ! [ -d "$DST_DIR" ]; then
+    mkdir -p "$DST_DIR"
+  fi
+
+  for file in "$(ls "$SRC_DIR")"; do
+    backup "$DST_DIR/.$file" "$BACKUP_DIR/$files"
+    ln -s "$SRC_DIR/$file" "$DST_DIR/.$file"
+  done
+}
+
+configure_INSTALL_THEMES() {
+  local BACKUP_DIR="${CONFIGS["BACKUP_DIR"]}/themes"
+  local SRC_DIR="${CONFIGS["ROOT"]}/themes"
+  local DST_DIR="${CONFIGS["ROOT"]}/.themes"
+
+  if ! [ -d "$BACKUP_DIR" ]; then
+    mkdir -p "$BACKUP_DIR"
+  fi
+  if ! [ -d "$DST_DIR" ]; then
+    mkdir -p "$DST_DIR"
+  fi
+
+  for theme in "$(ls "$SRC_DIR")"; do
+    backup "$DST_DIR/$theme" "$BACKUP_DIR/$theme"
+    ln -s "$SRC_DIR/$theme" "$DST_DIR/$theme"
+  done
+}
+
+do_configure() {
+  echo "Running with vars:"
+  show_vars
+
+  git init --bare "${CONFIGS["GIT_DIR"]}"
+  echo "Initialized Git tracking for ${CONFIGS["ROOT"]}.\
+    Git directory is ${CONFIGS["GIT_DIR"]}."
+
+  echo "Adding configuration remote to track: ${CONFIGS["REMOTE"]}"
+  configs remote add origin "${CONFIGS["REMOTE"]}"
+  configs pull origin master
+  configs checkout -b "${CONFIGS["GIT_BRANCH_NAME"]}"
+
+  for var in ${!CONFIGS[@]}; do
+    if [[ $var = INSTALL_* ]]; then
+      if [[ ${CONFIGS[$var]} == "true" ]]; then
+        "configure_$var"
+        echo "Finished ${var}."
+      else
+        echo "Skipped ${var}."
+      fi
+    fi
+  done
+
+  configs push -u origin "${CONFIGS["GIT_BRANCH_NAME"]}"
+  echo "Configuration installation complete. A reboot might be required."
+}
+
+case $1 in
+  show)
+    show_vars
+    ;;
+  install)
+    do_configure
+    ;;
+  *)
+    err "Unrecognized argument: '$arg'"
+    show_help
+esac
