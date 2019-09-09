@@ -102,7 +102,6 @@ let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
 let g:vimtex_imaps_leader='!'
-let g:polyglot_disabled = ['latex']
 set conceallevel=1
 
 " Fugitive, GitGutter, and diff options
