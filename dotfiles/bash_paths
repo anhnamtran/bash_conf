@@ -1,3 +1,4 @@
 export PATH="$HOME/bin:$PATH"
+export PAHT="$PATH:$HOME/.local/bin"
 
 # vim: ft=sh
