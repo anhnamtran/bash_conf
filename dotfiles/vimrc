@@ -155,14 +155,26 @@ set exrc
 " enables modeline
 set modeline
 
+" update time
+set timeoutlen=175
+set ttimeoutlen=10
+
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
 " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+autocmd FocusGained,BufEnter * 
+      \if mode() != 'c'
+      \| checktime
+      \| endif
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+  \ echohl WarningMsg | echo "Buffer reloaded." | echohl None
+
+" Make line numbers relative to current position
+autocmd WinEnter * set relativenumber
+autocmd WinLeave * set norelativenumber
+autocmd BufWinEnter <buffer>  set relativenumber
 
 " --------------------------------- KEYMAPS -----------------------------------
 "-------------------------------- INSERT MODE----------------------------------
@@ -184,9 +196,9 @@ inoremap {;<CR> {<CR>};<ESC>O
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) ==")" ? "\<Right>" : ")"
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) =="]" ? "\<Right>" : "]"
 inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) =="}" ? "\<Right>" : "}"
-inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-inoremap <expr> ` strpart(getline('.'), col('.')-1, 1) == "\`" ? "\<Right>" : "\`\`\<Left>"
+inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'"
+inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\""
+inoremap <expr> ` strpart(getline('.'), col('.')-1, 1) == "\`" ? "\<Right>" : "\`"
 inoremap <expr> . strpart(getline('.'), col('.')-1, 1) == "\." ? "\<Right>" : "."
 
 " quickly edit the previous typo
@@ -272,3 +284,11 @@ let g:onedark_color_overrides = {
 
 set background=dark
 colorscheme onedark
+
+" Highlight trailing white spaces
+highlight ExtraWhitespace ctermbg=204 guibg=#E06C75
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
