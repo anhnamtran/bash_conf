@@ -4,5 +4,6 @@ export CHECK_TMUX="true"
 export EDITOR=nvim
 
 export CONFIGS_GIT_DIR="$HOME/.cfg"
+export LESS="-XRF"
 
 # vim: ft=sh
