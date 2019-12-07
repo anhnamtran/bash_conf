@@ -83,7 +83,7 @@ if [ "$color_prompt" = yes ]; then
     local DIR=$(pwd)
 
     PS1="→ ${COLOR_BLUE}${DIR}${COLOR_RESET}\n${TIME} "
-    PS1+="${COLOR_PURPLE}\u${COLOR_RESET} "
+    PS1+="${COLOR_PURPLE}\u@\H${COLOR_RESET} "
 
     if [[ $LAST_COMMAND_STATE == 0 ]]; then
       PS1+="${COLOR_GREEN}"
