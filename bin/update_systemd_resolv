@@ -1,0 +1,15 @@
+#/bin/bash
+
+systemd-resolve -i gpd0 \
+  --set-domain aristanetworks.com \
+  --set-domain sjc.aristanetworks.com \
+  --set-domain dm1tac.aristanetworks.com \
+  --set-domain yvr.aristanetworks.com \
+  --set-domain blr.aristanetworks.com \
+  --set-domain rtp.aristanetworks.com \
+  --set-domain nh.aristanetworks.com \
+  --set-domain ire.aristanetworks.com \
+  --set-domain syd.aristanetworks.com \
+  --set-domain metamako.com \
+  --set-domain arista.io \
+  --set-domain bigswitch.com

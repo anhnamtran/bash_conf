@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ -f /tmp/.tmux_local_mode ]]; then
+  bash
+else
+  mosh --server="LD_LIBRARY_PATH=/home/andrew_nt/.local/lib /home/andrew_nt/.local/bin/mosh-server" us115
+fi

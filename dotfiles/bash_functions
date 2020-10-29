@@ -106,4 +106,32 @@ pac-list() {
   sudo pacman -Qqqm > ~/aur-pac-list
 }
 
+tmux-is() {
+  mode="$1"
+  options="local, server"
+  case $mode in
+    "local"|"lo")
+      touch /tmp/.tmux_local_mode
+      ;;
+    "server"|"se")
+      if [[ -f /tmp/.tmux_local_mode ]]; then
+        rm -f /tmp/.tmux_local_mode
+      fi
+      ;;
+    "status"|"st")
+      if [[ -f /tmp/.tmux_local_mode ]]; then
+        echo "TMUX mode is currently \"local\""
+      else
+        echo "TMUX mode is currently \"server\""
+      fi
+      return 0
+      ;;
+    *)
+      echo "Unknown mode, options are {$options}"
+      return 1
+      ;;
+  esac
+  echo "TMUX mode is now \"$mode\""
+}
+
 # vim: ft=sh

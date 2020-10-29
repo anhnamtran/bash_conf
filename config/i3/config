@@ -1,12 +1,19 @@
 set $mod Mod4
 
-hide_edge_borders both
+hide_edge_borders smart
 focus_follows_mouse no
-default_border none
-default_floating_border none
+mouse_warping none
+default_border pixel
+default_floating_border pixel
+
+# Colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #8826a5 #282C34 #ffffff #8826a5   #8826a5
+
+floating_minimum_size 500 x 500
 
 bindsym $mod+u border none
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
 
 font xft:Iosevka 12
@@ -16,12 +23,15 @@ floating_modifier $mod
 bindsym $mod+Return exec terminator -e tmux
 bindsym $mod+Shift+t exec terminator
 
+# Move mouse to bottom right corner
+bindsym $mod+Escape exec --no-startup-id xdotool mousemove_relative -sync -- 5000 5000
+
 # Window kill command
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id rofi -show run
-bindsym $mod+Shift+w exec --no-startup-id rofi -show window
+bindsym $mod+space exec --no-startup-id rofi -show run -monitor -1
+bindsym $mod+Shift+w exec --no-startup-id rofi -show window -monitor -1
 
 # change focus
 bindsym $mod+l focus right
@@ -51,8 +61,8 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+minus split v;exec notify-send -t 1000 'tile vertically'
-bindsym $mod+backslash split h;exec notify-send -t 1000 'tile horizontally'
+bindsym $mod+minus split v;exec notify-send -t 2000 'tile vertically'
+bindsym $mod+backslash split h;exec notify-send -t 2000 'tile horizontally'
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
@@ -81,6 +91,9 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+Ctrl+minus scratchpad show
+bindsym $mod+m [class="Spotify.*"] scratchpad show
+bindsym $mod+c [title="Meet.*"] scratchpad show
+bindsym $mod+o [class="obs"] scratchpad show
 
 # navigate workspaces next / previous
 bindsym $mod+Shift+l workspace next
@@ -134,6 +147,10 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
+for_window [class="(?i)Spotify.*"] floating enable sticky enable border normal
+for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
+for_window [class="(?i)obs"] floating enable sticky enable
+
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
@@ -143,9 +160,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec i3-msg exit
-
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
@@ -154,15 +168,15 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym l resize shrink width 5 px or 1 ppt
+        bindsym l resize grow width 5 px or 1 ppt
         bindsym j resize grow height 5 px or 1 ppt
         bindsym k resize shrink height 5 px or 1 ppt
-        bindsym h resize grow width 5 px or 1 ppt
+        bindsym h resize shrink width 5 px or 1 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 1 ppt
-        bindsym Down resize grow height 10 px or 1 ppt
-        bindsym Up resize shrink height 10 px or 1 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
         # exit resize mode: Enter or Escape
@@ -171,12 +185,19 @@ mode "resize" {
 }
 
 # Autostart applications
-exec --no-startup-id nitrogen --restore
 exec --no-startup-id ibus-daemon --xim -d
-exec --no-startup-id light -s sysfs/leds/dell::kbd_backlight -S 100
-exec --no-startup-id xautolock -notify 30 -corners 0-0- -cornersize 20 -time 5 -locker $HOME/bin/lock
+exec --no-startup-id dunst
 exec --no-startup-id redshift
+exec --no-startup-id nm-applet
+exec --no-startup-id autorandr-launcher
+exec --no-startup-id autorandr --change
+exec --no-startup-id xautolock -notify 30 -corners 0-0- -cornersize 20 -time 10 -locker $HOME/bin/lock
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
+exec_always --no-startup-id nitrogen --restore
+
+# Touchpad settings
+exec_always --no-startup-id xinput set-prop 14 332 1 # tap to click
+exec_always --no-startup-id xinput set-prop 14 334 1 # drag lock
 
 # Gaps
 gaps inner 5
@@ -223,10 +244,10 @@ mode "$mode_gaps_outer" {
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2db- unmute
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
+bindsym XF86AudioMute exec --no-startup-id /home/andrew_nt/bin/amixer_mute_toggle
 
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5    # increase brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5  # decrease brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5    # increase brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -inc 5  # decrease brightness
 
 # touchpad on and off controller on laptop with Fn+<touchpad control functional key>
 bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0

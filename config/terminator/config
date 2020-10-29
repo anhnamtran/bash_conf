@@ -1,9 +1,9 @@
 [global_config]
-	borderless = True
+	borderless = False
 
 [profiles]
   [[default]]
-    font = Iosevka Term Medium 9
+    font = Iosevka Regular 9
 
     show_titlebar = False
     scrollbar_position = disabled

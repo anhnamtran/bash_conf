@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/bash
 
 pkill polybar
 

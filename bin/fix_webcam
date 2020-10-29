@@ -1,0 +1,3 @@
+#!/bin/bash
+mv /dev/video0 /dev/video0-orig
+ln -s /dev/video2 /dev/video0

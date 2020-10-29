@@ -14,7 +14,6 @@ alias ~="cd ~ && clear"
 
 alias q=exit
 
-type ranger 2>&1 >/dev/null && alias r=ranger
 alias clear="clear -x"
 
 alias open="xdg-open"
@@ -36,11 +35,6 @@ fi
 alias vis="${EDITOR} -S"
 alias vi="${EDITOR}"
 alias vimdiff="${EDITOR} -d"
-
-# more convenient less
-# view raw characters
-alias lessr="less -r"
-alias lessR="less -R"
 
 alias fucking="sudo"
 alias please="sudo"
