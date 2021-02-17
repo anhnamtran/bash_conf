@@ -38,5 +38,5 @@ Xft.lcdfilter: lcddefault
 Xft.antialias: 1
 
 
-Xcursor.size: 30
+Xcursor.size: 28
 Xcursor.theme: Capitaine-cursors

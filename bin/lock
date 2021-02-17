@@ -8,49 +8,59 @@ EXCLUDED_WIN=(
   "Zoom Meeting ID:.*"
 )
 
-WINDOWS=$(xwininfo -tree -root)
-for win in ${EXCLUDED_WIN[@]}; do
-  if grep -q "$win" -- <<<"$WINDOWS"; then
-    exit 0
-  fi
-done
+check_windows() {
+  local windows=$(xwininfo -tree -root)
+  for win in ${EXCLUDED_WIN[@]}; do
+    if grep -q "$win" -- <<<"$windows"; then
+      exit 1
+    fi
+  done
+}
 
-B='#00000000'  # blank
-C='#ffffff22'  # clear ish
-D='#ff00ffcc'  # default
-T='#ff00ffcc'  # text
-W='#880000bb'  # wrong
-V='#bb00bbbb'  # verifying
+run_i3lock() {
+    B='#00000000'  # blank
+    C='#ffffff22'  # clear ish
+    D='#ff00ffcc'  # default
+    T='#ff00ffcc'  # text
+    W='#880000bb'  # wrong
+    V='#bb00bbbb'  # verifying
 
+    i3lock \
+    --color='000000'                                                      \
+    --insidevercolor=$B                                                   \
+    --ringvercolor=$V                                                     \
+    \
+    --insidewrongcolor=$C                                                 \
+    --ringwrongcolor=$W                                                   \
+    \
+    --insidecolor=$B                                                      \
+    --ringcolor=$D                                                        \
+    --linecolor=$B                                                        \
+    --separatorcolor=$D                                                   \
+    \
+    --verifcolor=$T                                                       \
+    --wrongcolor=$T                                                       \
+    --timecolor=$T                                                        \
+    --datecolor=$T                                                        \
+    --layoutcolor=$T                                                      \
+    --keyhlcolor=$W                                                       \
+    --bshlcolor=$W                                                        \
+    \
+    --ring-width "3.0"                                                    \
+    \
+    --clock                                                               \
+    --indicator                                                           \
+    --timestr="%H:%M:%S"                                                  \
+    --datestr="%a, %Y-%m-%d"                                              \
+    \
+    --veriftext="Verifying"                                               \
+    --noinputtext="No Input"                                              \
+    --wrongtext="Incorrect"                                               \
+    --show-failed-attempts
+}
 
-i3lock \
---color='000000'                                                      \
---insidevercolor=$B                                                   \
---ringvercolor=$V                                                     \
-\
---insidewrongcolor=$C                                                 \
---ringwrongcolor=$W                                                   \
-\
---insidecolor=$B                                                      \
---ringcolor=$D                                                        \
---linecolor=$B                                                        \
---separatorcolor=$D                                                   \
-\
---verifcolor=$T                                                       \
---wrongcolor=$T                                                       \
---timecolor=$T                                                        \
---datecolor=$T                                                        \
---layoutcolor=$T                                                      \
---keyhlcolor=$W                                                       \
---bshlcolor=$W                                                        \
-\
---ring-width "3.0"                                                    \
-\
---clock                                                               \
---indicator                                                           \
---timestr="%H:%M:%S"                                                  \
---datestr="%a, %Y-%m-%d"                                              \
-\
---veriftext="Verifying"                                               \
---noinputtext="No Input"                                              \
---wrongtext="Incorrect"                                               \
+set -e
+if ! [[ "$1" = "-f" ]]; then
+  check_windows
+fi
+run_i3lock

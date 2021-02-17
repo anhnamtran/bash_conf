@@ -148,8 +148,8 @@ for_window [class="Xfburn"] floating enable
 for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
 for_window [class="(?i)Spotify.*"] floating enable sticky enable border normal
+for_window [class="(?i)Spotify.*"] move scratchpad resize set 1500 1000
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
-for_window [class="(?i)obs"] floating enable sticky enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -191,7 +191,7 @@ exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr-launcher
 exec --no-startup-id autorandr --change
-exec --no-startup-id xautolock -notify 30 -corners 0-0- -cornersize 20 -time 10 -locker $HOME/bin/lock
+exec --no-startup-id xautolock -resetsaver -detectsleep -notify 30 -notifier "notify-send -t 10000 'Locking screen in 30 seconds'" -corners 0-0- -cornersize 20 -time 10 -locker $HOME/bin/lock
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
@@ -246,8 +246,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2db- unmute
 bindsym XF86AudioMute exec --no-startup-id /home/andrew_nt/bin/amixer_mute_toggle
 
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5    # increase brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -inc 5  # decrease brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5    # increase brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5  # decrease brightness
 
 # touchpad on and off controller on laptop with Fn+<touchpad control functional key>
 bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0

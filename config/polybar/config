@@ -41,7 +41,7 @@ modules-left = i3 wintitle
 modules-center = date
 modules-right = backlight pulseaudio battery
 
-tray-position = right
+tray-position = ${env:TRAY_POS:}
 tray-maxsize = 40
 tray-padding = 0
 tray-offset-y =
