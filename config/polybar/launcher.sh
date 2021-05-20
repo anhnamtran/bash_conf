@@ -1,12 +1,18 @@
-#!/bin/env sh
+#!/bin/bash
 
 pkill polybar
 
 while pgrep -a polybar &> /dev/null; do sleep 1; done
 
+set -x
+PRIMARY_MONITOR=$(xrandr --query | grep " connected" | grep " primary" | cut -d " " -f 1)
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d " " -f 1); do
-    MONITOR=$m polybar --reload mainbar &
+    if [ "$m" = "$PRIMARY_MONITOR" ]; then
+      TRAY_POS='right'
+    fi
+    TRAY_POS=${TRAY_POS:-none} MONITOR=$m polybar --reload mainbar &
+    unset TRAY_POS
   done
 else
   polybar --reload mainbar &

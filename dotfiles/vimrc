@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+set encoding=utf-8
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -7,41 +8,39 @@ call plug#begin('~/.vim/bundle')
 "call vundle#begin('~/some/path/here')
 
 " Plugins
-" YouCompleteMe requires Vim 7.4+
-Plug 'Valloric/YouCompleteMe'
 
 " Themes and GUIs
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar'
 
 " Syntax handling
-Plug 'sheerun/vim-polyglot'
-Plug 'lervag/vimtex'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'sheerun/vim-polyglot', { 'branch': 'master', 'do': 'git rebase master arista && git checkout arista' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " System navigation
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'christoomey/vim-tmux-navigator'
-
-" Git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Session tracking
 Plug 'tpope/vim-obsession'
 
 " Utility
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
-
-" UltiSnips requires Vim 7.4+
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'szw/vim-maximizer'
+Plug 'inkarkat/vim-mark'
+Plug 'inkarkat/vim-ingo-library'
+Plug 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -59,13 +58,9 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 "--------------------end Vundle setup
 
-
 " -------------------------------- SETTINGS -----------------------------------
 " View `man` pages and add new file types
 runtime ftplugin/man.vim
-
-" New file types
-au BufRead,BufNewFile *.bats set filetype=sh
 
 " Obsession
 nnoremap <F10> :Obsession<CR>
@@ -77,37 +72,68 @@ let g:loaded_netrwPlugin = 1
 " Airline
 let g:airline_theme='onedark'
 let g:airline_highlighting_cache=1
+let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_tab_count = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#formatter = 'short_path'
 
-" YouCompleteMe settings
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_max_num_candidates = 5
-let g:ycm_max_num_identifier_candidates = 5
+" Add window numbers to the status line
+if !exists("window_numbers_added")
+   let window_numbers_added = 1
+   function! WindowNumber(...)
+       let builder = a:1
+       let context = a:2
+       call builder.add_section('airline_b', '[%{tabpagewinnr(tabpagenr())}]')
+       return 0
+   endfunction
 
-" Trigger configuration. Do not use <tab>
-" if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<C-Space>"
-let g:UltiSnipsJumpForwardTrigger="<c-q>"
-let g:UltiSnipsJumpBackwardTrigger="<c-g>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/.UltiSnips']
-let g:UltiSnipsEditSplit = "context"
+   call airline#add_statusline_func('WindowNumber')
+   call airline#add_inactive_statusline_func('WindowNumber')
+endif
 
-" Vimtex
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-let g:tex_conceal='abdmg'
-let g:vimtex_imaps_leader='!'
+" Add current function name to the status line
+let g:airline#extensions#tagbar#enabled = 1
+
+" Enhanced CPP highligh options
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+" Python highlighting options
+let g:python_highlight_class_vars = 1
+let g:python_highlight_func_calls = 1
+let g:python_highlight_string_formatting = 1
+let g:python_highlight_string_format = 1
+let g:python_highlight_exceptions = 1
+
+" NERDTree
+let g:NERDTreeSortHiddenFirst = 1
+let g:NERDTreeQuitOnOpen = 1
+
+" coc.nvim
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+hi! link CocHighlightText Underlined
+
+" tagbar
+let g:tagbar_autoclose = 1
+let g:tagbar_position = 'bottom'
+let g:tagbar_height = 30
+nnoremap <silent> <F9> :TagbarToggle<CR>
+
+" update time
+set updatetime=100
+
+" Indent lines
+
 set conceallevel=1
 
-" Fugitive, GitGutter, and diff options
-set diffopt=vertical,filler,context:5
+" Fugitive and GitGutter
+" And diff options
+set diffopt=filler,context:5
 set foldopen-=search
-set updatetime=100
 
 " line numbers
 set number
@@ -118,17 +144,15 @@ set noshowcmd
 set splitright
 set equalalways
 
-
 " wrapping
 set wrap linebreak nolist
 
 " tabbing
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-set pastetoggle=<F2>
-set clipboard=unnamedplus
+if !exists("loaded_arista_vim")
+  set tabstop=2
+  set shiftwidth=2
+  set expandtab
+endif
 
 " search highlighting
 set hlsearch
@@ -140,7 +164,16 @@ set smarttab
 
 " updates file automatically
 set autoread
-au FocusGained,BufEnter * :checktime
+
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+autocmd FocusGained,BufEnter *
+   \ if mode() != 'c' | checktime | endif
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "Buffer reloaded." | echohl None
 
 " taking care of files with long lines
 " this gives vim a seizure if there are too many long lines
@@ -151,30 +184,29 @@ set mouse=a
 
 " enables local vimrc files
 set exrc
+set secure
 
 " enables modeline
 set modeline
 
-" update time
-set timeoutlen=175
-set ttimeoutlen=10
+" Set the timeout between mapped sequences and key codes
+set timeoutlen=200
+set ttimeoutlen=100
 
-" Triger `autoread` when files changes on disk
-" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-autocmd FocusGained,BufEnter * 
-      \if mode() != 'c'
-      \| checktime
-      \| endif
-" Notification after file change
-" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
-autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "Buffer reloaded." | echohl None
+" Enable smart case searching
+set ignorecase
+set smartcase
 
 " Make line numbers relative to current position
-autocmd WinEnter * set relativenumber
-autocmd WinLeave * set norelativenumber
-autocmd BufWinEnter <buffer>  set relativenumber
+augroup WinRelNum
+   autocmd WinEnter * set relativenumber
+   autocmd WinLeave * set norelativenumber
+   autocmd BufWinEnter <buffer>  set relativenumber
+augroup END
+
+" make grep use ripgrep instead
+set grepprg=rg\ --vimgrep
+set grepformat^=%f:%l:%c:%m
 
 " --------------------------------- KEYMAPS -----------------------------------
 "-------------------------------- INSERT MODE----------------------------------
@@ -185,32 +217,15 @@ inoremap <c-s> <c-o>:w<CR>
 inoremap jj <ESC>
 inoremap qq <ESC>:x<CR>
 
-" Auto-close
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
-
-" skip closing char
-inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) ==")" ? "\<Right>" : ")"
-inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) =="]" ? "\<Right>" : "]"
-inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) =="}" ? "\<Right>" : "}"
-inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'"
-inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\""
-inoremap <expr> ` strpart(getline('.'), col('.')-1, 1) == "\`" ? "\<Right>" : "\`"
-inoremap <expr> . strpart(getline('.'), col('.')-1, 1) == "\." ? "\<Right>" : "."
-
 " quickly edit the previous typo
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 "---------------------------------- NORMAL MODE -------------------------------
 nnoremap <CR> o<Esc>
-nnoremap <C-CR> O<Esc>
-autocmd CmdwinEnter * nnoremap <CR> <CR>
-autocmd BufReadPost quickfix nnoremap <CR> <CR>
-
-nnoremap <Tab> a<C-Tab><Esc>
+augroup CRFix
+   autocmd CmdwinEnter * nnoremap <CR> <CR>
+   autocmd BufReadPost quickfix nnoremap <CR> <CR>
+augroup END
 
 " Ctrl+S to save
 nnoremap <c-s> :w<CR><x><u>
@@ -218,6 +233,7 @@ nnoremap <c-s> :w<CR><x><u>
 " Tabs
 nnoremap tl :tabn<CR>
 nnoremap th :tabp<CR>
+nnoremap tc :tabc<CR>
 
 " Buffers
 nnoremap H :bp<CR>
@@ -231,8 +247,44 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 " Change current window's directory to current file's
 nnoremap <leader>cd :lcd %:p:h<CR>
 
+" FZF bindings. Requires fzf.vim
 " Opens FZF in the current directory
 nnoremap _ :FZF %:p:h<CR>
+
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>l :BLines<CR>
+
+nnoremap <leader>rn :set relativenumber<CR>
+nnoremap <leader>rN :set relativenumber!<CR>
+
+ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+nnoremap <C-w>; :wincmd p<CR>
+
+function! BlinkCursorLine()
+   for i in range(3)
+      set nocursorline
+      redraw
+      sleep 100m
+      set cursorline
+      redraw
+   endfor
+endfunction
+nnoremap bl :call BlinkCursorLine()<CR>
+
+nnoremap <C-w>z :MaximizerToggle<CR>
+
+" NERDTree specific
+nnoremap <C-n>n :NERDTreeToggle<CR>
+nnoremap - :NERDTree %<CR>
+
+"--------------------------------- TERM MODE ----------------------------------
+
+tnoremap <Esc> <C-\><C-N>
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
 
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
@@ -242,6 +294,11 @@ command -nargs=+ Grip !grip --quiet <args> &
 command -nargs=+ Make make <args> | cwindow
 command -nargs=+ Grep grep <args> | cwindow
 command -nargs=+ Vim vim <args> | cwindow
+
+" Turn a buffer into a scratch buffer
+command Scratch setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
+" show all highlight groups
+command HighLights source $VIMRUNTIME/syntax/hitest.vim
 
 "------------------------------ EXTRA FUNCTIONS -------------------------------
 function! HandleURL()
@@ -255,10 +312,32 @@ function! HandleURL()
 endfunction
 map gx :call HandleURL()<cr>
 
+function! DeleteInactiveBufs()
+    "From tabpagebuflist() help, get a list of all buffers in all tabs
+    let tablist = []
+    for i in range(tabpagenr('$'))
+        call extend(tablist, tabpagebuflist(i + 1))
+    endfor
+
+    "Below originally inspired by Hara Krishna Dara and Keith Roberts
+    "http://tech.groups.yahoo.com/group/vim/message/56425
+    let nWipeouts = 0
+    for i in range(1, bufnr('$'))
+        if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
+        "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
+            silent exec 'bwipeout' i
+            let nWipeouts = nWipeouts + 1
+        endif
+    endfor
+    echomsg nWipeouts . ' buffer(s) wiped out'
+endfunction
+command! OpenOnly :call DeleteInactiveBufs()
+nnoremap <C-w>b :OpenOnly<CR>
 
 "-------------------------------- THEMES AND GUI ------------------------------
-" Columns limit and cursor line highlights
-set colorcolumn=80
+
+" Columns limits
+" highlights the current line
 set cursorline
 
 " themes
@@ -279,16 +358,33 @@ endif
 syntax on
 
 let g:onedark_color_overrides = {
-  \ "cursor_grey" : { "gui": "#3E4452", "cterm": "237", "cterm16": "8" }
+  \ "cursor_grey": { "gui": "#3E4452", "cterm": "237", "cterm16": "8" }
 \}
+
+" Highlight trailing white spaces
+augroup ExtraWhiteSpaceHi
+  au!
+  match DiffDelete /\s\+$/
+  autocmd BufWinEnter * match DiffDelete /\s\+$/
+  autocmd InsertEnter * match DiffDelete /\s\+\%#\@<!$/
+  autocmd InsertLeave * match DiffDelete /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+augroup END
+
+augroup ActiveWin
+  au!
+  autocmd WinEnter * set colorcolumn=85
+  autocmd WinLeave * set colorcolumn=0
+augroup END
+
+" onedark.vim override: Don't set a background color when running in a terminal;
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white })
+  augroup END
+endif
 
 set background=dark
 colorscheme onedark
-
-" Highlight trailing white spaces
-highlight ExtraWhitespace ctermbg=204 guibg=#E06C75
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()

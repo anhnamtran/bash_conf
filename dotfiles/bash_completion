@@ -1,0 +1,164 @@
+if test -n "${BASH_VERSION+set}"; then
+
+_setcompreply() {
+   COMPREPLY=( $(compgen -W "$1" -- "$2") )
+}
+
+_amake() {
+  local cur opts cmd subcmd
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  cmd="${COMP_WORDS[1]}"
+  subcmd=""
+  COMPREPLY=()
+
+  if [ $COMP_CWORD -eq 1 ]; then
+    opts="$(amake help \
+            | sed -ne 's/^[[:space:]]\+\([-]*[[:alnum:]_-]*\).*$/\1/p' \
+            | sed '/^$/d')"
+    _setcompreply "${opts}" "${cur}"
+    return 0
+  fi
+
+  if [ $COMP_CWORD -gt 2 ]; then
+    opts="$(ls -1 /src/)"
+    _setcompreply "${opts}" "${cur}"
+    return 0
+  fi
+
+  case "$cmd" in
+    all|check|conf|confall)
+      opts="$(ls -1 /src/)"
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+    findcheck)
+      opts="REGEX"
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+    help|cdbgen)
+      opts=""
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+  esac
+}
+complete -o bashdefault -o default -F _amake amake
+
+_a_all() {
+  local cur
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  opts="builds muts parallel queue"
+  COMPREPLY=()
+  _setcompreply "${opts}" "${cur}"
+  return 0
+}
+complete -F _a_all a-all
+
+_bgls() {
+  local cur opts prev cmd subcmd
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  cmd="${COMP_WORDS[1]}"
+  COMPREPLY=()
+
+  if [ $COMP_CWORD -eq 1 ]; then
+    opts="$(bgls help \
+            | sed -ne 's/^[[:space:]]\+\([-]*[[:alnum:]_-]*\).*$/\1/p' \
+            | sed '/^$/d')"
+    _setcompreply "${opts}" "${cur}"
+    return 0
+  fi
+
+  case "$cur" in
+    --*)
+      opts="$(a bg ls --help | grep -Eo '\-\-[[:alnum:]-]+')"
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+    -*)
+      opts="$(a bg ls --help | grep -Eo '^ *-[[:alpha:]]')"
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+  esac
+
+  case "$cmd" in
+    cal|blocks|graph|id)
+      user="$(whoami)"
+      opts="$(a bg ls -u $user \
+              | sed -ne 's/^[[:space:]]*\([[:digit:]]*\).*$/\1/p')"
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+    ed)
+      case "$prev" in
+        -u|--user)
+          opts="$(a4 users \
+                  | sed -ne 's/^\([[:alnum:]]*\) .*$/\1/p' \
+                  | sort)"
+          ;;
+        -S|--status)
+          opts="a c/dup c/f c/wf c/wfm r/dup r/f r/wf r/wfm ro"
+          ;;
+        -p|--package)
+          opts="$(ls -1 /src/)"
+          ;;
+        -i|--priority)
+          opts="df1 df2 df3 jail mu tvl tw"
+          ;;
+        *)
+          user="$(whoami)"
+          opts="$(a bg ls -u $user \
+                  | sed -ne 's/^[[:space:]]*\([[:digit:]]*\).*$/\1/p')"
+          ;;
+      esac
+      _setcompreply "${opts}" "${cur}"
+      return 0
+      ;;
+    cr)
+      case "$prev" in
+        -u|--user)
+          opts="$(a4 users \
+                  | sed -ne 's/^\([[:alnum:]]*\) .*$/\1/p' \
+                  | sort)"
+          ;;
+        -S|--status)
+          opts="a c/dup c/f c/wf c/wfm r/dup r/f r/wf r/wfm ro"
+          ;;
+        -p|--package)
+          opts="$(ls -1 /src/)"
+          ;;
+        -i|--priority)
+          opts="df1 df2 df3 jail mu tvl tw"
+          ;;
+      esac
+      _setcompreply "${opts}" "${cur}"
+      return 0
+  esac
+}
+complete -o bashdefault -o default -F _bgls bgls
+
+_gp() {
+  local cur
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  opts="$(gp help \
+          | sed -ne 's/^[[:space:]]\+\([-]*[[:alnum:]_-]*\).*$/\1/p' \
+          | sed '/^$/d')"
+  COMPREPLY=()
+  _setcompreply "${opts}" "${cur}"
+  return 0
+}
+complete -F _gp gp
+
+_tmux_is() {
+  local cur
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  opts="local server"
+  COMPREPLY=()
+  _setcompreply "${opts}" "${cur}"
+  return 0
+}
+complete -F _tmux_is tmux-is
+
+fi

@@ -8,4 +8,4 @@
 	patch = commit -p
 	sync = "!git fetch $1 $2:$2; #"
 [credential]
-	helper = cache --timeout=600
+	helper = store

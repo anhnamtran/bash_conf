@@ -1,11 +1,12 @@
 global !p
 def add_space(t):
-	if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', '\'']:
+	if t[2] and t[2][0] not in [ '[', ',', '.', '?', '-', ' ', '\'']:
 			return ' '
 	return ''
 
 def fix_indent(snip):
-    vim.eval('feedkeys("\<c-f>")')
+    vim.eval('feedkeys("\<c-d>")')
+
 endglobal
 
 snippet doc "Begin document" b
@@ -28,9 +29,15 @@ snippet " "Quotes" iA
 \`\`$1''
 endsnippet
 
-post_expand "fix_indent(snip)"
+priority 2
+post_expand "fix_indent( snip )"
 snippet it "Individual item" b
 \item $0
+endsnippet
+
+priority 1
+snippet it "\textit" w
+\textit{${1:text}}
 endsnippet
 
 snippet ilc "\code{...}" iA
@@ -43,10 +50,88 @@ $0
 \end{lstlisting}
 endsnippet
 
-snippet ^ "math ^{...}" iA
+snippet ^ "math ^{...}" i
 ^{$1} $0
 endsnippet
 
-snippet mt "\maketitle"
+snippet mt "\maketitle" b
 \maketitle
+endsnippet
+
+snippet alel3 "AleL3Unicast" wA
+AleL3Unicast
+endsnippet
+
+snippet kw "@*...*@" w
+@*\textbf{${1}}*@`!p snip.rv = add_space(t)`$2
+endsnippet
+
+snippet sec "Section"
+\section{${1:section name}}%
+\label{sec:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet sec* "Section*"
+\section*{${1:section name}}%
+\label{sec:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet sub "subsection"
+\subsection{${1:subsection name}}%
+\label{sub:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet sub* "subsection*"
+\subsection*{${1:subsection name}}%
+\label{sub:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet ssub "subsubsection"
+\subsubsection{${1:ssubsection name}}%
+\label{ssub:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet ssub* "subsubsection*"
+\subsubsection*{${1:ssubsection name}}%
+\label{ssub:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet chap "Chapter"
+\chapter{${1:chapter name}}%
+\label{chap:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet chap* "Chapter*"
+\chapter*{${1:chapter name}}%
+\label{chap:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet par "Paragraph"
+\par{${1:paragraph name}}%
+\label{par:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
+endsnippet
+
+snippet par* "Paragraph*"
+\par*{${1:paragraph name}}%
+\label{par:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}
+
+$0
 endsnippet

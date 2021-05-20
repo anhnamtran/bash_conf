@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TO_WATCH="$1"
+shift
+CMD="$@"
+
+echo "Waiting for changes on ${TO_WATCH} to run ${CMD}"
+while inotifywait -e modify "$TO_WATCH"; do
+  $CMD
+done
