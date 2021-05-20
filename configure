@@ -69,7 +69,7 @@ backup() {
 }
 
 configs() {
-  git --git-dir="${CONFIGS["GIT_DIR"]}" --work-tree="${CONFIGS["DIR"]}" "$@"
+  git --git-dir="${CONFIGS["GIT_DIR"]}" --work-tree="${CONFIGS["ROOT"]}" "$@"
 }
 
 show_vars() {
@@ -105,7 +105,7 @@ configure_INSTALL_CONFIGS() {
     mkdir -p "$DST_DIR"
   fi
 
-  for dir in "$(ls "$SRC_DIR")"; do
+  for dir in $(ls "$SRC_DIR"); do
     # Special cases for some config folders. Some needs to just go to ROOT
     # instead of .config
     case $dir in
@@ -134,7 +134,7 @@ configure_INSTALL_DOT_FILES() {
     mkdir -p "$DST_DIR"
   fi
 
-  for file in "$(ls "$SRC_DIR")"; do
+  for file in $(ls "$SRC_DIR"); do
     backup "$DST_DIR/.$file" "$BACKUP_DIR/$files"
     ln -s "$SRC_DIR/$file" "$DST_DIR/.$file"
   done
@@ -152,7 +152,7 @@ configure_INSTALL_THEMES() {
     mkdir -p "$DST_DIR"
   fi
 
-  for theme in "$(ls "$SRC_DIR")"; do
+  for theme in $(ls "$SRC_DIR"); do
     backup "$DST_DIR/$theme" "$BACKUP_DIR/$theme"
     ln -s "$SRC_DIR/$theme" "$DST_DIR/$theme"
   done
