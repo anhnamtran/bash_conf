@@ -42,6 +42,9 @@ Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'jiangmiao/auto-pairs'
 
+" Browser plugin
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -66,8 +69,38 @@ runtime ftplugin/man.vim
 nnoremap <F10> :Obsession<CR>
 nnoremap <C-F10> :Obsession!<CR>
 
-" Dirvish
-let g:loaded_netrwPlugin = 1
+" Firenvim Configs
+let g:firenvim_config = { 
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'neovim',
+            \ 'content': 'text',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'always',
+        \ },
+    \ }
+\ }
+
+let g:dont_write = v:false
+function! My_Write(timer) abort
+	let g:dont_write = v:false
+	write
+endfunction
+
+function! Delay_My_Write() abort
+	if g:dont_write
+		return
+	end
+	let g:dont_write = v:true
+	call timer_start(10000, 'My_Write')
+endfunction
+
+au TextChanged * ++nested call Delay_My_Write()
+au TextChangedI * ++nested call Delay_My_Write()" Dirvish
 
 " Airline
 let g:airline_theme='onedark'
