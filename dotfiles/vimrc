@@ -18,7 +18,7 @@ Plug 'majutsushi/tagbar'
 
 " Syntax handling
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'sheerun/vim-polyglot', { 'branch': 'master', 'do': 'git rebase master arista && git checkout arista' }
+Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
@@ -44,6 +44,9 @@ Plug 'jiangmiao/auto-pairs'
 
 " Browser plugin
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+" Vimwiki
+Plug 'vimwiki/vimwiki'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
