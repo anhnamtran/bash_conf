@@ -262,3 +262,4 @@ shopt -qs autocd
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 check_tmux
+. "$HOME/.cargo/env"
