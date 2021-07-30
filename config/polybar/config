@@ -11,6 +11,7 @@ purple              = #73208c
 red                 = #bA2922
 
 [bar/mainbar]
+enable-ipc = true
 monitor = ${env:MONITOR:}
 
 width = 100%
