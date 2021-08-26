@@ -42,9 +42,6 @@ Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'jiangmiao/auto-pairs'
 
-" Browser plugin
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
 " Vimwiki
 Plug 'vimwiki/vimwiki'
 
