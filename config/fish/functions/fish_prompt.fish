@@ -56,10 +56,10 @@ function fish_prompt
       set statusColor (set_color red)
    end
 
-   set -l gitPrompt (fish_git_prompt '%s')
 
    if [ -d $dir/.git ]
       set gitStart "git@"
+      set gitPrompt (fish_git_prompt '%s')
    else
       set gitStart ""
       set gitPrompt ""
