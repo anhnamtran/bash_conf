@@ -9,7 +9,7 @@ gp_connect() {
 
 gp_disconnect() {
   HELP='Disconnect from GlobalProtect'
-  globalprotect disconect
+  globalprotect disconnect
 }
 
 gp_status() {
