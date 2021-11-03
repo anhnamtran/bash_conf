@@ -184,11 +184,9 @@ set equalalways
 set wrap linebreak nolist
 
 " tabbing
-if !exists("loaded_arista_vim")
-  set tabstop=2
-  set shiftwidth=2
-  set expandtab
-endif
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " search highlighting
 set hlsearch

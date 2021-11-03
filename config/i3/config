@@ -194,7 +194,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
 # Touchpad settings
-exec_always --no-startup-id /home/andrew_nt/xinput_config 1
+exec_always --no-startup-id /home/andrew_nt/bin/xinput_config 1
 
 # Gaps
 gaps inner 5
