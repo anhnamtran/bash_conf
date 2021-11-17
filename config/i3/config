@@ -187,7 +187,6 @@ exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id dunst
 exec --no-startup-id redshift
 exec --no-startup-id nm-applet
-exec --no-startup-id autorandr-launcher
 exec --no-startup-id autorandr --change
 exec --no-startup-id xautolock -resetsaver -detectsleep -notify 30 -notifier "notify-send -t 10000 'Locking screen in 30 seconds'" -corners 0-0- -cornersize 20 -time 10 -locker $HOME/bin/lock
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh

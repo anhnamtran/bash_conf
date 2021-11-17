@@ -23,10 +23,10 @@ background = ${neon_colors.background}
 foreground = #bfbfbf
 
 line-size = 1
-line-color =
+line-color = 0
 
 border-size = 0
-border-color =
+border-color = 0
 
 padding-left = 0
 padding-right = 2
