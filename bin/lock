@@ -6,6 +6,7 @@ type i3lock 2>&1 >/dev/null || return 1
 EXCLUDED_WIN=(
   "Meet.*Firefox"
   "Zoom Meeting ID:.*"
+  "YouTube"
 )
 
 check_windows() {
