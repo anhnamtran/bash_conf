@@ -23,10 +23,8 @@ background = ${neon_colors.background}
 foreground = #bfbfbf
 
 line-size = 1
-line-color = 0
 
 border-size = 0
-border-color = 0
 
 padding-left = 0
 padding-right = 2
@@ -36,13 +34,13 @@ module-margin-right = 1
 
 font-0 = "Source Code Pro Semibold:size=15;1"
 font-1 = "Material Design Icons:size=15;1"
-font-2 = "Material Design Icons:size=15;1"
+font-2 = "Noto Sans CJK JP:style=Regular:size=15;1"
 
 modules-left = i3 wintitle
 modules-center = date
-modules-right = backlight pulseaudio battery
+modules-right = spotify_current backlight pulseaudio battery
 
-tray-position = ${env:TRAY_POS:}
+tray-position = ${env:TRAY_POS:right}
 tray-maxsize = 40
 tray-padding = 0
 tray-offset-y =
@@ -185,6 +183,20 @@ blacklist-0 = num lock
 blacklist-1 = scroll lock
 
 format = <label-layout>
+
+[module/spotify_current]
+type = custom/script
+
+exec = $HOME/.config/polybar/scripts/spotify_current.sh
+exec-if = pgrep -x spotify
+
+interval = 10
+
+format = song: <label>
+format-foreground = ${neon_colors.bright_purple}
+
+label = %output:0:30:...%
+label-font = 3
 
 [settings]
 screenchange-reload = true
