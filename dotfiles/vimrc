@@ -28,6 +28,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dag/vim-fish'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " System navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -158,6 +159,9 @@ map m <Plug>(easymotion-prefix)
 " indentLine
 let g:indentLine_char = '▏'
 let g:indentLine_defaultGroup = 'NonText'
+
+" Hexokinase
+let g:Hexokinase_highlighters = [ 'virtual' ]
 
 " update time
 set updatetime=100
