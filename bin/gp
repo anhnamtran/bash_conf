@@ -4,7 +4,7 @@ options="connect|disconnect|dns|status|notify|help"
 
 gp_connect() {
   HELP='Connect to gp-nst.arista.com with andrew_nt'
-  globalprotect connect --portal gp-nst.arista.com --user andrew_nt
+  globalprotect connect --portal gp.arista.com --user andrew_nt
 }
 
 gp_disconnect() {
