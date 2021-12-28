@@ -238,6 +238,11 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+# Spotify bindings, require https://gist.github.com/streetturtle/fa6258f3ff7b17747ee3
+bindsym $mod+shift+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp next
+bindsym $mod+shift+comma exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp prev
+bindsym $mod+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp play
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2db- unmute
 bindsym XF86AudioMute exec --no-startup-id /home/andrew_nt/bin/amixer_mute_toggle
