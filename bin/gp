@@ -1,0 +1,58 @@
+#!/bin/bash
+
+options="connect|disconnect|dns|status|notify|help"
+
+gp_connect() {
+  HELP='Connect to gp-nst.arista.com with andrew_nt'
+  globalprotect connect --portal gp.arista.com --user andrew_nt
+}
+
+gp_disconnect() {
+  HELP='Disconnect from GlobalProtect'
+  globalprotect disconnect
+}
+
+gp_status() {
+  HELP='Show the current VPN status'
+  globalprotect show --status
+}
+
+gp_notify() {
+  HELP='Trigger a notification on the status of GlobalProtect'
+  gp_status | xargs -I{} notify-send --urgency normal {}
+}
+
+gp_dns() {
+  HELP='Update systemd-resolve with the correct dns domains'
+  sudo systemd-resolve -i gpd0 \
+    --set-domain aristanetworks.com \
+    --set-domain sjc.aristanetworks.com \
+    --set-domain dm1tac.aristanetworks.com \
+    --set-domain yvr.aristanetworks.com \
+    --set-domain blr.aristanetworks.com \
+    --set-domain rtp.aristanetworks.com \
+    --set-domain nh.aristanetworks.com \
+    --set-domain ire.aristanetworks.com \
+    --set-domain syd.aristanetworks.com \
+    --set-domain metamako.com \
+    --set-domain arista.io \
+    --set-domain bigswitch.com
+}
+
+gp_help() {
+  HELP='Prints this help'
+  fmt="%-5s%-12s%-25s\n"
+  echo "Usage: gp {$options}"
+  IFS='|'
+  for opt in $options; do
+    local def=$(type gp_$opt | grep -m 1 "HELP" | sed "s/HELP='\(.*\)'.*/\1/g")
+    printf "$fmt" " " "$opt" "$def"
+  done
+}
+
+cmd="$1"
+if [[ -n $cmd ]] && [[ $options =~ $cmd ]]; then
+  gp_"$@"
+else
+  gp_help
+fi

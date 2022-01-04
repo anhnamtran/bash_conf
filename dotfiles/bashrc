@@ -8,7 +8,11 @@ case $- in
       *) return;;
 esac
 
-
+if [ ${BASH_VERSINFO[0]} -lt 5 ]; then
+    if [ -f "/usr/local/bin/bash" ]; then
+        sudo ln -fs /usr/local/bin/bash /bin/bash
+    fi
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -60,54 +64,68 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-PROMPT_COMMAND=__prompt_command
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+if [ "$PS1" -a -z ${ARTOOLS_NOPROMPTMUNGE} ]; then
+   PROMPT_COMMAND=__prompt_command
+   export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}:"
 
-# These colors only work if the terminal supports True Color!
-if [ "$color_prompt" = yes ]; then
-  bind 'set show-mode-in-prompt on'
-  bind 'set vi-cmd-mode-string "\1\033[00;32m\2"'
-  bind 'set vi-ins-mode-string "\1\033[00;34m\2"'
-  __prompt_command() {
-    # Work around to bash-git-prompt to still capture the correct exit code.
-    local LAST_COMMAND_STATE=${GIT_PROMPT_LAST_COMMAND_STATE:-$?}
-    PS1=""
+   # These colors only work if the terminal supports True Color!
+   if [ "$color_prompt" = yes ]; then
+     bind 'set show-mode-in-prompt on'
+     bind 'set vi-cmd-mode-string "\1\033[00;32m\2"'
+     bind 'set vi-ins-mode-string "\1\033[00;34m\2"'
+     __prompt_command() {
+       # Work around to bash-git-prompt to still capture the correct exit code.
+       local LAST_COMMAND_STATE=${GIT_PROMPT_LAST_COMMAND_STATE:-$?}
+       PS1=""
 
-    local COLOR_RESET='\[\033[00m\]'
-    local COLOR_RED='\[\033[01;31m\]'
-    local COLOR_GREEN='\[\033[01;32m\]'
-    local COLOR_BLUE='\[\033[01;34m\]'
-    local COLOR_PURPLE='\[\033[01;35m\]'
+       local EXIT=${LAST_COMMAND_STATE}
+       local COLOR_RESET='\[\033[00m\]'
+       local COLOR_RED='\[\033[01;31m\]'
+       local COLOR_GREEN='\[\033[01;32m\]'
+       local COLOR_YELLOW='\[\033[00;33m\]'
+       local COLOR_BLUE='\[\033[01;34m\]'
+       local COLOR_PURPLE='\[\033[01;35m\]'
 
-    local TIME=$(date +%H:%M:%S)
-    local DIR=$(pwd)
+       local TIME=$(date +%H:%M:%S)
+       local DIR=$(pwd)
 
-    PS1="→ ${COLOR_BLUE}${DIR}${COLOR_RESET}\n${TIME} "
-    PS1+="${COLOR_PURPLE}\u@\H${COLOR_RESET} "
+       if [ -d '/src/.repo' ] && [[ $DIR == /src* ]]; then
+         DIR="${DIR:1}"
+         GITAR_PROMPT_START='gitar@'
+         GITAR_PROMPT_END=" ${COLOR_YELLOW}$(agu-minimal current-topic 2> /dev/null)"
+       else
+          GITAR_PROMPT_START=''
+          GITAR_PROMPT_END=''
+       fi
 
-    if [[ $LAST_COMMAND_STATE == 0 ]]; then
-      PS1+="${COLOR_GREEN}"
-    else
-      PS1+="${COLOR_RED}"
-    fi
-    PS1+="\$ ${COLOR_RESET}"
-  }
+       PS1="→ ${GITAR_PROMPT_START}${COLOR_RESET}${COLOR_BLUE}${DIR}${GITAR_PROMPT_END}${COLOR_RESET}\n${TIME} "
+       PS1+="${COLOR_PURPLE}\u@\h${COLOR_RESET} "
+
+       if [[ $EXIT == 0 ]]; then
+         PS1+="${COLOR_GREEN}\$${COLOR_RESET} "
+       else
+         PS1+="${COLOR_RED}\$${COLOR_RESET} "
+       fi
+     }
+   else
+     __prompt_command() {
+       PS1='${debian_chroot:+($debian_chroot)}[\u:\W]\[\033[00;33m\]\[\033[00m\]\$ '
+     }
+   fi
+   unset color_prompt force_color_prompt
+
+   # If this is an xterm set the title to user@host:dir
+   case "$TERM" in
+   xterm*|rxvt*)
+       PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+       ;;
+   *)
+       ;;
+   esac
 else
-  __prompt_command() {
-    PS1='${debian_chroot:+($debian_chroot)}[\u:\W]\[\033[00;33m\]\[\033[00m\]\$ '
-  }
+   unset PROMPT_COMMAND
+   export GIT_PROMPT_DISABLE=1
 fi
-unset color_prompt force_color_prompt
-
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -129,10 +147,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -144,14 +158,23 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Use custom dircolors
+# Uses custom dircolors
 if [ -f ~/.dircolors ]; then
   eval "$(dircolors ~/.dircolors)"
 fi
 
 # Enables Z for bash
-if [ -f /usr/share/z/z.sh ]; then
-  . /usr/share/z/z.sh
+if [ -f ~/z/z.sh ]; then
+  . ~/z/z.sh
+
+  # Populate it with dirs from ~/.z_dirs
+  if [ -f ~/.z_dirs ]; then
+    > "${_Z_DATA:-$HOME/.z}"
+    while read line; do
+      [[ -z "$line" ]] || [[ "$line" =~ ^\#.*$ ]] && continue
+      _z --add "$line"
+    done < ~/.z_dirs
+  fi
 fi
 
 # PATH additions.
@@ -195,17 +218,22 @@ if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
     source ~/.bash-git-prompt/gitprompt.sh
 fi
 
+if [[ $- == *i* ]]; then  # check if interactive shell
+   if [ -x "$HOME/bin/nix-enter" ]; then
+      if [ ! -e /nix/var/nix/profiles ] || [ -z ${NIX_ENTER+x} ]; then
+         export NIX_ENTER=""
+         exec "$HOME/bin/nix-enter"
+      fi
+   fi
+fi
+
 # disables silent mode `Ctrl-S`
 stty -ixon
-
-check_tmux
 
 # Turn on recursive globbing (enables ** to recurse all directories)
 shopt -s globstar
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
-# Change directory without cd
-shopt -s autocd
 
 set -o vi
 bind -m vi-insert '"q:": vi-movement-mode'
@@ -215,6 +243,7 @@ bind -m vi-insert -x '"qq": exit'
 # Enables history search using the current characters.
 bind -m vi-command '"k": history-search-backward'
 bind -m vi-command '"j": history-search-forward'
+
 
 bind 'set show-all-if-ambiguous on'
 bind 'set colored-stats on'
@@ -229,13 +258,8 @@ bind "set completion-ignore-case on"
 # Allows backward movement through menu complete
 bind -m vi-insert '"\033[Z": menu-complete-backward'
 
+shopt -qs autocd
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-if [ -d /usr/share/fzf ]; then
-  . /usr/share/fzf/completion.bash
-  . /usr/share/fzf/key-bindings.bash
-fi
 
-# Set window title if not in TMUX
-trap 'printf "\033]0;%s\007" "${BASH_COMMAND//[^[:print:]]/}"' DEBUG
-
-# vim: ft=sh
+check_tmux
+. "$HOME/.cargo/env"

@@ -6,9 +6,14 @@ export XAUTHORITY=$HOME/.Xauthority
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 
+
 HALF_LEVEL=50
 WARN_LEVEL=20
 CRIT_LEVEL=10
+
+if (acpi -b | grep "Charging") &> /dev/null; then
+  exit 0
+fi
 
 color-msg() {
   echo "<span foreground=\"$1\">$2</span>"
@@ -24,14 +29,11 @@ battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 echo "Battery at ${battery_level}%"
 
 if [ $battery_level -le $CRIT_LEVEL ]; then
-  if ! (acpi -b | grep "Charging") &> /dev/null; then
-    bat_notify "Battery Critically Low - Connect to Power Source" "critical" "red"
-  fi
+  bat_notify "Battery Critically Low - Connect to Power Source" "critical" "red"
+  spd-say -w -r -20 "Your battery is at ${battery_level}% you stupid shit. You need to plug it in now or I will literally break your knee caps" &
 elif [[ $battery_level -lt $WARN_LEVEL ]] && \
       [[ $battery_level -gt $CRITICAL_LEVEL ]]; then
-  if ! (acpi -b | grep "Charging") &> /dev/null; then
-    bat_notify "Battery Low - Consider Plugging In" "normal" "yellow"
-  fi
+  bat_notify "Battery Low - Consider Plugging In" "normal" "yellow"
 elif [[ $battery_level -lt $HALF_LEVEL ]] && \
       [[ $battery_level -gt $WARN_LEVEL ]]; then
   bat_notify "Battery Less Than $HALF_LEVEL" "normal" "white"

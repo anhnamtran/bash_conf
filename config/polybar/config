@@ -11,10 +11,11 @@ purple              = #73208c
 red                 = #bA2922
 
 [bar/mainbar]
+enable-ipc = true
 monitor = ${env:MONITOR:}
 
 width = 100%
-height = 50
+height = 35
 radius = 0
 fixed-center = true
 
@@ -22,10 +23,8 @@ background = ${neon_colors.background}
 foreground = #bfbfbf
 
 line-size = 1
-line-color =
 
 border-size = 0
-border-color =
 
 padding-left = 0
 padding-right = 2
@@ -33,16 +32,18 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "Source Code Pro Semibold:size=24;1"
-font-1 = "Material Design Icons:size=24;1"
-font-2 = "Material Design Icons:size=24;1"
+font-0 = "Source Code Pro Semibold:size=15;1"
+font-1 = "Material Design Icons:size=15;1"
+font-2 = "Noto Sans CJK JP:style=Regular:size=15;1"
 
 modules-left = i3 wintitle
 modules-center = date
-modules-right = wlan backlight pulseaudio battery ibus
+modules-right = spotify_current backlight pulseaudio battery
 
-tray-position =
-;tray-padding =
+tray-position = ${env:TRAY_POS:right}
+tray-maxsize = 40
+tray-padding = 0
+tray-offset-y =
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -111,13 +112,12 @@ ramp-signal-4 = 
 type = internal/date
 interval = 1
 
-date = " %Y-%m-%d"
+date = "%a, %Y-%m-%d"
 date-alt =
 
 time = %H:%M:%S
 time-alt = %H:%M
 
-format-prefix = 肋
 format-foreground = ${neon_colors.dark_blue}
 format-background = ${neon_colors.purple}
 format-padding = 2
@@ -132,53 +132,42 @@ use-ui-max = true
 
 interval = 2
 
-format-volume = <ramp-volume> <label-volume>
+format-volume = vol:<label-volume>
 format-volume-foreground = ${neon_colors.bright_purple}
-format-muted = <label-muted>
+format-muted = vol:muted
 
 label-volume = %percentage%%
 
-label-muted = 
-label-muted-foreground = ${neon_colors.bright_purple}
-
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+format-muted-foreground = ${neon_colors.bright_purple}
 
 [module/backlight]
 type = internal/backlight
 
 card = intel_backlight
 
-format = <ramp> <label>
+format = backlight:<label>
 format-foreground = ${neon_colors.bright_purple}
 
 label = %percentage%%
 label-foreground =  ${neon_colors.bright_purple}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
-
 [module/battery]
 type = internal/battery
 
-full-at = 95
+full-at = 100
 
 battery = BAT0
 adapter = ADP1
 
 poll-interval = 5
 
-format-charging = <ramp-capacity> <label-charging>
+format-charging = batt(^):<label-charging>
 format-charging-foreground = ${neon_colors.bright_purple}
 
-format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = batt(v):<label-discharging>
 format-discharging-foreground = ${neon_colors.bright_purple}
 
-format-full = <ramp-capacity><label-full>
+format-full = batt(o):<label-full>
 format-full-foreground = ${neon_colors.bright_purple}
 
 label-charging = %percentage%%
@@ -186,14 +175,6 @@ label-charging = %percentage%%
 label-discharging = %percentage%%
 
 label-full = %percentage%%
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 輸
-ramp-capacity-2 = 遲
-ramp-capacity-3 = 醙
-ramp-capacity-4 = 鉶
-ramp-capacity-5 = 陼
-ramp-capacity-6 = 難
 
 [module/keyboard]
 type = internal/xkeyboard
@@ -203,15 +184,19 @@ blacklist-1 = scroll lock
 
 format = <label-layout>
 
-[module/ibus]
+[module/spotify_current]
 type = custom/script
 
-interval = 1
+exec = $HOME/.config/polybar/scripts/spotify_current.sh
+exec-if = pgrep -x spotify
 
-format = <label>
+interval = 10
+
+format = song: <label>
 format-foreground = ${neon_colors.bright_purple}
 
-exec = ~/.config/polybar/scripts/ibus-engine.sh
+label = %output:0:30:...%
+label-font = 3
 
 [settings]
 screenchange-reload = true

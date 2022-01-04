@@ -3,6 +3,7 @@ set smoothscroll true
 set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
+set incsearch true
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
@@ -22,5 +23,31 @@ bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
 
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
 unbind <C-f>
 unbind <Space>
+
+alias tg tabgrab
+
+set hintmaps.<Tab> hint.focusNextHint
+set hintmaps.<S-Tab> hint.focusPreviousHint
+
+command tabc tabclose
+
+# Arista domains
+set searchurls.go http://go/%s
+set searchurls.pb http://pb/%s
+set searchurls.aid http://aid/%s
+set searchurls.dashboard http://dashboard/%s
+set searchurls.bug http://bug/%s
+set searchurls.bb http://bb/%s
+set searchurls.cl http://cl/%s
+set searchurls.review http://reviewboard/%s
+set searchurls.aboard http://aboard/react/user/andrew_nt/%s
+set searchurls.src http://src/%s
+set searchurls.grok http://spidar101.sjc.aristanetworks.com:8081/source/search?project=eos-trunk&q=%s

@@ -1,0 +1,7 @@
+#!/bin/bash
+server=${1:-us160}
+if [[ -f /tmp/.tmux_local_mode ]]; then
+  fish
+else
+  mosh --server="LD_LIBRARY_PATH=/home/andrew_nt/.local/lib /home/andrew_nt/.local/bin/mosh-server" $server
+fi

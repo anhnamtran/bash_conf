@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DEVICES="Master Headphone Speaker"
+MUTED_FILE="/tmp/.amixer_muted"
+
+if [ -f "$MUTED_FILE" ]; then
+  rm -f "$MUTED_FILE"
+  ACTION="unmute"
+else
+  touch "$MUTED_FILE"
+  ACTION="mute"
+fi
+
+for dev in $DEVICES; do
+  amixer -c 0 set $dev $ACTION
+done
