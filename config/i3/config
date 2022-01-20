@@ -149,7 +149,6 @@ for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
 for_window [title=".*Todoist$"] floating enable sticky enable
-for_window [class="Spotify.*"] floating enable sticky enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
