@@ -9,3 +9,5 @@
 	sync = "!git fetch $1 $2:$2; #"
 [credential]
 	helper = store
+[core]
+	editor = nvim
