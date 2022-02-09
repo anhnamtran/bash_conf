@@ -4,6 +4,7 @@ set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
 set incsearch true
+set allowautofocus true
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
@@ -22,12 +23,6 @@ bind <C-[> back
 bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
-
-bind / fillcmdline find
-bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
-bind ,<Space> nohlsearch
 
 unbind <C-f>
 unbind <Space>
