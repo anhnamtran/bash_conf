@@ -8,7 +8,8 @@ default_floating_border pixel
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #8826a5 #282C34 #ffffff #8826a5   #8826a5
+client.focused          #c678dd #282C34 #abb2bf #8826a5   #8826a5
+client.unfocused        #4b5263 #282C34 #4b5263 #4b5263   #4b5263
 
 floating_minimum_size 500 x 500
 
