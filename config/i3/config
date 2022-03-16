@@ -4,11 +4,11 @@ hide_edge_borders smart
 focus_follows_mouse no
 mouse_warping none
 default_border pixel
-default_floating_border pixel
+default_floating_border normal
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #c678dd #282C34 #abb2bf #8826a5   #8826a5
+client.focused          #c678dd #282C34 #abb2bf #c678dd   #c678dd
 client.unfocused        #4b5263 #282C34 #4b5263 #4b5263   #4b5263
 
 floating_minimum_size 500 x 500
