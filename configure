@@ -182,6 +182,9 @@ do_configure() {
     fi
   done
 
+  if [[ -f ${CONFIGS['ROOt']}/dotfiles/bash_conf_gitignore ]]; then
+    configs config --local core.excludeFile ${CONFIGS['ROOT']}/dotfiles/bash_conf_gitignore
+  fi
   configs push -u origin "${CONFIGS["GIT_BRANCH_NAME"]}"
   echo "Configuration installation complete. A reboot might be required."
 }
