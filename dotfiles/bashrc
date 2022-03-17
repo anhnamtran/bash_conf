@@ -263,3 +263,4 @@ shopt -qs autocd
 
 check_tmux
 . "$HOME/.cargo/env"
+export PATH="$PATH:$HOME/.spicetify"
