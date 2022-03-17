@@ -48,4 +48,4 @@ set searchurls.cl http://cl/%s
 set searchurls.review http://reviewboard/%s
 set searchurls.aboard http://aboard/react/user/andrew_nt/%s
 set searchurls.src http://src/%s
-set searchurls.grok http://spidar101.sjc.aristanetworks.com:8081/source/search?project=eos-trunk&q=%s
+set searchurls.grok http://opengrok/source/search?project=eos-trunk&full=%s
