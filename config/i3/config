@@ -1,6 +1,6 @@
 set $mod Mod4
 
-hide_edge_borders smart
+hide_edge_borders horizontal
 focus_follows_mouse no
 mouse_warping none
 default_border pixel
