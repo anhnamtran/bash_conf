@@ -201,7 +201,7 @@ exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id /home/andrew_nt/bin/xinput_config 1
 
 # Gaps
-gaps inner 5
+gaps inner 1
 gaps outer 0
 
 smart_gaps on
