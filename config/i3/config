@@ -3,7 +3,7 @@ set $mod Mod4
 hide_edge_borders none
 focus_follows_mouse no
 mouse_warping none
-default_border pixel
+default_border pixel 1
 default_floating_border normal
 
 # Colors

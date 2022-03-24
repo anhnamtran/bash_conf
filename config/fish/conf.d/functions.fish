@@ -38,6 +38,5 @@ end
 # New functions should be above this line for readability
 set -l funcs (cat (status filename) | grep -Eo 'function [[:alnum:]_]+' | sed 's/function \(.*\)/\1/g')
 for func in $funcs
-   funcsave $func
+   funcsave -q $func
 end
-
