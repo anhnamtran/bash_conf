@@ -11,10 +11,8 @@ call plug#begin('~/.vim/bundle')
 
 " Themes
 Plug 'joshdick/onedark.vim'
-Plug 'bignimbus/pop-punk.vim'
 
 " GUIs elements
-Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -22,6 +20,7 @@ Plug 'majutsushi/tagbar'
 
 if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim' " requires neovim v0.5+
+  Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 else
   Plug 'Yggdroot/indentLine'
 endif
@@ -69,6 +68,7 @@ Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'psliwka/vim-smoothie'
 
 " Vim wiki
 Plug 'vimwiki/vimwiki'
@@ -173,8 +173,32 @@ let g:NERDTreeQuitOnOpen = 1
 autocmd CursorHold * silent call CocActionAsync('highlight')
 hi! link CocHighlightText Title
 
+set tagfunc=CocTagFunc
+
+let g:coc_global_extension = [
+\  'coc-yaml',
+\  'coc-vimlsp',
+\  'coc-tsserver',
+\  'coc-sh',
+\  'coc-pyright',
+\  'coc-lua',
+\  'coc-json',
+\  'coc-jedi',
+\  'coc-html',
+\  'coc-css',
+\  'coc-clangd',
+\]
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+
+" remap all Coc's <Plug> mappings to use CocActionAsync
+nnoremap <Plug>(coc-definition) :CocActionAsync('jumpDefinition')
+nnoremap <Plug>(coc-type-definiion) :CocActionAsync('jumpTypeDefinition')
+nnoremap <Plug>(coc-implementation) :CocActionAsync('jumpImplementation')
+nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
+nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
+
 nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
 nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -200,6 +224,7 @@ inoremap <silent><expr> <S-TAB>
   \ coc#refresh()
 
 inoremap <expr> <C-Space> pumvisible() ? "\<C-y>" : "\<CR>"
+
 " tagbar
 let g:tagbar_autoclose = 1
 let g:tagbar_position = 'bottom'
@@ -213,7 +238,7 @@ let g:mwDefaultHighlightingPalette = 'maximum'
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_verbose = 0
-map m <Plug>(easymotion-prefix)
+map ; <Plug>(easymotion-prefix)
 
 if has('nvim')
 " nvim indent_blankline
@@ -248,6 +273,9 @@ set updatetime=100
 " And diff options
 set diffopt=filler,context:5
 set foldopen-=search
+
+" jumplist options
+set jumpoptions+=stack
 
 " line numbers
 set number
@@ -326,7 +354,7 @@ augroup END
 set grepprg=rg\ --vimgrep
 set grepformat^=%f:%l:%c:%m
 
-set switchbuf+=useopen
+set switchbuf=useopen,usetab,uselast
 
 " --------------------------------- KEYMAPS -----------------------------------
 "-------------------------------- INSERT MODE----------------------------------
@@ -442,7 +470,6 @@ command! OpenOnly :call DeleteInactiveBufs()
 nnoremap <C-w>b :OpenOnly<CR>
 
 command! -range PastePrint <line1>,<line2>w !cat
-command! -range=% Pb <line1>,<line2>w !curl -s -F c=@- pb
 
 "-------------------------------- THEMES AND GUI ------------------------------
 
