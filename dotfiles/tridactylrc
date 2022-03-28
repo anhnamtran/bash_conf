@@ -5,6 +5,7 @@ set hintfiltermode vimperator-reflow
 set hintnames numeric
 set incsearch true
 set allowautofocus true
+set wordpattern [^\s\/]+
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
@@ -16,6 +17,10 @@ bind L tabnext
 bind H tabprev
 bind yt tabduplicate
 bind ;t tabdetach
+bind ;T composite tabduplicate; tabdetach
+
+bind n !s xdotool key 'alt+g'
+bind N !s xdotool key 'alt+g'
 
 bind <C-]> forward
 bind <C-[> back
@@ -27,7 +32,6 @@ bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
 
-unbind <C-f>
 unbind <Space>
 
 alias tg tabgrab
