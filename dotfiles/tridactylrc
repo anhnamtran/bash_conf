@@ -34,10 +34,9 @@ bind --mode=insert <C-w> text.backward_kill_word
 
 unbind <Space>
 
-command tabgrab_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabgrab");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
-command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
+alias tg tabgrab
 
-alias tg tabgrab_and_focus
+command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
 alias tp tabpush_and_focus
 
 set hintmaps.<Tab> hint.focusNextHint
