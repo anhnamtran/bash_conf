@@ -99,4 +99,4 @@ button selected {
   background-color: @emphasis;
 }
 
-/* vim:ft=css
+/* vim:ft=css */
