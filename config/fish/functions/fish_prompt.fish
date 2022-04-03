@@ -57,7 +57,7 @@ function fish_prompt
    end
 
 
-   if [ -d $dir/.git ]
+   if [ -d $dir/.git ] || git rev-parse --git-dir >/dev/null 2>&1
       set gitStart "git@"
       set gitPrompt (fish_git_prompt '%s')
    else
