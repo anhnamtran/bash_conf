@@ -116,6 +116,8 @@ set nofoldenable
 
 " Obsession
 let g:sessions_dir = '~/.vim/session'
+let g:sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize'
+
 exec 'nnoremap <leader>ss :Obsession! ' . g:sessions_dir . '/*.vim<C-D><Left><Left><Left><Left><BS>'
 exec 'nnoremap <leader>sr :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 nnoremap <leader>sp :Obsession<CR>
@@ -187,6 +189,8 @@ let g:coc_global_extension = [
 \  'coc-html',
 \  'coc-css',
 \  'coc-clangd',
+\  'coc-fish',
+\  'coc-spell-checker',
 \]
 
 " Use `[g` and `]g` to navigate diagnostics
