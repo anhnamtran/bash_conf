@@ -10,4 +10,4 @@ get_first_artist() {
   echo "$META_DATA" | sed -n '/artist/{n;n;p}' | awk '{ sep = ""; for (i = 2; i <= NF; i++) s = s $i " "; print s }'
 }
 
-printf "$(get_song_name) - $(get_first_artist)\n"
+printf "$(get_song_name)- $(get_first_artist)\n"
