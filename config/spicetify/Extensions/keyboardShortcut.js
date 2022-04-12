@@ -13,7 +13,7 @@
     }
 
     const SCROLL_STEP = 50;
-    const PAGE_STEP = 100;
+    const PAGE_STEP = 200;
 
     /**
      * Register your own keybind with function `registerBind`
