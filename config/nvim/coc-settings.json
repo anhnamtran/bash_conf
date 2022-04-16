@@ -1,0 +1,34 @@
+{
+   "diagnostic.checkCurrentLine": true,
+   "diagnostic.refreshOnInsertMode": true,
+   "diagnostic.autoRefresh": true,
+
+   "suggest.triggerAfterInsertEnter": true,
+   "suggest.acceptSuggestionOnCommitCharacter": true,
+   "suggest.removeDuplicateItems": true,
+   "suggest.enablePreview": true,
+   "suggest.enablePreselect": true,
+
+   "clangd.arguments" : [ "-j", "4",
+                        "--all-scopes-completion",
+                        "--limit-results=0",
+                        "--cross-file-rename" ],
+
+   "python.analysis.extraPaths": [ "/usr/lib", "/usr" ],
+   "python.formatting.provider": "none",
+   "python.linting.enabled": true,
+   "python.linting.pylintEnabled": true,
+   "python.analysis.diagnosticSeverityOverrides": {
+      "reportGeneralTypeIssues": "none"
+   },
+
+   "cSpell.showStatus": false,
+   "cSpell.allowCompoundWords": true,
+   "cSpell.ignoreWords": [
+    "py",
+    "clangd",
+    "grpc",
+    "pyclient",
+    "pylint"
+  ]
+}

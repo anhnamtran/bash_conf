@@ -63,6 +63,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'szw/vim-maximizer'
 Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
@@ -97,7 +98,7 @@ runtime ftplugin/man.vim
 if has('nvim')
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { 'c', 'cpp', 'bash', 'vim', 'json', 'python', 'go', 'comment' },
+  ensure_installed = { 'c', 'cpp', 'bash', 'vim', 'json', 'python', 'go', 'comment', 'rust' },
   highlight = {
     enable = true,              -- false will disable the whole extension
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -114,7 +115,7 @@ endif
 
 set nofoldenable
 
-" Obsession
+" Obsession and session management
 let g:sessions_dir = '~/.vim/session'
 let g:sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize'
 
@@ -152,7 +153,7 @@ endif
 " Add current function name to the status line
 let g:airline#extensions#tagbar#enabled = 1
 
-" Enhanced CPP highligh options
+" Enhanced CPP highlight options
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_member_highlight = 1
@@ -191,6 +192,7 @@ let g:coc_global_extension = [
 \  'coc-clangd',
 \  'coc-fish',
 \  'coc-spell-checker',
+\  'coc-rls',
 \]
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -198,20 +200,25 @@ let g:coc_global_extension = [
 
 " remap all Coc's <Plug> mappings to use CocActionAsync
 nnoremap <Plug>(coc-definition) :CocActionAsync('jumpDefinition')
-nnoremap <Plug>(coc-type-definiion) :CocActionAsync('jumpTypeDefinition')
+nnoremap <Plug>(coc-type-definition) :CocActionAsync('jumpTypeDefinition')
 nnoremap <Plug>(coc-implementation) :CocActionAsync('jumpImplementation')
 nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
 nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
 
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nnoremap <silent> <leader>gd <Plug>(coc-definition)
-nnoremap <silent> <leader>gy <Plug>(coc-type-definition)
-nnoremap <silent> <leader>gi <Plug>(coc-implementation)
-nnoremap <silent> <leader>gr <Plug>(coc-references)
-nnoremap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
+vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
+nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
+nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
 
 function! s:check_back_space() abort
    let col = col('.') - 1
