@@ -184,7 +184,6 @@ let g:coc_global_extension = [
 \  'coc-tsserver',
 \  'coc-sh',
 \  'coc-pyright',
-\  'coc-lua',
 \  'coc-json',
 \  'coc-jedi',
 \  'coc-html',
