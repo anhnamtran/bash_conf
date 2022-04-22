@@ -1,6 +1,10 @@
 [global_config]
 	borderless = False
 
+[keybindings]
+  new_tab = ''
+  help = ''
+
 [profiles]
   [[default]]
     font = Iosevka Term 10.5
