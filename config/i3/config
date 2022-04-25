@@ -97,7 +97,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Ctrl+minus scratchpad show
 bindsym $mod+m [class="Spotify.*"] scratchpad show
 bindsym $mod+c [title="Meet.*"] scratchpad show
-bindsym $mod+o [class=".*Todoist$"] scratchpad show
+bindsym $mod+Shift+o [class=".*Todoist$"] scratchpad show
 
 # navigate workspaces next / previous
 bindsym $mod+Shift+l workspace next
@@ -153,6 +153,7 @@ for_window [class="Xfburn"] floating enable
 for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
+
 for_window [title=".*Todoist$"] floating enable sticky enable
 
 # switch to workspace with urgent window automatically
