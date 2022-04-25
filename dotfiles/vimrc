@@ -41,6 +41,7 @@ Plug 'pboettch/vim-cmake-syntax'
 Plug 'rust-lang/rust.vim'
 Plug 'MTDL9/vim-log-highlighting'
 Plug 'arzg/vim-sh'
+Plug 'fladson/vim-kitty', { 'branch': 'main' }
 
 if has('nvim')
    Plug 'nvim-treesitter/nvim-treesitter'
@@ -233,7 +234,12 @@ inoremap <silent><expr> <S-TAB>
   \ <SID>check_back_space() ? "\<S-TAB>" :
   \ coc#refresh()
 
-inoremap <expr> <C-Space> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <C-Space> coc#coc#refresh()
+
+augroup CocCustom
+  autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
+  autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
+augroup END
 
 " tagbar
 let g:tagbar_autoclose = 1

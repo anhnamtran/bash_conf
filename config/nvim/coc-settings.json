@@ -21,14 +21,16 @@
    "python.analysis.diagnosticSeverityOverrides": {
       "reportGeneralTypeIssues": "none"
    },
+   "pyright.disableCompletion": true,
 
    "cSpell.showStatus": false,
    "cSpell.allowCompoundWords": true,
    "cSpell.ignoreWords": [
-    "py",
     "clangd",
     "grpc",
+    "py",
     "pyclient",
-    "pylint"
+    "pylint",
+    "pyright"
   ]
 }
