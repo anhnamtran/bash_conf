@@ -14,13 +14,13 @@ output VIRTUAL1
 off
 output DP2
 crtc 1
-gamma 1.0:0.909:0.833
+gamma 0:0:0
 mode 3840x2160
 pos 0x0
 rate 29.98
 output eDP1
 crtc 0
-gamma 1.0:0.909:0.833
+gamma 0:0:0
 mode 2560x1440
 pos 576x2160
 primary
