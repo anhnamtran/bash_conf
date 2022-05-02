@@ -70,6 +70,7 @@ blue_connected() {
     echo $count
     return 0
   fi
+  echo $count
   return 1
 }
 
