@@ -39,13 +39,18 @@ blue_devices() {
     if echo "$info" | grep -q "Connected: yes"; then
       local name=$(echo "$info" | grep "Alias" | cut -d' ' -f2-)
 
-      local upower_query="devices/.*${device//:/_}"
-      local upower_dev=$(upower --enumerate | grep "$upower_query")
+      local bluez_dev="/org/bluez/hci0/dev_${device//:/_}"
+
+      local dbus_query="--print-reply=literal --system --dest=org.bluez \
+                        $bluez_dev \
+                        org.freedesktop.DBus.Properties.Get \
+                        string:\"org.bluez.Battery1\" \
+                        string:\"Percentage\"
+                       "
       local batt_percentage="Unknown"
-      if [ -n "$upower_dev" ]; then
-        if upower -i "$upower_dev" | grep -q "[Pp]ercentage"; then
-          batt_percentage=$(upower -i "$upower_dev" | grep "[Pp]ercentage" | awk '{ print $2 }')
-        fi
+      local dbus_out=$(dbus-send $dbus_query 2>/dev/null)
+      if [ -n "$dbus_out" ]; then
+        batt_percentage=$(echo "$dbus_out" | awk '{ print $3 }' )
       fi
 
       printf "$fmt" "$name" "$batt_percentage"
