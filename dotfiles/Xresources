@@ -19,7 +19,7 @@
 *color7: #bfbfbf
 *color15:                         #E8E8E8
 
-URxvt.font: xft:Iosevka:size=10.5
+URxvt.font: xft:Iosevka:size=11.5
 URxvt.depth:                      32
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
