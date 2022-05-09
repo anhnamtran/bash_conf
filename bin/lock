@@ -3,5 +3,5 @@
 if ps aux | grep -q 'xss-lock'; then
   xset s activate
 else
-  xsecurelock
+  $HOME/bin/xsecurelock_launch
 fi
