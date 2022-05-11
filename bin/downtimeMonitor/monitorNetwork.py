@@ -25,8 +25,10 @@ def internet( host=defaultHost, port=80, timeout=1 ):
         return False
     except socket.gaierror:
         return False
-    except Exception:
+    except KeyboardInterrupt:
         raise
+    except Exception:
+        return False
 
 def timestamp():
     """ Get Current timestamp string """
@@ -75,13 +77,15 @@ if __name__ == '__main__':
     startTime = datetime.datetime.now()
     try:
         while True:
-            if internet( host, timeout=args.timeout ):
+            ok = internet( host, timeout=args.timeout )
+            if ok:
                 writeLog( outFile, host, 'OK' )
             else:
                 writeLog( outFile, host, 'NOT CONNECTED' )
 
             elapsed = datetime.datetime.now() - startTime
-            sys.stdout.write( f"\rElapsed time: {elapsed}" )
+            sys.stdout.write( f"Elapsed time: {elapsed} "
+                              f"[{'OK' if ok else 'NOT CONNECTED'}]{' ' * 20}\r" )
             sys.stdout.flush()
 
             sleep( args.interval )
