@@ -35,7 +35,7 @@ function configs
 end
 
 function cb
-  cd (bd -si $1)
+  cd (bd -si $argv[1])
 end
 
 # Autoload all declared functions

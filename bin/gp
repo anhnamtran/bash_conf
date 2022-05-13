@@ -37,11 +37,14 @@ gp_fix() {
   local num_procs=$(echo "$panGPA_procs" | wc -l)
 
   if (( $num_procs > 1 )); then
-    killall -s 9 PanGPA
+    while pgrep PanGPA > /dev/null 2>&1; do
+      echo "Killing PanGPA procs"
+      killall -s 9 PanGPA
+    done
 
-    /opt/paloaltonetworks/globalprotect/PanGPA start &
-    panGPA_procs=$(ps aux | grep PanGPA | grep -v grep)
-    disown $(echo "$panGPA_procs" | awk '{ print $2 }') > /dev/null 2>&1
+    # /opt/paloaltonetworks/globalprotect/PanGPA start
+    # panGPA_procs=$(ps aux | grep PanGPA | grep -v grep)
+    # disown $(echo "$panGPA_procs" | awk '{ print $2 }') > /dev/null 2>&1
     echo "Restarted PanGPA process"
     echo "$panGPA_procs"
   fi

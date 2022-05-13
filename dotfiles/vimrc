@@ -41,6 +41,7 @@ Plug 'pboettch/vim-cmake-syntax'
 Plug 'rust-lang/rust.vim'
 Plug 'MTDL9/vim-log-highlighting'
 Plug 'arzg/vim-sh'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'fladson/vim-kitty', { 'branch': 'main' }
 
 if has('nvim')

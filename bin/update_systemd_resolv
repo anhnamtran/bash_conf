@@ -1,6 +1,6 @@
 #/bin/bash
 
-systemd-resolve -i gpd0 \
+systemd-resolve -i global \
   --set-domain aristanetworks.com \
   --set-domain sjc.aristanetworks.com \
   --set-domain dm1tac.aristanetworks.com \
