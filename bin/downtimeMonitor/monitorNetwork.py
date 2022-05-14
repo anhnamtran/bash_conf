@@ -10,24 +10,35 @@ from urllib.parse import urlparse
 
 defaultHost = "http://www.google.com"
 logFmt = "{timestamp}\t{host}\t{status}\n"
+args = None
 
-def internet( host=defaultHost, port=80, timeout=1 ):
+def internet( host=defaultHost, port=80, timeout=1, verbose=False ):
     """ Generates a new request"""
     if host.startswith( 'http' ):
         host = urlparse( host ).netloc
     try:
         hostIp = socket.gethostbyname( host )
-        socket.setdefaulttimeout( timeout )
         sock = socket.socket( socket.AF_INET, socket.SOCK_STREAM )
+        sock.settimeout( timeout )
+        if verbose:
+            print(f"internet( host={hostIp}, port={port}, timeout={timeout} )")
         sock.connect( ( hostIp, port ) )
         return True
     except socket.timeout:
+        if verbose:
+            print("Timed out")
         return False
     except socket.gaierror:
+        if verbose:
+            print("Resolving error")
         return False
     except KeyboardInterrupt:
+        if verbose:
+            print("Keyboard interrupt")
         raise
-    except Exception:
+    except Exception as e:
+        if verbose:
+            print(f"Unknown Exception({e})")
         return False
 
 def timestamp():
@@ -49,8 +60,10 @@ def parseArgs():
                          help="Use stdout instead of output file" )
     parser.add_argument( '--interval', '-i', metavar='SECONDS', type=int, default=5,
                          help="Check the host every {interval} seconds" )
-    parser.add_argument( '--timeout', '-t', metavar='SECONDS', default=1,
+    parser.add_argument( '--timeout', '-t', metavar='SECONDS', type=int, default=1,
                          help="Timeout for connection check")
+    parser.add_argument( '--verbose', '-v', action='store_true',
+                         help="Verbose output")
 
     return parser.parse_args()
 
@@ -77,7 +90,7 @@ if __name__ == '__main__':
     startTime = datetime.datetime.now()
     try:
         while True:
-            ok = internet( host, timeout=args.timeout )
+            ok = internet( host, timeout=args.timeout, verbose=args.verbose )
             if ok:
                 writeLog( outFile, host, 'OK' )
             else:

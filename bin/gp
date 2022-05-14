@@ -34,20 +34,20 @@ gp_fix() {
     echo "Started PanGPA process $panGPA_procs"
     return 0
   fi
-  local num_procs=$(echo "$panGPA_procs" | wc -l)
+  while pgrep PanGPA > /dev/null 2>&1; do
+    echo "Killing PanGPA procs"
+    killall -s 9 PanGPA
+  done
 
-  if (( $num_procs > 1 )); then
-    while pgrep PanGPA > /dev/null 2>&1; do
-      echo "Killing PanGPA procs"
-      killall -s 9 PanGPA
-    done
-
-    # /opt/paloaltonetworks/globalprotect/PanGPA start
-    # panGPA_procs=$(ps aux | grep PanGPA | grep -v grep)
-    # disown $(echo "$panGPA_procs" | awk '{ print $2 }') > /dev/null 2>&1
-    echo "Restarted PanGPA process"
-    echo "$panGPA_procs"
-  fi
+  echo -n "Waiting for PanGPA proccess to start"
+  while ! pgrep PanGPA > /dev/null 2>&1; do
+    echo -n .
+    sleep 1
+  done
+  panGPA_procs=$(ps aux | grep PanGPA | grep -v grep)
+  # disown $(echo "$panGPA_procs" | awk '{ print $2 }') > /dev/null 2>&1
+  echo " Restarted PanGPA process"
+  echo "$panGPA_procs"
 }
 
 gp_dns() {
