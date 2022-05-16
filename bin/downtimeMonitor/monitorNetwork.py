@@ -12,7 +12,7 @@ defaultHost = "http://www.google.com"
 logFmt = "{timestamp}\t{host}\t{status}\n"
 args = None
 
-def internet( host=defaultHost, port=80, timeout=1, verbose=False ):
+def internet( host=defaultHost, port=80, timeout=5, verbose=False ):
     """ Generates a new request"""
     if host.startswith( 'http' ):
         host = urlparse( host ).netloc
