@@ -16,7 +16,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'majutsushi/tagbar'
 
 if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim' " requires neovim v0.5+
@@ -26,8 +25,6 @@ else
 endif
 
 " Syntax handling
-Plug 'godlygeek/tabular'
-
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'dag/vim-fish'
@@ -54,8 +51,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 " Session tracking
 Plug 'tpope/vim-obsession'
@@ -152,9 +149,6 @@ if !exists("window_numbers_added")
    call airline#add_inactive_statusline_func('WindowNumber')
 endif
 
-" Add current function name to the status line
-let g:airline#extensions#tagbar#enabled = 1
-
 " Enhanced CPP highlight options
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
@@ -241,12 +235,6 @@ augroup CocCustom
   autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
   autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
 augroup END
-
-" tagbar
-let g:tagbar_autoclose = 1
-let g:tagbar_position = 'bottom'
-let g:tagbar_height = 30
-nnoremap <silent> <leader>gt :TagbarToggle<CR>
 
 " vim-mark
 let g:mwDefaultHighlightingPalette = 'maximum'
