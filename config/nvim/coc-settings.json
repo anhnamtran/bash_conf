@@ -28,9 +28,11 @@
    "cSpell.ignoreWords": [
     "clangd",
     "grpc",
+    "proj",
     "py",
     "pyclient",
     "pylint",
-    "pyright"
+    "pyright",
+    "ssid"
   ]
 }
