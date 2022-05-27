@@ -194,6 +194,7 @@ exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr --change
 exec --no-startup-id xss-lock -n "notify-send -t 10000 'Screen will lock soon'" -l -- $HOME/bin/xsecurelock_launch
+exec --no-startup-id $HOME/bin/easyeffects --gapplication-service
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
