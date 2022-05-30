@@ -112,6 +112,15 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 endif
 
+" Enable rainbow parentheses
+let g:rainbow#max_level = 24
+let g:rainbow#blacklist = [ 248, 238, 59, 1 ]
+let g:rainbow#pairs = [ ['(', ')'], ['[', ']'], ['{', '}'] ]
+augroup Rainbow
+  au!
+  autocmd! VimEnter * RainbowParentheses
+augroup END
+
 set nofoldenable
 
 " Obsession and session management
@@ -134,6 +143,7 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_tab_count = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#formatter = 'short_path'
+let g:airline#extensions#whitespace#max_lines = 100
 
 " Add window numbers to the status line
 if !exists("window_numbers_added")
@@ -148,6 +158,10 @@ if !exists("window_numbers_added")
    call airline#add_statusline_func('WindowNumber')
    call airline#add_inactive_statusline_func('WindowNumber')
 endif
+
+" Add coc.nvim related items
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#show_coc_status = 1
 
 " Enhanced CPP highlight options
 let g:cpp_class_scope_highlight = 1
@@ -199,6 +213,8 @@ nnoremap <Plug>(coc-type-definition) :CocActionAsync('jumpTypeDefinition')
 nnoremap <Plug>(coc-implementation) :CocActionAsync('jumpImplementation')
 nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
 nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
+nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
+nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -211,6 +227,8 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
 vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
+vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
 nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
 nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
 nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
@@ -220,16 +238,26 @@ function! s:check_back_space() abort
    return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+function! s:refresh_and_next() abort
+   call coc#refresh()
+   return "\<C-n>"
+ endfunction
+
+function! s:refresh_and_previous() abort
+   call coc#refresh()
+   return "\<C-p>"
+ endfunction
+
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
+  \ pumvisible() ? <SID>refresh_and_next() :
   \ <SID>check_back_space() ? "\<TAB>" :
   \ coc#refresh()
 inoremap <silent><expr> <S-TAB>
-  \ pumvisible() ? "\<C-p>" :
+  \ pumvisible() ? <SID>refresh_and_previous() :
   \ <SID>check_back_space() ? "\<S-TAB>" :
   \ coc#refresh()
 
-inoremap <expr> <C-Space> coc#coc#refresh()
+inoremap <expr> <C-Space> coc#refresh()
 
 augroup CocCustom
   autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
@@ -264,7 +292,7 @@ let g:indentLine_defaultGroup = 'NonText'
 let g:indentLine_concealcursor = 'nc'
 let g:indentLine_conceallevel = 2
 let g:indentLine_bufTypeExclude = [ 'help', 'terminal' ]
-let g:indentLine_fileTypeExclude = [ 'vimwiki', 'markdown' ]
+let g:indentLine_fileTypeExclude = [ 'vimwiki', 'markdown', 'log' ]
 endif
 
 set wildmode=full
@@ -350,11 +378,6 @@ augroup WinRelNum
    autocmd BufWinEnter <buffer>  set relativenumber
 augroup END
 
-" Spell checking for certain file types or buffers
-augroup SpellChk
-  autocmd FileType vimwiki setlocal spell
-augroup END
-
 " make grep use ripgrep instead
 set grepprg=rg\ --vimgrep
 set grepformat^=%f:%l:%c:%m
@@ -402,13 +425,16 @@ nnoremap <leader>cd :lcd %:p:h<CR>
 
 " FZF bindings. Requires fzf.vim
 " Opens FZF in the current directory
-nnoremap _ :FZF %:p:h<CR>
+nnoremap _ :Files %:p:h<CR>
 
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>w :Windows<CR>
 
 nnoremap <leader>rN :set relativenumber!<CR>
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
