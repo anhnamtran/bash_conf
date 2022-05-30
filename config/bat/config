@@ -1,0 +1,11 @@
+# Set the theme
+--theme="ansi"
+
+# Set the style
+--style="changes"
+
+# Use italic text on terminal
+--italic-text=always
+
+# new syntaxes
+--map-syntax="*.qb:python"

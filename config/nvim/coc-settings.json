@@ -1,16 +1,25 @@
 {
+   "coc.source.buffer.priority": 50,
+   "coc.source.around.priority": 60,
+   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+
    "diagnostic.checkCurrentLine": true,
    "diagnostic.refreshOnInsertMode": true,
    "diagnostic.autoRefresh": true,
 
+   "suggest.autoTrigger": "always",
    "suggest.triggerAfterInsertEnter": true,
    "suggest.acceptSuggestionOnCommitCharacter": true,
    "suggest.removeDuplicateItems": true,
    "suggest.enablePreview": true,
    "suggest.enablePreselect": true,
+   "suggest.localityBonus": true,
+   "suggest.floatConfig": {
+      "border": true
+   },
+   "suggest.disableMenuShortcut": true,
 
-   "clangd.arguments" : [ "-j", "4",
-                        "--all-scopes-completion",
+   "clangd.arguments" : [ "--all-scopes-completion",
                         "--limit-results=0",
                         "--cross-file-rename" ],
 
@@ -19,7 +28,8 @@
    "python.linting.enabled": true,
    "python.linting.pylintEnabled": true,
    "python.analysis.diagnosticSeverityOverrides": {
-      "reportGeneralTypeIssues": "none"
+      "reportGeneralTypeIssues": "none",
+      "reportOptionalMemberAccess": "none"
    },
    "pyright.disableCompletion": true,
 

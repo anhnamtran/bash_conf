@@ -19,6 +19,7 @@ videos/
 code/
 opt/
 GPUCache/
+bundle/
 .vim/
 .cache/
 .cups/

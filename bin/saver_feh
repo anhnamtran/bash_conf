@@ -1,0 +1,12 @@
+#!/bin/bash
+
+: ${XSECURELOCK_IMAGE_PATH:-$HOME/pics/wallpapers/onedark.png}
+
+FEH=$(type -p feh)
+if [ -z $FEH ]; then
+  exit 0
+fi
+
+# Requires feh 3.0+
+${FEH} --zoom=fill --window-id="${XSCREENSAVER_WINDOW}" -F
+"${XSECURELOCK_IMAGE_PATH}"
