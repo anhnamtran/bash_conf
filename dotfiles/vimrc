@@ -134,6 +134,12 @@ nnoremap <leader>sc :echo v:this_session<CR>
 nnoremap <leader>sl :exec 'mksession!' . v:this_session<CR>
 nnoremap <leader>sd :Obsession!<CR>
 
+" vim-smoothie
+let g:smoothie_update_interval = 1
+let g:smoothie_speed_constant_factor = 20
+let g:smoothie_speed_linear_factor = 20
+let g:smoothie_speed_exponentiation_factor = 0.5
+
 " Airline
 let g:airline_theme='onedark'
 let g:airline_highlighting_cache=1
