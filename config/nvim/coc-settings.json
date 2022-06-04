@@ -44,5 +44,8 @@
     "pylint",
     "pyright",
     "ssid"
+  ],
+  "cSpell.userWords": [
+    "abuild"
   ]
 }
