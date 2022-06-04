@@ -1,27 +1,28 @@
 set $mod Mod4
 
-hide_edge_borders smart
+hide_edge_borders none
 focus_follows_mouse no
 mouse_warping none
-default_border pixel
-default_floating_border pixel
+default_border pixel 1
+default_floating_border normal
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #8826a5 #282C34 #ffffff #8826a5   #8826a5
+client.focused          #98c379 #282C34 #abb2bf #98c379   #98c379
+client.unfocused        #4b5263 #282C34 #4b5263 #4b5263   #4b5263
 
 floating_minimum_size 500 x 500
 
 bindsym $mod+0 border none
-bindsym $mod+p border pixel 2
+bindsym $mod+p border pixel 1
 bindsym $mod+n border normal
 
 font xft:Iosevka 12
 
 floating_modifier $mod
 
-bindsym $mod+Return exec terminator -e tmux
-bindsym $mod+Shift+t exec terminator
+bindsym $mod+Return exec kitty tmux
+bindsym $mod+Shift+t exec kitty
 
 # Move mouse to bottom right corner
 bindsym $mod+Escape exec --no-startup-id xdotool mousemove_relative -sync -- 5000 5000
@@ -30,7 +31,8 @@ bindsym $mod+Escape exec --no-startup-id xdotool mousemove_relative -sync -- 500
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id /home/andrew_nt/bin/rofi_wrapper -show run -monitor -1
+bindsym $mod+space exec --no-startup-id $HOME/bin/rofi_wrapper -show run -monitor -1
+bindsym $mod+Shift+f exec --no-startup-id [ -d $HOME/code/rofi-file-selector ] && $HOME/code/rofi-file-selector/rofi-file-selector.sh
 bindsym $mod+Shift+w exec --no-startup-id /home/andrew_nt/bin/rofi_wrapper -show window -monitor -1
 
 # change focus
@@ -45,15 +47,17 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Ctrl+l move right
-bindsym $mod+Ctrl+j move down
-bindsym $mod+Ctrl+k move up
-bindsym $mod+Ctrl+h move left
+bindsym $mod+Ctrl+l move right 20 px
+bindsym $mod+Ctrl+j move down 20 px
+bindsym $mod+Ctrl+k move up 20 px
+bindsym $mod+Ctrl+h move left 20 px
 
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+bindsym $mod+Ctrl+c move position center
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -93,7 +97,6 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Ctrl+minus scratchpad show
 bindsym $mod+m [class="Spotify.*"] scratchpad show
 bindsym $mod+c [title="Meet.*"] scratchpad show
-bindsym $mod+o [class=".*Todoist$"] scratchpad show
 
 # navigate workspaces next / previous
 bindsym $mod+Shift+l workspace next
@@ -141,6 +144,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open specific applications in floating mode
 for_window [title="File Transfer*"] floating enable
+for_window [title="Zoom*"] border normal
 for_window [class="Nitrogen"] floating enable sticky enable
 for_window [class="(?i)System-config-printer.py"] floating enable
 for_window [class="(?i)virtualbox"] floating enable border normal
@@ -148,13 +152,13 @@ for_window [class="Xfburn"] floating enable
 for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
-for_window [title=".*Todoist$"] floating enable sticky enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+bindsym $mod+Shift+a exec autorandr --change --force
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -189,7 +193,8 @@ exec --no-startup-id dunst
 exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr --change
-exec --no-startup-id xautolock -resetsaver -detectsleep -notify 30 -notifier "notify-send -t 10000 'Locking screen in 30 seconds'" -corners 0-0- -cornersize 20 -time 10 -locker $HOME/bin/lock
+exec --no-startup-id xss-lock -n "notify-send -t 10000 'Screen will lock soon'" -l -- $HOME/bin/xsecurelock_launch
+exec --no-startup-id $HOME/bin/easyeffects --gapplication-service
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
@@ -197,7 +202,7 @@ exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id /home/andrew_nt/bin/xinput_config 1
 
 # Gaps
-gaps inner 5
+gaps inner 1
 gaps outer 0
 
 smart_gaps on

@@ -9,3 +9,11 @@ input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='check
 #downloads-indicator-counter {
     color: white;
 }
+
+#TabsToolbar {
+    visibility: collapse !important;
+}
+
+#webrtcIndicator {
+  display: none;
+}

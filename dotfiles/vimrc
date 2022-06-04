@@ -1,6 +1,3 @@
-" Disable python-indent from polyglot
-let g:polyglot_disabled = [ 'python-indent' ]
-
 set nocompatible              " be iMproved, required
 set encoding=utf-8
 filetype off                  " required
@@ -14,28 +11,48 @@ call plug#begin('~/.vim/bundle')
 
 " Themes
 Plug 'joshdick/onedark.vim'
-Plug 'bignimbus/pop-punk.vim'
 
 " GUIs elements
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'majutsushi/tagbar'
-Plug 'Yggdroot/indentLine'
+
+if has('nvim')
+  Plug 'lukas-reineke/indent-blankline.nvim' " requires neovim v0.5+
+  Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+else
+  Plug 'Yggdroot/indentLine'
+endif
 
 " Syntax handling
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'bfrg/vim-cpp-modern'
 Plug 'dag/vim-fish'
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'plasticboy/vim-markdown'
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'tpope/vim-git'
+Plug 'othree/html5.vim'
+Plug 'vim-python/python-syntax'
+Plug 'pboettch/vim-cmake-syntax'
+Plug 'rust-lang/rust.vim'
+Plug 'MTDL9/vim-log-highlighting'
+Plug 'arzg/vim-sh'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'fladson/vim-kitty', { 'branch': 'main' }
+
+if has('nvim')
+   Plug 'nvim-treesitter/nvim-treesitter'
+endif
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " System navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 " Session tracking
 Plug 'tpope/vim-obsession'
@@ -45,11 +62,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'szw/vim-maximizer'
 Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'psliwka/vim-smoothie'
 
 " Vim wiki
 Plug 'vimwiki/vimwiki'
@@ -74,13 +93,52 @@ filetype plugin indent on    " required
 " View `man` pages and add new file types
 runtime ftplugin/man.vim
 
-" Obsession
+" Treesitter
+if has('nvim')
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { 'c', 'cpp', 'bash', 'vim', 'json', 'python', 'go', 'comment', 'rust' },
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = true,
+  },
+}
+EOF
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+endif
+
+" Enable rainbow parentheses
+let g:rainbow#max_level = 24
+let g:rainbow#blacklist = [ 248, 238, 59, 1 ]
+let g:rainbow#pairs = [ ['(', ')'], ['[', ']'], ['{', '}'] ]
+augroup Rainbow
+  au!
+  autocmd! VimEnter * RainbowParentheses
+augroup END
+
+set nofoldenable
+
+" Obsession and session management
 let g:sessions_dir = '~/.vim/session'
+let g:sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize'
+
 exec 'nnoremap <leader>ss :Obsession! ' . g:sessions_dir . '/*.vim<C-D><Left><Left><Left><Left><BS>'
 exec 'nnoremap <leader>sr :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 nnoremap <leader>sp :Obsession<CR>
 nnoremap <leader>sc :echo v:this_session<CR>
+nnoremap <leader>sl :exec 'mksession!' . v:this_session<CR>
 nnoremap <leader>sd :Obsession!<CR>
+
+" vim-smoothie
+let g:smoothie_update_interval = 1
+let g:smoothie_speed_constant_factor = 20
+let g:smoothie_speed_linear_factor = 20
+let g:smoothie_speed_exponentiation_factor = 0.5
 
 " Airline
 let g:airline_theme='onedark'
@@ -91,6 +149,7 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_tab_count = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#formatter = 'short_path'
+let g:airline#extensions#whitespace#max_lines = 100
 
 " Add window numbers to the status line
 if !exists("window_numbers_added")
@@ -106,13 +165,16 @@ if !exists("window_numbers_added")
    call airline#add_inactive_statusline_func('WindowNumber')
 endif
 
-" Add current function name to the status line
-let g:airline#extensions#tagbar#enabled = 1
+" Add coc.nvim related items
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#show_coc_status = 1
 
-" Enhanced CPP highligh options
+" Enhanced CPP highlight options
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
+let g:cpp_member_highlight = 1
 let g:cpp_class_decl_highlight = 1
+let g:cpp_attributes_highlight = 1
 
 " Python highlighting options
 let g:python_highlight_class_vars = 1
@@ -130,8 +192,36 @@ let g:NERDTreeQuitOnOpen = 1
 autocmd CursorHold * silent call CocActionAsync('highlight')
 hi! link CocHighlightText Title
 
+set tagfunc=CocTagFunc
+
+let g:coc_global_extension = [
+\  'coc-yaml',
+\  'coc-vimlsp',
+\  'coc-tsserver',
+\  'coc-sh',
+\  'coc-pyright',
+\  'coc-json',
+\  'coc-jedi',
+\  'coc-html',
+\  'coc-css',
+\  'coc-clangd',
+\  'coc-fish',
+\  'coc-spell-checker',
+\  'coc-rls',
+\]
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+
+" remap all Coc's <Plug> mappings to use CocActionAsync
+nnoremap <Plug>(coc-definition) :CocActionAsync('jumpDefinition')
+nnoremap <Plug>(coc-type-definition) :CocActionAsync('jumpTypeDefinition')
+nnoremap <Plug>(coc-implementation) :CocActionAsync('jumpImplementation')
+nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
+nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
+nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
+nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
+
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -140,12 +230,45 @@ nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gy <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
+vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
+vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
+nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
+nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
+nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
 
-" tagbar
-let g:tagbar_autoclose = 1
-let g:tagbar_position = 'bottom'
-let g:tagbar_height = 30
-nnoremap <silent> <leader>gt :TagbarToggle<CR>
+function! s:check_back_space() abort
+   let col = col('.') - 1
+   return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+function! s:refresh_and_next() abort
+   call coc#refresh()
+   return "\<C-n>"
+ endfunction
+
+function! s:refresh_and_previous() abort
+   call coc#refresh()
+   return "\<C-p>"
+ endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? <SID>refresh_and_next() :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+inoremap <silent><expr> <S-TAB>
+  \ pumvisible() ? <SID>refresh_and_previous() :
+  \ <SID>check_back_space() ? "\<S-TAB>" :
+  \ coc#refresh()
+
+inoremap <expr> <C-Space> coc#refresh()
+
+augroup CocCustom
+  autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
+  autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
+augroup END
 
 " vim-mark
 let g:mwDefaultHighlightingPalette = 'maximum'
@@ -154,26 +277,44 @@ let g:mwDefaultHighlightingPalette = 'maximum'
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_verbose = 0
-map m <Plug>(easymotion-prefix)
+map ; <Plug>(easymotion-prefix)
 
+if has('nvim')
+" nvim indent_blankline
+lua <<EOF
+require("indent_blankline").setup {
+    char = "▏",
+    buftype_exclude = { "terminal", "help" },
+    filetype_exclude = { "vimwiki", "markdown" },
+    use_treesitter = true,
+    show_current_context = true,
+}
+EOF
+hi! link IndentBlankLineChar NonText
+else
 " indentLine
 let g:indentLine_char = '▏'
 let g:indentLine_defaultGroup = 'NonText'
+let g:indentLine_concealcursor = 'nc'
+let g:indentLine_conceallevel = 2
+let g:indentLine_bufTypeExclude = [ 'help', 'terminal' ]
+let g:indentLine_fileTypeExclude = [ 'vimwiki', 'markdown', 'log' ]
+endif
+
+set wildmode=full
 
 " Hexokinase
 let g:Hexokinase_highlighters = [ 'virtual' ]
-
 " update time
 set updatetime=100
-
-" Indent lines
-
-set conceallevel=1
 
 " Fugitive and GitGutter
 " And diff options
 set diffopt=filler,context:5
 set foldopen-=search
+
+" jumplist options
+set jumpoptions+=stack
 
 " line numbers
 set number
@@ -238,6 +379,7 @@ set smartcase
 " Make line numbers relative to current position
 augroup WinRelNum
    autocmd WinEnter * set relativenumber
+   autocmd FileType help set norelativenumber
    autocmd WinLeave * set norelativenumber
    autocmd BufWinEnter <buffer>  set relativenumber
 augroup END
@@ -246,7 +388,7 @@ augroup END
 set grepprg=rg\ --vimgrep
 set grepformat^=%f:%l:%c:%m
 
-set switchbuf+=useopen
+set switchbuf=useopen,usetab,uselast
 
 " --------------------------------- KEYMAPS -----------------------------------
 "-------------------------------- INSERT MODE----------------------------------
@@ -289,14 +431,16 @@ nnoremap <leader>cd :lcd %:p:h<CR>
 
 " FZF bindings. Requires fzf.vim
 " Opens FZF in the current directory
-nnoremap _ :FZF %:p:h<CR>
+nnoremap _ :Files %:p:h<CR>
 
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>w :Windows<CR>
 
-nnoremap <leader>rn :set relativenumber<CR>
 nnoremap <leader>rN :set relativenumber!<CR>
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
@@ -363,14 +507,8 @@ command! OpenOnly :call DeleteInactiveBufs()
 nnoremap <C-w>b :OpenOnly<CR>
 
 command! -range PastePrint <line1>,<line2>w !cat
-command! -range=% Pb <line1>,<line2>w !curl -s -F c=@- pb
 
 "-------------------------------- THEMES AND GUI ------------------------------
-
-" Make floating windows transparent
-if has('nvim')
-  set pumblend=15
-endif
 
 " Columns limits
 " highlights the current line
@@ -407,11 +545,12 @@ augroup ExtraWhiteSpaceHi
   autocmd BufWinLeave * call clearmatches()
 augroup END
 
-augroup ABugs
+" Highlight BUGXXXX (case insensitive) within every file.
+" BUG11111111: asdf
+augroup ABug
   au!
-  " Highlight BUGXXXX (case insensitive) within every file.
-  syn match bugNumber "\c\<BUG\d\+"
-  hi def link bugNumber Todo
+  autocmd! Syntax * syn match bugNumber '\c\<BUG\d\+' contained containedin=.*Comment.* nextgroup=.*Comment.* nextgroup=.*Comment.*
+  hi! default link bugNumber Error
 augroup END
 
 if &textwidth == 0
@@ -436,4 +575,8 @@ endif
 set background=dark
 colorscheme onedark
 
+" Make popup menu nicer
+if has('nvim')
+  set pumblend=15
+endif
 hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD

@@ -34,10 +34,13 @@ function configs
    git --git-dir="$CONFIGS_GIT_DIR" --work-tree="$HOME" $argv
 end
 
+function cb
+  cd (bd -si $argv[1])
+end
+
 # Autoload all declared functions
 # New functions should be above this line for readability
 set -l funcs (cat (status filename) | grep -Eo 'function [[:alnum:]_]+' | sed 's/function \(.*\)/\1/g')
 for func in $funcs
-   funcsave $func
+   funcsave -q $func
 end
-

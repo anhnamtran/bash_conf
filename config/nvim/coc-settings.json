@@ -1,0 +1,51 @@
+{
+   "coc.source.buffer.priority": 50,
+   "coc.source.around.priority": 60,
+   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+
+   "diagnostic.checkCurrentLine": true,
+   "diagnostic.refreshOnInsertMode": true,
+   "diagnostic.autoRefresh": true,
+
+   "suggest.autoTrigger": "always",
+   "suggest.triggerAfterInsertEnter": true,
+   "suggest.acceptSuggestionOnCommitCharacter": true,
+   "suggest.removeDuplicateItems": true,
+   "suggest.enablePreview": true,
+   "suggest.enablePreselect": true,
+   "suggest.localityBonus": true,
+   "suggest.floatConfig": {
+      "border": true
+   },
+   "suggest.disableMenuShortcut": true,
+
+   "clangd.arguments" : [ "--all-scopes-completion",
+                        "--limit-results=0",
+                        "--cross-file-rename" ],
+
+   "python.analysis.extraPaths": [ "/usr/lib", "/usr" ],
+   "python.formatting.provider": "none",
+   "python.linting.enabled": true,
+   "python.linting.pylintEnabled": true,
+   "python.analysis.diagnosticSeverityOverrides": {
+      "reportGeneralTypeIssues": "none",
+      "reportOptionalMemberAccess": "none"
+   },
+   "pyright.disableCompletion": true,
+
+   "cSpell.showStatus": false,
+   "cSpell.allowCompoundWords": true,
+   "cSpell.ignoreWords": [
+    "clangd",
+    "grpc",
+    "proj",
+    "py",
+    "pyclient",
+    "pylint",
+    "pyright",
+    "ssid"
+  ],
+  "cSpell.userWords": [
+    "abuild"
+  ]
+}

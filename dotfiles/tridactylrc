@@ -4,6 +4,8 @@ set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
 set incsearch true
+set allowautofocus true
+set wordpattern [^\s\/]+
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
@@ -15,24 +17,31 @@ bind L tabnext
 bind H tabprev
 bind yt tabduplicate
 bind ;t tabdetach
+bind ;T composite tabduplicate; tabdetach
 
-bind <C-]> forward
-bind <C-[> back
-
-bind --mode=ex <C-w> text.backward_kill_word
-bind --mode=input <C-w> text.backward_kill_word
-bind --mode=insert <C-w> text.backward_kill_word
-
+set findcase smart
 bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
 bind ,<Space> nohlsearch
 
-unbind <C-f>
+bind <C-]> forward
+bind <C-[> back
+
+unbind --mode=normal <C-b>
+bind --mode=browser <C-b> tab #
+
+bind --mode=ex <C-w> text.backward_kill_word
+bind --mode=input <C-w> text.backward_kill_word
+bind --mode=insert <C-w> text.backward_kill_word
+
 unbind <Space>
 
 alias tg tabgrab
+
+command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
+alias tp tabpush_and_focus
 
 set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
@@ -40,14 +49,16 @@ set hintmaps.<S-Tab> hint.focusPreviousHint
 command tabc tabclose
 
 # Arista domains
-set searchurls.go http://go/%s
-set searchurls.pb http://pb/%s
-set searchurls.aid http://aid/%s
-set searchurls.dashboard http://dashboard/%s
-set searchurls.bug http://bug/%s
-set searchurls.bb http://bb/%s
-set searchurls.cl http://cl/%s
-set searchurls.review http://reviewboard/%s
-set searchurls.aboard http://aboard/react/user/andrew_nt/%s
-set searchurls.src http://src/%s
-set searchurls.grok http://spidar101.sjc.aristanetworks.com:8081/source/search?project=eos-trunk&q=%s
+set searchurls.go https://go/%s
+set searchurls.pb https://pb/%s
+set searchurls.aid https://aid/%s
+set searchurls.dashboard https://dashboard/%s
+set searchurls.bug https://bug/%s
+set searchurls.bb https://bb/%s
+set searchurls.cl https://cl/%s
+set searchurls.review https://reviewboard/%s
+set searchurls.aboard https://aboard/react/user/andrew_nt/%s
+set searchurls.src https://src/%s
+set searchurls.grok https://opengrok/source/search?project=eos-trunk&full=%s
+set searchurls.eosdoc https://eosdoc2.infra.corp.arista.io/#/%s
+set searchurls.crontab https://crontab.guru/#%s

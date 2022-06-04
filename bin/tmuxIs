@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ $1 =~ local ]]; then
+  echo "TMUX is now in local mode"
+  touch /tmp/.tmux_local_mode
+elif [[ $1 =~ server ]]; then
+  echo "TMUX is now in server mode"
+  rm -f /tmp/.tmux_local_mode > /dev/null 2>&1
+else
+  if [[ -f /tmp/.tmux_local_mode ]]; then
+    echo "TMUX is in local mode"
+  else
+    echo "TMUX is in server mode"
+  fi
+fi

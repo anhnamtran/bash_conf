@@ -19,7 +19,7 @@
 *color7: #bfbfbf
 *color15:                         #E8E8E8
 
-URxvt.font: xft:Iosevka:size=10.5
+URxvt.font: xft:Iosevka:size=11.5
 URxvt.depth:                      32
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
@@ -38,5 +38,5 @@ Xft.lcdfilter: lcddefault
 Xft.antialias: 1
 
 
-Xcursor.size: 28
+Xcursor.size: 32
 Xcursor.theme: Capitaine-cursors

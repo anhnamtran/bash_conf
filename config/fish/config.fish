@@ -3,3 +3,4 @@ if status is-interactive
 end
 
 function fish_vi_cursor; end
+export PATH="$PATH:$HOME/.spicetify"

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if (( $# > 1 )); then
+  echo "Valid options are on/off/status"
+  exit 1
+fi
+
+DPMS_ENABLED=$(xset q | grep 'DPMS is' | awk '{ if($3 == "Enabled") print 1; else print 0 }')
+
+case $@ in
+  off)
+    if (( $DPMS_ENABLED == 1 )); then
+      xset -dpms
+      xset s off
+    else
+      echo "Screensaver already off"
+    fi
+    ;;
+  on)
+    if (( $DPMS_ENABLED == 0 )); then
+      xset +dpms
+      xset s on
+    else
+      echo "Screensaver already on"
+    fi
+    ;;
+  status)
+    if (( $DPMS_ENABLED == 1 )); then
+      echo "Screensaver is on"
+    else
+      echo "Screensaver is off"
+    fi
+    ;;
+  *)
+    echo "Valid options are on/off/status"
+    exit 1
+esac

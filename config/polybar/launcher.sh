@@ -1,10 +1,11 @@
 #!/bin/bash
-
-pkill polybar
-
-while pgrep -a polybar &> /dev/null; do sleep 1; done
-
 set -x
+
+for pid in $(pgrep -x polybar); do
+  kill -9 $pid
+  sleep 1;
+done
+
 PRIMARY_MONITOR=$(xrandr --query | grep " connected" | grep " primary" | cut -d " " -f 1)
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d " " -f 1); do
