@@ -202,9 +202,11 @@ do_configure() {
   done
 
   if [[ -f ${CONFIGS['ROOt']}/dotfiles/bash_conf_gitignore ]]; then
-    configs config --local core.excludeFile ${CONFIGS['ROOT']}/dotfiles/bash_conf_gitignore
+    configs config --local core.excludesFile ${CONFIGS['ROOT']}/dotfiles/bash_conf_gitignore
   fi
-  configs push -u origin "${CONFIGS["GIT_BRANCH_NAME"]}"
+  if (ssh -T git@github.com | grep -q success); then
+    configs push -u origin "${CONFIGS["GIT_BRANCH_NAME"]}"
+  fi
   echo "Configuration installation complete. A reboot might be required."
 }
 
