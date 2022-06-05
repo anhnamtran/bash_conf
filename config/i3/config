@@ -188,6 +188,7 @@ mode "resize" {
 }
 
 # Autostart applications
+exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id dunst
 exec --no-startup-id redshift

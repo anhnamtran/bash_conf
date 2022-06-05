@@ -2,7 +2,7 @@ export PYTHONUNBUFFERED=1
 export IBUS_ENABLE_SYNC_MODE=1
 export CHECK_TMUX="true"
 export EDITOR=nvim
-export VISUAL=nvim
+export VISUAL="$EDITOR"
 
 export CONFIGS_GIT_DIR="$HOME/.cfg"
 export LESS="-XRF"

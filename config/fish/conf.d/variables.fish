@@ -4,7 +4,7 @@ set -gx fish_greeting
 set -gx me (whoami)
 set -gx EDITOR nvim
 
-set -gx VISUAL nvim
+set -gx VISUAL $EDITOR
 set -gx GIT_DISCOVERY_ACROSS_FILESYSTEM 1
 
 set -gx RIPGREP_CONFIG_PATH ~/.ripgreprc
