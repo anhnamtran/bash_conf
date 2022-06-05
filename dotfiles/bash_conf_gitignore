@@ -34,6 +34,8 @@ bin/sp
 .profile
 .tmux.conf
 .tridactylrc
+.history
+.python_history
 WiFi/
 snap/
 [Cc]ache/
