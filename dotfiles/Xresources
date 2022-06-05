@@ -28,9 +28,6 @@ URxvt*saveLines:                  5000
 URxvt*internalBorder: 5
 URxvt*geometry: 70x19
 
-rofi.theme: onedark
-rofi.terminal: terminator
-
 Xft.dpi: 125
 Xft.rgba: rgb
 Xft.autohint: 0
