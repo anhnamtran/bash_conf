@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 TOUCH_PAD_ID=$(xinput list | grep -i touchpad | awk '{ print $6  }' | cut -d= -f2)
 
 find_prop_id() {

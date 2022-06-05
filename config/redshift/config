@@ -1,3 +1,5 @@
 [redshift]
 temp-day = 7500
 temp-night = 4000
+
+fade = 1

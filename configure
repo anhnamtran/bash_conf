@@ -28,6 +28,7 @@ declare -A CONFIGS=(
   # Install dotfiles.
   ["INSTALL_DOT_FILES"]="${CONFIGS_INSTALL_DOT:-true}"
   ["INSTALL_THEMES"]="${CONFIGS_INSTALL_THEMES:-true}"
+  ["INSTALL_ICONS"]="${CONFIGS_INSTALL_ICONS:-true}"
 
   # The Git url of the git repository to use for the dotfiles.
   ["REMOTE"]="${CONFIGS_REMOTE:-https://github.com/anhnamtran/bash_conf.git}"
@@ -155,6 +156,24 @@ configure_INSTALL_THEMES() {
   for theme in $(ls "$SRC_DIR"); do
     backup "$DST_DIR/$theme" "$BACKUP_DIR/$theme"
     ln -s "$SRC_DIR/$theme" "$DST_DIR/$theme"
+  done
+}
+
+configure_INSTALL_ICONS() {
+  local BACKUP_DIR="${CONFIGS["BACKUP_DIR"]}/icons"
+  local SRC_DIR="${CONFIGS["ROOT"]}/icons"
+  local DST_DIR="${CONFIGS["ROOT"]}/.icons"
+
+  if ! [ -d "$BACKUP_DIR" ]; then
+    mkdir -p "$BACKUP_DIR"
+  fi
+  if ! [ -d "$DST_DIR" ]; then
+    mkdir -p "$DST_DIR"
+  fi
+
+  for icons in $(ls "$SRC_DIR"); do
+    backup "$DST_DIR/$icons" "$BACKUP_DIR/$icons"
+    ln -s "$SRC_DIR/$icons" "$DST_DIR/$icons"
   done
 }
 

@@ -10,7 +10,7 @@ call plug#begin('~/.vim/bundle')
 " Plugins
 
 " Themes
-Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 
 " GUIs elements
 Plug 'vim-airline/vim-airline'

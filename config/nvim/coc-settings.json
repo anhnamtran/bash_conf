@@ -33,6 +33,8 @@
    },
    "pyright.disableCompletion": true,
 
+   "sh.commandPath": "/usr/bin/bash-language-server",
+
    "cSpell.showStatus": false,
    "cSpell.allowCompoundWords": true,
    "cSpell.ignoreWords": [
