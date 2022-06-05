@@ -142,7 +142,9 @@ let g:smoothie_speed_exponentiation_factor = 0.5
 
 " Airline
 let g:airline_theme='onedark'
-let g:airline_highlighting_cache=1
+let g:airline_highlighting_cache = 1
+let g:airline_experimental = 1
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 0
