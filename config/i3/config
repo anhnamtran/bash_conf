@@ -249,13 +249,12 @@ bindsym $mod+shift+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/
 bindsym $mod+shift+comma exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp prev
 bindsym $mod+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp play
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute
-bindsym XF86AudioMute exec --no-startup-id /home/andrew_nt/bin/amixer_mute_toggle
+bindsym $mod+F1 exec --no-startup-id $HOME/bin/amixer_mute_toggle
+bindsym $mod+F2 exec --no-startup-id amixer -q set Master 5%- unmute
+bindsym $mod+F3 exec --no-startup-id amixer -q set Master 5%+ unmute
 
 bindsym $mod+F5 exec --no-startup-id light -U 5  # decrease brightness
 bindsym $mod+F6 exec --no-startup-id light -A 5    # increase brightness
 
 # touchpad on and off controller on laptop with Fn+<touchpad control functional key>
-bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0
-bindsym XF86TouchpadOff exec --no-startup-id synclient Touchpadoff=1
+bindsym $mod+F10 exec --no-startup-id $HOME/bin/toggle_touchpad.sh
