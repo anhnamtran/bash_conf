@@ -1,0 +1,29 @@
+diff --git a/Dribbblish/color.ini b/Dribbblish/color.ini
+index b8c152d..c4bc149 100644
+--- a/Dribbblish/color.ini
++++ b/Dribbblish/color.ini
+@@ -177,4 +177,22 @@ button-disabled    = bdae93
+ tab-active         = fb4934
+ notification       = 8ec07c
+ notification-error = d79921
+-misc               = BFBFBF
+\ No newline at end of file
++misc               = BFBFBF
++
++[onedark]
++text               = ABB2BF
++subtext            = ABB2BF
++sidebar-text       = 282C34
++main               = 282C34
++sidebar            = 98C379
++player             = 282C34
++card               = 282C34
++shadow             = 2D3B23
++selected-row       = C678DD
++button             = 98C379
++button-active      = 98C379
++button-disabled    = 4B5263
++tab-active         = 98C379
++notification       = E5C07B
++notification-error = E06C75
++misc               = 282C34
