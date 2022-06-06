@@ -7,6 +7,9 @@
 kube*
 nohup.out
 bin/sp
+Backup/
+Extracted/
+Themes/
 .viminfo
 .vimrc
 .UltiSnips

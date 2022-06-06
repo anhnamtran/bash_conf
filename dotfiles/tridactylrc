@@ -1,5 +1,5 @@
 set newtab about:blank
-set smoothscroll true
+# set smoothscroll true
 set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
