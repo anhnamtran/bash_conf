@@ -67,6 +67,6 @@ function fish_prompt
       set gitPrompt ""
    end
 
-   echo -es $promptStart ' ' $gitStart (set_color --bold blue) (string trim -c '/' -l $dir) (set_color normal) ' ' $gitPrompt
+   echo -es $promptStart ' ' $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
    echo -es $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
 end
