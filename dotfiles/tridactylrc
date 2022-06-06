@@ -6,6 +6,7 @@ set hintnames numeric
 set incsearch true
 set allowautofocus true
 set wordpattern [^\s\/]+
+set escapehatchsidebarhack false
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
@@ -39,26 +40,14 @@ bind --mode=insert <C-w> text.backward_kill_word
 unbind <Space>
 
 alias tg tabgrab
+alias tabc tabclose
+alias tabm tabmove
 
 command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
+
 alias tp tabpush_and_focus
 
 set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
 
-command tabc tabclose
-
-# Arista domains
-set searchurls.go https://go/%s
-set searchurls.pb https://pb/%s
-set searchurls.aid https://aid/%s
-set searchurls.dashboard https://dashboard/%s
-set searchurls.bug https://bug/%s
-set searchurls.bb https://bb/%s
-set searchurls.cl https://cl/%s
-set searchurls.review https://reviewboard/%s
-set searchurls.aboard https://aboard/react/user/andrew_nt/%s
-set searchurls.src https://src/%s
-set searchurls.grok https://opengrok/source/search?project=eos-trunk&full=%s
-set searchurls.eosdoc https://eosdoc2.infra.corp.arista.io/#/%s
-set searchurls.crontab https://crontab.guru/#%s
+autocmd TabEnter .* unfocus
