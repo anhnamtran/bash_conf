@@ -196,7 +196,6 @@ exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id dunst
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id redshift
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr --change
 exec --no-startup-id xss-lock -n "notify-send -t 10000 'Screen will lock soon'" -l -- $HOME/bin/xsecurelock_launch
