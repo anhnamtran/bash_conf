@@ -13,7 +13,7 @@ fi
 
 zscroll -l 20 \
   --delay 0.1 \
-  --scroll-padding " " \
+  --scroll-padding "  " \
   --update-check true \
   "$SPOTIFY_CURRENT_SCRIPT $$" &
 
