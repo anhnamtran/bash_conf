@@ -1,4 +1,8 @@
 #!/bin/bash
+if ! pgrep -x spotify > /dev/null 2>&1; then
+  kill -s SIGINT "$1"
+  exit 1
+fi
 
 META_DATA=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata)
 
