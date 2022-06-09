@@ -7,11 +7,24 @@ fi
 META_DATA=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata)
 
 get_song_name() {
-  echo "$META_DATA" | sed -n '/title/{n;p}' | awk '{ sep = ""; for (i = 3; i <= NF; i++) s = s $i " "; print s }'
+  echo "$META_DATA" | sed -n '/title/{n;p}' | awk '{ sep = ""; for (i = 3; i <= NF; i++) s = s $i " "; print s }' | sed -e 's/"//g' | xargs
 }
 
 get_first_artist() {
-  echo "$META_DATA" | sed -n '/artist/{n;n;p}' | awk '{ sep = ""; for (i = 2; i <= NF; i++) s = s $i " "; print s }'
+  echo "$META_DATA" | sed -n '/artist/{n;n;p}' | awk '{ sep = ""; for (i = 2; i <= NF; i++) s = s $i " "; print s }' | sed -e 's/"//g' | xargs
 }
 
-printf "$(get_song_name)- $(get_first_artist)\n"
+get_album() {
+  echo "$META_DATA" | sed -n '/album\>/{n;p}' | awk '{ sep = ""; for (i = 3; i <= NF; i++) s = s $i " "; print s }' | sed -e 's/"//g' | xargs
+}
+
+TITLE="$(get_song_name)"
+ARTIST="$(get_first_artist)"
+ALBUM="$(get_album)"
+if [[ -n "${ARTIST}" ]]; then
+  BY="$ARTIST"
+else
+  BY="$ALBUM"
+fi
+
+printf '"%s" - "%s"\n' "$TITLE" "$BY"
