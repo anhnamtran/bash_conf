@@ -10,4 +10,13 @@ x-prop-max_bpc 12
 x-prop-non_desktop 0
 x-prop-scaling_mode Full aspect
 output HDMI-1
-off
+crtc 1
+mode 3840x2160
+pos 1920x0
+rate 30.00
+x-prop-aspect_ratio Automatic
+x-prop-audio auto
+x-prop-broadcast_rgb Automatic
+x-prop-colorspace Default
+x-prop-max_bpc 12
+x-prop-non_desktop 0
