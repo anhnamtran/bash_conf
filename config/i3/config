@@ -193,7 +193,8 @@ mode "resize" {
 exec --no-startup-id picom -b
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id dunst
-exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- $HOME/bin/xsecurelock_launch
+exec --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
+exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr --change
 exec --no-startup-id $HOME/bin/easyeffects --gapplication-service
