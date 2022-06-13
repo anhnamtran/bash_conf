@@ -28,7 +28,7 @@ insidecolor=282c34ff
 insidevercolor=282c34ff
 insidewrongcolor=282c34ff
 # separator color
-separatorcolor=61afefff
+separatorcolor=abb2bfff
 #
 timecolor=abb2bfff
 time_format="%H:%M:%S"

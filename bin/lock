@@ -1,2 +1,6 @@
 #!/bin/bash
-betterlockscreen --lock
+if pgrep -x xss-lock > /dev/null 2>&1; then
+  xset s activate
+else
+  betterlockscreen --lock
+fi
