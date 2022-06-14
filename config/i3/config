@@ -65,8 +65,8 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+minus split v;exec notify-send -t 2000 'tile vertically'
-bindsym $mod+backslash split h;exec notify-send -t 2000 'tile horizontally'
+bindsym $mod+minus split v; exec notify-send -t 2000 'Tiling Vertically' -a i3
+bindsym $mod+backslash split h; exec notify-send -t 2000 'Tiling Horizontally' -a i3
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
