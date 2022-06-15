@@ -42,10 +42,10 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'fladson/vim-kitty', { 'branch': 'main' }
 
 if has('nvim')
-   Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 endif
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': ':CocUpdate' }
 
 " System navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
