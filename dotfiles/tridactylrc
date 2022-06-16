@@ -4,7 +4,7 @@ set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
 set incsearch true
-set allowautofocus true
+set allowautofocus false
 set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
 
