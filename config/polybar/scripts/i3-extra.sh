@@ -8,7 +8,7 @@ i3_tree() {
 
 i3_scratch() {
   HELP='Gets the number of containers in the scratch pad'
-  i3_tree | jq '.. |."scratchpad_state"? | select(. != null)' | rg -c fresh
+  i3_tree | jq '.. |."scratchpad_state"? | select(. != null)' | rg -c 'fresh|changed'
 }
 
 i3_help() {

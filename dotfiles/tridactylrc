@@ -37,6 +37,9 @@ bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
 
+bind --mode=normal <AC-,> escapehatch
+bind --mode=browser <AC-,> escapehatch
+
 unbind <Space>
 
 alias tg tabgrab
