@@ -6,6 +6,7 @@ set hintnames numeric
 set incsearch true
 set allowautofocus false
 set wordpattern [^\s\/]+
+set escapehatchsidebarhack false
 
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
@@ -36,17 +37,23 @@ bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
 
+bind --mode=normal <AC-,> escapehatch
+bind --mode=browser <AC-,> escapehatch
+
 unbind <Space>
 
 alias tg tabgrab
+alias tabc tabclose
+alias tabm tabmove
 
 command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
+
 alias tp tabpush_and_focus
 
 set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
 
-command tabc tabclose
+autocmd TabEnter .* unfocus
 
 # Arista domains
 set searchurls.go https://go/%s
