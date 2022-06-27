@@ -190,6 +190,7 @@ mode "resize" {
 }
 
 # Autostart applications
+exec --no-startup-id autotiling
 exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
