@@ -58,10 +58,11 @@ function fish_prompt
 
 
    if [ -d $dir/.git ] || git rev-parse --git-dir >/dev/null 2>&1
-      set gitStart "git@"
       set gitPrompt (fish_git_prompt '%s')
-      set repoName (basename (git rev-parse --show-toplevel))
-      set dir (string match -r "$repoName.*" "$dir")
+      set gitDir (basename (git rev-parse --show-toplevel))
+      set repoName (basename -s .git (git config --get remote.origin.url))
+      set gitStart "git@$repoName:"
+      set dir (string match -r "$gitDir.*" "$dir")
    else
       set gitStart ""
       set gitPrompt ""
