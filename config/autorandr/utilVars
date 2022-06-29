@@ -3,3 +3,5 @@ CONNECTED=$(xrandr -q | grep ' connected')
 NUM_CONNECTED=$(echo "$CONNECTED" | wc -l)
 PRIMARY=$(echo "$CONNECTED" | grep "primary" | cut -f1 -d' ')
 SECONDARY=$(echo "$CONNECTED" | grep -v "primary" | cut -f1 -d' ')
+
+pgrep i3lock > /dev/null 2>&1 || i3-msg restart
