@@ -118,7 +118,7 @@
     }
 
     function clickQueueButton() {
-        document.querySelector("div.ExtraControls div.control-button-wrapper > button").click();
+        document.querySelector(".main-nowPlayingBar-right .control-button-wrapper > button").click();
     }
 
     function clickNavigatingBackButton() {
@@ -168,19 +168,19 @@
     }
 
     function nextSong() {
-        document.querySelector(".main-skipForwardButton-button").click();
+        document.querySelector("button[aria-label='Next']").click();
     }
 
     function previousSong() {
-        document.querySelector(".main-skipBackButton-button").click();
+        document.querySelector("button[aria-label='Previous']").click();
     }
 
     function increaseVolume() {
-        Spicetify.Player.origin.setVolume(Spicetify.Player.getVolume() + 0.1);
+        Spicetify.Player.setVolume(Spicetify.Player.getVolume() + 0.05);
     }
 
     function decreaseVolume() {
-        Spicetify.Player.origin.setVolume(Spicetify.Player.getVolume() - 0.1);
+        Spicetify.Player.setVolume(Spicetify.Player.getVolume() - 0.05);
     }
 
     /**
@@ -228,7 +228,7 @@
     }
 
     function focusOnApp() {
-        return document.querySelector("main .os-viewport");
+        return document.querySelector(".Root__main-view .os-viewport");
     }
 
     /**
