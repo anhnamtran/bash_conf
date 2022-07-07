@@ -12,5 +12,5 @@ else
 fi
 
 for dev in $DEVICES; do
-  amixer -c 0 set $dev $ACTION
+  amixer set $dev $ACTION
 done

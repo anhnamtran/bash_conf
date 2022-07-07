@@ -1,6 +1,6 @@
 #!/bin/bash
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-source $SCRIPT_DIR/../utilVars
+source $SCRIPT_DIR/../commonPostSwitch
 
 if (( $NUM_CONNECTED > 1 )); then
   autorandr --load horizontal
@@ -10,4 +10,3 @@ fi
 i3-msg '[workspace="1"]' move workspace to output $PRIMARY
 i3-msg '[workspace="2"]' move workspace to output $PRIMARY
 i3-msg '[workspace="3"]' move workspace to output $PRIMARY
-i3-msg restart
