@@ -1,7 +1,10 @@
 #!/bin/bash
 set -x
 
-killall -w -e polybar
+for pid in $(pgrep -x polybar); do
+  kill -9 $pid
+  sleep 1;
+done
 
 PRIMARY_MONITOR=$(xrandr --query | grep " connected" | grep " primary" | cut -d " " -f 1)
 if type "xrandr"; then
