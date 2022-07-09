@@ -1,7 +1,15 @@
+android-sdk-platform-tools
+autotiling-git
+batify-git
+betterlockscreen
+downgrade
+easyeffects-git
 foxitreader
 gstreamer0.10
 gstreamer0.10-base
+i3lock-color
 libvterm-0.1
+mkinitcpio-numlock
 neovim-git
 nerd-fonts-complete
 polybar-git
@@ -9,5 +17,7 @@ redshift-git
 snapd
 spotify
 tmux-git
+xpub
 yay
+zoom
 zscroll-git
