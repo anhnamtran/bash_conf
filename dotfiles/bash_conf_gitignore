@@ -39,6 +39,7 @@ Themes/
 .tridactylrc
 .history
 .python_history
+.ripgreprc
 WiFi/
 snap/
 [Cc]ache/
