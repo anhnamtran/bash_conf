@@ -29,15 +29,15 @@ bind ,<Space> nohlsearch
 bind <C-]> forward
 bind <C-[> back
 
-unbind --mode=normal <C-b>
+unbind --mode=browser <C-b>
 bind --mode=browser <C-b> tab #
 
 bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
 bind --mode=insert <C-w> text.backward_kill_word
 
-bind --mode=normal <AC-,> escapehatch
-bind --mode=browser <AC-,> escapehatch
+bind --mode=normal <CA-,> escapehatch
+bind --mode=browser <CA-,> escapehatch
 
 unbind <Space>
 
