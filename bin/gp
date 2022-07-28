@@ -2,21 +2,23 @@
 
 options="connect|disconnect|dns|show|notify|help|fix"
 
-GP="timeout --preserve-status -k 10s 5s globalprotect"
+run_gp() {
+  timeout --foreground --preserve-status -k 30s 15s /usr/bin/globalprotect "$@"
+}
 
 gp_connect() {
   HELP='Connect to gp-nst.arista.com with andrew_nt'
-  ${GP} connect "$@"
+  run_gp connect "$@"
 }
 
 gp_disconnect() {
   HELP='Disconnect from ${GP}'
-  ${GP} disconnect
+  run_gp disconnect
 }
 
 gp_show() {
   HELP='Show the current VPN status'
-  ${GP} show "$@"
+  run_gp show "$@"
 }
 
 gp_notify() {
