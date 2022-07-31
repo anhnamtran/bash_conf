@@ -11,13 +11,10 @@
    "suggest.triggerAfterInsertEnter": true,
    "suggest.acceptSuggestionOnCommitCharacter": true,
    "suggest.removeDuplicateItems": true,
-   "suggest.enablePreview": true,
-   "suggest.enablePreselect": true,
    "suggest.localityBonus": true,
    "suggest.floatConfig": {
       "border": true
    },
-   "suggest.disableMenuShortcut": true,
 
    "clangd.arguments" : [ "--all-scopes-completion",
                         "--limit-results=0",

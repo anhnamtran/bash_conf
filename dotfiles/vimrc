@@ -190,9 +190,7 @@ let g:NERDTreeSortHiddenFirst = 1
 let g:NERDTreeQuitOnOpen = 1
 
 " coc.nvim
-
 autocmd CursorHold * silent call CocActionAsync('highlight')
-hi! link CocHighlightText Title
 
 set tagfunc=CocTagFunc
 
@@ -242,30 +240,23 @@ nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
 nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
 
 function! s:check_back_space() abort
-   let col = col('.') - 1
-   return !col || getline('.')[col - 1]  =~ '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-function! s:refresh_and_next() abort
-   call coc#refresh()
-   return "\<C-n>"
- endfunction
-
-function! s:refresh_and_previous() abort
-   call coc#refresh()
-   return "\<C-p>"
- endfunction
-
+" Insert <tab> when previous text is space, refresh completion if not.
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? <SID>refresh_and_next() :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-inoremap <silent><expr> <S-TAB>
-  \ pumvisible() ? <SID>refresh_and_previous() :
-  \ <SID>check_back_space() ? "\<S-TAB>" :
-  \ coc#refresh()
+\ coc#pum#visible() ? coc#pum#next(1):
+\ <SID>check_back_space() ? "\<Tab>" :
+\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
-inoremap <expr> <C-Space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 augroup CocCustom
   autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
@@ -582,3 +573,5 @@ if has('nvim')
   set pumblend=15
 endif
 hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
+hi! link CocHighlightText Title
+hi! link CocMenuSel PmenuSel
