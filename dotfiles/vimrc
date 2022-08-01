@@ -222,42 +222,6 @@ nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
 nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
 nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nmap <silent> <leader>rn <Plug>(coc-rename)
-nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
-vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
-vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
-nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
-nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
-nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" Insert <tab> when previous text is space, refresh completion if not.
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1):
-\ <SID>check_back_space() ? "\<Tab>" :
-\ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
-
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
 augroup CocCustom
   autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
   autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
@@ -450,6 +414,44 @@ tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
+
+"--------------------------------- COC MAPPINGS ----------------------------------
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
+vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
+vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
+nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
+nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
+nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+\ coc#pum#visible() ? coc#pum#next(1):
+\ <SID>check_back_space() ? "\<Tab>" :
+\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr><CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
 
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
