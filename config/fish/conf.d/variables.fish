@@ -18,3 +18,5 @@ set -gx PYTHONWARNINGS "ignore"
 
 # Lower fish escape delay
 set -gx fish_escape_delay_ms 10
+
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
