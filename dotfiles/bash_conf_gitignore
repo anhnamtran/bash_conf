@@ -10,6 +10,8 @@ bin/sp
 Backup/
 Extracted/
 Themes/
+external
+external/
 .viminfo
 .vimrc
 .UltiSnips
@@ -25,6 +27,10 @@ Themes/
 .bash_history
 .bash_paths
 .bash_vars
+.bash_logout
+.bash_profile
+.dmrc
+.wget-hsts
 .bashrc
 .dircolors
 .git-credentials
