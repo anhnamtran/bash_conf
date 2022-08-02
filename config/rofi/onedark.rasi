@@ -26,12 +26,12 @@
   spacing: 0;
   background-color: transparent;
 
-  font: "Iosevka Term Bold 15";
+  font: "Iosevka Nerd Font 14";
   text-color: @text;
 }
 
 window {
-  transparency: "screenshot";
+  transparency: "real";
   fullscreen: true;
   background-color: #282c34dd;
 }
@@ -46,7 +46,7 @@ inputbar {
 }
 
 prompt {
-  text-color: @mangenta;
+  text-color: @blue;
 }
 
 textbox-prompt-colon {
@@ -82,7 +82,7 @@ element urgent, element selected urgent {
 }
 
 element active, element selected active {
-  text-color: @purple;
+  text-color: @mangenta;
 }
 
 message {
@@ -98,5 +98,3 @@ button selected {
   border-radius: 3px;
   background-color: @emphasis;
 }
-
-/* vim:ft=css */
