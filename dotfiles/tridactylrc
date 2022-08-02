@@ -1,3 +1,4 @@
+" General settings
 set newtab about:blank
 set smoothscroll true
 set theme dark
@@ -7,6 +8,8 @@ set incsearch true
 set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
 
+" i to go to ignore mode
+" Ctrl+Enter to leave ignore mode
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
 bind i mode ignore
