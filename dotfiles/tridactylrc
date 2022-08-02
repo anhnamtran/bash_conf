@@ -25,6 +25,14 @@ bind yt tabduplicate
 bind ;t tabdetach
 bind ;T composite tabduplicate; tabdetach
 
+alias tg tabgrab
+alias tabc tabclose
+alias tabm tabmove
+
+command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
+
+alias tp tabpush_and_focus
+
 " tridactyl search
 set findcase smart
 bind / fillcmdline find
@@ -55,14 +63,7 @@ bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
 
 unbind <Space>
 
-alias tg tabgrab
-alias tabc tabclose
-alias tabm tabmove
-
-command tabpush_and_focus jsb void async function(){const tabId=await activeTabId();fillcmdline("tabpush");while(true){if(tabId==await activeTabId())await sleep(50);else break}browser.tabs.update(tabId,{active:true});const tabNow=await browser.tabs.get(tabId);browser.windows.update(tabNow.windowId,{focused:true})}();
-
-alias tp tabpush_and_focus
-
+" use tabs to change hints
 set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
 
