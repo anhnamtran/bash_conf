@@ -14,14 +14,18 @@ command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
 bind i mode ignore
 
+" Faster scrolling
 bind j scrollline 5
 bind k scrollline -5
+
+" Tab operations
 bind L tabnext
 bind H tabprev
 bind yt tabduplicate
 bind ;t tabdetach
 bind ;T composite tabduplicate; tabdetach
 
+" tridactyl search
 set findcase smart
 bind / fillcmdline find
 bind ? fillcmdline find -?
@@ -29,6 +33,7 @@ bind n findnext 1
 bind N findnext -1
 bind ,<Space> nohlsearch
 
+" general browsing
 bind <C-]> forward
 bind <C-[> back
 
