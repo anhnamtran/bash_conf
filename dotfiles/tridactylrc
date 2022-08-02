@@ -39,6 +39,12 @@ bind --mode=insert <C-w> text.backward_kill_word
 bind --mode=normal <AC-,> escapehatch
 bind --mode=browser <AC-,> escapehatch
 
+" Only hint search results on Google and DDG
+bindurl www.google.com f hint -Jc #search div:not(.action-menu) > a
+bindurl www.google.com F hint -Jbc #search div:not(.action-menu) > a
+bindurl ^https://duckduckgo.com f hint -Jc [data-testid="result-title-a"]
+bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
+
 unbind <Space>
 
 alias tg tabgrab
