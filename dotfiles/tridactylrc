@@ -68,3 +68,5 @@ set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
 
 autocmd TabEnter .* unfocus
+
+" vim: ft=tridactyl
