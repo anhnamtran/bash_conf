@@ -10,7 +10,7 @@ call plug#begin('~/.vim/bundle')
 " Plugins
 
 " Themes
-Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 
 " GUIs elements
 Plug 'vim-airline/vim-airline'
@@ -40,12 +40,13 @@ Plug 'MTDL9/vim-log-highlighting'
 Plug 'arzg/vim-sh'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'fladson/vim-kitty', { 'branch': 'main' }
+Plug 'tridactyl/vim-tridactyl'
 
 if has('nvim')
-   Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 endif
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': ':CocUpdate' }
 
 " System navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -142,7 +143,9 @@ let g:smoothie_speed_exponentiation_factor = 0.5
 
 " Airline
 let g:airline_theme='onedark'
-let g:airline_highlighting_cache=1
+let g:airline_highlighting_cache = 1
+let g:airline_experimental = 1
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 0
@@ -188,9 +191,7 @@ let g:NERDTreeSortHiddenFirst = 1
 let g:NERDTreeQuitOnOpen = 1
 
 " coc.nvim
-
 autocmd CursorHold * silent call CocActionAsync('highlight')
-hi! link CocHighlightText Title
 
 set tagfunc=CocTagFunc
 
@@ -221,49 +222,6 @@ nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
 nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
 nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
 nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
-
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nmap <silent> <leader>rn <Plug>(coc-rename)
-nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
-vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
-vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
-nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
-nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
-nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
-
-function! s:check_back_space() abort
-   let col = col('.') - 1
-   return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-function! s:refresh_and_next() abort
-   call coc#refresh()
-   return "\<C-n>"
- endfunction
-
-function! s:refresh_and_previous() abort
-   call coc#refresh()
-   return "\<C-p>"
- endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? <SID>refresh_and_next() :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-inoremap <silent><expr> <S-TAB>
-  \ pumvisible() ? <SID>refresh_and_previous() :
-  \ <SID>check_back_space() ? "\<S-TAB>" :
-  \ coc#refresh()
-
-inoremap <expr> <C-Space> coc#refresh()
 
 augroup CocCustom
   autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
@@ -458,6 +416,44 @@ tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
+"--------------------------------- COC MAPPINGS ----------------------------------
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
+vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
+vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
+nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
+nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
+nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+\ coc#pum#visible() ? coc#pum#next(1):
+\ <SID>check_back_space() ? "\<Tab>" :
+\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr><CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+
 "------------------------------- EXTRA COMMANDS -------------------------------
 command -nargs=+ Grip !grip --quiet <args> &
 
@@ -580,3 +576,5 @@ if has('nvim')
   set pumblend=15
 endif
 hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
+hi! link CocHighlightText Title
+hi! link CocMenuSel PmenuSel
