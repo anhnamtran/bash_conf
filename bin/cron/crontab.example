@@ -1,0 +1,27 @@
+# vim: ft=crontab tw=0
+# ┌───────────── minute (0 - 59)
+# │ ┌───────────── hour (0 - 23)
+# │ │ ┌───────────── day of the month (1 - 31)
+# │ │ │ ┌───────────── month (1 - 12)
+# │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday;
+# │ │ │ │ │                                   7 is also Sunday on some systems)
+# │ │ │ │ │
+# │ │ │ │ │
+# * * * * * <command to execute>
+
+# Options
+!mailto(andremail03+cron@gmail.com)
+
+# Test job to check email capability
+# & * * * * * echo "Cron test job"
+
+# Check battery status and notify every 15 minutes
+# Uses elapsed system up time entry
+@nice(0),mail(false) 15 $HOME/bin/cron/low_battery_notify
+
+# Backup dotfiles daily at 5, or whenever the system boots up and we haven't backed
+# it up. Uses time based entry
+&bootrun(true),noticenotrun(true) 0 17 * * * $HOME/bin/cron/backup_configs
+
+# Full system backup every friday
+&bootrun(true),noticenotrun(true) 0 17 * * 5 $HOME/bin/cron/system_backup
