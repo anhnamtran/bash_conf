@@ -1,3 +1,4 @@
+" General settings
 set newtab about:blank
 set smoothscroll true
 set theme dark
@@ -7,36 +8,22 @@ set incsearch true
 set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
 
+" i to go to ignore mode
+" Ctrl+Enter to leave ignore mode
 command ignore mode ignore
 bind --mode=ignore <C-Enter> mode normal
 bind i mode ignore
 
+" Faster scrolling
 bind j scrollline 5
 bind k scrollline -5
+
+" Tab operations
 bind L tabnext
 bind H tabprev
 bind yt tabduplicate
 bind ;t tabdetach
 bind ;T composite tabduplicate; tabdetach
-
-set findcase smart
-bind / fillcmdline find
-bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
-bind ,<Space> nohlsearch
-
-bind <C-]> forward
-bind <C-[> back
-
-bind --mode=ex <C-w> text.backward_kill_word
-bind --mode=input <C-w> text.backward_kill_word
-bind --mode=insert <C-w> text.backward_kill_word
-
-bind --mode=normal <CA-,> escapehatch
-bind --mode=browser <CA-,> escapehatch
-
-unbind <Space>
 
 alias tg tabgrab
 alias tabc tabclose
@@ -46,12 +33,43 @@ command tabpush_and_focus jsb void async function(){const tabId=await activeTabI
 
 alias tp tabpush_and_focus
 
+" tridactyl search
+set findcase smart
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
+" general browsing
+bind <C-]> forward
+bind <C-[> back
+
+unbind --mode=normal <C-b>
+bind --mode=browser <C-b> tab #
+
+bind --mode=ex <C-w> text.backward_kill_word
+bind --mode=input <C-w> text.backward_kill_word
+bind --mode=insert <C-w> text.backward_kill_word
+
+bind --mode=normal <AC-,> escapehatch
+bind --mode=browser <AC-,> escapehatch
+
+" Only hint search results on Google and DDG
+bindurl www.google.com f hint -Jc #search div:not(.action-menu) > a
+bindurl www.google.com F hint -Jbc #search div:not(.action-menu) > a
+bindurl ^https://duckduckgo.com f hint -Jc [data-testid="result-title-a"]
+bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
+
+unbind <Space>
+
+" use tabs to change hints
 set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
 
 autocmd TabEnter .* unfocus
 
-# Arista domains
+" Arista domains
 set searchurls.go https://go/%s
 set searchurls.pb https://pb/%s
 set searchurls.aid https://aid/%s
@@ -65,3 +83,5 @@ set searchurls.src https://src/%s
 set searchurls.grok https://opengrok/source/search?project=eos-trunk&full=%s
 set searchurls.eosdoc https://eosdoc2.infra.corp.arista.io/#/%s
 set searchurls.crontab https://crontab.guru/#%s
+
+" vim: ft=tridactyl
