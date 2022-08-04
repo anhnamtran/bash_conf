@@ -445,7 +445,11 @@ inoremap <silent><expr> <TAB>
 \ <SID>check_back_space() ? "\<Tab>" :
 \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <expr><CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+" <CR> will confirm an item if something is selected, else, it'll just act like
+" <Enter>
+inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] < 0 ? "\<CR>" :
+        \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
+        \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
