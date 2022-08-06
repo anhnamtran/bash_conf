@@ -51,6 +51,7 @@ kube*
 .lesshst
 .local/
 *.log|*.log.*
+Maildir/
 .mozilla/
 .muttrc
 nohup.out
@@ -69,6 +70,7 @@ pics/
 snap/
 .spicetify/
 .ssh/
+system_backup.log
 .themes/
 Themes/
 .thumbnails/

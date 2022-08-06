@@ -11,6 +11,7 @@
 
 # Options
 !mailto(andremail03+cron@gmail.com)
+!mailfrom(andremail03+cron@gmail.com)
 
 # Test job to check email capability
 # & * * * * * echo "Cron test job"

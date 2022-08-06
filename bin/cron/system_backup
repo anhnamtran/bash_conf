@@ -15,7 +15,7 @@ rsync -aAXHS \
   --info=progress1,stats1 \
   --delete \
   --exclude-from="/home/andrew_nt/bin/cron/system_backup_exclude.txt" \
-  "$ROOT" "$BACKUP_DIR"
+  "$ROOT" "$BACKUP_DIR" > /home/andrew_nt/bin/cron/system_backup.log 2>&1
 
 if [ "$?" -ne 0 ]; then
   echo "rsync failed, check cron logs"
