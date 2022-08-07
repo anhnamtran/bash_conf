@@ -1,0 +1,24 @@
+#!/bin/bash
+NUM_ENTRIES=5
+CACHE="$HOME/.cache/archwikinews"
+TEMP=$(mktemp)
+
+if [ -f "$CACHE" ]; then
+  curl -sL https://archlinux.org/news/ \
+    | pandoc --from html --to plain \
+    | tail -n +18 \
+    | head -n $((NUM_ENTRIES + 2)) > "$TEMP"
+  diff -U 10 "$CACHE" "$TEMP" | tail -n +4 | bat -l diff
+  if (( ${PIPESTATUS[0]} == 0 )); then
+    echo "No news since last checked."
+    ${PAGER:-less} "$CACHE"
+  fi
+  mv "$TEMP" "$CACHE"
+else
+  curl -sL https://archlinux.org/news/ \
+    | pandoc --from html --to plain \
+    | tail -n +18 \
+    | head -n $((NUM_ENTRIES + 2)) > "$CACHE"
+
+    ${PAGER:-less} "$CACHE"
+fi
