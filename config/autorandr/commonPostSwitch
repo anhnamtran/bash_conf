@@ -1,0 +1,12 @@
+#!/bin/bash
+CONNECTED=$(xrandr -q | grep ' connected')
+NUM_CONNECTED=$(echo "$CONNECTED" | wc -l)
+PRIMARY=$(echo "$CONNECTED" | grep "primary" | cut -f1 -d' ')
+SECONDARY=$(echo "$CONNECTED" | grep -v "primary" | cut -f1 -d' ')
+
+# Only perform the following actions if we're not locked
+if ! pgrep i3lock > /dev/null 2>&1; then
+  i3-msg restart
+fi
+betterlockscreen -u $HOME/pics/wallpapers/onedark.png
+$HOME/config/polybar/launcher.sh
