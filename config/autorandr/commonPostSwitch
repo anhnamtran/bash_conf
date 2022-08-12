@@ -10,3 +10,9 @@ if ! pgrep i3lock > /dev/null 2>&1; then
 fi
 betterlockscreen -u $HOME/pics/wallpapers/onedark.png
 $HOME/config/polybar/launcher.sh
+
+if (( $NUM_CONNECTED == 1 )); then
+  i3-msg '[workspace="1"]' move workspace to output $PRIMARY
+  i3-msg '[workspace="2"]' move workspace to output $PRIMARY
+  i3-msg '[workspace="3"]' move workspace to output $PRIMARY
+fi
