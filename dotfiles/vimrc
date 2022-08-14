@@ -16,6 +16,7 @@ Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
 
 if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim' " requires neovim v0.5+
