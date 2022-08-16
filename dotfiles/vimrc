@@ -137,6 +137,7 @@ nnoremap <leader>sl :exec 'mksession!' . v:this_session<CR>
 nnoremap <leader>sd :Obsession!<CR>
 
 " startify
+let g:startify_session_dir = g:sessions_dir
 let g:startify_ascii_header = [
       \ ' █████╗  ███╗   ██╗ ██████╗  ██████╗  ███████╗ ██╗    ██╗',
       \ '██╔══██╗ ████╗  ██║ ██╔══██╗ ██╔══██╗ ██╔════╝ ██║    ██║',
@@ -146,12 +147,11 @@ let g:startify_ascii_header = [
       \ '╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═════╝  ╚═╝  ╚═╝ ╚══════╝  ╚══╝╚══╝',
       \]
 let g:startify_custom_header = startify#pad(g:startify_ascii_header)
-let g:startify_session_dir = g:sessions_dir
 let g:startify_lists = [
+      \ { 'type': 'commands',  'header': ['   Commands']        },
       \ { 'type': 'sessions',  'header': ['   Sessions']        },
       \ { 'type': 'files',     'header': ['   FILES']           },
       \ { 'type': 'dir',       'header': ['   DIRS '. getcwd()] },
-      \ { 'type': 'commands',  'header': ['   Commands']        },
       \ ]
 let g:startify_commands = [
       \ {'v': ['vimrc', 'e ~/.vimrc']},
@@ -608,3 +608,18 @@ endif
 hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
 hi! link CocHighlightText Title
 hi! link CocMenuSel PmenuSel
+
+augroup AristaLocal
+   au!
+   " ArCloud
+   autocmd BufRead,BufNewFile /home/andrew_nt/code/ArCloud/** set tabstop=3
+   autocmd BufRead,BufNewFile /home/andrew_nt/code/ArCloud/** set shiftwidth=3
+
+   " gitar
+   autocmd BufRead,BufNewFile /home/andrew_nt/code/gitar/** set tabstop=3
+   autocmd BufRead,BufNewFile /home/andrew_nt/code/gitar/** set shiftwidth=3
+
+   " ardc-config
+   autocmd BufRead,BufNewFile /home/andrew_nt/code/ardc-config/** set tabstop=3
+   autocmd BufRead,BufNewFile /home/andrew_nt/code/ardc-config/** set shiftwidth=3
+augroup END
