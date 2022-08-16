@@ -28,7 +28,7 @@ gp_notify() {
 
 gp_fix() {
   HELP='Fix an issue where PanGPA start gets spawned twice'
-  local panGPA_procs=$(ps aux | grep PanGPA | grep -v grep)
+  local panGPA_procs=$(pgrep PanGPA)
   if [[ -z $panGPA_procs ]]; then
     /opt/paloaltonetworks/globalprotect/PanGPA start &
     panGPA_procs=$(ps aux | grep PanGPA | grep -v grep)
@@ -36,12 +36,10 @@ gp_fix() {
     echo "Started PanGPA process $panGPA_procs"
     return 0
   fi
-  while pgrep PanGPA > /dev/null 2>&1; do
-    echo "Killing PanGPA procs"
-    killall -s 9 PanGPA
-  done
+  echo "Killing PanGPA procs"
+  killall -w -s 9 PanGPA
 
-  echo -n "Waiting for PanGPA proccess to start"
+  echo -n "Waiting for PanGPA proccess to start."
   while ! pgrep PanGPA > /dev/null 2>&1; do
     echo -n .
     sleep 1

@@ -16,6 +16,7 @@ Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
 
 if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim' " requires neovim v0.5+
@@ -134,6 +135,31 @@ nnoremap <leader>sp :Obsession<CR>
 nnoremap <leader>sc :echo v:this_session<CR>
 nnoremap <leader>sl :exec 'mksession!' . v:this_session<CR>
 nnoremap <leader>sd :Obsession!<CR>
+
+" startify
+let g:startify_ascii_header = [
+      \ ' █████╗  ███╗   ██╗ ██████╗  ██████╗  ███████╗ ██╗    ██╗',
+      \ '██╔══██╗ ████╗  ██║ ██╔══██╗ ██╔══██╗ ██╔════╝ ██║    ██║',
+      \ '███████║ ██╔██╗ ██║ ██║  ██║ ██████╔╝ █████╗   ██║ █╗ ██║',
+      \ '██╔══██║ ██║╚██╗██║ ██║  ██║ ██╔══██╗ ██╔══╝   ██║███╗██║',
+      \ '██║  ██║ ██║ ╚████║ ██████╔╝ ██║  ██║ ███████╗ ╚███╔███╔╝',
+      \ '╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═════╝  ╚═╝  ╚═╝ ╚══════╝  ╚══╝╚══╝',
+      \]
+let g:startify_custom_header = startify#pad(g:startify_ascii_header)
+let g:startify_session_dir = g:sessions_dir
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   Sessions']        },
+      \ { 'type': 'files',     'header': ['   FILES']           },
+      \ { 'type': 'dir',       'header': ['   DIRS '. getcwd()] },
+      \ { 'type': 'commands',  'header': ['   Commands']        },
+      \ ]
+let g:startify_commands = [
+      \ {'v': ['vimrc', 'e ~/.vimrc']},
+      \ {'P': ['Update plugins', 'PlugUpdate']},
+      \ {'w': ['VimWiki Index', 'VimwikiIndex']},
+      \ {'d': ['VimWiki Diary', 'VimwikiDiary']},
+      \ {'D': ['VimWiki Diary Index', 'VimwikiDiaryIndex']},
+      \ ]
 
 " vim-smoothie
 let g:smoothie_update_interval = 1

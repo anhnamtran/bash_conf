@@ -32,6 +32,7 @@
       "reportOptionalMemberAccess": "none"
    },
    "pyright.disableCompletion": true,
+   "jedi.executable.command": "/home/andrew_nt/.local/bin/jedi-language-server",
 
    "cSpell.showStatus": false,
    "cSpell.allowCompoundWords": true,
