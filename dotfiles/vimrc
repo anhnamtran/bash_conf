@@ -136,6 +136,31 @@ nnoremap <leader>sc :echo v:this_session<CR>
 nnoremap <leader>sl :exec 'mksession!' . v:this_session<CR>
 nnoremap <leader>sd :Obsession!<CR>
 
+" startify
+let g:startify_session_dir = g:sessions_dir
+let g:startify_ascii_header = [
+      \ ' █████╗  ███╗   ██╗ ██████╗  ██████╗  ███████╗ ██╗    ██╗',
+      \ '██╔══██╗ ████╗  ██║ ██╔══██╗ ██╔══██╗ ██╔════╝ ██║    ██║',
+      \ '███████║ ██╔██╗ ██║ ██║  ██║ ██████╔╝ █████╗   ██║ █╗ ██║',
+      \ '██╔══██║ ██║╚██╗██║ ██║  ██║ ██╔══██╗ ██╔══╝   ██║███╗██║',
+      \ '██║  ██║ ██║ ╚████║ ██████╔╝ ██║  ██║ ███████╗ ╚███╔███╔╝',
+      \ '╚═╝  ╚═╝ ╚═╝  ╚═══╝ ╚═════╝  ╚═╝  ╚═╝ ╚══════╝  ╚══╝╚══╝',
+      \]
+let g:startify_custom_header = startify#pad(g:startify_ascii_header)
+let g:startify_lists = [
+      \ { 'type': 'commands',  'header': ['   Commands']        },
+      \ { 'type': 'sessions',  'header': ['   Sessions']        },
+      \ { 'type': 'files',     'header': ['   FILES']           },
+      \ { 'type': 'dir',       'header': ['   DIRS '. getcwd()] },
+      \ ]
+let g:startify_commands = [
+      \ {'v': ['vimrc', 'e ~/.vimrc']},
+      \ {'P': ['Update plugins', 'PlugUpdate']},
+      \ {'w': ['VimWiki Index', 'VimwikiIndex']},
+      \ {'d': ['VimWiki Diary', 'VimwikiDiary']},
+      \ {'D': ['VimWiki Diary Index', 'VimwikiDiaryIndex']},
+      \ ]
+
 " vim-smoothie
 let g:smoothie_update_interval = 1
 let g:smoothie_speed_constant_factor = 20
@@ -446,7 +471,11 @@ inoremap <silent><expr> <TAB>
 \ <SID>check_back_space() ? "\<Tab>" :
 \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <expr><CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+" <CR> will confirm an item if something is selected, else, it'll just act like
+" <Enter>
+inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] < 0 ? "\<CR>" :
+        \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
+        \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
