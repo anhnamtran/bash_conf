@@ -193,8 +193,8 @@ mode "resize" {
 exec --no-startup-id picom -b
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id dunst
-exec --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
+exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
