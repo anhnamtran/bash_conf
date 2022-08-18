@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+
 set encoding=utf-8
 filetype off                  " required
 
@@ -622,4 +623,8 @@ augroup AristaLocal
    " ardc-config
    autocmd BufRead,BufNewFile /home/andrew_nt/code/ardc-config/** set tabstop=3
    autocmd BufRead,BufNewFile /home/andrew_nt/code/ardc-config/** set shiftwidth=3
+
+   " vimwiki
+   autocmd BufRead,BufNewFile /home/andrew_nt/vimwiki/** set tabstop=3
+   autocmd BufRead,BufNewFile /home/andrew_nt/vimwiki/** set shiftwidth=3
 augroup END
