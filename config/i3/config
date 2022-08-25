@@ -34,6 +34,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id $HOME/bin/rofi_wrapper -show run -monitor -1
 bindsym $mod+Shift+f exec --no-startup-id [ -d $HOME/code/rofi-file-selector ] && $HOME/code/rofi-file-selector/rofi-file-selector.sh
 bindsym $mod+Shift+w exec --no-startup-id /home/andrew_nt/bin/rofi_wrapper -show window -monitor -1
+bindsym $mod+Shift+a exec --no-startup-id $HOME/bin/rofi_wrapper -show autorandr -modi "autorandr:$HOME/bin/rofi-autorandr-selector.sh" -monitor -1
 
 # change focus
 bindsym $mod+l focus right
@@ -160,7 +161,6 @@ for_window [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+a exec autorandr --change --force
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
