@@ -1,5 +1,5 @@
 /**
- *
+ * vim:ft=css
  * Author : Aditya Shakya (adi1090x)
  * Github : @adi1090x
  * 
@@ -15,7 +15,7 @@ configuration {
 	scroll-method: 0;
 	normalize-match: true;
 	show-icons: true;
-	icon-theme: "Papirus";
+	icon-theme: "OneDark";
 /*	cache-dir: ;*/
 	steal-focus: false;
 /*	dpi: -1;*/
@@ -82,8 +82,7 @@ configuration {
 	display-filebrowser: "Files";
 
 	/*---------- Misc setting ----------*/
-	terminal: "rofi-sensible-terminal";
-	font: "Mono 12";
+	terminal: "kitty";
 	sort: false;
 	threads: 0;
 	click-to-exit: true;
