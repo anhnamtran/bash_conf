@@ -1,2 +1,2 @@
 #!/bin/bash
-notify-send -a "Locker" -t 10000 -u normal "Screen will lock soon"
+notify-send -a "Locker" -t 5000 -u normal "Screen will lock soon"
