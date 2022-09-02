@@ -83,6 +83,7 @@ Themes/
 videos/
 .vim
 .vim/
+*/vim/session*
 .viminfo
 .vimrc
 .vscode/
