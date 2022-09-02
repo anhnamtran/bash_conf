@@ -101,6 +101,9 @@ bindsym $mod+c [title="Meet.*"] scratchpad show
 bindsym $mod+Shift+l workspace next
 bindsym $mod+Shift+h workspace prev
 
+# create a new workspace with the next index
+bindsym $mod+Shift+n exec $HOME/bin/i3NewSpace.py
+
 # workspaces
 set $ws1 1
 set $ws2 2
