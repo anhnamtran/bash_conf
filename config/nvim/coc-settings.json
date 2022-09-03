@@ -36,6 +36,7 @@
    "cSpell.allowCompoundWords": true,
    "cSpell.ignoreWords": [
     "clangd",
+    "deque",
     "grpc",
     "proj",
     "py",

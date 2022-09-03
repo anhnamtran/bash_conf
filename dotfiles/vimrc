@@ -234,7 +234,7 @@ let g:coc_global_extension = [
 \  'coc-clangd',
 \  'coc-fish',
 \  'coc-spell-checker',
-\  'coc-rls',
+\  'coc-rust-analyzer',
 \]
 
 " Use `[g` and `]g` to navigate diagnostics
