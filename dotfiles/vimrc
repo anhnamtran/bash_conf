@@ -579,9 +579,7 @@ augroup ABug
   hi! default link bugNumber Error
 augroup END
 
-if &textwidth == 0
-  set textwidth=85
-endif
+set textwidth=80
 set colorcolumn=+0
 augroup ActiveWin
   au!
