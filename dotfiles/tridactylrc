@@ -84,4 +84,6 @@ set searchurls.grok https://opengrok/source/search?project=eos-trunk&full=%s
 set searchurls.eosdoc https://eosdoc2.infra.corp.arista.io/#/%s
 set searchurls.crontab https://crontab.guru/#%s
 
+bindurl reviewboard.*/r/[0-9]+ f hint -Jc input
+
 " vim: ft=tridactyl
