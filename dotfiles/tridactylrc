@@ -84,6 +84,13 @@ set searchurls.grok https://opengrok/source/search?project=eos-trunk&full=%s
 set searchurls.eosdoc https://eosdoc2.infra.corp.arista.io/#/%s
 set searchurls.crontab https://crontab.guru/#%s
 
-bindurl reviewboard.*/r/[0-9]+ f hint -Jc input
+" reviewboard bindings
+bindurl reviewboard.*/r/[0-9]+ f hint
+bindurl reviewboard.*/r/[0-9]+ R hint -Jc li[class^="review-request-action"] > a[href*="/r/"]
+bindurl reviewboard.*/r/[0-9]+ F hint -Jc input
+bindurl reviewboard.*/r/[0-9]+ D hint -Jc a[href*="/diff/"]
+bindurl reviewboard.*/r/[0-9]+ S hint -Jc a[id="ship-it-action"]
+bindurl reviewboard.*/r/[0-9]+ l hint -Jc tbody[id^="chunk"] > tr[line] > th
+bindurl reviewboard.*/dashboard F hint -Jbc a[class="review-request-link"]
 
 " vim: ft=tridactyl
