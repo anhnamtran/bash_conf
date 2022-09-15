@@ -199,7 +199,8 @@ exec --no-startup-id dunst
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
 exec --no-startup-id 1password --silent
 exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
-exec_always --no-startup-id autotiling
+# Requires NAndLib fork and branch excludable
+exec_always --no-startup-id autotiling -E focus -E move
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
