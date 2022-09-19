@@ -11,3 +11,5 @@
 	helper = store
 [core]
 	editor = nvim
+[safe]
+	directory = /home/andrew_nt/code/rofi/
