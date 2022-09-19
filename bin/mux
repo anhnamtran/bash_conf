@@ -1,7 +1,7 @@
 #!/bin/bash
-server=${1:-us160}
-if [[ -f /tmp/.tmux_local_mode ]]; then
-  fish
-else
-  mosh --server "/home/andrew_nt/.local/bin/mosh-server" $server
-fi
+_tmux_kill() {
+  tmux kill-session -t $$
+}
+trap _tmux_kill EXIT
+
+tmux new-session -s $$

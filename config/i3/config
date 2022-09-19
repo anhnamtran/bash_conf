@@ -21,7 +21,7 @@ font xft:Iosevka 12
 
 floating_modifier $mod
 
-bindsym $mod+Return exec kitty tmux
+bindsym $mod+Return exec kitty mux
 bindsym $mod+Shift+t exec kitty
 
 # Move mouse to bottom right corner
