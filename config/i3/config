@@ -21,8 +21,8 @@ font xft:Iosevka 12
 
 floating_modifier $mod
 
-bindsym $mod+Return exec kitty $HOME/bin/mux
-bindsym $mod+Shift+t exec kitty
+bindsym $mod+Return exec --no-startup-id kitty $HOME/bin/mux
+bindsym $mod+Shift+t exec --no-startup-id kitty
 
 # Move mouse to bottom right corner
 bindsym $mod+Escape exec --no-startup-id xdotool mousemove_relative -sync -- 5000 5000
@@ -64,8 +64,8 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+minus split v; exec notify-send -t 2000 'Tiling Vertically' -a i3
-bindsym $mod+backslash split h; exec notify-send -t 2000 'Tiling Horizontally' -a i3
+bindsym $mod+minus split v; exec --no-startup-id notify-send -t 2000 'Tiling Vertically' -a i3
+bindsym $mod+backslash split h; exec --no-startup-id notify-send -t 2000 'Tiling Horizontally' -a i3
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
@@ -102,7 +102,7 @@ bindsym $mod+Shift+l workspace next
 bindsym $mod+Shift+h workspace prev
 
 # create a new workspace with the next index
-bindsym $mod+Shift+n exec $HOME/bin/i3NewSpace.py
+bindsym $mod+Shift+n exec --no-startup-id $HOME/bin/i3NewSpace.py
 
 # workspaces
 set $ws1 1
@@ -162,7 +162,7 @@ for_window [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+a exec autorandr --change --force
+bindsym $mod+Shift+a exec --no-startup-id autorandr --change --force
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
