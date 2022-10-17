@@ -97,6 +97,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Ctrl+minus scratchpad show
 bindsym $mod+m [class="Spotify.*"] scratchpad show
 bindsym $mod+c [title="Meet.*"] scratchpad show
+bindsym $mod+o [title=".*Obsidian v.*"] scratchpad show
 
 # navigate workspaces next / previous
 bindsym $mod+Shift+l workspace next
