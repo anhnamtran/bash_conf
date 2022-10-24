@@ -13,8 +13,8 @@ call plug#begin('~/.vim/bundle')
 Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 
 " GUIs elements
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 
@@ -118,9 +118,15 @@ endif
 let g:rainbow#max_level = 24
 let g:rainbow#blacklist = [ 248, 238, 59, 1 ]
 let g:rainbow#pairs = [ ['(', ')'], ['[', ']'], ['{', '}'] ]
-augroup Rainbow
-  au!
-  autocmd! VimEnter * RainbowParentheses
+function! s:disable_rainbow_for_type()
+   let l:filesuffix_denylist = ['log', 'qt', 'wiki']
+   if index(l:filesuffix_denylist, expand('%:e')) != -1
+      call rainbow_parentheses#deactivate()
+   endif
+endfunction
+augroup RainbowCustomAu
+   au!
+   autocmd! BufRead,BufNewFile * call s:disable_rainbow_for_type()
 augroup END
 
 set nofoldenable
@@ -167,36 +173,6 @@ let g:smoothie_speed_constant_factor = 20
 let g:smoothie_speed_linear_factor = 20
 let g:smoothie_speed_exponentiation_factor = 0.5
 
-" Airline
-let g:airline_theme='onedark'
-let g:airline_highlighting_cache = 1
-let g:airline_experimental = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_tab_count = 0
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#formatter = 'short_path'
-let g:airline#extensions#whitespace#max_lines = 100
-
-" Add window numbers to the status line
-if !exists("window_numbers_added")
-   let window_numbers_added = 1
-   function! WindowNumber(...)
-       let builder = a:1
-       let context = a:2
-       call builder.add_section('airline_b', '[%{tabpagewinnr(tabpagenr())}]')
-       return 0
-   endfunction
-
-   call airline#add_statusline_func('WindowNumber')
-   call airline#add_inactive_statusline_func('WindowNumber')
-endif
-
-" Add coc.nvim related items
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#coc#show_coc_status = 1
 
 " Enhanced CPP highlight options
 let g:cpp_class_scope_highlight = 1
@@ -217,6 +193,17 @@ let g:NERDTreeSortHiddenFirst = 1
 let g:NERDTreeQuitOnOpen = 1
 
 " coc.nvim
+function! s:disable_coc_for_type()
+   let l:filesuffix_denylist = ['log', 'qt']
+	if index(l:filesuffix_denylist, expand('%:e')) != -1
+		let b:coc_enabled = 0
+	endif
+endfunction
+augroup CocCustomAu
+   au!
+   autocmd! BufRead,BufNewFile * call s:disable_coc_for_type()
+augroup END
+
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 set tagfunc=CocTagFunc
@@ -285,7 +272,32 @@ let g:indentLine_bufTypeExclude = [ 'help', 'terminal' ]
 let g:indentLine_fileTypeExclude = [ 'vimwiki', 'markdown', 'log' ]
 endif
 
-set wildmode=full
+" lualine.nvim
+if has('nvim')
+lua <<EOF
+require("lualine").setup {
+   options = {
+      theme = 'onedark',
+   },
+   sections = {
+      lualine_a = { '[%{tabpagewinnr(tabpagenr())}]', 'mode' },
+      lualine_b = { 'branch', 'diff' },
+      lualine_c = { 'filename', 'b:coc_current_function' },
+      lualine_x = { 'diagnostics', 'filetype' },
+      lualine_y = { 'progress' },
+      lualine_z = { 'location' },
+   },
+   tabline = {
+      lualine_a = { 'buffers' },
+      lualine_z = { 'tabs' },
+   },
+   extensions = { 'fugitive', 'fzf' }
+}
+EOF
+endif
+set wildmenu
+set wildignorecase
+set wildmode=longest,full
 
 " Hexokinase
 let g:Hexokinase_highlighters = [ 'virtual' ]
