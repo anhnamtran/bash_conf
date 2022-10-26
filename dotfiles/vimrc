@@ -275,13 +275,16 @@ endif
 
 " lualine.nvim
 if has('nvim')
+function LuaLineWinNum()
+  return tabpagewinnr(tabpagenr())
+endfunction
 lua <<EOF
 require("lualine").setup {
    options = {
       theme = 'onedark',
    },
    sections = {
-      lualine_a = { '[%{tabpagewinnr(tabpagenr())}]', 'mode' },
+      lualine_a = { 'LuaLineWinNum', 'mode' },
       lualine_b = { 'branch', 'diff' },
       lualine_c = { 'filename', 'b:coc_current_function' },
       lualine_x = { 'diagnostics', 'filetype' },
