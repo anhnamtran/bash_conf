@@ -123,6 +123,8 @@ function! s:disable_rainbow_for_type()
    let l:filesuffix_denylist = ['log', 'qt', 'wiki']
    if index(l:filesuffix_denylist, expand('%:e')) != -1
       call rainbow_parentheses#deactivate()
+   else
+      call rainbow_parentheses#activate()
    endif
 endfunction
 augroup RainbowCustomAu
@@ -275,8 +277,11 @@ endif
 
 " lualine.nvim
 if has('nvim')
-function LuaLineWinNum()
+function! LuaLineWinNum()
   return tabpagewinnr(tabpagenr())
+endfunction
+function! LuaLineObsession()
+   return ObsessionStatus("$", "")
 endfunction
 lua <<EOF
 require("lualine").setup {
@@ -289,11 +294,15 @@ require("lualine").setup {
       lualine_c = { 'filename', 'b:coc_current_function' },
       lualine_x = { 'diagnostics', 'filetype' },
       lualine_y = { 'progress' },
-      lualine_z = { 'location' },
+      lualine_z = { 'location', 'LuaLineObsession' }
    },
    tabline = {
-      lualine_a = { 'buffers' },
-      lualine_z = { 'tabs' },
+      lualine_a = {
+         { 'buffers', symbols = { alternate_file = '# ' } }
+      },
+      lualine_z = {
+         { 'tabs', mode = 2 }
+      },
    },
    extensions = { 'fugitive', 'fzf' }
 }
