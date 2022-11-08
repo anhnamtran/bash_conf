@@ -34,6 +34,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/launcher.sh
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/rofi/autorandr/type-1/autorandr.sh
+bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/rofi/windows/type-1/windows.sh
 
 # change focus
 bindsym $mod+l focus right
