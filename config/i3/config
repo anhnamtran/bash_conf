@@ -33,6 +33,8 @@ bindsym $mod+Shift+q kill
 # start program launcher
 bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/launcher.sh
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/rofi/powermenu/type-1/powermenu.sh
+bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/rofi/autorandr/type-1/autorandr.sh
+bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/rofi/windows/type-1/windows.sh
 
 # change focus
 bindsym $mod+l focus right
@@ -164,7 +166,6 @@ for_window [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+a exec --no-startup-id autorandr --change --force
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
