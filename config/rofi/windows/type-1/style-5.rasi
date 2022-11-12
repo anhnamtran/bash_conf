@@ -1,4 +1,5 @@
 /**
+
  *
  * Author : Aditya Shakya (adi1090x)
  * Github : @adi1090x
@@ -56,7 +57,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       800px;
+    width:                       500px;
     x-offset:                    0px;
     y-offset:                    0px;
 
