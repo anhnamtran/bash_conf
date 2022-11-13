@@ -31,7 +31,7 @@ blue_active() {
 blue_devices() {
   HELP="Prints list of devices connected and their battery information if any"
 
-  local paired=$(bluetoothctl paired-devices | grep Device | awk '{ print $2 }')
+  local paired=$(bluetoothctl devices Paired | grep Device | awk '{ print $2 }')
   for device in $paired; do
     local info=$(bluetoothctl info "$device")
 
@@ -62,7 +62,7 @@ blue_devices() {
 blue_connected() {
   HELP="Prints *yes* if bluetooth is active and is connected to something, *no* otherwise"
 
-  local paired=$(bluetoothctl paired-devices | grep Device | awk '{ print $2 }')
+  local paired=$(bluetoothctl devices Paired | grep Device | awk '{ print $2 }')
   local count=0
 
   for device in $paired; do
