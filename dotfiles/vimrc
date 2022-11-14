@@ -197,14 +197,16 @@ let g:NERDTreeQuitOnOpen = 1
 
 " coc.nvim
 function! s:disable_coc_for_type()
-   let l:filesuffix_denylist = ['log', 'qt']
+  let l:filesuffix_denylist = ['log', 'qt']
 	if index(l:filesuffix_denylist, expand('%:e')) != -1
-		let b:coc_enabled = 0
+	  let b:coc_enabled = 0
 	endif
 endfunction
 augroup CocCustomAu
-   au!
-   autocmd! BufRead,BufNewFile * call s:disable_coc_for_type()
+  au!
+  autocmd! BufRead,BufNewFile * call s:disable_coc_for_type()
+  autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
+  autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
 augroup END
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -240,8 +242,6 @@ nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
 nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
 
 augroup CocCustom
-  autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
-  autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
 augroup END
 
 " vim-mark
@@ -467,7 +467,7 @@ tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
-"--------------------------------- COC MAPPINGS ----------------------------------
+"------------------------------- COC.NVIM MAPPINGS ----------------------------------
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 

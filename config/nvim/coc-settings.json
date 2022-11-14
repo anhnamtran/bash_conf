@@ -9,7 +9,7 @@
 
    "suggest.autoTrigger": "always",
    "suggest.triggerAfterInsertEnter": true,
-   "suggest.acceptSuggestionOnCommitCharacter": true,
+   "suggest.acceptSuggestionOnCommitCharacter": false,
    "suggest.removeDuplicateItems": true,
    "suggest.enablePreview": true,
    "suggest.enablePreselect": true,
@@ -29,9 +29,12 @@
    "python.linting.pylintEnabled": true,
    "python.analysis.diagnosticSeverityOverrides": {
       "reportGeneralTypeIssues": "none",
-      "reportOptionalMemberAccess": "none"
+      "reportOptionalMemberAccess": "none",
+      "reportOptionalSubscript": "none"
    },
    "pyright.disableCompletion": true,
+   "pyright.inlayHints.enable": true,
+
    "jedi.executable.command": "/home/andrew_nt/.local/bin/jedi-language-server",
 
    "cSpell.showStatus": false,
