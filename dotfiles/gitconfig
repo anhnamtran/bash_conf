@@ -13,3 +13,4 @@
 	editor = nvim
 [safe]
 	directory = /home/andrew_nt/code/rofi/
+	directory = /home/andrew_nt/code/dunst

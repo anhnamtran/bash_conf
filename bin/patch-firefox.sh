@@ -4,7 +4,8 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 USER=$1
-if ! sudo grep 'reserved="true"' /usr/lib/firefox/browser/omni.ja; then
+FF_PATH="/snap/firefox/2088/usr/lib/firefox/omni.ja"
+if ! sudo grep 'reserved="true"' "$FF_PATH"; then
   echo "Firefox already patched"
 else
   sudo perl -i -pne 's/reserved="true"/               /g' /usr/lib/firefox/browser/omni.ja
