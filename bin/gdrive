@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+if ! type rclone > /dev/null 2>&1; then
+  echo "Script requires rclone"
+  exit 1
+fi
+
+options="mount|umount"
+
+GDRIVE_LOCAL="/mnt/gdrive"
+
+gdrive_mount() {
+  echo "Mounnting to $GDRIVE_LOCAL"
+  rclone mount --daemon gdrive: "$GDRIVE_LOCAL"
+}
+
+gdrive_umount() {
+  umount "$GDRIVE_LOCAL"
+}
+
+cmd="$1"
+if [[ $cmd =~ $options ]]; then
+  gdrive_"$cmd"
+else
+  echo "Usage: gdrive mount|umount"
+  exit 1
+fi
