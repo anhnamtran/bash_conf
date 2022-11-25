@@ -14,13 +14,11 @@ output VIRTUAL1
 off
 output DP1-1
 crtc 1
-gamma 0:0:0
 mode 3840x2160
 pos 0x0
 rate 30.00
 output eDP1
 crtc 0
-gamma 0:0:0
 mode 2048x1152
 pos 3840x952
 primary
