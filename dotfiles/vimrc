@@ -11,7 +11,7 @@ call plug#begin('~/.vim/bundle')
 " Plugins
 
 " Themes
-Plug 'joshdick/onedark.vim', { 'branch': 'main' }
+Plug 'navarasu/onedark.nvim'
 
 " GUIs elements
 Plug 'nvim-lualine/lualine.nvim'
@@ -598,10 +598,6 @@ endif
 
 syntax on
 
-let g:onedark_color_overrides = {
-  \ "cursor_grey": { "gui": "#3E4452", "cterm": "237", "cterm16": "8" }
-\}
-
 " Highlight trailing white spaces
 augroup ExtraWhiteSpaceHi
   au!
@@ -629,15 +625,6 @@ augroup ActiveWin
   autocmd WinEnter * set colorcolumn=+0
   autocmd WinLeave * set colorcolumn=0
 augroup END
-
-" onedark.vim override: Don't set a background color when running in a terminal;
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white })
-  augroup END
-endif
 
 set background=dark
 colorscheme onedark
