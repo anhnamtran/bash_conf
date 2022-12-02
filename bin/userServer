@@ -3,5 +3,6 @@ server=${1:-us160}
 if [[ -f /tmp/.tmux_local_mode ]]; then
   fish
 else
+  tmux rename-window "$server"
   mosh --server "/home/andrew_nt/.local/bin/mosh-server" $server
 fi
