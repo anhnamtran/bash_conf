@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 
+set nocompatible              " be iMproved, required
 set encoding=utf-8
 filetype off                  " required
 
@@ -494,6 +495,9 @@ vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
 nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
 nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
 nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
+
+" Show documentation
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 
 " Formatting actions
 " Format selected code
