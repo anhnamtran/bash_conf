@@ -1,4 +1,6 @@
 set nocompatible              " be iMproved, required
+
+set nocompatible              " be iMproved, required
 set encoding=utf-8
 filetype off                  " required
 
@@ -10,7 +12,7 @@ call plug#begin('~/.vim/bundle')
 " Plugins
 
 " Themes
-Plug 'joshdick/onedark.vim', { 'branch': 'main' }
+Plug 'navarasu/onedark.nvim'
 
 " GUIs elements
 Plug 'nvim-lualine/lualine.nvim'
@@ -116,7 +118,7 @@ endif
 
 " Enable rainbow parentheses
 let g:rainbow#max_level = 24
-let g:rainbow#blacklist = [ 248, 238, 59, 1 ]
+let g:rainbow#blacklist = [ 248, 238, 59, 10, 1 ]
 let g:rainbow#pairs = [ ['(', ')'], ['[', ']'], ['{', '}'] ]
 function! s:disable_rainbow_for_type()
    let l:filesuffix_denylist = ['log', 'qt', 'wiki']
@@ -196,14 +198,17 @@ let g:NERDTreeQuitOnOpen = 1
 
 " coc.nvim
 function! s:disable_coc_for_type()
-   let l:filesuffix_denylist = ['log', 'qt']
+  let l:filesuffix_denylist = ['log', 'qt']
 	if index(l:filesuffix_denylist, expand('%:e')) != -1
-		let b:coc_enabled = 0
+	  let b:coc_enabled = 0
 	endif
 endfunction
 augroup CocCustomAu
-   au!
-   autocmd! BufRead,BufNewFile * call s:disable_coc_for_type()
+  au!
+  autocmd! BufRead,BufNewFile * call s:disable_coc_for_type()
+  autocmd! BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
+  autocmd! BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
+  autocmd! FileType json,cpp,vim,tacc,python setl formatexpr=CocAction('formatSelected')
 augroup END
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -237,11 +242,6 @@ nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
 nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
 nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
 nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
-
-augroup CocCustom
-  autocmd BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
-  autocmd BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
-augroup END
 
 " vim-mark
 let g:mwDefaultHighlightingPalette = 'maximum'
@@ -284,26 +284,34 @@ function! LuaLineObsession()
 endfunction
 lua <<EOF
 require("lualine").setup {
-   options = {
-      theme = 'onedark',
-   },
-   sections = {
-      lualine_a = { 'LuaLineWinNum', 'mode' },
-      lualine_b = { 'branch', 'diff' },
-      lualine_c = { 'filename', 'b:coc_current_function' },
-      lualine_x = { 'diagnostics', 'filetype' },
-      lualine_y = { 'progress' },
-      lualine_z = { 'location', 'LuaLineObsession' },
-   },
-   tabline = {
-      lualine_a = {
-        { 'buffers', symbols = { alternate_file = '# ' } }
-      },
-      lualine_z = {
-        { 'tabs', mode = 2 }
-      },
-   },
-   extensions = { 'fugitive', 'fzf' }
+  options = {
+    theme = 'onedark',
+  },
+  sections = {
+    lualine_a = { 'LuaLineWinNum', 'mode' },
+    lualine_b = { 'branch', 'diff' },
+    lualine_c = { 'filename', 'b:coc_current_function' },
+    lualine_x = { 'diagnostics', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location', 'LuaLineObsession' }
+  },
+  inactive_sections = {
+    lualine_a = { 'LuaLineWinNum' },
+    lualine_b = {},
+    lualine_c = { 'filename', 'b:coc_current_function' },
+    lualine_x = { 'location' },
+    lualine_y = {},
+    lualine_z = { 'LuaLineObsession' }
+  },
+  tabline = {
+    lualine_a = {
+      { 'buffers', symbols = { alternate_file = '# ' } }
+    },
+    lualine_z = {
+      { 'tabs', mode = 2 }
+    },
+  },
+  extensions = { 'fugitive', 'fzf' }
 }
 EOF
 endif
@@ -466,7 +474,7 @@ tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
-"--------------------------------- COC MAPPINGS ----------------------------------
+"------------------------------- COC.NVIM MAPPINGS ----------------------------------
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -475,15 +483,28 @@ nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gy <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
+
+" Code manipulation
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <silent> <leader>ca <Plug>(coc-codeaction-cursor)
 vmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>cf :call CocActionAsync('quickfixes')<CR>
 vmap <silent> <leader>cf :call CocActionAsync('quickfixes', 'visualmode')<CR>
+
+" coc-spellchecker actions
 nmap <silent> <leader>zg :CocCommand cSpell.addWordToUserDictionary<CR>
 nmap <silent> <leader>zG :CocCommand cSpell.addWordToDictionary<CR>
 nmap <silent> <leader>zi :CocCommand cSpell.addIgnoreWordToUser<CR>
 
+" Show documentation
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+
+" Formatting actions
+" Format selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Tab completion
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -497,7 +518,7 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " <CR> will confirm an item if something is selected, else, it'll just act like
 " <Enter>
-inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] < 0 ? "\<CR>" :
+inoremap <silent><expr> <CR> coc#pum#visible() && coc#pum#info()['index'] < 0 ? "\<CR>" :
         \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
         \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -581,10 +602,6 @@ endif
 
 syntax on
 
-let g:onedark_color_overrides = {
-  \ "cursor_grey": { "gui": "#3E4452", "cterm": "237", "cterm16": "8" }
-\}
-
 " Highlight trailing white spaces
 augroup ExtraWhiteSpaceHi
   au!
@@ -611,17 +628,10 @@ augroup ActiveWin
   autocmd WinLeave * set colorcolumn=0
 augroup END
 
-" onedark.vim override: Don't set a background color when running in a terminal;
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white })
-  augroup END
-endif
-
 set background=dark
 colorscheme onedark
+
+" Additional scheme and highliting changes
 
 " Make popup menu nicer
 if has('nvim')

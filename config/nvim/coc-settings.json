@@ -9,12 +9,15 @@
 
    "suggest.autoTrigger": "always",
    "suggest.triggerAfterInsertEnter": true,
-   "suggest.acceptSuggestionOnCommitCharacter": true,
+   "suggest.acceptSuggestionOnCommitCharacter": false,
    "suggest.removeDuplicateItems": true,
+   "suggest.enablePreview": true,
+   "suggest.enablePreselect": true,
    "suggest.localityBonus": true,
    "suggest.floatConfig": {
       "border": true
    },
+   "suggest.disableMenuShortcut": true,
 
    "clangd.arguments" : [ "--all-scopes-completion",
                         "--limit-results=0",
@@ -26,9 +29,11 @@
    "python.linting.pylintEnabled": true,
    "python.analysis.diagnosticSeverityOverrides": {
       "reportGeneralTypeIssues": "none",
-      "reportOptionalMemberAccess": "none"
+      "reportOptionalMemberAccess": "none",
+      "reportOptionalSubscript": "none"
    },
    "pyright.disableCompletion": true,
+   "pyright.inlayHints.enable": true,
 
    "sh.commandPath": "/usr/bin/bash-language-server",
 
