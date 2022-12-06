@@ -69,6 +69,10 @@ set hintmaps.<S-Tab> hint.focusPreviousHint
 
 autocmd TabEnter .* unfocus
 
+" Google Calendar bindings
+bindurl calendar.google.com/calendar/* e hint -Jc div[class="hnGhZ"] div[role="button"]
+bindurl calendar.google.com/calendar/* A hint -Jc div[class^="jefcFd"] div[role="button"]
+
 " Arista domains
 set searchurls.go https://go/%s
 set searchurls.pb https://pb/%s
