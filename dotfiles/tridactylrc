@@ -36,9 +36,11 @@ alias tp tabpush_and_focus
 " tridactyl search
 set findcase smart
 bind / fillcmdline find
-bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
+bind ? fillcmdline find --reverse
+bind n findnext --search-from-view
+bind N findnext --search-from-view --reverse
+bind gn findselect
+bind gN composite findnext --search-from-view --reverse; findselect
 bind ,<Space> nohlsearch
 
 " general browsing
@@ -68,5 +70,9 @@ set hintmaps.<Tab> hint.focusNextHint
 set hintmaps.<S-Tab> hint.focusPreviousHint
 
 autocmd TabEnter .* unfocus
+
+" Google Calendar bindings
+bindurl calendar.google.com/calendar/* e hint -Jc div[class="hnGhZ"] div[role="button"]
+bindurl calendar.google.com/calendar/* A hint -Jc div[class^="jefcFd"] div[role="button"]
 
 " vim: ft=tridactyl
