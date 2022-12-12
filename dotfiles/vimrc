@@ -36,7 +36,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-obsession'
 
 " Utility
-Plug 'TimUntersberger/neogit'
+Plug 'tpope/vim-fugitive'
 Plug 'sindrets/diffview.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kylechui/nvim-surround'
@@ -305,14 +305,6 @@ EOF
 lua <<EOF
 require('diffview').setup()
 require('gitsigns').setup()
-EOF
-
-" neogit
-lua <<EOF
-require('neogit').setup {
-  disable_signs = true,
-  integrations = { diffview = true },
-}
 EOF
 
 " Workaround for editing test files that have been installed
