@@ -14,7 +14,13 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- nvim companion plugins
-  use 'nvim-lua/plenary.nvim'
+  use {
+    'nvim-lua/plenary.nvim',
+    config = function()
+      require('plenary.filetype').add_file('tin')
+      require('plenary.filetype').add_file('qb')
+    end
+  }
   use 'nvim-lua/popup.nvim'
 
   -- Themes
