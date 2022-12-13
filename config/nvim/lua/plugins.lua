@@ -101,15 +101,7 @@ return require('packer').startup(function(use)
     end,
     requires = { 'inkarkat/vim-ingo-library' },
   }
-  use {
-    'windwp/nvim-autopairs',
-    config = function ()
-      require('nvim-autopairs').setup {
-        disable_filetype = { "TelescopePrompt", "log", "qt" },
-        map_cr = false
-      }
-    end
-  }
+  use 'windwp/nvim-autopairs'
   use 'easymotion/vim-easymotion'
   use 'karb94/neoscroll.nvim'
 end)
