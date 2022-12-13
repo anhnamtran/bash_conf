@@ -4,6 +4,7 @@ vim.opt.encoding = 'utf-8'
 
 -- load plugins from packer
 require('plugins')
+require('arista')
 
 -- Utility plugins configuration
 require('andrew_nt.obsession')
@@ -15,9 +16,9 @@ require('andrew_nt.telescope')
 
 -- Syntax plugins configuration
 require('andrew_nt.treesitter')
-require('andrew_nt.coc')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
+require('andrew_nt.coc')
 
 -- VimL settings
 
@@ -38,7 +39,9 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
 })
 
 -- tabbing and indentation
-vim.opt.tabstop = 2
+if vim.g.arista_vim ~= 1 then
+  vim.opt.tabstop = 2
+end
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
@@ -153,7 +156,7 @@ endif
 vim.opt.termguicolors = true
 
 -- enable syntax
-vim.opt.syntax = 'on'
+vim.opt.syntax = 'enable'
 
 -- highlight trailing whitespaces
 local ExtraWhiteSpaceHi = vim.api.nvim_create_augroup("ExtraWhiteSpaceHi", {})

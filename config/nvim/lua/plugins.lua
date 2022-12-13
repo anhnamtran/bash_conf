@@ -86,7 +86,12 @@ return require('packer').startup(function(use)
     end
   }
   use 'tpope/vim-commentary'
-  use 'tpope/vim-eunuch'
+  use {
+    'tpope/vim-eunuch',
+    config = function()
+      vim.g.eunuch_no_maps = 1
+    end
+  }
   use 'szw/vim-maximizer'
   use 'inkarkat/vim-ingo-library'
   use {
@@ -101,6 +106,7 @@ return require('packer').startup(function(use)
     config = function ()
       require('nvim-autopairs').setup {
         disable_filetype = { "TelescopePrompt", "log", "qt" },
+        map_cr = false
       }
     end
   }
