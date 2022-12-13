@@ -13,6 +13,7 @@ require('andrew_nt.neoscroll')
 require('andrew_nt.easymotion')
 require('andrew_nt.nvim-tmux-navigation')
 require('andrew_nt.telescope')
+require('andrew_nt.nvim-autopairs')
 
 -- Syntax plugins configuration
 require('andrew_nt.treesitter')

@@ -8,7 +8,7 @@ require('nvim-autopairs').setup {
 local npairs = require('nvim-autopairs')
 local Rule   = require('nvim-autopairs.rule')
 
-local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' }, { '<', '>' } }
 npairs.add_rules {
   Rule(' ', ' ')
     :with_pair(function (opts)
