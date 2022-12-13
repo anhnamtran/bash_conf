@@ -14,7 +14,12 @@ require('nvim-treesitter.configs').setup {
     enable = function()
       local excluded_filetypes = { 'log', 'qt', 'wiki' }
       local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-      return excluded_filetypes[filetype] == nil
+      for index, value in ipairs(excluded_filetypes) do
+        if value == filetype then
+          return false
+        end
+      end
+      return true
     end,
     extended_mode = true,
     max_file_lines = 1000000,
