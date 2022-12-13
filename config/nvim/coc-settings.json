@@ -53,5 +53,6 @@
   "cSpell.userWords": [
     "abuild",
     "todoist"
-  ]
+  ],
+  "Lua.telemetry.enable": true
 }
