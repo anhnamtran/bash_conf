@@ -50,6 +50,8 @@
     "ssid"
   ],
   "cSpell.userWords": [
-    "abuild"
-  ]
+    "abuild",
+    "todoist"
+  ],
+  "Lua.telemetry.enable": true
 }
