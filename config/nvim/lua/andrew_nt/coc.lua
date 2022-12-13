@@ -18,26 +18,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 set tagfunc=CocTagFunc
 
-let g:coc_global_extension = [
-\  'coc-yaml',
-\  'coc-vimlsp',
-\  'coc-tsserver',
-\  'coc-sh',
-\  'coc-pyright',
-\  'coc-json',
-\  'coc-jedi',
-\  'coc-html',
-\  'coc-css',
-\  'coc-clangd',
-\  'coc-fish',
-\  'coc-spell-checker',
-\  'coc-rust-analyzer',
-\  'coc-lua',
-\]
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-
 " remap all Coc's <Plug> mappings to use CocActionAsync
 nnoremap <Plug>(coc-definition) :CocActionAsync('jumpDefinition')
 nnoremap <Plug>(coc-type-definition) :CocActionAsync('jumpTypeDefinition')
@@ -46,24 +26,78 @@ nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
 nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
 nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
 nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
-
-" Tab completion
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" Insert <tab> when previous text is space, refresh completion if not.
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1):
-\ <SID>check_back_space() ? "\<Tab>" :
-\ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-" <CR> will confirm an item if something is selected, else, it'll just act like
-" <Enter>
-inoremap <silent><expr> <CR> coc#pum#visible() && coc#pum#info()['index'] < 0 ? "\<CR>" :
-        \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
-        \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-inoremap <silent><expr> <c-space> coc#refresh()
 ]])
+
+vim.g.coc_global_extension = {
+  'coc-yaml',
+  'coc-vimlsp',
+  'coc-tsserver',
+  'coc-sh',
+  'coc-pyright',
+  'coc-json',
+  'coc-jedi',
+  'coc-html',
+  'coc-css',
+  'coc-clangd',
+  'coc-fish',
+  'coc-spell-checker',
+  'coc-rust-analyzer',
+  'coc-sumneko-lua',
+}
+
+local function register_mappings(mappings, default_options)
+	for mode, mode_mappings in pairs(mappings) do
+		for _, mapping in pairs(mode_mappings) do
+			local options = #mapping == 3 and table.remove(mapping) or default_options
+			local prefix, cmd = unpack(mapping)
+			pcall(vim.api.nvim_set_keymap, mode, prefix, cmd, options)
+		end
+	end
+end
+
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+
+function _G.show_docs()
+    local cw = vim.fn.expand('<cword>')
+    if fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
+        vim.cmd('h ' .. cw)
+    elseif vim.api.nvim_eval('coc#rpc#ready()') then
+        vim.fn.CocActionAsync('doHover')
+    else
+        vim.cmd('!' .. vim.o.keywordprg .. ' ' .. cw)
+    end
+end
+
+local mappings = {
+	i = { -- Insert mode
+        { "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true } },
+        { "<S-TAB>", 'coc#pum#visible() ? coc#pum#prev(1) : "<S-TAB>"', { expr = true } },
+        { "<C-SPACE>", 'coc#refresh()', { expr = true } },
+        {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
+        {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
+        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<CR>"', {expr = true, noremap = true}}
+	},
+	n = { -- Normal mode
+        { "K", '<CMD>lua _G.show_docs()<CR>', { silent = true } },
+        {'[g', '<Plug>(coc-diagnostic-prev)', { noremap = false }},
+        {']g', '<Plug>(coc-diagnostic-next)', { noremap = false }},
+        {'gb', '<Plug>(coc-cursors-word)', { noremap = false }},
+        {'gd', '<Plug>(coc-definition)', { noremap = false }},
+        {'gy', '<Plug>(coc-type-definition)', { noremap = false }},
+        {'gi', '<Plug>(coc-implementation)', { noremap = false }},
+        {'gr', '<Plug>(coc-references)', { noremap = false }},
+
+        {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-F>"', { expr = true, silent = true, nowait = true }},
+        {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-B>"', { expr = true, silent = true, nowait = true }},
+
+	},
+}
+
+register_mappings(mappings, { silent = true, noremap = true })
