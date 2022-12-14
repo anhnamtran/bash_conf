@@ -78,6 +78,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-obsession'
 
   -- Utility
+  use 'rgroli/other.nvim'
   use 'tpope/vim-fugitive'
   use {
     'sindrets/diffview.nvim',
