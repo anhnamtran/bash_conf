@@ -111,6 +111,7 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'easymotion/vim-easymotion'
   use 'karb94/neoscroll.nvim'
+  use 'lewis6991/impatient.nvim'
 
   -- Arista specific plugins
   use 'https://gitlab.aristanetworks.com/vim-scripts/mts.vim'
