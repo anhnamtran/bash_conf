@@ -159,14 +159,10 @@ endif
 -- enable termguicolors
 vim.opt.termguicolors = true
 
--- enable syntax
-vim.opt.syntax = 'enable'
-
 -- highlight trailing whitespaces
-local ExtraWhiteSpaceHi = vim.api.nvim_create_augroup("ExtraWhiteSpaceHi", {})
 vim.api.nvim_create_autocmd(
   {'BufWinEnter', 'BufWinLeave', 'InsertEnter', 'InsertLeave'}, {
-  group = ExtraWhiteSpaceHi,
+  group = vim.api.nvim_create_augroup('ExtraWhiteSpaceHi', {}),
   pattern = '*',
   callback = function(args)
     vim.cmd([[match DiffDelete /\s\+$/]])
@@ -179,6 +175,46 @@ vim.api.nvim_create_autocmd(
     end
   end
 })
+
+-- load large files faster this disables syntax highlighting temporarily
+vim.api.nvim_create_autocmd({'BufReadPre'}, {
+  group = vim.api.nvim_create_augroup('LargeFiles', {}),
+  pattern = '*',
+  callback = function()
+    local maxSize = 1024 * 1024 * 10
+    local fileSize = vim.fn.getfsize(vim.fn.expand("<afile>"))
+    if (fileSize > maxSize) or (fileSize == -2) then
+      -- no syntax highlighting
+      vim.opt.eventignore:append('FileType')
+
+      -- save memory when other file is viewed by unloading the buffer
+      vim.opt_local.bufhidden = 'unload'
+
+      -- is read-only
+      vim.opt_local.buftype = 'nowrite'
+
+      -- no undo
+      vim.opt_local.undolevels = -1
+
+      -- display message about large file
+      print("File is too large " .. fileSize .. "/" .. maxSize .. ", some settings are disabled. Enable syntax by running :LargeSyntax")
+
+      vim.api.nvim_create_user_command('LargeSyntax', function()
+        local eventignore = vim.opt.eventignore:get()
+        for index, value in ipairs(eventignore) do
+          if value == 'FileType' then
+            vim.opt.eventignore:remove(value)
+          end
+          vim.opt.syntax = 'on'
+        end
+      end, {})
+    end
+  end
+})
+
+-- enable syntax. Doing this at the end-ish because this can take a while on
+-- large files
+vim.opt.syntax = 'enable'
 
 ---------------------------------- KEYMAPS ------------------------------------
 local function imap(shortcut, command, noremap)
@@ -205,13 +241,13 @@ imap('<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', true)
 -- normal mode
 nmap('<CR>', 'o<ESC>', true)
 -- allow ENTER to be used in command window and quickfix windows
-local CRFix = vim.api.nvim_create_augroup("CRFix", {})
-vim.api.nvim_create_autocmd({"CmdwinEnter"}, {
+local CRFix = vim.api.nvim_create_augroup('CRFix', {})
+vim.api.nvim_create_autocmd({'CmdwinEnter'}, {
   group = CRFix,
   pattern = '*',
   command = 'nnoremap <CR> <CR>'
 })
-vim.api.nvim_create_autocmd({"BufReadPost"}, {
+vim.api.nvim_create_autocmd({'BufReadPost'}, {
   group = CRFix,
   pattern = 'quickfix',
   command = 'nnoremap <CR> <CR>'
