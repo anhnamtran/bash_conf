@@ -8,3 +8,6 @@ if vim.fn.filereadable('/usr/share/vim/vimfiles/arista.vim') == 1 then
     vim.g.arista_vim = 1
   end
 end
+
+vim.api.nvim_create_user_command('Pb', ':<line1>,<line2>w !curl -F c=@- pb',
+                                 { range = '%' })
