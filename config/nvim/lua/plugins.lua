@@ -111,4 +111,5 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'easymotion/vim-easymotion'
   use 'karb94/neoscroll.nvim'
+  use 'lewis6991/impatient.nvim'
 end)

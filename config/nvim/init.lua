@@ -1,3 +1,5 @@
+-- Cached plugin loading using impatient.nvim
+require('impatient')
 -- be iMproved and encoding settings
 vim.opt.compatible = false
 vim.opt.encoding = 'utf-8'
