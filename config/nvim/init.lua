@@ -6,7 +6,6 @@ vim.opt.encoding = 'utf-8'
 
 -- load plugins from packer
 require('plugins')
-require('arista')
 
 -- Utility plugins configuration
 require('andrew_nt.obsession')
@@ -43,9 +42,7 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
 })
 
 -- tabbing and indentation
-if vim.g.arista_vim ~= 1 then
-  vim.opt.tabstop = 2
-end
+vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true

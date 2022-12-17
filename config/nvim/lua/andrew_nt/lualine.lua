@@ -27,7 +27,11 @@ require("lualine").setup {
   },
   tabline = {
     lualine_a = {
-      { 'buffers', symbols = { alternate_file = '# ' } }
+      {
+        'buffers',
+        symbols = { alternate_file = '# ' },
+        show_filename_only = false,
+      }
     },
     lualine_z = {
       { 'tabs', mode = 2 }
