@@ -268,3 +268,7 @@ bindsym $mod+F6 exec --no-startup-id light -A 5    # increase brightness
 
 # touchpad on and off controller on laptop with Fn+<touchpad control functional key>
 bindsym $mod+F10 exec --no-startup-id $HOME/bin/toggle_touchpad.sh
+
+# Printscreen
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+Print exec --no-startup-id flameshot screen
