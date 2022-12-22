@@ -16,7 +16,6 @@ require('andrew_nt.nvim-tmux-navigation')
 require('andrew_nt.telescope')
 require('andrew_nt.nvim-autopairs')
 require('andrew_nt.other')
-require('andrew_nt.nvim-osc52')
 
 -- Syntax plugins configuration
 require('andrew_nt.treesitter')
