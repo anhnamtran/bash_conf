@@ -37,6 +37,8 @@
 
    "sh.commandPath": "/usr/bin/bash-language-server",
 
+   "sumneko-lua.enableNvimLuaDev": true,
+
    "cSpell.showStatus": false,
    "cSpell.allowCompoundWords": true,
    "cSpell.ignoreWords": [

@@ -17,6 +17,7 @@ bundle/
 [Cc]ache/
 .cfg/
 code/
+config/nvim/plugin/
 .config/
 .cups/
 .dbus/
