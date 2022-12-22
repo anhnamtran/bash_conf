@@ -216,6 +216,8 @@ vim.api.nvim_create_autocmd({'BufReadPre'}, {
 -- large files
 vim.opt.syntax = 'enable'
 
+-- Show a raw version of the selected lines for easy copy-pasting
+
 ---------------------------------- KEYMAPS ------------------------------------
 local function imap(shortcut, command, noremap)
   vim.keymap.set('i', shortcut, command, { noremap = noremap, silent = true })
@@ -307,6 +309,8 @@ endfunction
 command! OpenOnly :call DeleteInactiveBufs()
 nnoremap <C-w>b :OpenOnly<CR>
 ]])
+
+----------------------------------- THEMES -------------------------------------
 
 vim.opt.background = 'dark'
 vim.cmd([[colorscheme onedark]])

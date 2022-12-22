@@ -37,6 +37,8 @@
 
    "jedi.executable.command": "/home/andrew_nt/.local/bin/jedi-language-server",
 
+   "sumneko-lua.enableNvimLuaDev": true,
+
    "cSpell.showStatus": false,
    "cSpell.allowCompoundWords": true,
    "cSpell.ignoreWords": [
