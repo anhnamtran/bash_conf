@@ -35,6 +35,7 @@
 .icons
 .icons/
 .idea*
+.java/
 .kube/
 .latexmkrc
 .lesshst
@@ -42,6 +43,7 @@
 .mozilla/
 .muttrc
 .npm/
+.pdfstudioviewer2022/
 .pki/
 .profile
 .python_history
@@ -70,6 +72,7 @@
 .xscreensaver
 .xserverrc
 .xsession-errors*
+.yarnrc
 .zoom/
 *.JPEG
 *.JPG
@@ -88,6 +91,7 @@ kube*
 Backup/
 Extracted/
 GPUCache/
+Maildir/
 Themes/
 WiFi/
 [Cc]ache/
