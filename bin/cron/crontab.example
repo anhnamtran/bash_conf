@@ -22,7 +22,7 @@
 
 # Backup dotfiles daily at 5, or whenever the system boots up and we haven't backed
 # it up. Uses time based entry
-&bootrun(true),noticenotrun(true) 0 17 * * * $HOME/bin/cron/backup_configs
+&noticenotrun(true),erroronlymail(true) 0 17 * * * $HOME/bin/cron/backup_configs
 
 # Full system backup every friday, this is present in the "root" crontab as it requires extra permissions
 # &bootrun(true),noticenotrun(true) 0 17 * * 5 $HOME/bin/cron/system_backup
