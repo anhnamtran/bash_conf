@@ -113,4 +113,10 @@ return require('packer').startup(function(use)
   use 'karb94/neoscroll.nvim'
   use 'lewis6991/impatient.nvim'
   use 'ojroques/nvim-osc52'
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  }
 end)
