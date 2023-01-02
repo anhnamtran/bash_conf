@@ -1,48 +1,60 @@
 {
-   "coc.source.buffer.priority": 50,
-   "coc.source.around.priority": 60,
-   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.source.buffer.priority": 50,
+  "coc.source.around.priority": 60,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
-   "diagnostic.checkCurrentLine": true,
-   "diagnostic.refreshOnInsertMode": true,
-   "diagnostic.autoRefresh": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.autoRefresh": true,
 
-   "suggest.autoTrigger": "always",
-   "suggest.triggerAfterInsertEnter": true,
-   "suggest.acceptSuggestionOnCommitCharacter": false,
-   "suggest.removeDuplicateItems": true,
-   "suggest.enablePreview": true,
-   "suggest.enablePreselect": true,
-   "suggest.localityBonus": true,
-   "suggest.floatConfig": {
-      "border": true
-   },
-   "suggest.disableMenuShortcut": true,
+  "suggest.autoTrigger": "always",
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.acceptSuggestionOnCommitCharacter": false,
+  "suggest.removeDuplicateItems": true,
+  "suggest.enablePreview": true,
+  "suggest.enablePreselect": true,
+  "suggest.localityBonus": true,
+  "suggest.floatConfig": {
+    "border": true
+  },
+  "suggest.disableMenuShortcut": true,
 
-   "clangd.arguments" : [ "--all-scopes-completion",
-                        "--limit-results=0",
-                        "--cross-file-rename" ],
+  "clangd.arguments": [
+    "--all-scopes-completion",
+    "--limit-results=0",
+    "--cross-file-rename"
+  ],
 
-   "python.analysis.extraPaths": [ "/usr/lib", "/usr" ],
-   "python.formatting.provider": "yapf",
-   "python.formatting.yapfPath": "/usr/local/bin/yapf",
-   "python.linting.enabled": true,
-   "python.linting.pylintEnabled": true,
-   "python.analysis.diagnosticSeverityOverrides": {
-      "reportGeneralTypeIssues": "none",
-      "reportOptionalMemberAccess": "none",
-      "reportOptionalSubscript": "none"
-   },
-   "pyright.disableCompletion": true,
-   "pyright.inlayHints.enable": true,
+  "python.analysis.extraPaths": ["/usr/lib", "/usr"],
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "/usr/local/bin/yapf",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": "none",
+    "reportOptionalMemberAccess": "none",
+    "reportOptionalSubscript": "none"
+  },
+  "pyright.disableCompletion": true,
+  "pyright.inlayHints.enable": true,
 
-   "sh.commandPath": "/usr/bin/bash-language-server",
+  "sh.commandPath": "/usr/bin/bash-language-server",
 
-   "sumneko-lua.enableNvimLuaDev": true,
+  "sumneko-lua.enableNvimLuaDev": true,
 
-   "cSpell.showStatus": false,
-   "cSpell.allowCompoundWords": true,
-   "cSpell.ignoreWords": [
+  "json.trace.server": "verbose",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "firebase.json"
+      ],
+      "url": "https://raw.githubusercontent.com/firebase/firebase-tools/master/schema/firebase-config.json"
+    }
+  ],
+
+  "cSpell.showStatus": false,
+  "cSpell.allowCompoundWords": true,
+  "cSpell.ignoreWords": [
     "clangd",
     "deque",
     "grpc",
@@ -53,9 +65,6 @@
     "pyright",
     "ssid"
   ],
-  "cSpell.userWords": [
-    "abuild",
-    "todoist"
-  ],
+  "cSpell.userWords": ["abuild", "todoist"],
   "Lua.telemetry.enable": true
 }
