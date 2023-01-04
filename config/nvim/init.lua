@@ -27,7 +27,9 @@ require('andrew_nt.coc')
 -- VimL settings
 
 -- color columns and textwidth
-vim.opt.textwidth = 80
+if vim.g.arista_vim ~= 1 then
+  vim.opt.textwidth = 80
+end
 vim.opt.colorcolumn = '+0'
 -- unset colorcolumn for inactive windows
 vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
@@ -45,8 +47,8 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
 -- tabbing and indentation
 if vim.g.arista_vim ~= 1 then
   vim.opt.tabstop = 2
+  vim.opt.shiftwidth = 2
 end
-vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smarttab = true
@@ -215,8 +217,6 @@ vim.api.nvim_create_autocmd({'BufReadPre'}, {
 -- enable syntax. Doing this at the end-ish because this can take a while on
 -- large files
 vim.opt.syntax = 'enable'
-
--- Show a raw version of the selected lines for easy copy-pasting
 
 ---------------------------------- KEYMAPS ------------------------------------
 local function imap(shortcut, command, noremap)

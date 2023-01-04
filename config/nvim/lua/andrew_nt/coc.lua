@@ -66,7 +66,7 @@ end
 
 function _G.show_docs()
     local cw = vim.fn.expand('<cword>')
-    if fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
+    if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
         vim.cmd('h ' .. cw)
     elseif vim.api.nvim_eval('coc#rpc#ready()') then
         vim.fn.CocActionAsync('doHover')
@@ -82,7 +82,7 @@ local mappings = {
         { "<C-SPACE>", 'coc#refresh()', { expr = true } },
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
-        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<CR>"', {expr = true, noremap = true}}
+        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<CR>"', {expr = true, noremap = true}},
 	},
 	n = { -- Normal mode
         { "K", '<CMD>lua _G.show_docs()<CR>', { silent = true } },
