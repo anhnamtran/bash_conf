@@ -1,5 +1,6 @@
 -- Setup for telescope.nvim
 require('telescope').setup()
+require('telescope').load_extension('fzf')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '_', function() builtin.find_files( { cwd = vim.fn.expand('%:p:h') } ) end, {})
 vim.keymap.set('n', '<leader>F', builtin.find_files, {})
