@@ -19,6 +19,10 @@
   },
   "suggest.disableMenuShortcut": true,
 
+  "floatFactory.floatConfig": {
+    "border": true
+  },
+
   "clangd.arguments": [
     "--all-scopes-completion",
     "--limit-results=0",
