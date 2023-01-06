@@ -31,7 +31,7 @@
 
   "python.analysis.extraPaths": ["/usr/lib", "/usr"],
   "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/usr/local/bin/yapf",
+  "python.formatting.yapfPath": "/usr/bin/yapf",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.analysis.diagnosticSeverityOverrides": {
