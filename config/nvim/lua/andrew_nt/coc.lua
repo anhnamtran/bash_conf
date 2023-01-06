@@ -122,8 +122,8 @@ local mappings = {
 
         {'<leader>rn', '<CMD>call CocActionAsync("rename")<CR>', { noremap = true }},
 
-        {'<leader>zg', '<CMD>CocCommand cSpell.addWordToDictionary<CR>', { nnoremap = true }},
-        {'<leader>zi', '<CMD>CocCommand cSpell.addIgnoreWord<CR>', { nnoremap = true }},
+        {'<leader>zg', '<CMD>CocCommand cSpell.addWordToDictionary<CR>', { noremap = true }},
+        {'<leader>zi', '<CMD>CocCommand cSpell.addIgnoreWord<CR>', { noremap = true }},
 
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-F>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-B>"', { expr = true, silent = true, nowait = true }},
