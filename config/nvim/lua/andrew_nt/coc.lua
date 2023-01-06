@@ -1,32 +1,5 @@
 -- Setup for coc.nvim
-vim.cmd([[
-function! s:disable_coc_for_type()
-  let l:filesuffix_denylist = ['log', 'qt']
-	if index(l:filesuffix_denylist, expand('%:e')) != -1
-	  let b:coc_enabled = 0
-	endif
-endfunction
-augroup CocCustomAu
-  au!
-  autocmd! BufRead,BufNewFile * call s:disable_coc_for_type()
-  autocmd! BufEnter,FocusGained * silent call CocActionAsync("ensureDocument")
-  autocmd! BufEnter,FocusGained * silent call CocActionAsync("refreshSource")
-  autocmd! FileType json,cpp,vim,tacc,python setl formatexpr=CocAction('formatSelected')
-augroup END
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-set tagfunc=CocTagFunc
-
-" remap all Coc's <Plug> mappings to use CocActionAsync
-nnoremap <Plug>(coc-definition) :CocActionAsync('jumpDefinition')
-nnoremap <Plug>(coc-type-definition) :CocActionAsync('jumpTypeDefinition')
-nnoremap <Plug>(coc-implementation) :CocActionAsync('jumpImplementation')
-nnoremap <Plug>(coc-references) :CocActionAsync('jumpReferences')
-nnoremap <Plug>(coc-rename) :CocActionAsync('rename')
-nnoremap <Plug>(coc-codeaction) :CocActionAsync('codeAction', '')
-nnoremap <Plug>(coc-codeaction-cursor) :CocActionAsync('codeAction', 'cursor')
-]])
+vim.opt.tagfunc = 'CocTagFunc'
 
 vim.g.coc_global_extension = {
   'coc-yaml',
@@ -44,6 +17,57 @@ vim.g.coc_global_extension = {
   'coc-rust-analyzer',
   'coc-sumneko-lua',
 }
+
+vim.g.coc_snippet_next = '<TAB>'
+vim.g.coc_snippet_prev = '<S-TAB>'
+
+local CocCustomAu = vim.api.nvim_create_augroup('CocCustomAu', {})
+vim.api.nvim_create_autocmd({ 'BufRead,BufNewFile' }, {
+  group = CocCustomAu,
+  pattern = '*',
+  callback = function ()
+    local excluded_filetypes = { 'log', 'qt' }
+    local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+    for index, value in ipairs(excluded_filetypes) do
+      if value == filetype then
+        vim.b.coc_enabled = false
+      else
+        vim.b.coc_enabled = true
+      end
+    end
+  end
+})
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained' }, {
+  group = CocCustomAu,
+  pattern = '*',
+  callback = function ()
+    vim.fn.CocActionAsync("ensureDocument")
+    vim.fn.CocActionAsync("refreshSource")
+  end
+})
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = CocCustomAu,
+  pattern = {
+    'cpp',
+    'javascript',
+    'json',
+    'python',
+    'rust',
+    'typescript',
+    'tacc',
+    'vim',
+  },
+  callback = function ()
+    vim.opt_local.formatexpr = "CocActionAsync('formatSelected')"
+  end
+})
+vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+  group = CocCustomAu,
+  pattern = '*',
+  callback = function ()
+    vim.fn.CocActionAsync('highlight')
+  end
+})
 
 local function register_mappings(mappings, default_options)
 	for mode, mode_mappings in pairs(mappings) do
@@ -77,22 +101,29 @@ end
 
 local mappings = {
 	i = { -- Insert mode
-        { "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true } },
-        { "<S-TAB>", 'coc#pum#visible() ? coc#pum#prev(1) : "<S-TAB>"', { expr = true } },
-        { "<C-SPACE>", 'coc#refresh()', { expr = true } },
+        {"<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true }},
+        {"<S-TAB>", 'coc#pum#visible() ? coc#pum#prev(1) : "<S-TAB>"', { expr = true }},
+        {"<C-SPACE>", 'coc#refresh()', { expr = true }},
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
         {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<CR>"', {expr = true, noremap = true}},
 	},
 	n = { -- Normal mode
-        { "K", '<CMD>lua _G.show_docs()<CR>', { silent = true } },
+        {"K", '<CMD>lua _G.show_docs()<CR>', { silent = true }},
+
         {'[g', '<Plug>(coc-diagnostic-prev)', { noremap = false }},
         {']g', '<Plug>(coc-diagnostic-next)', { noremap = false }},
-        {'gb', '<Plug>(coc-cursors-word)', { noremap = false }},
-        {'gd', '<Plug>(coc-definition)', { noremap = false }},
-        {'gy', '<Plug>(coc-type-definition)', { noremap = false }},
-        {'gi', '<Plug>(coc-implementation)', { noremap = false }},
-        {'gr', '<Plug>(coc-references)', { noremap = false }},
+        {'<leader>ca', '<Plug>(coc-codeaction-cursor)', { noremap = false }},
+
+        {'<leader>gd', '<CMD>call CocActionAsync("jumpDefinition")<CR>', { noremap = true }},
+        {'<leader>gy', '<CMD>call CocActionAsync("jumpTypeDefinition")<CR>', { noremap = true }},
+        {'<leader>gi', '<CMD>call CocActionAsync("jumpImplementation")<CR>', { noremap = true }},
+        {'<leader>gr', '<CMD>call CocActionAsync("jumpReferences")<CR>', { noremap = true }},
+
+        {'<leader>rn', '<CMD>call CocActionAsync("rename")<CR>', { noremap = true }},
+
+        {'<leader>zg', '<CMD>CocCommand cSpell.addWordToDictionary<CR>', { nnoremap = true }},
+        {'<leader>zi', '<CMD>CocCommand cSpell.addIgnoreWord<CR>', { nnoremap = true }},
 
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-F>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-B>"', { expr = true, silent = true, nowait = true }},

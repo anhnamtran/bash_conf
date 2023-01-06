@@ -51,7 +51,7 @@ vim.opt.autoindent = true
 vim.opt.smarttab = true
 
 -- Workaround for editing files that have been installed via symlink
-vim.opt.backupdir = '/home/andrew_nt/.local/state/nvim/backup/'
+vim.opt.backupdir = { '/home/andrew_nt/.local/state/nvim/backup/' }
 
 -- wildmenu settings
 vim.opt.wildmenu = true
