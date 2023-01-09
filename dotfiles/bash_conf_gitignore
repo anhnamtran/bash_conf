@@ -119,5 +119,6 @@ pics/
 snap/
 videos/
 vimwiki/
+!firefox-omni.patch
 external
 nohup.out
