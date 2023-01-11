@@ -75,6 +75,9 @@ autocmd TabEnter .* unfocus
 bindurl calendar.google.com/calendar/* e hint -Jc div[class="hnGhZ"] div[role="button"]
 bindurl calendar.google.com/calendar/* A hint -Jc div[class^="jefcFd"]  button, div[class^="jefcFd"] a, div[class^="jefcFd"]  div[role="button"]
 
+" Enter ignore mode on the following pages
+seturl .*\.coderpad\.io\/.* superignore true
+
 " Arista domains
 set searchurls.go https://go/%s
 set searchurls.pb https://pb/%s
