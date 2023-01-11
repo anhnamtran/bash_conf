@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     'vim',
   },
   callback = function ()
-    vim.opt_local.formatexpr = "CocActionAsync('formatSelected')"
+    vim.opt_local.formatexpr = "CocAction('formatSelected')"
   end
 })
 vim.api.nvim_create_autocmd({ 'CursorHold' }, {
