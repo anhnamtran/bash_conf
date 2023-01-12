@@ -51,10 +51,19 @@ nmap('T',
   true
 )
 
-nmap('<leader>w',
+nmap('w',
   function()
     hop.hint_words({
       direction = directions.AFTER_CURSOR,
+    })
+  end,
+  true
+)
+
+nmap('b',
+  function()
+    hop.hint_words({
+      direction = directions.BEFORE_CURSOR,
     })
   end,
   true
