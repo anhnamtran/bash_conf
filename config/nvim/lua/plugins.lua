@@ -115,7 +115,7 @@ return require('packer').startup(function(use)
     requires = { 'inkarkat/vim-ingo-library' },
   }
   use 'windwp/nvim-autopairs'
-  use { 'phaazon/hop.nvim', branch = 'v2' }
+  use { 'NAndLib/hop.nvim', branch = 'master' }
   use 'karb94/neoscroll.nvim'
   use 'lewis6991/impatient.nvim'
   use 'ojroques/nvim-osc52'
