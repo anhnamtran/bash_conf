@@ -17,7 +17,7 @@ bindsym $mod+0 border none
 bindsym $mod+p border pixel 1
 bindsym $mod+n border normal
 
-font xft:Iosevka 12
+font xft:Iosevka 0
 
 floating_modifier $mod
 
