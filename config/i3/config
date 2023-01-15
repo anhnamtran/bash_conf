@@ -11,8 +11,6 @@ default_floating_border normal
 client.focused          #98c379 #282C34 #abb2bf #98c379   #98c379
 client.unfocused        #4b5263 #282C34 #4b5263 #4b5263   #4b5263
 
-floating_minimum_size 500 x 500
-
 bindsym $mod+0 border none
 bindsym $mod+p border pixel 1
 bindsym $mod+n border normal
