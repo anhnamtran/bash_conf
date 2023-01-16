@@ -10,16 +10,16 @@ output DP-4
 off
 output DP-5
 off
-output DP-3
-crtc 1
+output DP-1
+crtc 0
 mode 1920x1080
 pos 1920x0
 rate 60.00
 rotate left
 x-prop-non_desktop 0
-output DP-1
-crtc 0
+output DP-3
+crtc 1
 mode 1920x1080
-pos 0x481
+pos 0x487
 rate 74.97
 x-prop-non_desktop 0
