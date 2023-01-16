@@ -1,0 +1,5 @@
+[Default Applications]
+application/pdf=firefox.desktop
+image/jpeg=qimgv.desktop
+image/png=qimgv.desktop
+image/gif=qimgv.desktop
