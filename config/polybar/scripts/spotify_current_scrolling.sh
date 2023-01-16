@@ -12,7 +12,7 @@ if ! type zscroll > /dev/null 2>&1; then
 fi
 
 zscroll -l 20 \
-  --delay 0.5 \
+  --delay 0.1 \
   --scroll-padding "  " \
   --update-check true \
   "$SPOTIFY_CURRENT_SCRIPT $$" &
