@@ -97,6 +97,7 @@
 bin/downtimeMonitor/*.txt
 bin/rust*
 config/google-chrome*
+config/systemd/user/*.target.wants/
 config/vim/**
 config/vivaldi*
 kube*
@@ -129,12 +130,14 @@ config/chromium/
 config/coc/
 config/dconf/
 config/ibus/
+config/kactivitymanagerdrc
+config/kglobalshortcutsrc
 config/libreoffice/
 config/microsoft-edge-dev/
 config/nvim/plugin/
 config/obsdian-html
 config/pulse/
-config/systemd/
+config/tabletdblocalrc
 config/yay/
 docs/
 downloads/
