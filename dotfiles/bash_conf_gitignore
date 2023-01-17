@@ -86,6 +86,7 @@
 .yarnrc
 .zoom/
 **.sav
+**.vdf
 *.JPEG
 *.JPG
 *.desktop
