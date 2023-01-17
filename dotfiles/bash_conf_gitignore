@@ -18,6 +18,8 @@
 .cache/
 .cargo/
 .cfg/
+.conda/
+.condarc
 .config
 .config/
 .configs_backup
