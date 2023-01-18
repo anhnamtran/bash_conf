@@ -34,12 +34,7 @@ return require('packer').startup(function(use)
   -- GUIs elements
   use 'nvim-lualine/lualine.nvim'
   use 'kyazdani42/nvim-web-devicons'
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = function ()
-      require('gitsigns').setup()
-    end
-  }
+  use 'lewis6991/gitsigns.nvim'
   use 'mhinz/vim-startify'
   use 'lukas-reineke/indent-blankline.nvim'
 
