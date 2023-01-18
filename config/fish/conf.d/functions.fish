@@ -28,7 +28,7 @@ function refresh
    reload_completions
 end
 
-function configs
+function configs -w git
    set -l CONFIGS_GIT_DIR $HOME/.cfg
 
    git --git-dir="$CONFIGS_GIT_DIR" --work-tree="$HOME" $argv
