@@ -197,7 +197,6 @@ exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id dunst
-exec --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
@@ -206,6 +205,7 @@ exec --no-startup-id 1password --silent
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 
 # Touchpad settings
 exec_always --no-startup-id /home/andrew_nt/bin/xinput_config 1
