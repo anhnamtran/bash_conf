@@ -31,7 +31,6 @@ bindsym $mod+Shift+q kill
 # start program launcher
 bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/launcher.sh
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/rofi/powermenu/type-1/powermenu.sh
-bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/rofi/autorandr/type-1/autorandr.sh
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/rofi/windows/type-1/windows.sh
 
 # change focus
@@ -202,7 +201,6 @@ exec --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id autorandr --change
 exec --no-startup-id $HOME/bin/easyeffects --gapplication-service
 exec --no-startup-id 1password --silent
 exec_always --no-startup-id autotiling
