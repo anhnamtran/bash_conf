@@ -6,7 +6,7 @@ fi
 
 options="mount|umount"
 
-GDRIVE_LOCAL="/mnt/gdrive"
+GDRIVE_LOCAL="$HOME/docs/gdrive"
 
 gdrive_mount() {
   echo "Mounnting to $GDRIVE_LOCAL"
