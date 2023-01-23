@@ -47,6 +47,9 @@ bind ,<Space> nohlsearch
 bind <C-]> forward
 bind <C-[> back
 
+" Have ZZ correctly restore multiple windows
+bind ZZ !s killall firefox
+
 unbind --mode=normal <C-b>
 bind --mode=browser <C-b> tab #
 
