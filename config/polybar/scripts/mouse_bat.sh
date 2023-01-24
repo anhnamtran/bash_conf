@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-UPOWER_OUT=$(upower -i /org/freedesktop/UPower/devices/mouse_hidpp_battery_5)
+DEVICE=$(upower -e | grep "mouse_hidpp_battery")
+UPOWER_OUT=$(upower -i "$DEVICE")
 
 STATE=$(echo "$UPOWER_OUT" | sed -n -e 's/state: \+\(.*\)/\1/p' | xargs)
 PERCENTAGE=$(echo "$UPOWER_OUT" | sed -n -e 's/percentage: \+\(.*%\).*/\1/p' | xargs)
