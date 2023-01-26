@@ -6,6 +6,7 @@ set hintfiltermode vimperator-reflow
 set hintnames numeric
 set incsearch true
 set wordpattern [^\s\/]+
+set escapehatchsidebarhack false
 
 " i to go to ignore mode
 " Ctrl+Enter to leave ignore mode
