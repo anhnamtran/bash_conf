@@ -1,8 +1,0 @@
-#!/bin/bash
-notify-send -a "Locker" -t 5000 -u normal "Screen will lock soon"
-
-# If veracrypt is installed and there are mounted volumes
-if type veracrypt &>/dev/null; then
-  veracrypt -d
-fi
-
