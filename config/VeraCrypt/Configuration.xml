@@ -13,12 +13,12 @@
 		<config key="DisableKernelEncryptionModeWarning">0</config>
 		<config key="DismountOnInactivity">0</config>
 		<config key="DismountOnLogOff">1</config>
-		<config key="DismountOnPowerSaving">1</config>
-		<config key="DismountOnScreenSaver">1</config>
+		<config key="DismountOnPowerSaving">0</config>
+		<config key="DismountOnScreenSaver">0</config>
 		<config key="DisplayMessageAfterHotkeyDismount">0</config>
 		<config key="BackgroundTaskEnabled">1</config>
 		<config key="ForceAutoDismount">1</config>
-		<config key="LastSelectedSlotNumber">1</config>
+		<config key="LastSelectedSlotNumber">4</config>
 		<config key="MaxVolumeIdleTime">60</config>
 		<config key="MountDevicesOnLogon">0</config>
 		<config key="MountFavoritesOnLogon">0</config>
