@@ -15,6 +15,7 @@ vim.g.startify_lists = {
   { type = 'sessions', header = { '    Sessions' } },
 }
 vim.g.startify_commands = {
+  { s = { 'Scratch buffer', 'enew | Scratch' } },
   { i = { 'init.lua', 'e ~/.config/nvim/init.lua' } },
   { P = { 'Update plugins', 'PackerUpdate' } },
 }
