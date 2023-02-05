@@ -42,6 +42,7 @@
 .icons/
 .idea*
 .java/
+.keras/
 .kube/
 .latexmkrc
 .lesshst
@@ -73,6 +74,7 @@
 .tmux/plugins/
 .tridactylrc
 .var/
+.veracrypt*
 .vim
 .vim/
 .viminfo
@@ -99,10 +101,13 @@
 *.png
 bin/downtimeMonitor/*.txt
 bin/rust*
+config/**/EOS*.conf
+config/**/zoom*.conf
 config/google-chrome*
 config/systemd/user/*.target.wants/
 config/vim/**
 config/vivaldi*
+krita*rc
 kube*
 Backup/
 Extracted/
@@ -136,11 +141,17 @@ config/ibus/
 config/kactivitymanagerdrc
 config/kglobalshortcutsrc
 config/libreoffice/
+config/mgba/
 config/microsoft-edge-dev/
+config/nautilus/
 config/nvim/plugin/
+config/obs-studio/
 config/obsdian-html
+config/pavucontrol.ini
 config/pulse/
+config/rclone/
 config/tabletdblocalrc
+config/unity3d/
 config/yay/
 docs/
 downloads/
@@ -154,4 +165,5 @@ videos/
 vimwiki/
 !firefox-omni.patch
 external
+flameshot.ini
 nohup.out
