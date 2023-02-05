@@ -30,8 +30,8 @@ wacom set "$STYLUS" MapToOutput "$PRIMARY_MONITOR"
 # Remap the buttons
 wacom set "$PAD" Button 1 "key +ctrl z -ctrl"
 wacom set "$PAD" Button 2 "key +ctrl +shift z -ctrl -shift"
-wacom set "$PAD" Button 3 "button 2"
-wacom set "$PAD" Button 8 "button 3"
+wacom set "$PAD" Button 3 "key 2" # resets zoom in krita
+wacom set "$PAD" Button 8 "key 5" # resets rotation in krita
 
 wacom set "$STYLUS" Button 2 "button 2"
 wacom set "$STYLUS" Button 3 "button 3"
