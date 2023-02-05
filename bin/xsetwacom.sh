@@ -29,7 +29,7 @@ wacom set "$STYLUS" MapToOutput "$PRIMARY_MONITOR"
 
 # Remap the buttons
 wacom set "$PAD" Button 1 "key +ctrl z -ctrl"
-wacom set "$PAD" Button 2 "key +ctrl r -ctrl"
+wacom set "$PAD" Button 2 "key +ctrl +shift z -ctrl -shift"
 wacom set "$PAD" Button 3 "button 2"
 wacom set "$PAD" Button 8 "button 3"
 

@@ -218,6 +218,8 @@ exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen 
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id 1password --silent
+# map wacom tablet to monitor
+exec --no-startup-id $HOME/bin/xsetwacom.sh
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
