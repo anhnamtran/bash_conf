@@ -1,358 +1,419 @@
-1password 8.9.13-40
-accountsservice 22.08.8-2
-acpi 1.7-3
-adobe-source-han-sans-cn-fonts 2.004-1
-adobe-source-han-sans-jp-fonts 2.004-1
-adobe-source-han-sans-kr-fonts 2.004-1
-alsa-firmware 1.2.4-2
-alsa-plugins 1:1.2.7.1-1
-alsa-utils 1.2.8-1
-apache 2.4.54-3
-arandr 0.1.10-7
-arc-gtk-theme-eos 20221218-1
-archinstall 2.5.2-1
-archlinux-contrib 20221211-1
-archlinux-keyring 20221220-1
-archlinux-xdg-menu 0.7.6.3-2
-aria2 1.36.0-1
-autoconf 2.71-1
-automake 1.16.5-1
-autorandr-git 1.13.1.r0.g0ca5ca9-1
-autotiling-git r114.9530ce3-1
-awesome-terminal-fonts 1.1.0-4
-b43-fwcutter 019-3
-base 3-1
-bash-completion 2.11-3
-bash-language-server 4.5.1-1
-bat 0.22.1-1
-betterlockscreen-git v4.0.4.r1.g9c15297-1
-bind 9.18.10-1
-binutils 2.40-1
-bison 3.8.2-4
-bluez 5.66-1
-bluez-utils 5.66-1
-btrfs-progs 6.1.2-1
-cabextract 1.9.1-2
-cantarell-fonts 1:0.303.1-1
-clang 15.0.7-1
-cryptsetup 2.6.0-1
-cups 1:2.4.2-3
-cups-filters 1.28.16-3
-cups-pdf 3.0.1-7
-debugedit 5.0-4
-device-mapper 2.03.18-1
-dex 0.9.0-1
-dhclient 4.4.3.P1-1
-diffutils 3.8-1
-displaylink 5.6.1-3
-dmenu 5.2-1
-dmidecode 3.4-1
-dmraid 1.0.0.rc16.3-14
-dnsmasq 2.88-1
-dosfstools 4.2-2
-downgrade 11.2.1-1
-dracut 056-1
-duf 0.8.1-2
-dunst-git 1.9.0.r19.g4910d5e-1
-e2fsprogs 1.46.5-4
-easyeffects-git 7.0.0.r251.g24021c64-1
-efibootmgr 18-1
-efitools 1.9.2-5
-endeavouros-keyring 20220614-1
-endeavouros-mirrorlist 4.11-1
-endeavouros-skel-i3wm 4.4-1
-endeavouros-theming 22.12.1.1-1
-endeavouros-xfce4-terminal-colors 5-1
-eos-apps-info 1.6-1
-eos-dracut 1.0-2
-eos-hooks 1.10-1
-eos-lightdm-slick-theme 3.2-1
-eos-log-tool 1.14-4
-eos-packagelist 2.1-1
-eos-qogir-icons 4-2
-eos-quickstart 1.3.1-1
-eos-rankmirrors 2.10-1
-eos-update-notifier 1.17-1
-ethtool 1:6.1-1
-evdi-git 1.12.0.r6.gbdc258b-1
-evince 43.1-2
-exfatprogs 1.2.0-1
-f2fs-tools 1.15.0-2
-fakeroot 1.30.1-1
-fcron 3.3.1-1
-fd 8.6.0-1
-feh 3.9.1-2
-fetchmail 6.4.35-1
-ffmpegthumbnailer 2.2.2-4
-file 5.44-1
-file-roller 43.0-1
-findutils 4.9.0-1
-firefox 109.0-1
-firewalld 1.3.0-1
-fish 3.6.0-1
-flameshot 12.1.0-1
-flex 2.6.4-3
-foomatic-db 3:20230115-1
-foomatic-db-engine 4:20220521-1
-foomatic-db-gutenprint-ppds 5.3.4-2
-foomatic-db-nonfree 3:20230115-1
-foomatic-db-nonfree-ppds 3:20230115-1
-foomatic-db-ppds 3:20230115-1
-freedownloadmanager 6.18.1.4920-1
-fsarchiver 0.8.6-2
-galculator 2.1.4-7
-gawk 5.2.1-1
-gcc 12.2.1-1
-gdb 12.1-2
-gettext 0.21.1-2
-ghostscript 10.0.0-4
-git 2.39.1-1
-glances 3.3.0-1
-glmark2 2021.12-1
-gnome-keyring 1:42.1-2
-google-chrome 109.0.5414.74-1
-grep 3.8-2
-groff 1.22.4-7
-grub 2:2.06.r440.g4de39a2af-1
-grub-customizer 5.2.2-2
-gsfonts 20200910-2
-gsl 2.7.1-1
-gst-libav 1.20.5-5
-gst-plugin-pipewire 1:0.3.64-1
-gst-plugins-bad 1.20.5-5
-gst-plugins-ugly 1.20.5-5
-gthumb 3.12.2-4
-gtk-engine-murrine 0.98.2-4
-gutenprint 5.3.4-2
-gvfs 1.50.3-1
-gvfs-afc 1.50.3-1
-gvfs-gphoto2 1.50.3-1
-gvfs-mtp 1.50.3-1
-gvfs-nfs 1.50.3-1
-gvfs-smb 1.50.3-1
-gzip 1.12-1
-haveged 1.9.18-1
-hdparm 9.65-1
-htop 3.2.1-1
-hwdetect 2023.01-1
-hwinfo 22.2-1
-i3-wm 4.22-3
-i3blocks 1.5-3
-i3status 2.14-1
-ibus 1.5.27-1
-inetutils 2.3-1
-intel-media-driver 23.1.0-1
-intel-ucode 20221108-1
-inxi 3.3.24.1-4
-iptables-nft 1:1.8.8-2
-iwd 2.1-1
-jfsutils 1.1.15-8
-jq 1.6-4
-jre-openjdk 19.0.2.u7-2
-kcm-wacomtablet 1:3.2.0-5
-kitty-git 1:r11447.gbd13238d9-1
-krita 5.1.5-1
-less 1:608-1
-lib32-nvidia-utils 525.85.05-1
-libdvdcss 1.4.3-1
-libfido2 1.12.0-5
-libgsf 1.14.50-1
-libopenraw 0.3.3-1
-libreoffice-fresh 7.4.4-1
-libtool 2.4.7+4+g1ec8fa28-1
-libva-intel-driver 2.4.1-2
-libva-mesa-driver 22.3.3-3
-libwnck3 43.0-3
-light 1.2.2-3
-lightdm 1:1.32.0-4
-lightdm-gtk-greeter 1:2.0.8-3
-lightdm-slick-greeter 1.5.9-1
-linux 6.1.7.arch1-1
-linux-firmware 20221214.f3c283e-1
-linux-headers 6.1.7.arch1-1
-logiops 0.2.3-1
-logrotate 3.21.0-2
-lsb-release 2.0.r48.3cf5103-1
-lsscsi 0.32-1
-lvm2 2.03.18-1
-lxappearance-gtk3 0.6.3-4
-m4 1.4.19-1
-mailutils 3.15-3
-make 4.4-1
-man-db 2.11.2-1
-man-pages 6.02-1
-masterpdfeditor 5.9.30-1
-mdadm 4.2-2
-meld 3.22.0-1
-mesa-utils 8.5.0-2
-mgba-qt 0.10.0-2
-mlocate 0.26.git.20170220-7
-modemmanager 1.20.4-1
-mpc 0.34-2
-mpv 1:0.35.0-5
-mtools 1:4.0.42-1
-nano 7.2-1
-nano-syntax-highlighting 2020.10.10-1
-nautilus 43.2-1
-neofetch 7.1.0-2
-neovim-git 0.8.0.r1267.g0f52e2c849-1
-nerd-fonts-complete 2.2.2-2
-netctl 1.28-1
-network-manager-applet 1.30.0-1
-networkmanager 1.40.10-1
-networkmanager-openconnect 1.2.8-2
-networkmanager-openvpn 1.10.2-1
-nfs-utils 2.6.2-1
-nilfs-utils 2.2.9-2
-nitrogen 1.6.1-4
-nodejs 19.4.0-1
-noto-fonts 20220810-1
-npm 8.19.2-1
-nss-mdns 0.15.1-1
-ntfs-3g 2022.10.3-1
-ntp 4.2.8.p15-3
-numlockx 1.2-5
-nvidia-dkms 525.85.05-1
-nvidia-hook 1.2-1
-nvidia-inst 1.9-1
-nvidia-settings 525.85.05-1
-nvidia-utils 525.85.05-1
-obsidian 1.1.9-3
-os-prober 1.81-1
-pacman 6.0.2-5
-pacman-contrib 1.8.2-1
-pacman-utils 1.1.0-1
-pam-u2f 1.2.1-2
-pandoc 2.19.2-55
-patch 2.7.6-8
-pavucontrol 1:5.0+r61+gee77d86-2
-pcsc-tools 1.6.0-1
-perl 5.36.0-3
-phoronix-test-suite 10.8.4-1
-pico 2.00-2
-picom-git 1847_9.rc1.169.g364463f_2023.01.17-1
-pipewire-alsa 1:0.3.64-1
-pipewire-jack 1:0.3.64-1
-pipewire-pulse 1:0.3.64-1
-pkgconf 1.8.0-1
-pkgfile 21-2
-playerctl 2.4.1-3
-polkit-gnome 0.105-9
-polybar-git 3.6.3.r87.gfc423c09-1
-poppler-glib 23.01.0-3
-postfix 3.7.3-4
-postfixadmin 3.3.13-1
-power-profiles-daemon 0.12-1
-pv 1.6.20-2
-python 3.10.9-1
-python-bluetooth-battery 1.3.2-4
-python-capng 0.8.3-1
-python-defusedxml 0.7.1-4
-python-packaging 21.3-1
-python-pip 22.3.1-1
-python-pynvim 0.4.3-2
-python-pyqt5 5.15.7-3
-qimgv 1.0.2-2
-rclone 1.61.1-1
-rebuild-detector 4.4.1-2
-redshift 1.12-6
-reflector 2021.11-5
-reflector-simple 2022.09.01-1
-reiserfsprogs 3.6.27-3
-ripgrep 13.0.0-3
-rofi-git 1.7.5.r98.gebb4459a-1
-rpmextract 1.0-9
-rsync 3.2.7-3
-rtkit 0.13-2
-s-nail 14.9.24-2
-scrot 1.8.1-1
-seahorse 1:43.0-1
-sed 4.9-1
-sg3_utils 1.47-1
-sharutils 4.15.2-4
-shellcheck 0.9.0-12
-signal-desktop 6.2.0-1
-smartmontools 7.3-1
-sof-firmware 2.2.4-1
-splix 2.0.0-19
-spotify 1:1.1.84.716-4
-steam 1.0.0.75-1
-sudo 1.9.12.p2-1
-sysfsutils 2.1.1-1
-sysstat 12.7.1-1
-system-config-printer 1.5.18-1
-systemd-sysvcompat 252.4-2
-texinfo 7.0.1-1
-thermald 2.5.1-1
-thunar 4.18.3-1
-thunar-archive-plugin 0.5.0-2
-thunar-volman 4.18.0-1
-tldr 3.1.0-2
-tmux-git 9989_3.3a.r156.gc42087c7-1
-tree 2.1.0-1
-ttf-bitstream-vera 1.10-15
-ttf-dejavu 2.37+18+g9b5d1b2f-3
-ttf-liberation 2.1.5-1
-ttf-material-design-icons-git v7.1.96.r0.g081279c-1
-ttf-opensans 1.101-2
-ttf-symbola 14.00-1
-tumbler 4.18.0-1
-udiskie 2.4.2-1
-unace 2.5-11
-unarj 2.65-1
-unclutter 1:1.6-2
-unp 2.0.pre10-1
-unrar 1:6.2.3-1
-unzip 6.0-19
-upower 1.90.0-1
-usb_modeswitch 2.6.1-3
-usbutils 015-2
-v4l2loopback-dkms 0.12.7-2
-v4l2loopback-utils 0.12.7-2
-veracrypt 1.25.9-4
-vi 1:070224-6
-vim 9.0.1182-1
-vulkan-intel 22.3.3-3
-vulkan-radeon 22.3.3-3
-welcome 3.45-1
-wget 1.21.3-1
-which 2.21-5
-wireless_tools 30.pre9-3
-wireplumber 0.4.13-1
-wmctrl 1.07-6
-wpa_supplicant 2:2.10-8
-xbindkeys 1.8.7-4
-xclip 0.13-3
-xdg-user-dirs 0.18-1
-xdg-user-dirs-gtk 0.11-1
-xdg-utils 1.1.3+25+g8ae0263-1
-xdotool 3.20211022.1-1
-xed 3.2.8-1
-xf86-input-libinput 1.2.1-1
-xf86-input-synaptics 1.9.2-1
-xf86-input-wacom 1.1.0-1
-xf86-video-amdgpu 22.0.0-1
-xf86-video-ati 1:19.1.0.r15.g7a6a34af-1
-xf86-video-vmware 13.3.0-4
-xfce4-terminal 1.0.4-1
-xfsprogs 6.1.1-2
-xl2tpd 1.3.18-1
-xorg-server 21.1.6-1
-xorg-xbacklight 1.2.3-3
-xorg-xdpyinfo 1.3.3-4
-xorg-xev 1.2.5-1
-xorg-xinit 1.4.2-1
-xorg-xinput 1.6.3-3
-xorg-xkill 1.0.6-1
-xorg-xrandr 1.5.2-1
-xss-lock 0.3.0.g1e158fb20108-4
-xterm 378-1
-yapf 0.32.0-1
-yarn 1.22.19-1
-yay 11.3.2-1
-yubico-pam 2.27-2
-yubikey-manager 1:4.0.9-3
-yubikey-manager-qt 1.2.4-1
-yubikey-personalization 1.20.0-3
-yubioath-desktop 5.1.0-3
-zram-generator 1.1.2-1
+1password
+accountsservice
+acpi
+adobe-source-han-sans-cn-fonts
+adobe-source-han-sans-jp-fonts
+adobe-source-han-sans-kr-fonts
+alsa-firmware
+alsa-plugins
+alsa-utils
+apache
+arandr
+arc-gtk-theme-eos
+archinstall
+archlinux-contrib
+archlinux-keyring
+archlinux-xdg-menu
+aria2
+autoconf
+automake
+autorandr-git
+autotiling-git
+awesome-terminal-fonts
+b43-fwcutter
+base
+bash-completion
+bash-language-server
+bat
+betterlockscreen-git
+bind
+binutils
+bison
+bluez
+bluez-utils
+btrfs-progs
+cabextract
+cantarell-fonts
+clang
+cryptsetup
+cups
+cups-filters
+cups-pdf
+debugedit
+device-mapper
+dex
+dhclient
+diffutils
+displaylink
+dmenu
+dmidecode
+dmraid
+dnsmasq
+dosfstools
+downgrade
+dracut
+duf
+dunst-git
+dust
+e2fsprogs
+easyeffects-git
+efibootmgr
+efitools
+endeavouros-keyring
+endeavouros-mirrorlist
+endeavouros-skel-i3wm
+endeavouros-theming
+endeavouros-xfce4-terminal-colors
+eos-apps-info
+eos-dracut
+eos-hooks
+eos-lightdm-slick-theme
+eos-log-tool
+eos-packagelist
+eos-qogir-icons
+eos-quickstart
+eos-rankmirrors
+eos-update-notifier
+ethtool
+evdi-git
+evince
+exfatprogs
+f2fs-tools
+fakeroot
+fcron
+fd
+feh
+fetchmail
+ffmpegthumbnailer
+file
+file-roller
+findutils
+firefox
+firewalld
+fish
+flameshot
+flex
+foomatic-db
+foomatic-db-engine
+foomatic-db-gutenprint-ppds
+foomatic-db-nonfree
+foomatic-db-nonfree-ppds
+foomatic-db-ppds
+freedownloadmanager
+fsarchiver
+galculator
+gawk
+gcc
+gdb
+gettext
+ghostscript
+git
+glances
+glmark2
+gnome-disk-utility
+gnome-keyring
+google-chrome
+grep
+groff
+grub
+grub-customizer
+gsfonts
+gsl
+gst-libav
+gst-plugin-pipewire
+gst-plugins-bad
+gst-plugins-ugly
+gthumb
+gtk-engine-murrine
+gutenprint
+gvfs
+gvfs-afc
+gvfs-gphoto2
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+gzip
+haveged
+hdparm
+htop
+hwdetect
+hwinfo
+i3-wm
+i3blocks
+i3status
+ibus
+ibus-unikey
+inetutils
+intel-media-driver
+intel-ucode
+inxi
+iptables-nft
+iwd
+jfsutils
+jq
+jre-openjdk
+kcm-wacomtablet
+kitty-git
+krita
+less
+lib32-nvidia-utils
+libdvdcss
+libfido2
+libgsf
+libopenraw
+libreoffice-fresh
+libtool
+libva-intel-driver
+libva-mesa-driver
+libwnck3
+light
+lightdm
+lightdm-gtk-greeter
+lightdm-slick-greeter
+linux
+linux-firmware
+linux-headers
+logiops
+logrotate
+lsb-release
+lsp-plugins
+lsscsi
+lvm2
+lxappearance-gtk3
+m4
+mailutils
+make
+man-db
+man-pages
+masterpdfeditor
+mdadm
+meld
+mesa-utils
+mgba-qt
+mlocate
+modemmanager
+mpc
+mpv
+mtools
+nano
+nano-syntax-highlighting
+nautilus
+neofetch
+neovim-git
+netctl
+network-manager-applet
+networkmanager
+networkmanager-openconnect
+networkmanager-openvpn
+nfs-utils
+nilfs-utils
+nitrogen
+nodejs
+noto-fonts
+npm
+nss-mdns
+ntfs-3g
+ntp
+numlockx
+nvidia-dkms
+nvidia-hook
+nvidia-inst
+nvidia-settings
+nvidia-utils
+obs-studio
+obsidian
+os-prober
+otf-aurulent-nerd
+otf-cascadia-code-nerd
+otf-codenewroman-nerd
+otf-droid-nerd
+otf-firamono-nerd
+otf-hasklig-nerd
+otf-hermit-nerd
+otf-opendyslexic-nerd
+otf-overpass-nerd
+pacman
+pacman-contrib
+pacman-utils
+pam-u2f
+pandoc-cli
+patch
+pavucontrol
+pcsc-tools
+perl
+phoronix-test-suite
+pico
+picom-git
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+pkgconf
+pkgfile
+playerctl
+polkit-gnome
+polybar-git
+poppler-glib
+postfix
+postfixadmin
+power-profiles-daemon
+pv
+python
+python-bluetooth-battery
+python-capng
+python-defusedxml
+python-packaging
+python-pip
+python-pylint
+python-pynvim
+python-pyqt5
+qimgv-git
+rclone
+rebuild-detector
+redshift
+reflector
+reflector-simple
+reiserfsprogs
+ripgrep
+rofi-git
+rpmextract
+rsync
+rtkit
+s-nail
+scrot
+seahorse
+sed
+sg3_utils
+sharutils
+shellcheck
+signal-desktop
+smartmontools
+sof-firmware
+splix
+spotify
+steam
+sudo
+sysfsutils
+sysstat
+system-config-printer
+systemd-sysvcompat
+texinfo
+thermald
+thunar
+thunar-archive-plugin
+thunar-volman
+tldr
+tmux-git
+tor-browser
+tree
+ttf-3270-nerd
+ttf-agave-nerd
+ttf-anonymouspro-nerd
+ttf-arimo-nerd
+ttf-bigblueterminal-nerd
+ttf-bitstream-vera
+ttf-bitstream-vera-mono-nerd
+ttf-cousine-nerd
+ttf-daddytime-mono-nerd
+ttf-dejavu
+ttf-dejavu-nerd
+ttf-fantasque-nerd
+ttf-firacode-nerd
+ttf-go-nerd
+ttf-hack-nerd
+ttf-heavydata-nerd
+ttf-iawriter-nerd
+ttf-ibmplex-mono-nerd
+ttf-inconsolata-go-nerd
+ttf-inconsolata-lgc-nerd
+ttf-inconsolata-nerd
+ttf-iosevka-nerd
+ttf-jetbrains-mono-nerd
+ttf-lekton-nerd
+ttf-liberation
+ttf-liberation-mono-nerd
+ttf-lilex-nerd
+ttf-material-design-icons-git
+ttf-meslo-nerd
+ttf-monofur-nerd
+ttf-monoid-nerd
+ttf-mononoki-nerd
+ttf-mplus-nerd
+ttf-nerd-fonts-symbols-2048-em
+ttf-nerd-fonts-symbols-2048-em-mono
+ttf-noto-nerd
+ttf-opensans
+ttf-profont-nerd
+ttf-proggyclean-nerd
+ttf-roboto-mono-nerd
+ttf-sharetech-mono-nerd
+ttf-sourcecodepro-nerd
+ttf-space-mono-nerd
+ttf-symbola
+ttf-terminus-nerd
+ttf-tinos-nerd
+ttf-ubuntu-mono-nerd
+ttf-ubuntu-nerd
+ttf-victor-mono-nerd
+tumbler
+udiskie
+unace
+unarj
+unclutter
+unp
+unrar
+unzip
+update-grub
+upower
+usb_modeswitch
+usbutils
+v4l2loopback-dkms
+v4l2loopback-utils
+v4l2ucp
+veracrypt
+vi
+vim
+vulkan-intel
+vulkan-radeon
+welcome
+wget
+which
+wireless_tools
+wireplumber
+wmctrl
+wpa_supplicant
+xbindkeys
+xdg-user-dirs
+xdg-user-dirs-gtk
+xdg-utils
+xdotool
+xed
+xf86-input-libinput
+xf86-input-synaptics
+xf86-input-wacom
+xf86-video-amdgpu
+xf86-video-ati
+xf86-video-vmware
+xfce4-terminal
+xfsprogs
+xl2tpd
+xorg-server
+xorg-xbacklight
+xorg-xdpyinfo
+xorg-xev
+xorg-xinit
+xorg-xinput
+xorg-xkill
+xorg-xrandr
+xsel
+xss-lock
+xterm
+yapf
+yarn
+yay
+yubico-pam
+yubikey-manager
+yubikey-manager-qt
+yubikey-personalization
+yubioath-desktop
+zoom
+zram-generator
