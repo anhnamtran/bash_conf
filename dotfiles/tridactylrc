@@ -7,6 +7,8 @@ set hintnames numeric
 set incsearch true
 set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
+set followpagepatterns.next ^(next|newer)\b|»|>>|more|>
+set followpagepatterns.prev ^(prev(ious)?|older)\b|«|<<|<
 
 " i to go to ignore mode
 " Ctrl+Enter to leave ignore mode
@@ -105,5 +107,7 @@ bindurl reviewboard.*/r/[0-9]+ S hint -Jc a[id="ship-it-action"]
 bindurl reviewboard.*/r/[0-9]+ l hint -Jc tbody[id^="chunk"] > tr[line] > th
 bindurl reviewboard.*/dashboard F hint -Jbc a[class="review-request-link"]
 bindurl reviewboard.*/users F hint -Jbc a[class="review-request-link"]
+seturl reviewboard.*/ followpagepatterns.next ^(next|newer)\b|more|>
+seturl reviewboard.*/ followpagepatterns.prev ^(prev(ious)?|older)\b|<
 
 " vim: ft=tridactyl
