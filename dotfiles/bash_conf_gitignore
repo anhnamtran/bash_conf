@@ -18,6 +18,7 @@
 .cache/
 .cargo/
 .cfg/
+.clasprc.json
 .conda/
 .condarc
 .config
@@ -46,6 +47,7 @@
 .latexmkrc
 .lesshst
 .local/
+.masterpdfeditor/
 .mozilla/
 .muttrc
 .nanorc
@@ -104,6 +106,7 @@ config/systemd/user/*.target.wants/
 config/vim/**
 config/vivaldi*
 kube*
+sumneko-lua-*/
 Backup/
 Extracted/
 GPUCache/
@@ -154,4 +157,5 @@ videos/
 vimwiki/
 !firefox-omni.patch
 external
+keyring.deb
 nohup.out
