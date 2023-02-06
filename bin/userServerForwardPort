@@ -1,0 +1,16 @@
+#!/bin/bash
+server=${1:-us160}
+
+LOG_FILE="/tmp/autossh-$server.log"
+AUTOSSH_PID=$(pgrep autossh)
+if [[ -n "$AUTOSSH_PID" ]]; then
+  echo "Autossh already running, restarting child SSH process instead."
+  kill -10 "$AUTOSSH_PID"
+  exit 0
+fi
+
+set -x
+AUTOSSH_LOGLEVEL=7 \
+AUTOSSH_LOGFILE="$LOG_FILE" \
+AUTOSSH_POLL=300 \
+  autossh -M0 -f -nNC -R 8888:localhost:22 us160 & disown
