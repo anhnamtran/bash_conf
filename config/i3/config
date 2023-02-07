@@ -30,6 +30,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/launcher.sh
+bindsym $mod+Ctrl+s exec --no-startup-id $HOME/.config/rofi/priv_launchers/type-1/launcher.sh
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/rofi/windows/type-1/windows.sh
 
