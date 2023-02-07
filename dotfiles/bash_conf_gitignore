@@ -139,6 +139,7 @@ config/coc/
 config/dconf/
 config/ibus/
 config/kactivitymanagerdrc
+config/kdeconnect/
 config/kglobalshortcutsrc
 config/libreoffice/
 config/mgba/
