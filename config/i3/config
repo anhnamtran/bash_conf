@@ -71,8 +71,8 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
+bindsym $mod+s layout stacking; exec --no-startup-id notify-send -t 2000 'Stacking Layout' -a i3
+bindsym $mod+t layout tabbed; exec --no-startup-id notify-send -t 2000 'Tabbed Layout' -a i3
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
