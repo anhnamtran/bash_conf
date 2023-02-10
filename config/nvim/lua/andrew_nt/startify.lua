@@ -17,4 +17,5 @@ vim.g.startify_lists = {
 vim.g.startify_commands = {
   { i = { 'init.lua', 'e ~/.config/nvim/init.lua' } },
   { P = { 'Update plugins', 'PackerUpdate' } },
+  { s = { 'Scratch buffer', 'e Scratch | Scratch' } },
 }

@@ -23,6 +23,7 @@ require('andrew_nt.scratch')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
+require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
 
 -- VimL settings
