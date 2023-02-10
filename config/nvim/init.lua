@@ -217,6 +217,9 @@ vim.api.nvim_create_autocmd({'BufReadPre'}, {
   end
 })
 
+-- cindent options
+vim.opt.cinoptions = 'N-s'
+
 -- enable syntax. Doing this at the end-ish because this can take a while on
 -- large files
 vim.opt.syntax = 'enable'
