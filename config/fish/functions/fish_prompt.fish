@@ -68,6 +68,8 @@ function fish_prompt
       set gitPrompt ""
    end
 
+   set -l kubePrompt (__kube_prompt)
+
    echo -es $promptStart ' ' $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
-   echo -es $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
+   echo -es $modeIndicator $time (set_color --bold purple) ' ' $userAndHost (set_color blue) $kubePrompt ' ' $statusColor $promptEnd (set_color normal) ' '
 end
