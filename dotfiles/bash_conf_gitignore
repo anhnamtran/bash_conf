@@ -89,6 +89,7 @@
 .zoom/
 **.sav
 **.vdf
+**/mpv/watch_later/
 *.JPEG
 *.JPG
 *.desktop
