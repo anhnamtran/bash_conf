@@ -4,6 +4,7 @@ acpi
 adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
 adobe-source-han-sans-kr-fonts
+alsa-card-profiles
 alsa-firmware
 alsa-plugins
 alsa-utils
@@ -15,9 +16,9 @@ archlinux-contrib
 archlinux-keyring
 archlinux-xdg-menu
 aria2
+arp-scan
 autoconf
 automake
-autorandr-git
 autotiling-git
 awesome-terminal-fonts
 b43-fwcutter
@@ -33,12 +34,16 @@ bluez
 bluez-utils
 btrfs-progs
 cabextract
+calf
 cantarell-fonts
 clang
 cryptsetup
 cups
 cups-filters
 cups-pdf
+dconf-editor
+ddcci-driver-linux-dkms
+ddcutil
 debugedit
 device-mapper
 dex
@@ -112,6 +117,7 @@ glances
 glmark2
 gnome-disk-utility
 gnome-keyring
+gnome-shell-extension-gsconnect
 google-chrome
 grep
 groff
@@ -153,6 +159,7 @@ jfsutils
 jq
 jre-openjdk
 kcm-wacomtablet
+kdeconnect
 kitty-git
 krita
 less
@@ -160,6 +167,7 @@ lib32-nvidia-utils
 libdvdcss
 libfido2
 libgsf
+libmysofa
 libopenraw
 libreoffice-fresh
 libtool
@@ -175,6 +183,7 @@ linux-firmware
 linux-headers
 logiops
 logrotate
+lrzip
 lsb-release
 lsp-plugins
 lsscsi
@@ -208,7 +217,9 @@ networkmanager-openvpn
 nfs-utils
 nilfs-utils
 nitrogen
+nmap
 nodejs
+nordvpn-bin
 noto-fonts
 npm
 nss-mdns
@@ -222,6 +233,7 @@ nvidia-settings
 nvidia-utils
 obs-studio
 obsidian
+openbsd-netcat
 os-prober
 otf-aurulent-nerd
 otf-cascadia-code-nerd
@@ -244,7 +256,9 @@ perl
 phoronix-test-suite
 pico
 picom-git
+pipewire
 pipewire-alsa
+pipewire-audio
 pipewire-jack
 pipewire-pulse
 pkgconf
@@ -261,12 +275,15 @@ python
 python-bluetooth-battery
 python-capng
 python-defusedxml
+python-nautilus
 python-packaging
 python-pip
 python-pylint
 python-pynvim
 python-pyqt5
+qbittorrent
 qimgv-git
+qt5ct-kde
 rclone
 rebuild-detector
 redshift
@@ -288,6 +305,7 @@ shellcheck
 signal-desktop
 smartmontools
 sof-firmware
+speedtest-cli
 splix
 spotify
 steam
@@ -296,6 +314,7 @@ sysfsutils
 sysstat
 system-config-printer
 systemd-sysvcompat
+termshark
 texinfo
 thermald
 thunar
@@ -304,6 +323,7 @@ thunar-volman
 tldr
 tmux-git
 tor-browser
+traceroute
 tree
 ttf-3270-nerd
 ttf-agave-nerd
@@ -344,6 +364,7 @@ ttf-noto-nerd
 ttf-opensans
 ttf-profont-nerd
 ttf-proggyclean-nerd
+ttf-roboto
 ttf-roboto-mono-nerd
 ttf-sharetech-mono-nerd
 ttf-sourcecodepro-nerd
@@ -372,13 +393,16 @@ v4l2ucp
 veracrypt
 vi
 vim
+vlc
 vulkan-intel
 vulkan-radeon
 welcome
 wget
 which
+wireguard-tools
 wireless_tools
 wireplumber
+wireshark-cli
 wmctrl
 wpa_supplicant
 xbindkeys
