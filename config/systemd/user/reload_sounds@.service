@@ -1,0 +1,9 @@
+[Unit]
+Description=Restart pipewire, wireplumber, and easyeffects on resume from suspend
+
+[Service]
+Type=simple
+ExecStart=%h/bin/reload_sounds
+
+[Install]
+WantedBy=resume@%u.service

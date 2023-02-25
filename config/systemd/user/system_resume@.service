@@ -1,0 +1,10 @@
+[Unit]
+Description=Call user's suspend target after system suspend
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl --user --machine=%i@ start --wait resume@%u.target
+
+[Install]
+WantedBy=suspend.target
