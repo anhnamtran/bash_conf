@@ -82,6 +82,7 @@
 .vscode/
 .wget-hsts
 .xinitrc
+.xprofile
 .xscreensaver
 .xserverrc
 .xsession-errors*
@@ -132,6 +133,7 @@ config/1Password/
 config/BraveSoftware/
 config/Code\ Industry/
 config/QtProject.conf
+config/Signal/
 config/Yubico/
 config/autorandr/default
 config/cef_user_data/
@@ -140,23 +142,29 @@ config/coc/
 config/dconf/
 config/ibus/
 config/kactivitymanagerdrc
+config/kde.org/
 config/kdeconnect/
 config/kglobalshortcutsrc
 config/libreoffice/
 config/mgba/
 config/microsoft-edge-dev/
 config/nautilus/
+config/nordvpn/
 config/nvim/plugin/
 config/obs-studio/
 config/obsdian-html
 config/pavucontrol.ini
 config/pulse/
+config/qBittorrent/
 config/rclone/
 config/tabletdblocalrc
+config/termshark/
 config/unity3d/
+config/vlc/
 config/yay/
 docs/
 downloads/
+emulator/
 external/
 go/
 obsidian/
@@ -168,4 +176,5 @@ vimwiki/
 !firefox-omni.patch
 external
 flameshot.ini
+media
 nohup.out
