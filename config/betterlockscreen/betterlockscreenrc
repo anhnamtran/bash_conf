@@ -11,36 +11,40 @@ pixel_scale=10,1000
 solid_color=282C34
 wallpaper_cmd="feh --bg-fill"
 quiet=false
-i3lockcolor_bin="/usr/bin/i3lock"
 
 # default theme
 loginbox=282c3466
 loginshadow=282c34ff
-#
 locktext="$USER"
-font="Iosevka Bold"
-# ring colors: normal, verifying, wrong
+font="Iosevka:style=Bold"
 ringcolor=abb2bfff
-ringvercolor=61afefff
-ringwrongcolor=e06c75ff
-# inside of ring colors: normal, verifying, wrong
 insidecolor=282c34ff
-insidevercolor=282c34ff
-insidewrongcolor=282c34ff
-# separator color
 separatorcolor=abb2bfff
-#
+ringvercolor=61afefff
+insidevercolor=282c34ff
+ringwrongcolor=e06c75ff
+insidewrongcolor=282c34ff
 timecolor=abb2bfff
 time_format="%H:%M:%S"
-#
 greetercolor=abb2bfff
 layoutcolor=abb2bfff
-#
 keyhlcolor=282c34ff
 bshlcolor=e06c75ff
-#
-modifcolor=e06c75ff
+veriftext="Verifying..."
 verifcolor=abb2bfff
+wrongtext="Failure!"
 wrongcolor=e06c75ff
-#
+modifcolor=e06c75ff
 bgcolor=282c3466
+
+
+#
+# expert options (change at own risk!)
+#
+
+i3lockcolor_bin="/usr/bin/i3lock"   # Manually set command for i3lock-color
+# suspend_command="systemctl suspend" # Manually change action e.g. hibernate/suspend-command
+
+# i3lock-color - custom arguments
+# lockargs=() 						  # overwriting default "(-n)"
+# lockargs+=(--ignore-empty-password) # appending new argument
