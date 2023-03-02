@@ -87,6 +87,7 @@ return require('packer').startup(function(use)
       require('diffview').setup()
     end
   }
+  use 'rbong/vim-flog'
   use {
     'kylechui/nvim-surround',
     config = function()
