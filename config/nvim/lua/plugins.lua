@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
   -- Syntax handling
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use {
-    'p00f/nvim-ts-rainbow',
+    'mrjones2014/nvim-ts-rainbow',
     requires = { 'nvim-treesitter/nvim-treesitter' }
   }
   use { 'neoclide/coc.nvim', branch = 'release', run = ':CocUpdate' }
@@ -87,6 +87,7 @@ return require('packer').startup(function(use)
       require('diffview').setup()
     end
   }
+  use 'rbong/vim-flog'
   use {
     'kylechui/nvim-surround',
     config = function()
