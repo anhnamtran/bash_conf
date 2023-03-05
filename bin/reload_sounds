@@ -2,4 +2,4 @@
 systemctl restart --user pipewire
 systemctl restart --user wireplumber
 pgrep -x easyeffects | xargs kill -9
-easyeffects --gapplication-service &>/dev/null & disown
+easyeffects --gapplication-service &>/dev/null
