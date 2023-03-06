@@ -18,9 +18,6 @@ vim.g.coc_global_extension = {
   'coc-sumneko-lua',
 }
 
-vim.g.coc_snippet_next = '<TAB>'
-vim.g.coc_snippet_prev = '<S-TAB>'
-
 local CocCustomAu = vim.api.nvim_create_augroup('CocCustomAu', {})
 vim.api.nvim_create_autocmd({ 'BufRead,BufNewFile' }, {
   group = CocCustomAu,
