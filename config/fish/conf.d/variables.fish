@@ -10,8 +10,9 @@ set -gx GIT_DISCOVERY_ACROSS_FILESYSTEM 1
 set -gx RIPGREP_CONFIG_PATH ~/.ripgreprc
 set -gx LESS "XRF"
 
-set -gx FZF_DEFAULT_COMMAND "rg --smart-case --files --hidden --follow"
+set -gx FZF_DEFAULT_COMMAND "fd --type f --search-path=\$dir"
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_CTRL_T_OPTS "--preview 'bat -n --color=always {}'"
 
 # Ignore deprecation warnings for Python
 set -gx PYTHONWARNINGS "ignore"
