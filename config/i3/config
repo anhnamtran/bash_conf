@@ -164,7 +164,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open specific applications in floating mode
 for_window [title="File Transfer*"] floating enable
-for_window [title="Zoom*"] border normal
 for_window [class="Nitrogen"] floating enable, sticky enable
 for_window [class="(?i)System-config-printer.py"] floating enable
 for_window [class="(?i)virtualbox"] floating enable, border normal
@@ -175,6 +174,14 @@ for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title=".*Obsidian v.*"] border pixel 1
+
+# Zoom specific window settings
+for_window [instance="^zoom(\.|$|\s)" title="^Zoom($|\s)"] floating disable, border pixel
+for_window [instance="^zoom(\.|$|\s)" title="^zoom"] floating enable, border none no_focus [instance="^zoom(\.|$|\s)" title="^zoom"]
+for_window [instance="^join\?action=join" title="^Zoom($|\s)"] floating disable, border pixel
+for_window [instance="^join\?action=join" title="^join\?action=join"] floating enable, border none no_focus [instance="^join\?action=join" title="^join\?action=join"]
+for_window [instance="^start\?action=start" title="^Zoom($|\s)"] floating disable, border pixel
+for_window [instance="^start\?action=start" title="^start\?action=start"] floating enable, border none no_focus [instance="^start\?action=start" title="^start\?action=start"]
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
