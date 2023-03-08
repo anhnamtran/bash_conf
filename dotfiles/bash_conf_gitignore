@@ -81,6 +81,7 @@
 .vimrc
 .vscode/
 .wget-hsts
+.x2go*
 .xinitrc
 .xprofile
 .xscreensaver
