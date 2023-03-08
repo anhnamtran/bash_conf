@@ -1,5 +1,6 @@
 [Unit]
 Description=Restart pipewire, wireplumber, and easyeffects on resume from suspend
+StartLimitBurst=5
 
 [Service]
 Type=simple
