@@ -5,4 +5,5 @@ PRIMARY=$(echo "$CONNECTED" | grep "primary" | cut -f1 -d' ')
 SECONDARY=$(echo "$CONNECTED" | grep -v "primary" | cut -f1 -d' ')
 
 betterlockscreen -u $HOME/pics/wallpapers/onedark.png
+nitrogen --restore
 $HOME/config/polybar/launcher.sh
