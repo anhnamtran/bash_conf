@@ -4,6 +4,7 @@ acpi
 adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
 adobe-source-han-sans-kr-fonts
+adwaita-qt5
 alsa-card-profiles
 alsa-firmware
 alsa-plugins
@@ -17,6 +18,7 @@ archlinux-keyring
 archlinux-xdg-menu
 aria2
 arp-scan
+audacity
 autoconf
 automake
 autotiling-git
@@ -32,6 +34,7 @@ binutils
 bison
 bluez
 bluez-utils
+breeze-gtk
 btrfs-progs
 cabextract
 calf
@@ -80,7 +83,7 @@ eos-quickstart
 eos-rankmirrors
 eos-update-notifier
 ethtool
-evdi-git
+evdi
 evince
 exfatprogs
 f2fs-tools
@@ -159,7 +162,11 @@ jfsutils
 jq
 jre-openjdk
 kcm-wacomtablet
+kconfig
+kcoreaddons
 kdeconnect
+kdelibs4support
+ki18n
 kitty-git
 krita
 less
@@ -283,7 +290,8 @@ python-pynvim
 python-pyqt5
 qbittorrent
 qimgv-git
-qt5ct-kde
+qt5ct
+qtcurve-qt5
 rclone
 rebuild-detector
 redshift
@@ -322,6 +330,8 @@ thunar-archive-plugin
 thunar-volman
 tldr
 tmux-git
+todoist
+todoist-appimage
 tor-browser
 traceroute
 tree
@@ -405,6 +415,8 @@ wireplumber
 wireshark-cli
 wmctrl
 wpa_supplicant
+x2goclient
+x2goserver
 xbindkeys
 xdg-user-dirs
 xdg-user-dirs-gtk
@@ -434,6 +446,7 @@ xterm
 yapf
 yarn
 yay
+youtube-dl-git
 yubico-pam
 yubikey-manager
 yubikey-manager-qt
