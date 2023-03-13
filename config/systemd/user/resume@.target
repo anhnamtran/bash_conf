@@ -3,3 +3,6 @@ Description=User level suspend target
 StopWhenUnneeded=yes
 # Put any services that needs to be run below this line
 Wants=reload_sounds@%u.service
+
+[Install]
+WantedBy=default.target
