@@ -135,8 +135,10 @@ config/BraveSoftware/
 config/Code\ Industry/
 config/QtProject.conf
 config/Signal/
+config/Todoist/
 config/Yubico/
 config/autorandr/default
+config/betterlockscreenrc
 config/cef_user_data/
 config/chromium/
 config/coc/
@@ -168,6 +170,7 @@ downloads/
 emulator/
 external/
 go/
+music/
 obsidian/
 opt/
 pics/
