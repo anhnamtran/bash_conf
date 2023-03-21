@@ -13,8 +13,11 @@ vpn_status() {
     local city=$(echo "$status" | grep "City" | awk '{ print $2 }')
     if [[ -n "$city" ]]; then
       echo "$country/$city"
-    else
+    elif [[ -n "$country" ]]; then
       echo "$country"
+    else
+      local meshhost=$(echo "$status" | grep "Hostname" | awk '{ print $2 }')
+      echo "$meshhost"
     fi
     exit 0
   else
