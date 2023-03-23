@@ -103,7 +103,8 @@ local mappings = {
         {"<C-SPACE>", 'coc#refresh()', { expr = true }},
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
-        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<CR>"', {expr = true, noremap = true}},
+        -- Make <CR> either confirm completion or call nvim-autopairs enter
+        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<C-r>=v:lua.require\'nvim-autopairs\'.autopairs_cr()<CR>"', {expr = true, noremap = true}},
 	},
 	n = { -- Normal mode
         {"K", '<CMD>lua _G.show_docs()<CR>', { silent = true }},
