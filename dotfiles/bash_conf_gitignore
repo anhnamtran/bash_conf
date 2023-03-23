@@ -29,6 +29,7 @@
 .dircolors
 .dmrc
 .fehbg
+.fltk/
 .gconf/
 .gimp-2.8/
 .git
@@ -50,6 +51,7 @@
 .mozilla/
 .muttrc
 .nanorc
+.nmcli-history
 .npm/
 .nvidia-settings-rc
 .pdfstudioviewer2022/
@@ -79,6 +81,7 @@
 .vim/
 .viminfo
 .vimrc
+.vnc/
 .vscode/
 .wget-hsts
 .x2go*
