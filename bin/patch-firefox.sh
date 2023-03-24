@@ -7,7 +7,7 @@ USER=$1
 
 set -e
 
-PATCH_FILE="$HOME/bin/firefox-omni.patch"
+PATCH_FILE="/home/$USER/bin/firefox-omni.patch"
 PATCH_DIR="/tmp/firefox-omni"
 PATCHED_OMNI="/tmp/omni.ja"
 
