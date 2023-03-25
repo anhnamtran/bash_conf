@@ -1,8 +1,0 @@
-#!/bin/bash
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-source $SCRIPT_DIR/../commonPostSwitch
-
-if (( $NUM_CONNECTED > 1 )); then
-  autorandr --load horizontal
-  exit 0
-fi

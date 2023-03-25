@@ -34,19 +34,14 @@ return require('packer').startup(function(use)
   -- GUIs elements
   use 'nvim-lualine/lualine.nvim'
   use 'kyazdani42/nvim-web-devicons'
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = function ()
-      require('gitsigns').setup()
-    end
-  }
+  use 'lewis6991/gitsigns.nvim'
   use 'mhinz/vim-startify'
   use 'lukas-reineke/indent-blankline.nvim'
 
   -- Syntax handling
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use {
-    'p00f/nvim-ts-rainbow',
+    'mrjones2014/nvim-ts-rainbow',
     requires = { 'nvim-treesitter/nvim-treesitter' }
   }
   use { 'neoclide/coc.nvim', branch = 'release', run = ':CocUpdate' }
@@ -92,6 +87,7 @@ return require('packer').startup(function(use)
       require('diffview').setup()
     end
   }
+  use 'rbong/vim-flog'
   use {
     'kylechui/nvim-surround',
     config = function()

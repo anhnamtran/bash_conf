@@ -18,9 +18,6 @@ vim.g.coc_global_extension = {
   'coc-sumneko-lua',
 }
 
-vim.g.coc_snippet_next = '<TAB>'
-vim.g.coc_snippet_prev = '<S-TAB>'
-
 local CocCustomAu = vim.api.nvim_create_augroup('CocCustomAu', {})
 vim.api.nvim_create_autocmd({ 'BufRead,BufNewFile' }, {
   group = CocCustomAu,
@@ -106,7 +103,8 @@ local mappings = {
         {"<C-SPACE>", 'coc#refresh()', { expr = true }},
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
-        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<CR>"', {expr = true, noremap = true}},
+        -- Make <CR> either confirm completion or call nvim-autopairs enter
+        {'<CR>',  'coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : "<C-g>u<C-r>=v:lua.require\'nvim-autopairs\'.autopairs_cr()<CR>"', {expr = true, noremap = true}},
 	},
 	n = { -- Normal mode
         {"K", '<CMD>lua _G.show_docs()<CR>', { silent = true }},
@@ -122,8 +120,8 @@ local mappings = {
 
         {'<leader>rn', '<CMD>call CocActionAsync("rename")<CR>', { noremap = true }},
 
-        {'<leader>zg', '<CMD>CocCommand cSpell.addWordToDictionary<CR>', { noremap = true }},
-        {'<leader>zi', '<CMD>CocCommand cSpell.addIgnoreWord<CR>', { noremap = true }},
+        {'<leader>zg', '<CMD>CocCommand cSpell.addWordToUserDictionary<CR>', { noremap = true }},
+        {'<leader>zi', '<CMD>CocCommand cSpell.addIgnoreWordToUser<CR>', { noremap = true }},
 
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-F>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-B>"', { expr = true, silent = true, nowait = true }},

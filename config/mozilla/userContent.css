@@ -17,3 +17,9 @@ input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='check
 #webrtcIndicator {
   display: none;
 }
+
+/* remove maximum/minimum width restriction of sidebar */
+#sidebar-box {
+  max-width: none !important;
+  min-width: 0px !important;
+}
