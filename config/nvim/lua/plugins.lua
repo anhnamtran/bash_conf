@@ -81,12 +81,6 @@ return require('packer').startup(function(use)
   -- Utility
   use 'rgroli/other.nvim'
   use 'tpope/vim-fugitive'
-  use {
-    'sindrets/diffview.nvim',
-    config = function ()
-      require('diffview').setup()
-    end
-  }
   use 'rbong/vim-flog'
   use {
     'kylechui/nvim-surround',
