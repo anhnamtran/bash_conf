@@ -4,7 +4,7 @@
 display_on=0
 span_image=false
 lock_timeout=300
-fx_list=(dim blur dimblur pixel dimpixel color)
+fx_list=(blur)
 dim_level=40
 blur_level=1
 pixel_scale=10,1000
@@ -47,4 +47,5 @@ bgcolor=282c3466
 
 # i3lock-color - custom arguments
 # lockargs=() 						  # overwriting default "(-n)"
-# lockargs+=(--ignore-empty-password) # appending new argument
+lockargs+=(--indicator) # appending new argument
+lockargs+=(--keylayout 0) # appending new argument
