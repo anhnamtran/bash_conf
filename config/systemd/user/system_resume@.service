@@ -4,7 +4,7 @@ After=suspend.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/systemctl --user --machine=%i@ restart --wait resume@%u.target
+ExecStart=/usr/bin/systemctl --user --machine=%i@ restart resume@%i.target
 
 [Install]
 WantedBy=suspend.target
