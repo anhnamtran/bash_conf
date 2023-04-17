@@ -7,7 +7,7 @@ SLEEP_PID=0
 SLEEP_INT="$1"
 
 run_speedtest() {
-  if ! ping -W 5 -c 1 google.com &>/dev/null; then
+  if ! nc -zw1 google.com 433 &>/dev/null; then
     echo "No connection."
     exit 1
   fi
