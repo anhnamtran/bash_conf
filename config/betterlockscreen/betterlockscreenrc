@@ -47,5 +47,4 @@ bgcolor=282c3466
 
 # i3lock-color - custom arguments
 # lockargs=() 						  # overwriting default "(-n)"
-lockargs+=(--indicator) # appending new argument
 lockargs+=(--keylayout 0) # appending new argument
