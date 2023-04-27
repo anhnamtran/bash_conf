@@ -58,6 +58,10 @@ return require('packer').startup(function(use)
               && cmake --build build --config Release \
               && cmake --install build --prefix build]]
   }
+  use {
+    'fannheyward/telescope-coc.nvim',
+    requires = 'nvim-telescope/telescope.nvim'
+  }
   use 'alexghergh/nvim-tmux-navigation'
   use {
     'preservim/nerdtree',

@@ -1,6 +1,16 @@
 -- Setup for telescope.nvim
-require('telescope').setup()
+require('telescope').setup({
+  extensions = {
+    coc = {
+      prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+    }
+  }
+})
+
+require('telescope').load_extension('coc')
 require('telescope').load_extension('fzf')
+
+-- Configuration for built-ins
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '_', function() builtin.find_files( { cwd = vim.fn.expand('%:p:h') } ) end, {})
 vim.keymap.set('n', '<leader>F', builtin.find_files, {})
@@ -13,4 +23,14 @@ vim.api.nvim_create_user_command("Files",
     builtin.find_files( { cwd = opts.fargs[1] } )
   end,
   { nargs = 1, complete = "dir" }
+)
+
+-- Configuration for extensions
+local extensions = require('telescope').extensions
+
+vim.api.nvim_create_user_command("Symbols",
+  function (opts)
+    extensions.coc.workspace_symbols(opts)
+  end,
+  { nargs = 0 }
 )
