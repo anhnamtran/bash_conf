@@ -14,7 +14,7 @@ show_tray() {
 
 hide_tray() {
   polybar-msg action tray module_hide &>/dev/null
-  echo ""
+  echo "󰄽"
 }
 
 handle_click() {
