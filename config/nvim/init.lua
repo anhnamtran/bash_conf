@@ -21,6 +21,7 @@ require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
 
 -- Syntax plugins configuration
+require('andrew_nt.onedark')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
