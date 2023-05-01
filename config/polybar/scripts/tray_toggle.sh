@@ -30,6 +30,9 @@ handle_click() {
 handle_start() {
   if [ "$START_TRAY_HIDDEN" = "true" ]; then
     hide_tray
+    # Workaround for the tray overallping on startup
+    show_tray
+    hide_tray
     touch "$CACHE_DIR/$LOCK_FILE"
   else
     show_tray
