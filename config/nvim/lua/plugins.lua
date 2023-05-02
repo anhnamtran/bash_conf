@@ -115,4 +115,6 @@ return require('packer').startup(function(use)
       require('colorizer').setup()
     end
   }
+
+  use { 'sakhnik/nvim-gdb', run = 'install.sh' }
 end)
