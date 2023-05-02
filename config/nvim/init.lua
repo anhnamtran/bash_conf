@@ -315,7 +315,20 @@ command! OpenOnly :call DeleteInactiveBufs()
 nnoremap <C-w>b :OpenOnly<CR>
 ]])
 
+-- terminal mappings and commands
 tmap('<ESC>', '<C-\\><C-n>')
+tmap('<C-l>', '<C-\\><C-n><Cmd>NvimTmuxNavigateRight<CR>')
+tmap('<C-h>', '<C-\\><C-n><Cmd>NvimTmuxNavigateLeft<CR>')
+tmap('<C-j>', '<C-\\><C-n><Cmd>NvimTmuxNavigateDown<CR>')
+tmap('<C-k>', '<C-\\><C-n><Cmd>NvimTmuxNavigateUp<CR>')
+
+-- always enter insertmode when entering terminal
+vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
+   pattern = 'term://*',
+   callback = function(args)
+      vim.cmd.startinsert()
+   end
+})
 
 ----------------------------------- THEMES -------------------------------------
 
