@@ -24,7 +24,7 @@
 
   "clangd.arguments": [
     "--all-scopes-completion",
-    "--limit-results=0",
+    "--limit-results=500",
     "--cross-file-rename"
   ],
 

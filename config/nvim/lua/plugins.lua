@@ -24,12 +24,7 @@ return require('packer').startup(function(use)
   use 'nvim-lua/popup.nvim'
 
   -- Themes
-  use {
-    'navarasu/onedark.nvim',
-    config = function()
-      require('onedark').load()
-    end
-  }
+  use 'navarasu/onedark.nvim'
 
   -- GUIs elements
   use 'nvim-lualine/lualine.nvim'
@@ -40,6 +35,7 @@ return require('packer').startup(function(use)
 
   -- Syntax handling
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' }
   use {
     'mrjones2014/nvim-ts-rainbow',
     requires = { 'nvim-treesitter/nvim-treesitter' }
