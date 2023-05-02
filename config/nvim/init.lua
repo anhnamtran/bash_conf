@@ -167,14 +167,15 @@ vim.opt.termguicolors = true
 
 -- highlight trailing whitespaces
 vim.api.nvim_create_autocmd(
-  {'BufWinEnter', 'BufWinLeave', 'InsertEnter', 'InsertLeave'}, {
+  {'BufWinEnter', 'BufWinLeave', 'InsertEnter', 'InsertLeave', 'TermOpen'}, {
   group = vim.api.nvim_create_augroup('ExtraWhiteSpaceHi', {}),
   pattern = '*',
   callback = function(args)
+    local is_terminal = vim.api.nvim_buf_get_option(0, 'buftype') == 'terminal'
     vim.cmd([[match DiffDelete /\s\+$/]])
     if args.event == 'InsertEnter' then
       vim.cmd([[match DiffDelete /\s\+\%#\@<!$/]])
-    elseif args.event == 'BufWinLeave' then
+    elseif args.event == 'BufWinLeave' or is_terminal then
       vim.fn.clearmatches()
     else
       vim.cmd([[match DiffDelete /\s\+$/]])
@@ -234,6 +235,9 @@ local function nmap(shortcut, command, noremap)
 end
 local function vmap(shortcut, command, noremap)
   vim.keymap.set('v', shortcut, command, { noremap = noremap, silent = true })
+end
+local function tmap(shortcut, command, noremap)
+  vim.keymap.set('t', shortcut, command, { noremap = noremap, silent = true })
 end
 
 -- insert mode
@@ -316,6 +320,8 @@ endfunction
 command! OpenOnly :call DeleteInactiveBufs()
 nnoremap <C-w>b :OpenOnly<CR>
 ]])
+
+tmap('<ESC>', '<C-\\><C-n>')
 
 ----------------------------------- THEMES -------------------------------------
 

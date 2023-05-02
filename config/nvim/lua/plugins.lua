@@ -116,6 +116,8 @@ return require('packer').startup(function(use)
   use 'lewis6991/impatient.nvim'
   use 'ojroques/nvim-osc52'
 
+  use { 'sakhnik/nvim-gdb', run = 'install.sh' }
+
   -- Arista specific plugins
   use 'https://gitlab.aristanetworks.com/vim-scripts/mts.vim'
   use 'https://gitlab.aristanetworks.com/vim-scripts/bug.vim'
