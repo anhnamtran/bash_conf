@@ -6,6 +6,7 @@ vim.opt.encoding = 'utf-8'
 
 -- load plugins from packer
 require('plugins')
+require('arista')
 
 -- Utility plugins configuration
 require('andrew_nt.obsession')
@@ -48,8 +49,10 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
 })
 
 -- tabbing and indentation
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+if vim.g.arista_vim ~= 1 then
+  vim.opt.tabstop = 2
+  vim.opt.shiftwidth = 2
+end
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smarttab = true
@@ -215,6 +218,9 @@ vim.api.nvim_create_autocmd({'BufReadPre'}, {
     end
   end
 })
+
+-- cindent options
+vim.opt.cinoptions = 'N-s'
 
 -- enable syntax. Doing this at the end-ish because this can take a while on
 -- large files
