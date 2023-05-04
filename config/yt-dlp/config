@@ -2,6 +2,7 @@
 
 # Save files in ~/videos/downloaded
 -o ~/videos/downloaded/%(title)s.%(ext)s
+--restrict-filenames
 
 # Use aria2 to download
 --downloader aria2c
