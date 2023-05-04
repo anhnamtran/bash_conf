@@ -6,7 +6,6 @@ vim.opt.encoding = 'utf-8'
 
 -- load plugins from packer
 require('plugins')
-require('arista')
 
 -- Utility plugins configuration
 require('andrew_nt.obsession')
@@ -31,9 +30,7 @@ require('andrew_nt.coc')
 -- VimL settings
 
 -- color columns and textwidth
-if vim.g.arista_vim ~= 1 then
-  vim.opt.textwidth = 80
-end
+vim.opt.textwidth = 80
 vim.opt.colorcolumn = '+0'
 -- unset colorcolumn for inactive windows
 vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
@@ -49,10 +46,8 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
 })
 
 -- tabbing and indentation
-if vim.g.arista_vim ~= 1 then
-  vim.opt.tabstop = 2
-  vim.opt.shiftwidth = 2
-end
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smarttab = true

@@ -1,0 +1,8 @@
+--ignore-errors
+
+# Save files in ~/videos/downloaded
+-o ~/videos/downloaded/$(title)s.%(ext)s
+
+# Use aria2 to download
+--external-downloader aria2c
+--external-downloader-args '-c -j 3 -x 3 -s 3 -k 1M'
