@@ -1,10 +1,11 @@
 # Customized prompt
 function fish_prompt
    set -l lastStatus $status
-   set -l promptStart ""
+   set -l topPromptStart "╭╴"
+   set -l bottomPromptStart "╰╴"
    set -l time (date +%H:%M:%S)
-   set -l dir (pwd)
-   set -l promptEnd "\$"
+   set -l dir (prompt_pwd -d 0)
+   set -l promptEnd ""
    set -l userAndHost "$USER"@(prompt_hostname)
 
    if functions -q fish_is_root_user; and fish_is_root_user
@@ -51,9 +52,9 @@ function fish_prompt
          set modeIndicator (set_color green --bold)'[V] '
    end
 
-   set -l statusColor (set_color green)
+   set -l statusColor (set_color --bold green)
    if [ $lastStatus -ne 0 ]
-      set statusColor (set_color red)
+      set statusColor (set_color --bold red)
    end
 
 
@@ -68,6 +69,6 @@ function fish_prompt
       set gitPrompt ""
    end
 
-   echo -es $promptStart ' ' $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
-   echo -es $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
+   echo -es $topPromptStart $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
+   echo -es $bottomPromptStart $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
 end
