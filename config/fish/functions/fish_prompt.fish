@@ -1,11 +1,11 @@
 # Customized prompt
 function fish_prompt
    set -l lastStatus $status
-   set -l topPromptStart "╭╴"
-   set -l bottomPromptStart "╰╴"
+   set -l topPromptStart (set_color --dim) "╭╴"
+   set -l bottomPromptStart (set_color --dim) "╰╴"
    set -l time (date +%H:%M:%S)
    set -l dir (prompt_pwd -d 0)
-   set -l promptEnd ""
+   set -l promptEnd "󰫍 "
    set -l userAndHost "$USER"@(prompt_hostname)
 
    if functions -q fish_is_root_user; and fish_is_root_user
@@ -41,15 +41,15 @@ function fish_prompt
    set -l modeIndicator
    switch $fish_bind_mode
       case default
-         set modeIndicator (set_color green)'[N] '
+         set modeIndicator (set_color --dim green) '[' (set_color --bold green) 'n' (set_color normal) (set_color --dim green) '] '
       case insert
-         set modeIndicator (set_color blue)'[I] '
+         set modeIndicator (set_color --dim blue) '[' (set_color blue --bold) 'i' (set_color normal) (set_color --dim blue) '] '
       case replace_one
-         set modeIndicator (set_color cyan)'[r] '
+         set modeIndicator (set_color --dim cyan) '[' (set_color cyan --bold) 'r' (set_color normal) (set_color --dim cyan) '] '
       case replace
-         set modeIndicator (set_color cyan --bold)'[R] '
+         set modeIndicator (set_color --dim cyan) '[' (set_color cyan --bold) 'R' (set_color normal) (set_color --dim cyan) '] '
       case visual
-         set modeIndicator (set_color green --bold)'[V] '
+         set modeIndicator (set_color --dim green) '[' (set_color green --bold) 'v' (set_color normal) (set_color --dim green) '] '
    end
 
    set -l statusColor (set_color --bold green)
@@ -72,5 +72,5 @@ function fish_prompt
    set -l kubePrompt (__kube_prompt)
 
    echo -es $topPromptStart $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
-   echo -es $bottomPromptStart $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
+   echo -es $bottomPromptStart $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor (set_color --bold) $promptEnd (set_color normal) ' '
 end
