@@ -60,6 +60,7 @@
 .pki/
 .process_monitoring.conf
 .profile
+.psensor/
 .pulse-cookie
 .python_history
 .ripgreprc
@@ -86,6 +87,7 @@
 .vimrc
 .vnc/
 .vscode/
+.w3m/
 .wget-hsts
 .x2go*
 .xinitrc
@@ -119,6 +121,7 @@ config/vim/**
 config/vivaldi*
 krita*rc
 kube*
+Astral Ascent/
 Backup/
 Extracted/
 GPUCache/
@@ -152,6 +155,7 @@ config/chromium/
 config/coc/
 config/dconf/
 config/discord/
+config/fontforge/
 config/ibus/
 config/kactivitymanagerdrc
 config/kde.org/
