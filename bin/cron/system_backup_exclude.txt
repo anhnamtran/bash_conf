@@ -11,3 +11,7 @@
 - /home/*/.cargo
 - /home/*/.mozilla
 - /home/*/external/
+- /home/*/media
+- AndrewTran
+- node_modules
+- go/*

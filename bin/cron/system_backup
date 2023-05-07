@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 ROOT="/"
-BACKUP_DIR="/run/media/andrew_nt/Andrew Tran/Backups/LenovoArch/"
+BACKUP_DIR="/run/media/andrew_nt/AndrewTran/Backups/DahliaEndeavor/"
 
 if ! [ -d "$BACKUP_DIR" ]; then
-  echo "$BACKUP_DIR no found or not mounted, unable to backup system"
+  echo "$BACKUP_DIR not found or not mounted, unable to backup system"
   exit 1
 fi
 if ! type rsync > /dev/null 2>&1; then
@@ -11,11 +11,12 @@ if ! type rsync > /dev/null 2>&1; then
   exit 1
 fi
 
-rsync -aAXHS \
-  --info=progress1,stats1 \
+echo "Backing up system... "
+sudo rsync -aAXHS \
+  --info=progress2,stats2 \
   --delete \
   --exclude-from="/home/andrew_nt/bin/cron/system_backup_exclude.txt" \
-  "$ROOT" "$BACKUP_DIR" > /home/andrew_nt/bin/cron/system_backup.log 2>&1
+  "$ROOT" "$BACKUP_DIR" 2>&1 | sudo tee /home/andrew_nt/bin/cron/system_backup.log
 
 if [ "$?" -ne 0 ]; then
   echo "rsync failed, check cron logs"
