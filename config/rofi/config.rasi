@@ -94,6 +94,7 @@ configuration {
 /*	  directory: "/home";*/
       directories-first: true;
       sorting-method:    "name";
+      command: "kitty ranger";
     }
 
 	/*---------- Other settings ----------*/

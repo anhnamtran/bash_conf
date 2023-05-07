@@ -3,4 +3,4 @@ application/pdf=firefox.desktop
 image/jpeg=qimgv.desktop
 image/png=qimgv.desktop
 image/gif=qimgv.desktop
-inode/directory=org.gnome.Nautilus.desktop
+inode/directory=ranger.desktop

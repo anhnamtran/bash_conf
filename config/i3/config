@@ -33,6 +33,7 @@ bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/laun
 bindsym $mod+Ctrl+s exec --no-startup-id $HOME/.config/rofi/priv_launchers/type-1/launcher.sh
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/rofi/windows/type-1/windows.sh
+bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/rofi/ranger/type-1/ranger.sh
 bindsym $mod+Shift+v exec --no-startup-id $HOME/.config/rofi/vpn/type-1/vpn.sh
 
 # change focus
