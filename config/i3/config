@@ -224,7 +224,6 @@ exec --no-startup-id udiskie -F
 exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
-exec --no-startup-id dunst
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
@@ -234,6 +233,7 @@ exec --no-startup-id 1password --silent
 exec --no-startup-id $HOME/bin/xsetwacom.sh
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/kdeconnect-indicator
+exec_always --no-startup-id dunst
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
