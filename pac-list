@@ -9,6 +9,7 @@ alsa-card-profiles
 alsa-firmware
 alsa-plugins
 alsa-utils
+android-tools
 apache
 arandr
 arc-gtk-theme-eos
@@ -52,7 +53,7 @@ device-mapper
 dex
 dhclient
 diffutils
-displaylink
+discord
 dmenu
 dmidecode
 dmraid
@@ -83,7 +84,6 @@ eos-quickstart
 eos-rankmirrors
 eos-update-notifier
 ethtool
-evdi
 evince
 exfatprogs
 f2fs-tools
@@ -134,6 +134,7 @@ gst-plugins-bad
 gst-plugins-ugly
 gthumb
 gtk-engine-murrine
+gucharmap
 gutenprint
 gvfs
 gvfs-afc
@@ -201,6 +202,7 @@ mailutils
 make
 man-db
 man-pages
+mariadb
 masterpdfeditor
 mdadm
 meld
@@ -208,6 +210,7 @@ mesa-utils
 mgba-qt
 mlocate
 modemmanager
+mosh
 mpc
 mpv
 mtools
@@ -243,7 +246,6 @@ obsidian
 openbsd-netcat
 os-prober
 otf-aurulent-nerd
-otf-cascadia-code-nerd
 otf-codenewroman-nerd
 otf-droid-nerd
 otf-firamono-nerd
@@ -254,11 +256,13 @@ otf-overpass-nerd
 pacman
 pacman-contrib
 pacman-utils
+pacolog
 pam-u2f
 pandoc-cli
 patch
 pavucontrol
 pcsc-tools
+peek
 perl
 phoronix-test-suite
 pico
@@ -277,11 +281,13 @@ poppler-glib
 postfix
 postfixadmin
 power-profiles-daemon
+psensor
 pv
 python
 python-bluetooth-battery
 python-capng
 python-defusedxml
+python-kitty
 python-nautilus
 python-packaging
 python-pip
@@ -292,6 +298,7 @@ qbittorrent
 qimgv-git
 qt5ct
 qtcurve-qt5
+ranger
 rclone
 rebuild-detector
 redshift
@@ -317,6 +324,7 @@ speedtest-cli
 splix
 spotify
 steam
+strace
 sudo
 sysfsutils
 sysstat
@@ -328,10 +336,10 @@ thermald
 thunar
 thunar-archive-plugin
 thunar-volman
+tigervnc
 tldr
 tmux-git
 todoist
-todoist-appimage
 tor-browser
 traceroute
 tree
@@ -342,6 +350,7 @@ ttf-arimo-nerd
 ttf-bigblueterminal-nerd
 ttf-bitstream-vera
 ttf-bitstream-vera-mono-nerd
+ttf-cascadia-code-nerd
 ttf-cousine-nerd
 ttf-daddytime-mono-nerd
 ttf-dejavu
@@ -368,8 +377,8 @@ ttf-monofur-nerd
 ttf-monoid-nerd
 ttf-mononoki-nerd
 ttf-mplus-nerd
-ttf-nerd-fonts-symbols-2048-em
-ttf-nerd-fonts-symbols-2048-em-mono
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
 ttf-noto-nerd
 ttf-opensans
 ttf-profont-nerd
@@ -397,6 +406,7 @@ update-grub
 upower
 usb_modeswitch
 usbutils
+util-linux
 v4l2loopback-dkms
 v4l2loopback-utils
 v4l2ucp
@@ -418,6 +428,8 @@ wpa_supplicant
 x2goclient
 x2goserver
 xbindkeys
+xdg-desktop-portal
+xdg-desktop-portal-gtk
 xdg-user-dirs
 xdg-user-dirs-gtk
 xdg-utils
@@ -446,7 +458,7 @@ xterm
 yapf
 yarn
 yay
-youtube-dl-git
+yt-dlp
 yubico-pam
 yubikey-manager
 yubikey-manager-qt
