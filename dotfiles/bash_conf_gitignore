@@ -44,6 +44,7 @@
 .idea*
 .java/
 .keras/
+.kodi/
 .kube/
 .latexmkrc
 .lesshst
@@ -51,6 +52,7 @@
 .masterpdfeditor/
 .mozilla/
 .muttrc
+.mysql_history
 .nanorc
 .nmcli-history
 .npm/
