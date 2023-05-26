@@ -107,7 +107,6 @@ foomatic-db-gutenprint-ppds
 foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foomatic-db-ppds
-freedownloadmanager
 fsarchiver
 galculator
 gawk
@@ -169,6 +168,7 @@ kdeconnect
 kdelibs4support
 ki18n
 kitty-git
+kodi
 krita
 less
 lib32-nvidia-utils
@@ -179,6 +179,7 @@ libmysofa
 libopenraw
 libreoffice-fresh
 libtool
+libva
 libva-intel-driver
 libva-mesa-driver
 libwnck3
@@ -208,6 +209,7 @@ mdadm
 meld
 mesa-utils
 mgba-qt
+mkinitcpio
 mlocate
 modemmanager
 mosh
@@ -287,13 +289,13 @@ python
 python-bluetooth-battery
 python-capng
 python-defusedxml
-python-kitty
 python-nautilus
 python-packaging
 python-pip
 python-pylint
 python-pynvim
 python-pyqt5
+python-pyudev
 qbittorrent
 qimgv-git
 qt5ct
@@ -324,6 +326,7 @@ speedtest-cli
 splix
 spotify
 steam
+steam-screensaver-fix
 strace
 sudo
 sysfsutils
