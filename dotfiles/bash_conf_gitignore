@@ -54,6 +54,7 @@
 .muttrc
 .mysql_history
 .nanorc
+.newsboat/
 .nmcli-history
 .npm/
 .nvidia-settings-rc
