@@ -114,6 +114,7 @@ gcc
 gdb
 gettext
 ghostscript
+gimp
 git
 glances
 glmark2
@@ -190,6 +191,8 @@ lightdm-slick-greeter
 linux
 linux-firmware
 linux-headers
+linux-lqx
+linux-lqx-headers
 logiops
 logrotate
 lrzip
@@ -226,6 +229,7 @@ network-manager-applet
 networkmanager
 networkmanager-openconnect
 networkmanager-openvpn
+newsboat
 nfs-utils
 nilfs-utils
 nitrogen
