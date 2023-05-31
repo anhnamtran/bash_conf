@@ -225,6 +225,7 @@ exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
+exec --no-startup-id lxpolkit
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id easyeffects --gapplication-service
