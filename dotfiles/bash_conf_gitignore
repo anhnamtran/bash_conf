@@ -57,6 +57,7 @@
 .newsboat/
 .nmcli-history
 .npm/
+.nv/
 .nvidia-settings-rc
 .oracle_jre_usage/
 .pdfstudioviewer2022/
@@ -146,6 +147,7 @@ code/
 config/1Password/
 config/BraveSoftware/
 config/Code\ Industry/
+config/GIMP/
 config/QtProject.conf
 config/Signal/
 config/Todoist/
@@ -172,6 +174,7 @@ config/nordvpn/
 config/nvim/plugin/
 config/obs-studio/
 config/obsdian-html
+config/op/
 config/pavucontrol.ini
 config/pulse/
 config/qBittorrent/
