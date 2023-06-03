@@ -4,3 +4,6 @@ image/jpeg=qimgv.desktop
 image/png=qimgv.desktop
 image/gif=qimgv.desktop
 inode/directory=ranger.desktop
+
+[Added Associations]
+application/zip=firefox.desktop;
