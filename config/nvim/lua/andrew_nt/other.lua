@@ -3,6 +3,9 @@ require('other-nvim').setup {
   -- Don't remember the selection for the current user session
   rememberBuffers = false,
 
+  -- Don't show missing files
+  showMissingFiles = false,
+
   -- change the style to fit more with the theme of my neovim
   style = {
     border = 'single',
@@ -17,7 +20,7 @@ require('other-nvim').setup {
     },
     {
       pattern = '/src/(.*)/(.*).cpp$',
-      target = '/src/%1/%2.hpp',
+      target = '/include/%1/%2.hpp',
       context = 'Header',
     },
     {
@@ -26,7 +29,7 @@ require('other-nvim').setup {
       context = 'Source',
     },
     {
-      pattern = '/src/(.*)/(.*).hpp$',
+      pattern = '/include/(.*)/(.*).hpp$',
       target = '/src/%1/%2.cpp',
       context = 'Source',
     },
