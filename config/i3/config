@@ -66,16 +66,16 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+minus split v; exec notify-send -t 2000 'Tiling Vertically' -a i3
-bindsym $mod+backslash split h; exec notify-send -t 2000 'Tiling Horizontally' -a i3
+bindsym $mod+minus split v; exec --no-startup-id notify-send -t 2000 'Tiling Vertically' -a i3
+bindsym $mod+backslash split h; exec --no-startup-id notify-send -t 2000 'Tiling Horizontally' -a i3
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
+bindsym $mod+s layout stacking; exec --no-startup-id notify-send -t 2000 'Stacking Layout' -a i3
+bindsym $mod+t layout tabbed; exec --no-startup-id notify-send -t 2000 'Tabbed Layout' -a i3
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -89,6 +89,7 @@ bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -105,7 +106,7 @@ bindsym $mod+Shift+l workspace next
 bindsym $mod+Shift+h workspace prev
 
 # create a new workspace with the next index
-bindsym $mod+Shift+n exec $HOME/bin/i3NewSpace.py
+bindsym $mod+Shift+n exec --no-startup-id $HOME/bin/i3NewSpace.py
 
 # workspaces
 set $ws1 1
@@ -218,14 +219,15 @@ mode "resize" {
 
 # Autostart applications
 exec --no-startup-id picom -b
+exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
-exec --no-startup-id dunst
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
-exec --no-startup-id 1password --silent
 exec --no-startup-id lxpolkit
 exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 # Requires NAndLib fork and branch excludable
 exec_always --no-startup-id autotiling -E focus -E move
+exec --no-startup-id 1password --silent
+exec_always --no-startup-id dunst
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
@@ -282,9 +284,13 @@ bindsym $mod+shift+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/
 bindsym $mod+shift+comma exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp prev
 bindsym $mod+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp play
 
-bindsym $mod+F1 exec --no-startup-id $HOME/bin/amixer_mute_toggle
-bindsym $mod+F2 exec --no-startup-id amixer -q set Master 1%- unmute
-bindsym $mod+F3 exec --no-startup-id amixer -q set Master 1%+ unmute
+bindsym $mod+F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+F2 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+F3 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Use mouse wheel and $mod to change volume
+bindsym --whole-window $mod+button5 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym --whole-window $mod+button4 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +1%
 
 bindsym $mod+F5 exec --no-startup-id light -U 5  # decrease brightness
 bindsym $mod+F6 exec --no-startup-id light -A 5    # increase brightness
