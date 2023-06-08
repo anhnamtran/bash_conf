@@ -20,6 +20,10 @@ run_speedtest() {
   local speed_test_json=$(speedtest-cli --timeout 5 --json 2> /dev/null)
   local download=$(echo "$speed_test_json" | jq '.download' | numfmt --to iec --format '%.2fb/s')
   local upload=$(echo "$speed_test_json" | jq '.upload' | numfmt --to iec --format '%.2fb/s')
+  if [[ -z "$download" && -z "$upload" ]]; then
+    echo ""
+    return
+  fi
   echo " $download" " $upload"
 }
 
