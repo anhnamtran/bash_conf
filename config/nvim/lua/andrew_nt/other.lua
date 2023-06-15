@@ -3,9 +3,6 @@ require('other-nvim').setup {
   -- Don't remember the selection for the current user session
   rememberBuffers = false,
 
-  -- Don't show missing files
-  showMissingFiles = false,
-
   -- change the style to fit more with the theme of my neovim
   style = {
     border = 'single',

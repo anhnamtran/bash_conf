@@ -68,6 +68,9 @@
     "pyright",
     "ssid"
   ],
-  "cSpell.userWords": ["abuild", "todoist"],
+  "cSpell.userWords": [
+    "abuild",
+    "todoist"
+  ],
   "Lua.telemetry.enable": true
 }

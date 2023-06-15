@@ -116,5 +116,5 @@ return require('packer').startup(function(use)
     end
   }
 
-  use { 'sakhnik/nvim-gdb', run = 'install.sh' }
+  use { 'sakhnik/nvim-gdb', run = './install.sh' }
 end)

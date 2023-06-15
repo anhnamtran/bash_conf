@@ -221,6 +221,27 @@ vim.opt.cinoptions = 'N-s'
 -- large files
 vim.opt.syntax = 'enable'
 
+-- copy current file name and (optionally) line number to unnamed register
+local function Fname(basename, linenum)
+  local fileAbs = vim.api.nvim_buf_get_name(0)
+  local fname
+  if basename then
+     fname = vim.fs.basename(fileAbs)
+  else
+     fname = fileAbs
+  end
+
+  local line_col_pair = vim.api.nvim_win_get_cursor(0) -- row is 1, column is 0 indexed
+  local res = fname
+  if linenum then
+     res = res .. ':' .. tostring(line_col_pair[1])
+  end
+  vim.fn.setreg('+', res) -- register + has filename[:row]
+  vim.api.nvim_exec_autocmds('TextYankPost', { data = { force = true } })
+end
+vim.api.nvim_create_user_command('Fname', function() Fname(false, false) end, {})
+vim.api.nvim_create_user_command('Fnamel', function() Fname(false, true) end, {})
+
 ---------------------------------- KEYMAPS ------------------------------------
 local function imap(shortcut, command, noremap)
   vim.keymap.set('i', shortcut, command, { noremap = noremap, silent = true })
