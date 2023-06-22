@@ -1,0 +1,36 @@
+auto-reload yes
+
+delete-read-articles-on-quit    no
+refresh-on-startup              yes
+
+# Keybindings
+bind-key j  down
+bind-key k  up
+bind-key G  end
+bind-key g  home
+bind-key q  hard-quit
+bind-key h  quit
+bind-key l  open
+
+bind-key J  next-feed articlelist
+bind-key K  prev-feed articlelist
+bind-key n  next-unread articlelist
+bind-key N  prev-unread articlelist
+bind-key a  toggle-article-read articlelist
+bind-key l  open-in-browser article
+
+# Colors
+color background         default default
+color listnormal         white   default
+color listfocus          green   default bold
+color listnormal_unread  blue    default bold
+color listfocus_unread   green   default bold underline
+color info               yellow  default
+color article            default default
+color end-of-text-marker default default invis
+
+# Highlights
+highlight article "^[a-zA-Z ]+:"                default default bold
+highlight article "^Title:.*"                   green   default bold
+highlight article "([a-z]+://|magnet:\?)[^ ]+"  blue    default underline
+highlight article "\\[[0-9]+\\]"                blue    default
