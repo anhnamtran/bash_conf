@@ -184,7 +184,6 @@ config/termshark/
 config/todoist/
 config/unity3d/
 config/vlc/
-config/yay/
 docs/
 downloads/
 emulator/
