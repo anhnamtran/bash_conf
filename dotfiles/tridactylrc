@@ -1,5 +1,5 @@
 " General settings
-set newtab about:blank
+set newtab about:newtab
 set smoothscroll true
 set theme dark
 set hintfiltermode vimperator-reflow

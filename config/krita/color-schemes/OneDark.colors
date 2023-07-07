@@ -1,0 +1,23 @@
+[ColorEffects:Inactive]
+ChangeSelectionColor = true
+
+[Colors:Button]
+BackgroundNormal     = 40,44,52
+ForegroundNormal     = 171,178,191
+
+[Colors:Selection]
+BackgroundNormal     = 197,120,221
+ForegroundNormal     = 40,44,52
+
+[Colors:View]
+BackgroundAlternate  = 75,82,99
+BackgroundNormal     = 40,44,52
+ForegroundLink       = 97,175,239
+ForegroundNormal     = 171,178,191
+
+[Colors:Window]
+BackgroundNormal     = 40,44,52
+ForegroundNormal     = 171,178,191
+
+[General]
+Name                 = One Dark

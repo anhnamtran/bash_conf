@@ -24,12 +24,7 @@ return require('packer').startup(function(use)
   use 'nvim-lua/popup.nvim'
 
   -- Themes
-  use {
-    'navarasu/onedark.nvim',
-    config = function()
-      require('onedark').load()
-    end
-  }
+  use 'navarasu/onedark.nvim'
 
   -- GUIs elements
   use 'nvim-lualine/lualine.nvim'
@@ -40,6 +35,7 @@ return require('packer').startup(function(use)
 
   -- Syntax handling
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' }
   use {
     'mrjones2014/nvim-ts-rainbow',
     requires = { 'nvim-treesitter/nvim-treesitter' }
@@ -57,6 +53,10 @@ return require('packer').startup(function(use)
     run = [[cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \
               && cmake --build build --config Release \
               && cmake --install build --prefix build]]
+  }
+  use {
+    'fannheyward/telescope-coc.nvim',
+    requires = 'nvim-telescope/telescope.nvim'
   }
   use 'alexghergh/nvim-tmux-navigation'
   use {
@@ -115,4 +115,6 @@ return require('packer').startup(function(use)
       require('colorizer').setup()
     end
   }
+
+  use { 'sakhnik/nvim-gdb', run = './install.sh' }
 end)

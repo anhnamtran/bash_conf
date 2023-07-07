@@ -20,6 +20,7 @@ require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
 
 -- Syntax plugins configuration
+require('andrew_nt.onedark')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
@@ -29,9 +30,7 @@ require('andrew_nt.coc')
 -- VimL settings
 
 -- color columns and textwidth
-if vim.g.arista_vim ~= 1 then
-  vim.opt.textwidth = 80
-end
+vim.opt.textwidth = 80
 vim.opt.colorcolumn = '+0'
 -- unset colorcolumn for inactive windows
 vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
@@ -163,14 +162,15 @@ vim.opt.termguicolors = true
 
 -- highlight trailing whitespaces
 vim.api.nvim_create_autocmd(
-  {'BufWinEnter', 'BufWinLeave', 'InsertEnter', 'InsertLeave'}, {
+  {'BufWinEnter', 'BufWinLeave', 'InsertEnter', 'InsertLeave', 'TermOpen'}, {
   group = vim.api.nvim_create_augroup('ExtraWhiteSpaceHi', {}),
   pattern = '*',
   callback = function(args)
+    local is_terminal = vim.api.nvim_buf_get_option(0, 'buftype') == 'terminal'
     vim.cmd([[match DiffDelete /\s\+$/]])
     if args.event == 'InsertEnter' then
       vim.cmd([[match DiffDelete /\s\+\%#\@<!$/]])
-    elseif args.event == 'BufWinLeave' then
+    elseif args.event == 'BufWinLeave' or is_terminal then
       vim.fn.clearmatches()
     else
       vim.cmd([[match DiffDelete /\s\+$/]])
@@ -214,9 +214,33 @@ vim.api.nvim_create_autocmd({'BufReadPre'}, {
   end
 })
 
+-- cindent options
+vim.opt.cinoptions = 'N-s'
+
 -- enable syntax. Doing this at the end-ish because this can take a while on
 -- large files
 vim.opt.syntax = 'enable'
+
+-- copy current file name and (optionally) line number to unnamed register
+local function Fname(basename, linenum)
+  local fileAbs = vim.api.nvim_buf_get_name(0)
+  local fname
+  if basename then
+     fname = vim.fs.basename(fileAbs)
+  else
+     fname = fileAbs
+  end
+
+  local line_col_pair = vim.api.nvim_win_get_cursor(0) -- row is 1, column is 0 indexed
+  local res = fname
+  if linenum then
+     res = res .. ':' .. tostring(line_col_pair[1])
+  end
+  vim.fn.setreg('+', res) -- register + has filename[:row]
+  vim.api.nvim_exec_autocmds('TextYankPost', { data = { force = true } })
+end
+vim.api.nvim_create_user_command('Fname', function() Fname(false, false) end, {})
+vim.api.nvim_create_user_command('Fnamel', function() Fname(false, true) end, {})
 
 ---------------------------------- KEYMAPS ------------------------------------
 local function imap(shortcut, command, noremap)
@@ -227,6 +251,9 @@ local function nmap(shortcut, command, noremap)
 end
 local function vmap(shortcut, command, noremap)
   vim.keymap.set('v', shortcut, command, { noremap = noremap, silent = true })
+end
+local function tmap(shortcut, command, noremap)
+  vim.keymap.set('t', shortcut, command, { noremap = noremap, silent = true })
 end
 
 -- insert mode
@@ -309,6 +336,21 @@ endfunction
 command! OpenOnly :call DeleteInactiveBufs()
 nnoremap <C-w>b :OpenOnly<CR>
 ]])
+
+-- terminal mappings and commands
+tmap('<ESC>', '<C-\\><C-n>')
+tmap('<C-l>', '<C-\\><C-n><Cmd>NvimTmuxNavigateRight<CR>')
+tmap('<C-h>', '<C-\\><C-n><Cmd>NvimTmuxNavigateLeft<CR>')
+tmap('<C-j>', '<C-\\><C-n><Cmd>NvimTmuxNavigateDown<CR>')
+tmap('<C-k>', '<C-\\><C-n><Cmd>NvimTmuxNavigateUp<CR>')
+
+-- always enter insertmode when entering terminal
+vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
+   pattern = 'term://*',
+   callback = function(args)
+      vim.cmd.startinsert()
+   end
+})
 
 ----------------------------------- THEMES -------------------------------------
 

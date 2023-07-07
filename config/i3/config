@@ -33,6 +33,7 @@ bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/laun
 bindsym $mod+Ctrl+s exec --no-startup-id $HOME/.config/rofi/priv_launchers/type-1/launcher.sh
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/rofi/windows/type-1/windows.sh
+bindsym $mod+Shift+d exec --no-startup-id kitty fish -c ranger $HOME
 bindsym $mod+Shift+v exec --no-startup-id $HOME/.config/rofi/vpn/type-1/vpn.sh
 
 # change focus
@@ -175,7 +176,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title=".*Obsidian v.*"] border pixel 1
 
-for_window [class="Steam"] border pixel 1
+for_window [title="Steam"] border pixel 1
 
 # Zoom specific window settings
 for_window [instance="^zoom(\.|$|\s)" title="^Zoom($|\s)"] floating disable, border pixel
@@ -223,12 +224,17 @@ exec --no-startup-id udiskie -F
 exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
-exec --no-startup-id dunst
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id 1password --silent
+# map wacom tablet to monitor
+exec --no-startup-id $HOME/bin/xsetwacom.sh
+exec --no-startup-id /usr/lib/kdeconnectd
+exec --no-startup-id /usr/bin/kdeconnect-indicator
+exec_always --no-startup-id dunst
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
@@ -294,6 +300,10 @@ bindsym $mod+F6 exec --no-startup-id light -A 5    # increase brightness
 bindsym $mod+F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+F2 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym $mod+F3 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Use mouse wheel and $mod to change volume
+bindsym --whole-window $mod+button5 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym --whole-window $mod+button4 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +1%
 
 # Printscreen
 bindsym Print exec --no-startup-id flameshot gui

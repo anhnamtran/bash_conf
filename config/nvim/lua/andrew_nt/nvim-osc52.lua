@@ -7,8 +7,9 @@ require('osc52').setup {
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup("osc52-au", {}),
-  callback = function()
-    if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
+  callback = function(opts)
+    local force = opts.data ~= nil and opts.data.force ~= nil and opts.data.force
+    if force or (vim.v.event.operator == 'y' and vim.v.event.regname == '+') then
       require('osc52').copy_register('+')
     end
   end

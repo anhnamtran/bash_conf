@@ -7,7 +7,7 @@ SLEEP_PID=0
 SLEEP_INT="$1"
 
 run_speedtest() {
-  if ! ping -W 5 -c 1 google.com &>/dev/null; then
+  if ! nc -zw1 google.com 443; then
     echo "No connection."
     exit 1
   fi
@@ -20,7 +20,11 @@ run_speedtest() {
   local speed_test_json=$(speedtest-cli --timeout 5 --json 2> /dev/null)
   local download=$(echo "$speed_test_json" | jq '.download' | numfmt --to iec --format '%.2fb/s')
   local upload=$(echo "$speed_test_json" | jq '.upload' | numfmt --to iec --format '%.2fb/s')
-  echo "$download" "$upload"
+  if [[ -z "$download" && -z "$upload" ]]; then
+    echo ""
+    return
+  fi
+  echo " $download" " $upload"
 }
 
 trap run_speedtest SIGUSR1

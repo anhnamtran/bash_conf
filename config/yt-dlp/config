@@ -1,0 +1,12 @@
+--ignore-errors
+
+# Save files in ~/videos/downloaded
+-o %(title)s.%(ext)s
+--restrict-filenames
+
+# Use aria2 to download
+--downloader aria2c
+--downloader-args 'aria2c:-c -j 3 -x 3 -s 3 -k 1M'
+
+# Download options
+--concurrent-fragments 10

@@ -24,7 +24,7 @@
 
   "clangd.arguments": [
     "--all-scopes-completion",
-    "--limit-results=0",
+    "--limit-results=500",
     "--cross-file-rename"
   ],
 
@@ -68,6 +68,9 @@
     "pyright",
     "ssid"
   ],
-  "cSpell.userWords": ["abuild", "todoist"],
+  "cSpell.userWords": [
+    "abuild",
+    "todoist"
+  ],
   "Lua.telemetry.enable": true
 }

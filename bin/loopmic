@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# This filters the Nodes down to a dictionary of
+# { "name": "<name>", "class": "<media.class>" }
+NODES=$(pw-dump Node | jq '.[] | .info | .props | { name: ."node.name", class: ."media.class" } | select(.class != null)')
+
+# Returns all the sources
+SOURCES=$(echo "$NODES" | jq 'select(.class | contains("Audio/Source"))')
+# Filters all the sinks
+SINKS=$(echo "$NODES" | jq 'select(.class | contains("Audio/Sink"))')
+
+LOOP_IN=""
+LOOP_OUT=""
+for source in $(echo "$SOURCES" | jq -r '.name'); do
+  case $source in
+    *easyeffects*|*Mic*|*mic*)
+      LOOP_IN="$source"
+      break
+      ;;
+    *)
+      echo "Can't find usable input source from $SOURCES"
+      exit 1
+      ;;
+  esac
+done
+
+for sink in $(echo "$SINKS" | jq -r '.name'); do
+  case $source in
+    *easyeffects*|*analog*)
+      LOOP_OUT="$sink"
+      break
+      ;;
+    *)
+      echo "Can't find usable output sink from $SINKS"
+      exit 1
+      ;;
+  esac
+done
+echo "Looping input $LOOP_IN to $LOOP_OUT"
+pw-loopback -m '[FL FR]' -P "$LOOP_OUT" -C "$LOOP_IN"
