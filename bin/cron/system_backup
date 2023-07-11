@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 ROOT="/"
 BACKUP_DIR="/run/media/andrew_nt/AndrewTran/Backups/DahliaEndeavor/"
+LOG_FILE="/home/andrew_nt/bin/cron/system_backup.log"
 
 if ! [ -d "$BACKUP_DIR" ]; then
   echo "$BACKUP_DIR not found or not mounted, unable to backup system"
@@ -11,12 +12,29 @@ if ! type rsync > /dev/null 2>&1; then
   exit 1
 fi
 
+run_rsync() {
+  sudo rsync -aAXHS \
+    --info=progress2,stats2 \
+    --delete \
+    --exclude-from="/home/andrew_nt/bin/cron/system_backup_exclude.txt" \
+    "$ROOT" "$BACKUP_DIR" 2>&1
+}
+
+rsync_interactive() {
+  run_rsync | sudo tee "$LOG_FILE"
+}
+
+rsync_noninteractive() {
+  run_rsync > "$LOG_FILE"
+}
+
 echo "Backing up system... "
-sudo rsync -aAXHS \
-  --info=progress2,stats2 \
-  --delete \
-  --exclude-from="/home/andrew_nt/bin/cron/system_backup_exclude.txt" \
-  "$ROOT" "$BACKUP_DIR" 2>&1 | sudo tee /home/andrew_nt/bin/cron/system_backup.log
+
+if [[ $- == *i* ]]; then
+  time rsync_interactive
+else
+  time rsync_noninteractive
+fi
 
 if [ "$?" -ne 0 ]; then
   echo "rsync failed, check cron logs"
