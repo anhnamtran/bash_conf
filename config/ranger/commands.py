@@ -27,13 +27,13 @@ class rg(Command):
         if self.arg(1):
             search_string = self.rest(1)
         else:
-            self.fm.notify("Usage: fzf_rga_search_documents <search string>", bad=True)
+            self.fm.notify("Usage: rg <search string>", bad=True)
             return
 
         import subprocess
         import os.path
         from ranger.container.file import File
-        command="rg '%s' | fzf +m | awk -F':' '{print $1}'" % search_string
+        command="rg %s | fzf +m | awk -F':' '{print $1}'" % search_string
         fzf = self.fm.execute_command(command, universal_newlines=True, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:

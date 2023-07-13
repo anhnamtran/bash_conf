@@ -7,5 +7,6 @@ function fish_user_key_bindings
    bind -M default j 'down-or-search'
    bind -M insert \c] 'accept-autosuggestion'
    bind -M insert \ce 'edit_command_buffer'
+   bind -M insert \eh 'fish_commandline_append " --help &| bat -l help"'
 end
 
