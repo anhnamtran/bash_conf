@@ -7,6 +7,8 @@ set hintnames numeric
 set incsearch true
 set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
+set followpagepatterns.next ^(next|newer)\b|»|>>|more|>
+set followpagepatterns.prev ^(prev(ious)?|older)\b|«|<<|<
 
 " i to go to ignore mode
 " Ctrl+Enter to leave ignore mode
@@ -46,6 +48,9 @@ bind ,<Space> nohlsearch
 " general browsing
 bind <C-]> forward
 bind <C-[> back
+
+" Have ZZ correctly restore multiple windows
+bind ZZ !s killall firefox
 
 unbind --mode=normal <C-b>
 bind --mode=browser <C-b> tab #
