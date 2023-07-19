@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
   -- System navigation
   use {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    branch = 'master',
     requires = { 'nvim-lua/plenary.nvim' }
   }
   use {
