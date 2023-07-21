@@ -17,10 +17,14 @@ run_speedtest() {
   fi
 
   echo "Running speedtest..."
-  local speed_test_json=$(speedtest-cli --timeout 5 --json 2> /dev/null)
+  local speed_test_json=$(speedtest-cli --secure --timeout 5 --json 2> /dev/null)
   local download=$(echo "$speed_test_json" | jq '.download' | numfmt --to iec --format '%.2fb/s')
   local upload=$(echo "$speed_test_json" | jq '.upload' | numfmt --to iec --format '%.2fb/s')
-  echo "$download" "$upload"
+  if [[ -z "$download" && -z "$upload" ]]; then
+    echo ""
+    return
+  fi
+  echo " $download" " $upload"
 }
 
 trap run_speedtest SIGUSR1
