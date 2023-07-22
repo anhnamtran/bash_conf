@@ -4,6 +4,11 @@ image/jpeg=qimgv.desktop
 image/png=qimgv.desktop
 image/gif=qimgv.desktop
 inode/directory=ranger.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-PHG871.desktop
+message/rfc822=userapp-Thunderbird-PHG871.desktop
+x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop
 
 [Added Associations]
 application/zip=firefox.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-PHG871.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop;
