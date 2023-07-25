@@ -10,19 +10,21 @@
 # * * * * * <command to execute>
 
 # Options
-!mailto(andremail03+cron@gmail.com)
-!mailfrom(andremail03+cron@gmail.com)
+!mailto(cron@automated.andrewnt.com)
 
 # Test job to check email capability
 # & * * * * * echo "Cron test job"
 
-# Check battery status and notify every 15 minutes
-# Uses elapsed system up time entry
-@nice(0),mail(false) 15 $HOME/bin/cron/low_battery_notify
-
 # Backup dotfiles daily at 5, or whenever the system boots up and we haven't backed
 # it up. Uses time based entry
-&noticenotrun(true),erroronlymail(true) 0 17 * * * $HOME/bin/cron/backup_configs
+&bootrun,noticenotrun,erroronlymail 0 17 * * * $HOME/bin/cron/backup_configs
 
 # Full system backup every friday, this is present in the "root" crontab as it requires extra permissions
 # &bootrun(true),noticenotrun(true) 0 17 * * 5 $HOME/bin/cron/system_backup
+
+# DowntimeMonitor jobs
+# Sends a summary of DowntimeMonitor every Friday
+# & 59 23 * * 5 $HOME/code/DowntimeMonitor/crontab/log-summary.sh $HOME/docs/logs/network-monitor/connection.log endeavour@automated.andrewnt.com cron@automated.andrewnt.com
+
+# Attempts to compress any logs that gets too big monthly
+# %monthly,erroronlymail(true) * 21-23,0-5 * $HOME/code/DowntimeMonitor/crontab/log-compressor.sh $HOME/docs/logs/network-monitor
