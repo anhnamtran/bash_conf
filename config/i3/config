@@ -21,8 +21,8 @@ font xft:Iosevka 0
 
 floating_modifier $mod
 
-bindsym $mod+Return exec kitty mux
-bindsym $mod+Shift+t exec kitty
+bindsym $mod+Return exec --no-startup-id kitty $HOME/bin/mux
+bindsym $mod+Shift+t exec --no-startup-id kitty
 
 # Move mouse to bottom right corner
 bindsym $mod+Escape exec --no-startup-id xdotool mousemove_relative -sync -- 5000 5000
@@ -89,6 +89,7 @@ bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -98,7 +99,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Ctrl+minus scratchpad show
 bindsym $mod+m [class="Spotify.*"] scratchpad show
 bindsym $mod+c [title="Meet.*"] scratchpad show
-bindsym $mod+o [title=".*Obsidian v.*"] scratchpad show focus
+bindsym $mod+o [title=".*Obsidian v.*"] scratchpad show
 
 # navigate workspaces next / previous
 bindsym $mod+Shift+l workspace next
@@ -173,7 +174,10 @@ for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [title=".*Obsidian v.*"] border pixel 1
+for_window [title=".*Obsidian v.*"] border pixel 1, move scratchpad
+for_window [title=".*Thunderbird*"] move scratchpad
+
+for_window [title="Steam"] border pixel 1
 
 # Zoom specific window settings
 for_window [instance="^zoom(\.|$|\s)" title="^Zoom($|\s)"] floating disable, border pixel
