@@ -4,13 +4,14 @@
 # pushing it to the repository.
 
 TIMEOUT=60
-while ! nc -zw1 github.com 443; do
-  if [[ "$TIMEOUT" -eq 60 ]]; then
+ELAPSED=$TIMEOUT
+while ! nc -zw1 github.com 443 &>/dev/null; do
+  if [[ "$ELAPSED" -eq "$TIMEOUT" ]]; then
     echo "Waiting for github connection."
   fi
   sleep 1
-  TIMEOUT=$((TIMEOUT - 1))
-  if [[ "$TIMEOUT" -lt 1 ]]; then
+  ELAPSED=$((ELAPSED - 1))
+  if [[ "$ELAPSED" -lt 1 ]]; then
     echo "Failed to establish a connection to github.com."
     exit 1
   fi
