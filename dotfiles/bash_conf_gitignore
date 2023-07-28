@@ -1,4 +1,5 @@
 .GlobalProtect/
+.ICEauthority
 .UltiSnips
 .Xauthority
 .Xmodmap
@@ -51,6 +52,7 @@
 .mozilla/
 .muttrc
 .nanorc
+.newsboat/
 .npm/
 .nvidia-settings-rc
 .pdfstudioviewer2022/
@@ -79,8 +81,10 @@
 .vim/
 .viminfo
 .vimrc
+.vnc/
 .vscode/
 .wget-hsts
+.x2go/
 .xinitrc
 .xscreensaver
 .xserverrc
@@ -114,6 +118,7 @@ Maildir/
 Themes/
 WiFi/
 [Cc]ache/
+audio/
 bin/configureAristaGerrit
 bin/delve/
 bin/gimp
@@ -135,6 +140,7 @@ config/cef_user_data/
 config/chromium/
 config/coc/
 config/dconf/
+config/fish/functions/__kube_prompt.fish
 config/ibus/
 config/kactivitymanagerdrc
 config/kglobalshortcutsrc
