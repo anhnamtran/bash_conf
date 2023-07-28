@@ -1,5 +1,4 @@
 " General settings
-set newtab about:blank
 set smoothscroll true
 set theme dark
 set hintfiltermode vimperator-reflow
@@ -67,6 +66,12 @@ bindurl www.google.com f hint -Jc #search div:not(.action-menu) > a
 bindurl www.google.com F hint -Jbc #search div:not(.action-menu) > a
 bindurl ^https://duckduckgo.com f hint -Jc [data-testid="result-title-a"]
 bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
+
+" Kagi search bindings
+bindurl ^https://kagi.com / focusinput -b
+bindurl ^https://kagi.com f hint -Jc a[class$="_0_URL"]
+bindurl ^https://kagi.com F hint -Jbc a[class$="_0_URL"]
+bindurl ^https://kagi.com S hint -Jc [class="_0_summarize_link"] > a
 
 unbind <Space>
 
