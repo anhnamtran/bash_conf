@@ -1,1 +1,6 @@
+# vim: ft=yaml
 auto_activate_base: false
+create_default_packages:
+  - pip
+  - pdbpp
+  - pylint
