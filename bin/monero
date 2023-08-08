@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Starts monero in the right location
+WALLET_DIR=$(cat ~/.secrets/monero.dir)
+WALLET_NAME=$(cat ~/.secrets/monero.wallet)
+
+pushd "$WALLET_DIR" || exit 1
+monero-wallet-cli --wallet-file "$WALLET_NAME"
+popd > /dev/null 2>&1 || exit 1
