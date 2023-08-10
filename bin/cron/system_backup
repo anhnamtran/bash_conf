@@ -29,7 +29,6 @@ rsync_noninteractive() {
 }
 
 echo "Backing up system... "
-echo $-
 
 if [[ -t 0 ]]; then
   time rsync_interactive
