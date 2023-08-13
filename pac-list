@@ -1,4 +1,5 @@
 1password
+1password-cli
 accountsservice
 acpi
 adobe-source-han-sans-cn-fonts
@@ -29,6 +30,7 @@ base
 bash-completion
 bash-language-server
 bat
+betterbird-bin
 betterlockscreen-git
 bind
 binutils
@@ -40,6 +42,7 @@ btrfs-progs
 cabextract
 calf
 cantarell-fonts
+ccache
 clang
 cryptsetup
 cups
@@ -58,6 +61,7 @@ dmenu
 dmidecode
 dmraid
 dnsmasq
+docker
 dosfstools
 downgrade
 dracut
@@ -92,6 +96,7 @@ fcron
 fd
 feh
 fetchmail
+ffmpeg-full
 ffmpegthumbnailer
 file
 file-roller
@@ -116,12 +121,12 @@ gettext
 ghostscript
 gimp
 git
+github-cli
 glances
 glmark2
 gnome-disk-utility
 gnome-keyring
 gnome-shell-extension-gsconnect
-google-chrome
 grep
 groff
 grub
@@ -145,6 +150,7 @@ gvfs-smb
 gzip
 haveged
 hdparm
+homebank
 htop
 hwdetect
 hwinfo
@@ -172,6 +178,7 @@ kitty-git
 kodi
 krita
 less
+lf
 lib32-nvidia-utils
 libdvdcss
 libfido2
@@ -183,6 +190,8 @@ libtool
 libva
 libva-intel-driver
 libva-mesa-driver
+libva-nvidia-driver
+libva-utils
 libwnck3
 light
 lightdm
@@ -191,8 +200,6 @@ lightdm-slick-greeter
 linux
 linux-firmware
 linux-headers
-linux-lqx
-linux-lqx-headers
 logiops
 logrotate
 lrzip
@@ -215,6 +222,8 @@ mgba-qt
 mkinitcpio
 mlocate
 modemmanager
+monero
+monero-gui
 mosh
 mpc
 mpv
@@ -269,6 +278,7 @@ patch
 pavucontrol
 pcsc-tools
 peek
+perf
 perl
 phoronix-test-suite
 pico
@@ -282,7 +292,6 @@ pkgconf
 pkgfile
 playerctl
 polkit-gnome
-polybar-git
 poppler-glib
 postfix
 postfixadmin
@@ -290,12 +299,16 @@ power-profiles-daemon
 psensor
 pv
 python
+python-bcc
+python-black
 python-bluetooth-battery
 python-capng
 python-defusedxml
+python-flake8-black
 python-nautilus
 python-packaging
 python-pip
+python-poetry
 python-pylint
 python-pynvim
 python-pyqt5
@@ -345,7 +358,7 @@ thunar-archive-plugin
 thunar-volman
 tigervnc
 tldr
-tmux-git
+tmux
 todoist
 tor-browser
 traceroute
@@ -417,6 +430,7 @@ util-linux
 v4l2loopback-dkms
 v4l2loopback-utils
 v4l2ucp
+vdpauinfo
 veracrypt
 vi
 vim
@@ -433,7 +447,6 @@ wireshark-cli
 wmctrl
 wpa_supplicant
 x2goclient
-x2goserver
 xbindkeys
 xdg-desktop-portal
 xdg-desktop-portal-gtk
@@ -459,6 +472,7 @@ xorg-xinit
 xorg-xinput
 xorg-xkill
 xorg-xrandr
+xpadneo-dkms
 xsel
 xss-lock
 xterm
@@ -473,3 +487,4 @@ yubikey-personalization
 yubioath-desktop
 zoom
 zram-generator
+zscroll-git
