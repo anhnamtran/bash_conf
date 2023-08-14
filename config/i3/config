@@ -19,8 +19,8 @@ font xft:Iosevka 0
 
 floating_modifier $mod
 
-bindsym $mod+Return exec --no-startup-id kitty $HOME/bin/mux
-bindsym $mod+Shift+t exec --no-startup-id kitty
+bindsym $mod+Return exec --no-startup-id kitty $HOME/bin/zell
+bindsym $mod+Shift+t exec --no-startup-id kitty $HOME/bin/mux
 
 # Move mouse to bottom right corner
 bindsym $mod+Escape exec --no-startup-id xdotool mousemove_relative -sync -- 5000 5000

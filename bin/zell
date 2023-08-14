@@ -1,0 +1,7 @@
+#!/bin/bash
+_zellij_kill() {
+  zellij kill-session $$
+}
+trap _zellij_kill EXIT
+
+zellij -s $$
