@@ -175,7 +175,7 @@ for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title=".*Obsidian v.*"] border pixel 1, move scratchpad
-for_window [title=".*Thunderbird*"] move scratchpad
+for_window [title="Inbox.*Thunderbird.*"] move scratchpad
 
 for_window [title="Steam"] border pixel 1
 
