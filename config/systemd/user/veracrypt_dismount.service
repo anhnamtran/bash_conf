@@ -1,0 +1,10 @@
+[Unit]
+Description=Dismount all volumes forcibly when system sleeps
+Before=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=veracrypt -d -f
+
+[Install]
+WantedBy=suspend.target

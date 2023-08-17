@@ -1,8 +1,8 @@
 [Unit]
-Description=User level resume target to run after system resumes from suspend
+Description=User level suspend target to run before system suspends
 StopWhenUnneeded=yes
 # Put any services that needs to be run below this line
-# Wants=reload_sounds@%u.service
+Wants=veracrypt_dismount.service
 
 [Install]
 WantedBy=default.target

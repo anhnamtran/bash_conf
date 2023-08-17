@@ -1,0 +1,10 @@
+[Unit]
+Description=Call user's suspend target before system suspend
+Before=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl --user --machine=%i@ restart suspend@%i.target
+
+[Install]
+WantedBy=suspend.target

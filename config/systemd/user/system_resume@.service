@@ -1,5 +1,5 @@
 [Unit]
-Description=Call user's suspend target after system suspend
+Description=Call user's resume target after system suspend
 After=suspend.target
 
 [Service]
