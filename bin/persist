@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+if [[ "$1" == "help" ]] || [[ "$#" -lt 1 ]]; then
+   echo "Usage: persist <command>"
+   echo "Runs command until completion, waiting for input to run again or quit"
+fi
+
+prompt() {
+   local exit="$1"
+   shift
+   local command="$@"
+
+   echo "┌────────────────────────────────────────────"
+   if (( $exit != 0 )); then
+      echo -e "│\e[0;31mFAILED($exit)\e[0m $command"
+   else
+      echo -e "│\e[0;32mSUCCESS\e[0m $command"
+   fi
+   echo -ne "└ Run again? \e[1;32mY\e[0m/n "
+}
+
+while true; do
+   "$@"
+
+   EXIT=$?
+
+   prompt "$EXIT" "$@"
+   read again
+   case "${again:-y}" in
+      n|N|no|No|NO)
+         break
+         ;;
+      y|Y|yes|Yes|YES)
+         continue
+         ;;
+      *)
+         echo "Unknown option. Choosing default (Y)"
+         continue
+         ;;
+   esac
+done
