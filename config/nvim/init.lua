@@ -1,10 +1,11 @@
--- Cached plugin loading using impatient.nvim
-require('impatient')
 -- be iMproved and encoding settings
 vim.opt.compatible = false
 vim.opt.encoding = 'utf-8'
 
--- load plugins from packer
+-- enable termguicolors
+vim.opt.termguicolors = true
+
+-- load plugins from lazy.nvim
 require('plugins')
 require('arista')
 
@@ -161,9 +162,6 @@ if &term =~ '256color'
   set t_ut=
 endif
 ]])
-
--- enable termguicolors
-vim.opt.termguicolors = true
 
 -- highlight trailing whitespaces
 vim.api.nvim_create_autocmd(
