@@ -177,6 +177,7 @@ config/microsoft-edge-dev/
 config/monero-project/
 config/nautilus/
 config/nordvpn/
+config/nvim/lazy-lock.json
 config/nvim/plugin/
 config/obs-studio/
 config/obsdian-html
