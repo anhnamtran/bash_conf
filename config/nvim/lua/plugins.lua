@@ -93,7 +93,7 @@ require('lazy').setup({
       require('colorizer').setup()
     end },
 
-  { 'sakhnik/nvim-gdb', build = './install.sh' }
+  { 'sakhnik/nvim-gdb', build = './install.sh' },
 
   -- Arista specific plugins
   'https://gitlab.aristanetworks.com/vim-scripts/mts.vim',
