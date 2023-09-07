@@ -87,4 +87,4 @@ bindurl calendar.google.com/calendar/* A hint -Jc div[class^="jefcFd"]  button, 
 " Select the event element to scroll when entering the tab
 autocmd TabEnter ^https://calendar.google.com/calendar/* hint -;Jc [class="hnGhZ"][role="presentation"]
 
-" vim: ft=tridactyl
+" vim: ft=vim
