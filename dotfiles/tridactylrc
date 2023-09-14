@@ -117,4 +117,9 @@ bindurl reviewboard.*/users F hint -Jbc a[class="review-request-link"]
 seturl reviewboard.*/ followpagepatterns.next ^(next|newer)\b|more|>
 seturl reviewboard.*/ followpagepatterns.prev ^(prev(ious)?|older)\b|<
 
-" vim: ft=tridactyl
+" bugsby bindings
+bindurl bb.*/ D hint -;Jc .ant-modal-wrap:not([style="display: none;"]) [class^=detail-content-]
+" select the table content to scroll
+autocmd TabEnter ^https://bb.*/ hint -;Jc .ant-table-body
+
+" vim: ft=vim
