@@ -9,7 +9,7 @@ size = 24
 color = "#282C34"
 
 # Absolute coordinates of icon
-x = 65
+x = 80
 y = 3
 
 # Amound of spaces in the title of the module, before title of the window
