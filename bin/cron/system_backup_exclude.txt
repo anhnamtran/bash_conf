@@ -16,3 +16,7 @@
 - node_modules
 - go/*
 - /var/lib/monero/*
+- /srv/*
+- /home/*/videos/anime
+- /home/*/videos/shows
+- /home/*/videos/movies
