@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ROOT="/"
-BACKUP_DIR="/run/media/andrew_nt/AndrewTran/Backups/DahliaEndeavor/"
+BACKUP_DIR="/run/media/andrew_nt/AndrewTran2T/Backups/DahliaEndeavor/"
 LOG_FILE="/home/andrew_nt/bin/cron/system_backup.log"
 
 if ! [ -d "$BACKUP_DIR" ]; then
