@@ -1,5 +1,5 @@
 -- Setup for indent_blankline
-require("indent_blankline").setup {
+require("ibl").setup {
     char = "▏",
     buftype_exclude = { "terminal", "help" },
     filetype_exclude = { "vimwiki", "markdown" },
