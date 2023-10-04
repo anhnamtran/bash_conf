@@ -178,7 +178,8 @@ for_window [window_role="task_dialog"] floating enable
 for_window [title=".*Obsidian v.*"] border pixel 1, move scratchpad
 for_window [title="Inbox.*Thunderbird.*"] move scratchpad
 
-for_window [title="Steam"] border pixel 1
+for_window [title=".*(?i)Steam.*"] border pixel 1
+for_window [title=".*(?i)mpv.*"] border pixel 1
 
 # Zoom specific window settings
 for_window [instance="^zoom(\.|$|\s)" title="^Zoom($|\s)"] floating disable, border pixel
