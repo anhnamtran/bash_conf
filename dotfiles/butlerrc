@@ -1,0 +1,5 @@
+SCRIPTDIR=$HOME/.tmux/plugins/tmux-butler
+
+# default viewer is tmux-split
+# to switch to tmux popup view if your tmux supports it
+VIEWER=$SCRIPTDIR/viewers/tmux-popup
