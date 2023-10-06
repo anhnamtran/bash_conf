@@ -4,6 +4,7 @@
 .Xmodmap
 .Xresources
 .android/
+.aspnet/
 .bash_aliases
 .bash_completion
 .bash_completion.d/
@@ -16,6 +17,7 @@
 .bash_vars
 .bashrc
 .bitmonero/
+.butlerrc
 .cache/
 .cargo/
 .cfg/
@@ -29,6 +31,7 @@
 .dbus/
 .dircolors
 .dmrc
+.dotnet/
 .fehbg
 .fltk/
 .gconf/
@@ -59,6 +62,7 @@
 .newsboat/
 .nmcli-history
 .npm/
+.nuget/
 .nv/
 .nvidia-settings-rc
 .oracle_jre_usage/
@@ -79,6 +83,7 @@
 .ssh/
 .steam*
 .sudo_as_admin_successful
+.templateengine/
 .themes/
 .thumbnails/
 .thunderbird/
@@ -123,6 +128,7 @@ bin/rust*
 config/**/EOS*.conf
 config/**/zoom*.conf
 config/google-chrome*
+config/jellyfin*/
 config/systemd/user/*.target.wants/
 config/vim/**
 config/vivaldi*
@@ -150,6 +156,7 @@ code/
 config/1Password/
 config/BraveSoftware/
 config/Code\ Industry/
+config/Foundry\ Virtual\ Tabletop/
 config/GIMP/
 config/QtProject.conf
 config/Signal/
