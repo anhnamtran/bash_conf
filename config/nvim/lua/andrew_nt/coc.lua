@@ -19,7 +19,7 @@ vim.g.coc_global_extension = {
 }
 
 local CocCustomAu = vim.api.nvim_create_augroup('CocCustomAu', {})
-vim.api.nvim_create_autocmd({ 'BufRead,BufNewFile' }, {
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   group = CocCustomAu,
   pattern = '*',
   callback = function ()
