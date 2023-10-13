@@ -122,4 +122,9 @@ bindurl bb.*/ D hint -;Jc .ant-modal-wrap:not([style="display: none;"]) [class^=
 " select the table content to scroll
 autocmd TabEnter ^https://bb.*/ hint -;Jc .ant-table-body
 
+" Areview bindings
+bindurl eng3.aristanetworks.com/areview A hint -Jc .rank-table-row-users
+bindurl eng3.aristanetworks.com/areview c hint -Jc .comment-user
+bindurl eng3.aristanetworks.com/areview F hint -;Jc .rank-comment-panel > div
+
 " vim: ft=vim
