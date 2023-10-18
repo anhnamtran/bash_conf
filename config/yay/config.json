@@ -31,7 +31,7 @@
 	"sudoloop": false,
 	"timeupdate": true,
 	"devel": true,
-	"cleanAfter": true,
+	"cleanAfter": false,
 	"provides": false,
 	"pgpfetch": true,
 	"cleanmenu": true,
