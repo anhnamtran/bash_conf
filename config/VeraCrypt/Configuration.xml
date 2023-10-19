@@ -3,11 +3,11 @@
 	<configuration>
 		<config key="BackgroundTaskEnabled">1</config>
 		<config key="BackgroundTaskMenuDismountItemsEnabled">1</config>
-		<config key="BackgroundTaskMenuMountItemsEnabled">1</config>
-		<config key="BackgroundTaskMenuOpenItemsEnabled">1</config>
+		<config key="BackgroundTaskMenuMountItemsEnabled">0</config>
+		<config key="BackgroundTaskMenuOpenItemsEnabled">0</config>
 		<config key="BeepAfterHotkeyMountDismount">0</config>
 		<config key="CachePasswords">0</config>
-		<config key="CloseBackgroundTaskOnNoVolumes">1</config>
+		<config key="CloseBackgroundTaskOnNoVolumes">0</config>
 		<config key="CloseExplorerWindowsOnDismount">1</config>
 		<config key="CloseSecurityTokenSessionsAfterMount">0</config>
 		<config key="DisableKernelEncryptionModeWarning">0</config>
