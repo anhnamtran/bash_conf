@@ -18,6 +18,9 @@ configuration {
     display-window:             "";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
+  window {
+    hide-active-window:         true;
+  }
 }
 
 /*****----- Global Properties -----*****/
