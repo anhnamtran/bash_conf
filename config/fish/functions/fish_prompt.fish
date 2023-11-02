@@ -6,7 +6,7 @@ function fish_prompt
    set -l time (date +%H:%M:%S)
    set -l dir (prompt_pwd -d 0)
    set -l promptEnd "󰫍 "
-   set -l userAndHost "$USER"@(prompt_hostname)
+   set -l userAndHost (set_color --dim green) "$USER" (set_color normal) @ (set_color --dim purple) (prompt_hostname) (set_color normal)
 
    if functions -q fish_is_root_user; and fish_is_root_user
       set promptEnd "#"
@@ -16,6 +16,7 @@ function fish_prompt
    set -g __fish_git_prompt_show_informative_status 1
 
    set -g __fish_git_prompt_showstashstate 1
+   set -g __fish_git_prompt_showuntrackedfiles 1
 
    set -g __fish_git_prompt_color_branch yellow
    set -g __fish_git_prompt_showupstream "informative"
@@ -72,5 +73,5 @@ function fish_prompt
    set -l kubePrompt (__kube_prompt)
 
    echo -es $topPromptStart $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
-   echo -es $bottomPromptStart $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor (set_color --bold) $promptEnd (set_color normal) ' '
+   echo -es $bottomPromptStart $modeIndicator $time ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
 end
