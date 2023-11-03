@@ -20,6 +20,8 @@ bind j scrollline 5
 bind k scrollline -5
 
 " Tab operations
+set newtab https://kagi.com
+set tabopenpos related
 bind L tabnext
 bind H tabprev
 bind yt tabduplicate
