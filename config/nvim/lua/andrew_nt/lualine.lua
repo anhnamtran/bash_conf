@@ -12,7 +12,7 @@ require("lualine").setup {
   sections = {
     lualine_a = { LuaLineWinNum, 'mode' },
     lualine_b = { 'branch', 'diff' },
-    lualine_c = { 'filename', 'b:coc_current_function' },
+    lualine_c = { 'b:coc_current_function' },
     lualine_x = { 'diagnostics', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location', LuaLineObsession }
@@ -20,7 +20,7 @@ require("lualine").setup {
   inactive_sections = {
     lualine_a = { LuaLineWinNum },
     lualine_b = {},
-    lualine_c = { 'filename', 'b:coc_current_function' },
+    lualine_c = {},
     lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = { LuaLineObsession }
