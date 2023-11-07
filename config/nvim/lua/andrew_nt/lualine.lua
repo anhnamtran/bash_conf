@@ -18,7 +18,7 @@ require("lualine").setup {
     lualine_z = { 'location', LuaLineObsession }
    },
   inactive_sections = {
-    lualine_a = { LuaLineWinNum },
+    lualine_a = { LuaLineWinNum, 'filename' },
     lualine_b = {},
     lualine_c = {},
     lualine_x = { 'location' },
