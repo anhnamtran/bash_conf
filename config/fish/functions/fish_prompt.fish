@@ -6,7 +6,7 @@ function fish_prompt
    set -l time (date +%H:%M:%S)
    set -l dir (prompt_pwd -d 0)
    set -l promptEnd "󰫍 "
-   set -l userAndHost (set_color --dim green) "$USER" (set_color normal) @ (set_color --dim purple) (prompt_hostname) (set_color normal)
+   set -l userAndHost (set_color normal) (set_color green) "$USER" (set_color normal) @ (set_color magenta) (prompt_hostname) (set_color normal)
 
    if functions -q fish_is_root_user; and fish_is_root_user
       set promptEnd "#"
