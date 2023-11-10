@@ -1,5 +1,6 @@
 .GlobalProtect/
 .UltiSnips
+.VeraCrypt-lock*
 .Xauthority
 .Xmodmap
 .Xresources
@@ -172,6 +173,8 @@ config/coc/
 config/dconf/
 config/discord/
 config/fontforge/
+config/gthumb/
+config/hakuneko-desktop/
 config/homebank/
 config/ibus/
 config/kactivitymanagerdrc
