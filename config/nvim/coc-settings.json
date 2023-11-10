@@ -12,6 +12,7 @@
   "suggest.acceptSuggestionOnCommitCharacter": false,
   "suggest.removeDuplicateItems": true,
   "suggest.enablePreview": true,
+  "suggest.enablePreselect": false,
   "suggest.localityBonus": true,
   "suggest.floatConfig": {
     "border": true
