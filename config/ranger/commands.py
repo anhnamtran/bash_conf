@@ -94,3 +94,19 @@ class fzf(Command):
                 self.fm.cd(selected)
             else:
                 self.fm.select_file(selected)
+
+class drag(Command):
+    """
+    :drag
+    Run ripdrag on a file or visually selected files.
+    """
+    def execute(self):
+        from ranger.ext.get_executables import get_executables
+        if "ripdrag" not in get_executables():
+            self.fm.notify('Could not find ripdrag in the PATH', bad=True)
+            return
+
+        command = [ 'ripdrag', '--and-exit' ]
+        command.extend([f.realpath for f in self.fm.thistab.get_selection()])
+        self.fm.execute_command(command, universal_newlines=True)
+
