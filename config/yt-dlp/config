@@ -1,7 +1,7 @@
 --ignore-errors
 
 # Save files in ~/videos/downloaded
--o %(title)#S.%(ext)s
+-o %(title)S.%(ext)s
 --restrict-filenames
 
 # Use aria2 to download
