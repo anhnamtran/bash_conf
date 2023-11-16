@@ -93,7 +93,16 @@ require('lazy').setup({
       require('colorizer').setup()
     end },
 
-  { 'sakhnik/nvim-gdb', build = './install.sh' }
+  { 'sakhnik/nvim-gdb', build = './install.sh' },
+  { 'epwalsh/obsidian.nvim',
+    version = '*',
+    lazy = true,
+    event = {
+      "BufReadPre " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md",
+      "BufNewFile " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md"
+    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+  }
 }, {
   ui = {
     border = 'rounded'
