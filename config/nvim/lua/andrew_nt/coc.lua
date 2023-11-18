@@ -96,6 +96,14 @@ function _G.show_docs()
     end
 end
 
+function _G.multi_cr()
+  if vim.fn["coc#pum#visible"]() ~= 0 and vim.fn["coc#pum#info"]() ~= -1 then
+    return vim.fn["coc#pum#confirm"]()
+  else
+    return require("nvim-autopairs").autopairs_cr()
+  end
+end
+
 local mappings = {
 	i = { -- Insert mode
         {"<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true }},
@@ -104,7 +112,7 @@ local mappings = {
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
         -- Make <CR> either confirm completion or call nvim-autopairs enter
-        {'<CR>',  [[coc#pum#visible() && coc#pum#info()["index"] != -1 ? coc#pum#confirm() : v:lua.require('nvim-autopairs').autopairs_cr()]], {expr = true, noremap = true}},
+        {'<CR>',  'v:lua.multi_cr()', { expr = true, noremap = true }},
 	},
 	n = { -- Normal mode
         {"K", '<CMD>lua _G.show_docs()<CR>', { silent = true }},
