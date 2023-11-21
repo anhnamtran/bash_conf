@@ -94,6 +94,15 @@ require('lazy').setup({
     end },
 
   { 'sakhnik/nvim-gdb', build = './install.sh' },
+  { 'epwalsh/obsidian.nvim',
+    version = '*',
+    lazy = true,
+    event = {
+      "BufReadPre " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md",
+      "BufNewFile " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md"
+    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 
   -- Arista specific plugins
   'https://gitlab.aristanetworks.com/vim-scripts/mts.vim',
