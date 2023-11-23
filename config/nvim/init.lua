@@ -32,7 +32,7 @@ require('andrew_nt.coc')
 -- VimL settings
 
 -- color columns and textwidth
-vim.opt.textwidth = 80
+vim.opt.textwidth = 120
 vim.opt.colorcolumn = '+0'
 -- unset colorcolumn for inactive windows
 vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
