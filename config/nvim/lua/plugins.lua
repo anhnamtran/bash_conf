@@ -28,6 +28,7 @@ require('lazy').setup({
   'lewis6991/gitsigns.nvim',
   'mhinz/vim-startify',
   'lukas-reineke/indent-blankline.nvim',
+  'rcarriga/nvim-notify',
 
   -- Syntax handling
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
@@ -103,6 +104,8 @@ require('lazy').setup({
     },
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+  { 'moll/vim-bbye' },
+  { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
 
   -- Arista specific plugins
   'https://gitlab.aristanetworks.com/vim-scripts/mts.vim',

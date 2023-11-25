@@ -14,16 +14,25 @@
    "suggest.enablePreview": true,
    "suggest.enablePreselect": false,
    "suggest.localityBonus": true,
+   "suggest.languageSourcePriority": 99,
    "suggest.floatConfig": {
       "border": true
    },
    "suggest.disableMenuShortcut": true,
+   "suggest.lowPrioritySourceLimit": 5,
+
+   "floatFactory.floatConfig": {
+      "winblend": 15,
+   },
 
    "clangd.arguments" : [ "--all-scopes-completion",
-                        "--limit-results=0",
-                        "--cross-file-rename" ],
+                        "--limit-results=200", "--header-insertion=never",
+                        "--cross-file-rename", "--log=verbose" ],
+   "clangd.trace.server": "verbose",
 
    "python.analysis.extraPaths": [ "/usr/lib", "/usr" ],
+   "python.analysis.useLibraryCodeForTypes": true,
+   "python.analysis.autoSearchPaths": true,
    "python.formatting.provider": "yapf",
    "python.formatting.yapfPath": "/usr/local/bin/yapf",
    "python.linting.enabled": true,
@@ -35,8 +44,6 @@
    },
    "pyright.disableCompletion": true,
    "pyright.inlayHints.enable": true,
-
-   "jedi.executable.command": "/home/andrew_nt/.local/bin/jedi-language-server",
 
    "sumneko-lua.enableNvimLuaDev": true,
 
