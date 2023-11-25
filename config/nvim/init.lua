@@ -22,6 +22,7 @@ require('andrew_nt.scratch')
 require('andrew_nt.obsidian')
 
 -- Syntax plugins configuration
+require('andrew_nt.notify')
 require('andrew_nt.onedark')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
@@ -125,22 +126,6 @@ vim.opt.ttimeoutlen = 100
 -- enable smart case searching
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
-local WinRelNum = vim.api.nvim_create_augroup('WinRelNum', {})
-vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
-  group = WinRelNum,
-  pattern = '*',
-  callback = function(args)
-    vim.opt.relativenumber = args.event == 'WinEnter'
-  end
-})
-vim.api.nvim_create_autocmd({'BufWinEnter'}, {
-  group = WinRelNum,
-  buffer = 0,
-  callback = function()
-    vim.opt.relativenumber = true
-  end
-})
 
 -- make grep use ripgrep instead
 vim.opt.grepprg = 'rg --vimgrep'

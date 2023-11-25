@@ -28,6 +28,7 @@ require('lazy').setup({
   'lewis6991/gitsigns.nvim',
   'mhinz/vim-startify',
   'lukas-reineke/indent-blankline.nvim',
+  'rcarriga/nvim-notify',
 
   -- Syntax handling
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
@@ -102,7 +103,9 @@ require('lazy').setup({
       "BufNewFile " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md"
     },
     dependencies = { "nvim-lua/plenary.nvim" },
-  }
+  },
+  { 'moll/vim-bbye' },
+  { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
 }, {
   ui = {
     border = 'rounded'
