@@ -16,7 +16,7 @@ quiet=false
 loginbox=282c3466
 loginshadow=282c34ff
 locktext="$USER"
-font="IosevkaNF:style=Bold"
+font="Iosevka Nerd Font:style=Bold"
 ringcolor=abb2bfff
 insidecolor=282c34ff
 separatorcolor=abb2bfff
