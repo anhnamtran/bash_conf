@@ -1,0 +1,26 @@
+#!/bin/bash
+if [[ -n $(pgrep 'restic' | grep 'restic backup') ]]; then
+  echo 'restic is already running...' 1>&2
+  exit 0
+fi
+
+set -e
+
+export RESTIC_REPOSITORY="$(head -n+1 $HOME/.secrets/restic)"
+export RESTIC_PASSWORD="$(tail -n1 $HOME/.secrets/restic)"
+export RESTIC_COMPRESSION="auto"
+export RESTIC_CACHE_DIR="$HOME/.cache/restic"
+export RESTIC_EXCLUDE_FILE="$HOME/.config/restic/exclude.txt"
+
+if [[ $- == *i* ]]; then
+  echo "Running in interactive mode."
+  export RESTIC_MANUAL_RUN=manual
+  export RESTIC_VERBOSE="--verbose"
+fi
+
+mkdir -p "${RESTIC_CACHE_DIR}"
+
+sudo -E restic unlock
+sudo -E restic backup / --exclude-file="$RESTIC_EXCLUDE_FILE" --tag "${RESTIC_MANUAL_RUN:-scheduled}" "$RESTIC_VERBOSE"
+sudo -E restic check --with-cache --read-data-subset=5G
+sudo -E restic forget --prune --keep-hourly 24 --keep-daily 30 --keep-monthly 6 --keep-weekly 4 --keep-yearly 3

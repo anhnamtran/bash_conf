@@ -28,3 +28,9 @@
 
 # Attempts to compress any logs that gets too big monthly
 # %monthly,erroronlymail(true) * 21-23,0-5 * $HOME/code/DowntimeMonitor/crontab/log-compressor.sh $HOME/docs/logs/network-monitor
+
+# Sends the VPL list of currently running theatre productions
+& 0 9 1 * * $HOME/code/anaconda3/condabin/conda run -n yvr_theatre python /home/andrew_nt/code/yvr_theatre/yvr_theatre.py
+
+# Take a system snapshot with restic every 2 hours
+@nice(10),erroronlymail,noticenotrun 2h $HOME/bin/restic-backup
