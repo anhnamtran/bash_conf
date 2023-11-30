@@ -218,14 +218,14 @@ if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
     source ~/.bash-git-prompt/gitprompt.sh
 fi
 
-if [[ $- == *i* ]]; then  # check if interactive shell
-   if [ -x "$HOME/bin/nix-enter" ]; then
-      if [ ! -e /nix/var/nix/profiles ] || [ -z ${NIX_ENTER+x} ]; then
-         export NIX_ENTER=""
-         exec "$HOME/bin/nix-enter"
-      fi
-   fi
-fi
+# if [[ $- == *i* ]]; then  # check if interactive shell
+#    if [ -x "$HOME/bin/nix-enter" ]; then
+#       if [ ! -e /nix/var/nix/profiles ] || [ -z ${NIX_ENTER+x} ]; then
+#          export NIX_ENTER=""
+#          exec "$HOME/bin/nix-enter"
+#       fi
+#    fi
+# fi
 
 # disables silent mode `Ctrl-S`
 stty -ixon
