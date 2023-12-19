@@ -1,2 +1,10 @@
 #!/bin/bash
-betterlockscreen --lock
+dunstctl set-paused true
+
+if pgrep -x xss-lock > /dev/null 2>&1; then
+  xset s activate
+else
+  betterlockscreen --lock
+fi
+
+dunstctl set-paused false
