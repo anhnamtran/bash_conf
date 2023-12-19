@@ -19,6 +19,19 @@
     # will be ignored.
     follow = keyboard
 
+    # When set to true (recommended), you can use POSIX regular expressions for filtering rules. It  uses  the  POSIX
+    # Extended  Regular  Expression syntax:
+    # https://en.m.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions.
+
+    # If  this  is  set  to  false (not recommended), dunst will us fnmatch(3) for matching strings. Dunst doesn't pass
+    # any flags to fnmatch, so you cannot make use of extended patterns.
+
+    # The POSIX syntax is more powerful and will eventually become the default. The main differences between POSIX and
+    # fnmatch(3) is that POSIX uses ".*" for wildcards instead of "*" and POSIX allows for partial matches without
+    # needing wildcards.  This means  that  the  pattern  "abc"  will
+    # match all strings that contain "abc", like "abcdef".
+    enable_posix_regex = true
+
     ### Geometry ###
 
     # dynamic width from 0 to 300
@@ -27,7 +40,7 @@
     width = (300,500)
 
     # The maximum height of a single notification, excluding the frame.
-    height = (10,500)
+    height = 500
 
     # Position the notification in the top right corner
     origin = top-right
@@ -59,7 +72,6 @@
 
     # Set the maximum width for the progress bar
     progress_bar_max_width = 300
-
 
     # Show how many messages are currently hidden (because of
     # notification_limit).
@@ -175,7 +187,7 @@
     ellipsize = middle
 
     # Ignore newlines '\n' in notifications.
-    ignore_newline = no
+    ignore_newline = false
 
     # Stack together notifications with the same content
     stack_duplicates = true
@@ -184,7 +196,7 @@
     hide_duplicate_count = false
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = no
+    show_indicators = true
 
     ### Icons ###
 
@@ -200,7 +212,9 @@
     max_icon_size = 50
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/:/home/andrew_nt/icons/
+
+    enable_recursive_icon_lookup = true
 
     ### History ###
 
@@ -214,7 +228,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = /usr/bin/rofi -dmenu -p dunst
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/firefox -new-tab
@@ -227,20 +241,6 @@
 
     # Define the class of the windows spawned by dunst
     class = Dunst
-
-    # Print a notification on startup.
-    # This is mainly for error detection, since dbus (re-)starts dunst
-    # automatically after a crash.
-    startup_notification = false
-
-    # Manage dunst's desire for talking
-    # Can be one of the following values:
-    #  crit: Critical features. Dunst aborts
-    #  warn: Only non-fatal warnings
-    #  mesg: Important Messages
-    #  info: all unimportant stuff
-    # debug: all less than unimportant stuff
-    verbosity = mesg
 
     # Define the corner radius of the notification window
     # in pixel size. If the radius is 0, you have no rounded
