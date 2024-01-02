@@ -1,0 +1,7 @@
+.tabmail-tab > .tab-stack > .tab-content > .tab-label-container:not([selected]) label {
+  color: white !important;
+  opacity: .5 !important;
+}
+.tabmail-tab > .tab-stack > .tab-content > .tab-label-container:not([selected]) label:hover {
+  opacity: 1 !important;
+}
