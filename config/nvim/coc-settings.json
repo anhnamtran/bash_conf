@@ -50,6 +50,7 @@
    "cSpell.showStatus": false,
    "cSpell.allowCompoundWords": true,
    "cSpell.ignoreWords": [
+    "",
     "clangd",
     "grpc",
     "proj",
@@ -60,6 +61,7 @@
     "ssid"
   ],
   "cSpell.userWords": [
+    "",
     "abuild",
     "todoist"
   ],
