@@ -29,7 +29,8 @@ require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
 
--- VimL settings
+vim.opt.spell = true
+vim.opt.spelllang = 'en_us'
 
 -- color columns and textwidth
 if vim.g.arista_vim ~= 1 then
@@ -60,6 +61,7 @@ vim.opt.smarttab = true
 
 -- Workaround for editing files that have been installed via symlink
 vim.opt.backupdir = { '/home/andrew_nt/.local/state/nvim/backup/' }
+vim.opt.directory = { '/tmp' }
 
 -- wildmenu settings
 vim.opt.wildmenu = true
@@ -280,7 +282,12 @@ nmap('tc', ':tabc<CR>', true)
 -- buffers navigation
 nmap('H', ':bp<CR>', true)
 nmap('L', ':bn<CR>', true)
-nmap('<leader>q', ':bp <BAR> bd #<CR>', true)
+-- Use vim-bbye if possible
+if require("lazy.core.config").plugins["vim-bbye"] ~= nil then
+   nmap('<leader>q', ':bp <BAR> Bwipeout #<CR>', true)
+else
+   nmap('<leader>q', ':bp <BAR> bwipeout #<CR>', true)
+end
 nmap('<leader>ls', ':ls<CR>', true)
 
 -- remove trailing white spaces
@@ -331,11 +338,12 @@ tmap('<C-h>', '<C-\\><C-n><Cmd>NvimTmuxNavigateLeft<CR>')
 tmap('<C-j>', '<C-\\><C-n><Cmd>NvimTmuxNavigateDown<CR>')
 tmap('<C-k>', '<C-\\><C-n><Cmd>NvimTmuxNavigateUp<CR>')
 
--- always enter insertmode when entering terminal
+-- always enter insertmode and disable spell check when entering terminal
 vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
    pattern = 'term://*',
    callback = function(args)
       vim.cmd.startinsert()
+      vim.opt_local.spell = false
    end
 })
 
@@ -349,6 +357,6 @@ vim.cmd([[colorscheme onedark]])
 vim.opt.pumblend = 15
 vim.cmd([[
 hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
-hi! link CocHighlightText Title
+hi! CocHighlightText ctermbg=242 guibg=#3b3f4c gui=italic ctermfg=225 guifg=#56b6c2
 hi! link CocMenuSel PmenuSel
 ]])

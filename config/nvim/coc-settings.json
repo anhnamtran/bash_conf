@@ -16,15 +16,47 @@
    "suggest.localityBonus": true,
    "suggest.languageSourcePriority": 99,
    "suggest.floatConfig": {
-      "border": true
+      "border": true,
+      "rounded": true,
+      "winblend": 15,
+      "focusable": false
    },
    "suggest.disableMenuShortcut": true,
    "suggest.lowPrioritySourceLimit": 5,
+   "suggest.completionItemKindLabels": {
+      "text": "󰉿",
+      "method": "󰆧",
+      "function": "󰊕",
+      "constructor": "",
+      "field": "󰜢",
+      "variable": "󰀫",
+      "class": "󰠱",
+      "interface": "",
+      "module": "",
+      "property": "󰜢",
+      "unit": "󰑭",
+      "value": "󰎠",
+      "enum": "",
+      "keyword": "󰌋",
+      "snippet": "",
+      "color": "󰏘",
+      "file": "󰈙",
+      "reference": "󰈇",
+      "folder": "󰉋",
+      "enumMember": "",
+      "constant": "󰏿",
+      "struct": "󰙅",
+      "event": "",
+      "operator": "󰆕",
+      "typeParameter": "",
+	   "default": ""
+   },
 
    "floatFactory.floatConfig": {
       "winblend": 15,
    },
 
+   "clangd.inlayHints.enable": true,
    "clangd.arguments" : [ "--all-scopes-completion",
                         "--limit-results=200", "--header-insertion=never",
                         "--cross-file-rename", "--log=verbose" ],
