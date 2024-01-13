@@ -41,11 +41,7 @@ require('lazy').setup({
   -- System navigation
   { 'nvim-telescope/telescope.nvim', branch = 'master',
     dependencies = { 'nvim-lua/plenary.nvim' } },
-  { 'nvim-telescope/telescope-fzf-native.nvim',
-    build = [[cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \
-              && cmake --build build --config Release \
-              && cmake --install build --prefix build]]
-  },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   { 'fannheyward/telescope-coc.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' } },
   'alexghergh/nvim-tmux-navigation',
