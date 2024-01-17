@@ -23,3 +23,19 @@ require('obsidian').setup({
   open_app_foreground = true,
   disable_frontmatter = true,
 })
+
+local ObsidianCustomAu = vim.api.nvim_create_augroup('ObsidianCustomAu', {})
+vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+  group = ObsidianCustomAu,
+  pattern = '*.md',
+  callback = function ()
+    local file_path = vim.api.nvim_buf_get_name(0)
+    if string.match(file_path, ".*/obsidian/.*") ~= nil then
+      vim.b.coc_enabled = false
+      vim.opt_local.textwidth = 0
+      vim.opt_local.spell = true
+      vim.opt_local.spelllang = 'en_ca'
+      vim.opt_local.conceallevel = 1
+    end
+  end
+})
