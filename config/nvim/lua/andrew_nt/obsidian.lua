@@ -20,8 +20,12 @@ require('obsidian').setup({
       end
     }
   },
-  open_app_foreground = true,
   disable_frontmatter = true,
+  daily_notes = {
+    folder = "Daily",
+    date_format = "%Y-%m-%d %a",
+    template = "Templates/Daily notes.md"
+  }
 })
 
 local ObsidianCustomAu = vim.api.nvim_create_augroup('ObsidianCustomAu', {})
@@ -36,6 +40,13 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile', 'VimEnter' }, {
       vim.opt_local.spell = true
       vim.opt_local.spelllang = 'en_ca'
       vim.opt_local.conceallevel = 2
+      vim.opt.tabstop = 2
+      vim.opt.shiftwidth = 2
+
+      -- Set keymaps
+      vim.api.nvim_buf_set_keymap(0, 'n',
+        '<leader>o',
+        '<CMD>ObsidianOpen<CR>', { noremap = true })
     end
   end
 })
