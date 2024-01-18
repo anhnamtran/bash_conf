@@ -19,6 +19,7 @@ require('andrew_nt.nvim-autopairs')
 require('andrew_nt.other')
 require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
+require('andrew_nt.vim-markdown')
 require('andrew_nt.obsidian')
 
 -- Syntax plugins configuration

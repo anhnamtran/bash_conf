@@ -57,6 +57,8 @@ require('lazy').setup({
     lazy = true,
     cmd = { 'NERDTreeToggle' },
     dependencies = { 'preservim/nerdtree' } },
+  { 'godlygeek/tabular' },
+  { 'preservim/vim-markdown' },
 
   -- Session tracking
   'tpope/vim-obsession',
