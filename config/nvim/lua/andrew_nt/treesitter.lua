@@ -47,13 +47,3 @@ require('nvim-treesitter.configs').setup {
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
-
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-
-parser_config.tac = {
-  install_info = {
-    url = "~/tree-sitter-cli/tree-sitter-tac",
-    files = { "src/parser.c", "src/scanner.cc" }
-  },
-  filetype = "tacc",
-}

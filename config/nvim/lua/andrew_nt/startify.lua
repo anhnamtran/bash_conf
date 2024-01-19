@@ -18,4 +18,5 @@ vim.g.startify_commands = {
   { i = { 'init.lua', 'e ~/.config/nvim/init.lua' } },
   { P = { 'Update plugins', 'Lazy update' } },
   { s = { 'Scratch buffer', 'e Scratch | Scratch' } },
+  { S = { 'Stream of Consciousness', 'e ~/obsidian/Primary/Stream\\ of\\ Consciousness.md' } },
 }

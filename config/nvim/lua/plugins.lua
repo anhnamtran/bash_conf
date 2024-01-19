@@ -57,6 +57,8 @@ require('lazy').setup({
     lazy = true,
     cmd = { 'NERDTreeToggle' },
     dependencies = { 'preservim/nerdtree' } },
+  { 'godlygeek/tabular' },
+  { 'preservim/vim-markdown' },
 
   -- Session tracking
   'tpope/vim-obsession',
@@ -102,10 +104,6 @@ require('lazy').setup({
   },
   { 'moll/vim-bbye' },
   { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
-
-  -- Arista specific plugins
-  'https://gitlab.aristanetworks.com/vim-scripts/mts.vim',
-  'https://gitlab.aristanetworks.com/vim-scripts/bug.vim',
 }, {
   ui = {
     border = 'rounded'

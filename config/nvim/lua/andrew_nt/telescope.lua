@@ -1,6 +1,9 @@
 -- Setup for telescope.nvim
 require('telescope').setup({
   pickers = {
+    buffers = {
+      mappings = { ["<CR>"] = require('telescope.actions').select_tab_drop }
+    },
     builtin = {
       tags = {
         push_cursor_on_edit = true,
