@@ -31,7 +31,7 @@ require('lazy').setup({
   'rcarriga/nvim-notify',
 
   -- Syntax handling
-  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', commit = '10dd49958c96f86c8247c715bd20a6681afc1d8b' },
   { 'nvim-treesitter/playground',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'mrjones2014/nvim-ts-rainbow',

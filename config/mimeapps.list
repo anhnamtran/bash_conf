@@ -13,3 +13,4 @@ application/zip=firefox.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-PHG871.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop;
 text/plain=firefox.desktop;
+text/calendar=firefox.desktop;
