@@ -1,10 +1,11 @@
--- Cached plugin loading using impatient.nvim
-require('impatient')
 -- be iMproved and encoding settings
 vim.opt.compatible = false
 vim.opt.encoding = 'utf-8'
 
--- load plugins from packer
+-- enable termguicolors
+vim.opt.termguicolors = true
+
+-- load plugins from lazy.nvim
 require('plugins')
 
 -- Utility plugins configuration
@@ -18,8 +19,11 @@ require('andrew_nt.nvim-autopairs')
 require('andrew_nt.other')
 require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
+require('andrew_nt.vim-markdown')
+require('andrew_nt.obsidian')
 
 -- Syntax plugins configuration
+require('andrew_nt.notify')
 require('andrew_nt.onedark')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
@@ -27,10 +31,11 @@ require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
 
--- VimL settings
+vim.opt.spell = true
+vim.opt.spelllang = 'en_us'
 
 -- color columns and textwidth
-vim.opt.textwidth = 80
+vim.opt.textwidth = 120
 vim.opt.colorcolumn = '+0'
 -- unset colorcolumn for inactive windows
 vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
@@ -124,22 +129,6 @@ vim.opt.ttimeoutlen = 100
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-local WinRelNum = vim.api.nvim_create_augroup('WinRelNum', {})
-vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
-  group = WinRelNum,
-  pattern = '*',
-  callback = function(args)
-    vim.opt.relativenumber = args.event == 'WinEnter'
-  end
-})
-vim.api.nvim_create_autocmd({'BufWinEnter'}, {
-  group = WinRelNum,
-  buffer = 0,
-  callback = function()
-    vim.opt.relativenumber = true
-  end
-})
-
 -- make grep use ripgrep instead
 vim.opt.grepprg = 'rg --vimgrep'
 vim.opt.grepformat:prepend { '%f:%l:%c:%m' }
@@ -156,9 +145,6 @@ if &term =~ '256color'
   set t_ut=
 endif
 ]])
-
--- enable termguicolors
-vim.opt.termguicolors = true
 
 -- highlight trailing whitespaces
 vim.api.nvim_create_autocmd(
@@ -293,7 +279,12 @@ nmap('tc', ':tabc<CR>', true)
 -- buffers navigation
 nmap('H', ':bp<CR>', true)
 nmap('L', ':bn<CR>', true)
-nmap('<leader>q', ':bp <BAR> bd #<CR>', true)
+-- Use vim-bbye if possible
+if require("lazy.core.config").plugins["vim-bbye"] ~= nil then
+   nmap('<leader>q', ':bp <BAR> Bwipeout #<CR>', true)
+else
+   nmap('<leader>q', ':bp <BAR> bwipeout #<CR>', true)
+end
 nmap('<leader>ls', ':ls<CR>', true)
 
 -- remove trailing white spaces
@@ -344,11 +335,12 @@ tmap('<C-h>', '<C-\\><C-n><Cmd>NvimTmuxNavigateLeft<CR>')
 tmap('<C-j>', '<C-\\><C-n><Cmd>NvimTmuxNavigateDown<CR>')
 tmap('<C-k>', '<C-\\><C-n><Cmd>NvimTmuxNavigateUp<CR>')
 
--- always enter insertmode when entering terminal
+-- always enter insertmode and disable spell check when entering terminal
 vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
    pattern = 'term://*',
    callback = function(args)
       vim.cmd.startinsert()
+      vim.opt_local.spell = false
    end
 })
 
@@ -362,6 +354,6 @@ vim.cmd([[colorscheme onedark]])
 vim.opt.pumblend = 15
 vim.cmd([[
 hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
-hi! link CocHighlightText Title
+hi! CocHighlightText ctermbg=242 guibg=#3b3f4c gui=italic ctermfg=225 guifg=#56b6c2
 hi! link CocMenuSel PmenuSel
 ]])

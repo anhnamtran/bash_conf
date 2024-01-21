@@ -1,120 +1,111 @@
 -- This file can be loaded by calling `lua require('plugins')` from init.vim
 
 -- Only required if you have packer configured as `opt`
-vim.cmd([[
-packadd packer.nvim
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-]])
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-
+require('lazy').setup({
   -- nvim companion plugins
-  use {
-    'nvim-lua/plenary.nvim',
-    config = function()
-      require('plenary.filetype').add_file('tin')
-      require('plenary.filetype').add_file('qb')
-    end
-  }
-  use 'nvim-lua/popup.nvim'
+  'nvim-lua/plenary.nvim',
+  'nvim-lua/popup.nvim',
 
   -- Themes
-  use 'navarasu/onedark.nvim'
+  'navarasu/onedark.nvim',
 
   -- GUIs elements
-  use 'nvim-lualine/lualine.nvim'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'lewis6991/gitsigns.nvim'
-  use 'mhinz/vim-startify'
-  use 'lukas-reineke/indent-blankline.nvim'
+  'nvim-lualine/lualine.nvim',
+  'kyazdani42/nvim-web-devicons',
+  'lewis6991/gitsigns.nvim',
+  'mhinz/vim-startify',
+  'lukas-reineke/indent-blankline.nvim',
+  'rcarriga/nvim-notify',
 
   -- Syntax handling
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' }
-  use {
-    'mrjones2014/nvim-ts-rainbow',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
-  }
-  use { 'neoclide/coc.nvim', branch = 'release', run = ':CocUpdate' }
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', commit = '10dd49958c96f86c8247c715bd20a6681afc1d8b' },
+  { 'nvim-treesitter/playground',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+  { 'mrjones2014/nvim-ts-rainbow',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+  { 'neoclide/coc.nvim', branch = 'release', build = ':CocUpdate' },
 
   -- System navigation
-  use {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    requires = { 'nvim-lua/plenary.nvim' }
-  }
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = [[cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release \
-              && cmake --build build --config Release \
-              && cmake --install build --prefix build]]
-  }
-  use {
-    'fannheyward/telescope-coc.nvim',
-    requires = 'nvim-telescope/telescope.nvim'
-  }
-  use 'alexghergh/nvim-tmux-navigation'
-  use {
-    'preservim/nerdtree',
-    opt = true,
+  { 'nvim-telescope/telescope.nvim', branch = 'master',
+    dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  { 'fannheyward/telescope-coc.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' } },
+  'alexghergh/nvim-tmux-navigation',
+  { 'preservim/nerdtree',
+    lazy = true,
     cmd = { 'NERDTreeToggle' },
     config = function ()
       vim.g.NERDTreeSortHiddenFirst = 1
       vim.g.NERDTreeQuitOnOpen = 1
     end
-  }
-  use {
-    'Xuyuanp/nerdtree-git-plugin',
-    opt = true,
+  },
+  { 'Xuyuanp/nerdtree-git-plugin',
+    lazy = true,
     cmd = { 'NERDTreeToggle' },
-    requires = { 'preservim/nerdtree' }
-  }
+    dependencies = { 'preservim/nerdtree' } },
+  { 'godlygeek/tabular' },
+  { 'preservim/vim-markdown' },
 
   -- Session tracking
-  use 'tpope/vim-obsession'
+  'tpope/vim-obsession',
 
   -- Utility
-  use 'rgroli/other.nvim'
-  use 'tpope/vim-fugitive'
-  use 'rbong/vim-flog'
-  use {
-    'kylechui/nvim-surround',
+  'rgroli/other.nvim',
+  'tpope/vim-fugitive',
+  'rbong/vim-flog',
+  { 'kylechui/nvim-surround',
     config = function()
       require('nvim-surround').setup()
-    end
-  }
-  use 'tpope/vim-commentary'
-  use {
-    'tpope/vim-eunuch',
+    end },
+  'tpope/vim-commentary',
+  { 'tpope/vim-eunuch',
     config = function()
       vim.g.eunuch_no_maps = 1
-    end
-  }
-  use 'szw/vim-maximizer'
-  use 'inkarkat/vim-ingo-library'
-  use {
-    'inkarkat/vim-mark',
+    end },
+  'szw/vim-maximizer',
+  'inkarkat/vim-ingo-library',
+  { 'inkarkat/vim-mark',
     config = function()
       vim.g.mwDefaultHighlightingPalette = 'maximum'
     end,
-    requires = { 'inkarkat/vim-ingo-library' },
-  }
-  use 'windwp/nvim-autopairs'
-  use { 'NAndLib/hop.nvim', branch = 'master' }
-  use 'karb94/neoscroll.nvim'
-  use 'lewis6991/impatient.nvim'
-  use 'ojroques/nvim-osc52'
-  use {
-    'norcalli/nvim-colorizer.lua',
+    dependencies = { 'inkarkat/vim-ingo-library' } },
+  'windwp/nvim-autopairs',
+  { 'NAndLib/hop.nvim', branch = 'master' },
+  'karb94/neoscroll.nvim',
+  'ojroques/nvim-osc52',
+  { 'norcalli/nvim-colorizer.lua',
     config = function()
       require('colorizer').setup()
-    end
-  }
+    end },
 
-  use { 'sakhnik/nvim-gdb', run = './install.sh' }
-end)
+  { 'sakhnik/nvim-gdb', build = './install.sh' },
+  { 'epwalsh/obsidian.nvim',
+    version = '*',
+    lazy = true,
+    event = {
+      "BufReadPre " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md",
+      "BufNewFile " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md"
+    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  { 'moll/vim-bbye' },
+  { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
+}, {
+  ui = {
+    border = 'rounded'
+  }
+})

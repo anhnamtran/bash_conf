@@ -1,12 +1,12 @@
 -- Setup for startify
 vim.g.startify_session_dir = vim.g.sessions_dir
 vim.g.startify_ascii_header = {
-  '██╗   ██╗███████╗     ██╗ ██████╗  ██████╗',
-  '██║   ██║██╔════╝    ███║██╔════╝ ██╔═████╗',
-  '██║   ██║███████╗    ╚██║███████╗ ██║██╔██║',
-  '██║   ██║╚════██║     ██║██╔═══██╗████╔╝██║',
-  '╚██████╔╝███████║     ██║╚██████╔╝╚██████╔╝',
-  ' ╚═════╝ ╚══════╝     ╚═╝ ╚═════╝  ╚═════╝ ',
+'██████╗  █████╗ ██╗  ██╗██╗     ██╗ █████╗ ',
+'██╔══██╗██╔══██╗██║  ██║██║     ██║██╔══██╗',
+'██║  ██║███████║███████║██║     ██║███████║',
+'██║  ██║██╔══██║██╔══██║██║     ██║██╔══██║',
+'██████╔╝██║  ██║██║  ██║███████╗██║██║  ██║',
+'╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝',
 }
 vim.g.startify_custom_header =
   vim.fn['startify#pad'](vim.g.startify_ascii_header)
@@ -16,6 +16,7 @@ vim.g.startify_lists = {
 }
 vim.g.startify_commands = {
   { i = { 'init.lua', 'e ~/.config/nvim/init.lua' } },
-  { P = { 'Update plugins', 'PackerUpdate' } },
+  { P = { 'Update plugins', 'Lazy update' } },
   { s = { 'Scratch buffer', 'e Scratch | Scratch' } },
+  { S = { 'Stream of Consciousness', 'e ~/obsidian/Primary/Stream\\ of\\ Consciousness.md' } },
 }
