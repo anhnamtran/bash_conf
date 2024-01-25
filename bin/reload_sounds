@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+systemctl restart --user pipewire
+systemctl restart --user wireplumber
+killall -w easyeffects
+easyeffects --gapplication-service &>/dev/null
