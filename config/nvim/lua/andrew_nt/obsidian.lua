@@ -20,6 +20,9 @@ require('obsidian').setup({
       end
     }
   },
+  note_id_func = function(title)
+    return title
+  end,
   disable_frontmatter = true,
   daily_notes = {
     folder = "Daily",
