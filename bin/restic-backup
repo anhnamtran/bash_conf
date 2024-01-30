@@ -3,7 +3,6 @@ if [[ -n $(pgrep 'restic' | grep 'restic backup') ]]; then
   echo 'restic is already running...' 1>&2
   exit 0
 fi
-
 set -e
 
 export RESTIC_REPOSITORY="$(head -n+1 $HOME/.secrets/restic)"
@@ -18,9 +17,24 @@ if [[ $- == *i* ]]; then
   export RESTIC_VERBOSE="--verbose"
 fi
 
+MOUNT_TIMEOUT=300
+if ! [[ -d "$RESTIC_REPOSITORY" ]]; then
+  echo -n "Waiting $MOUNT_TIMEOUT second(s) for $RESTIC_REPOSITORY to exist"
+  while ! [[ -d "$RESTIC_REPOSITORY" ]]; do
+    echo -n "."
+    sleep 1
+    MOUNT_WAIT_ELAPSED=$((MOUNT_WAIT_ELAPSED + 1))
+    if (( MOUNT_WAIT_ELAPSED >= MOUNT_TIMEOUT )); then
+      echo "Timed out waiting for repository $RESTIC_REPOSITORY to exist"
+      exit 1
+    fi
+  done
+  echo " Done."
+fi
+
 mkdir -p "${RESTIC_CACHE_DIR}"
 
 sudo -E restic unlock
 sudo -E restic backup / --exclude-file="$RESTIC_EXCLUDE_FILE" --tag "${RESTIC_MANUAL_RUN:-scheduled}" "$RESTIC_VERBOSE"
 sudo -E restic check --with-cache --read-data-subset=5G
-sudo -E restic forget --prune --keep-hourly 24 --keep-daily 30 --keep-monthly 6 --keep-weekly 4 --keep-yearly 3
+sudo -E restic forget --prune --keep-hourly 24 --keep-daily 30 --keep-monthly 6 --keep-weekly 6 --keep-yearly 4
