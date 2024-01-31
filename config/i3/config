@@ -173,10 +173,19 @@ for_window [class="Xfburn"] floating enable
 for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
+# Handle floating dialogs
+for_window [window_role="About"] floating enable
+for_window [window_role="Organizer"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="page-info"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [title=".*Obsidian v.*"] border pixel 1, move scratchpad
-for_window [class="^(?i)thunderbird$"] move scratchpad
+for_window [window_role="toolbox"] floating enable
+for_window [window_role="webconsole"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [class="^(?i)thunderbird$" window_type=normal] move scratchpad
 
 for_window [class="^(?i)steam$"] border pixel 1
 for_window [title=".*(?i)mpv.*"] border pixel 1
