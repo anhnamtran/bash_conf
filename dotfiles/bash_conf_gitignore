@@ -80,9 +80,11 @@
 .screenlayout
 .secrets/
 .shared-ringdb/
+.snippetdbstore/
 .spicetify/
 .ssh/
 .steam*
+.subversion/
 .sudo_as_admin_successful
 .templateengine/
 .themes/
@@ -157,11 +159,13 @@ code/
 config/1Password/
 config/BraveSoftware/
 config/Code\ Industry/
+config/Electron/
 config/Foundry\ Virtual\ Tabletop/
 config/GIMP/
 config/QtProject.conf
 config/Signal/
 config/Todoist/
+config/VirtualBox/
 config/Yubico/
 config/appimagelauncher.cfg
 config/autorandr/default
@@ -189,6 +193,7 @@ config/nautilus/
 config/nordvpn/
 config/nvim/lazy-lock.json
 config/nvim/plugin/
+config/nvim/spell/
 config/obs-studio/
 config/obsdian-html
 config/op/
