@@ -19,6 +19,7 @@ require('andrew_nt.nvim-autopairs')
 require('andrew_nt.other')
 require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
+require('andrew_nt.vim-markdown')
 require('andrew_nt.obsidian')
 
 -- Syntax plugins configuration
@@ -28,7 +29,6 @@ require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
-require('andrew_nt.vim-markdown')
 require('andrew_nt.coc')
 
 vim.opt.spell = true
