@@ -2,7 +2,7 @@
 require('telescope').setup({
   pickers = {
     buffers = {
-      mappings = { ["<CR>"] = require('telescope.actions').select_tab_drop }
+      mappings = { i = { ["<CR>"] = require('telescope.actions').select_tab_drop } }
     },
     builtin = {
       tags = {
