@@ -9,9 +9,8 @@ require('obsidian').setup({
   completion = {
     -- If using nvim-cmp, set to true
     nvim_cmp = false,
-    new_notes_location = "current_dir",
-    prepend_note_path = true
   },
+  new_notes_location = "current_dir",
   templates = {
     subdir = "Templates",
     substitutions = {
