@@ -104,6 +104,13 @@ require('lazy').setup({
   },
   { 'moll/vim-bbye' },
   { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+  },
 }, {
   ui = {
     border = 'rounded'
