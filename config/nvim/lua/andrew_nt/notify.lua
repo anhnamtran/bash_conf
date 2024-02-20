@@ -8,8 +8,9 @@ require("notify").setup({
 })
 
 vim.notify = require('notify')
-_G.coc_status_record = {}
 
+-- coc.nvim notifications
+_G.coc_status_record = {}
 function _G.coc_status_notify(msg, level)
   local notify_opts = { title = "LSP", timeout = 100, hide_from_history = true, on_close = reset_coc_status_record }
   -- if coc_status_record is not {} then add it to notify_opts to key called "replace"
@@ -77,3 +78,10 @@ autocmd User CocNvimInit call s:InitCoc()
 autocmd User CocDiagnosticChange call s:DiagnosticNotify()
 autocmd User CocStatusChange call s:StatusNotify()
 ]])
+
+-- Buffer notification
+vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
+  pattern = {"*"},
+  callback = function() vim.notify("Buffer reloaded", vim.log.levels.WARN) end
+})
+
