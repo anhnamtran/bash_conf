@@ -89,6 +89,14 @@
       "url": "https://raw.githubusercontent.com/firebase/firebase-tools/master/schema/firebase-config.json"
     }
   ],
+  "Lua.workspace.ignoreDir": [
+    ".vscode",
+    ".git",
+    "/src",
+    "/src/*",
+    "/src/*/",
+    "/src/*/*"
+  ],
 
   "cSpell.showStatus": false,
   "cSpell.allowCompoundWords": true,
