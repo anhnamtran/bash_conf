@@ -21,6 +21,7 @@ require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
 require('andrew_nt.vim-markdown')
 require('andrew_nt.obsidian')
+require('andrew_nt.buffers')
 
 -- Syntax plugins configuration
 require('andrew_nt.notify')
@@ -105,10 +106,6 @@ vim.api.nvim_create_autocmd({'FocusGained', 'BufEnter'}, {
   pattern = {"*"},
   command = "if mode() != 'c' | checktime | endif"
 })
-vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
-  pattern = {"*"},
-  command = 'echohl WarningMsg | echo "Buffer reloaded." | echohl None'
-})
 
 -- handle files with long lines, can cause issues if there are too many long
 -- lines
@@ -132,9 +129,6 @@ vim.opt.smartcase = true
 -- make grep use ripgrep instead
 vim.opt.grepprg = 'rg --vimgrep'
 vim.opt.grepformat:prepend { '%f:%l:%c:%m' }
-
--- make buffer switching use opened, tabbed, or last buffer
-vim.opt.switchbuf = {'useopen', 'usetab', 'uselast'}
 
 -- highlight the current line
 vim.opt.cursorline = true
@@ -276,17 +270,6 @@ nmap('tl', ':tabn<CR>', true)
 nmap('th', ':tabp<CR>', true)
 nmap('tc', ':tabc<CR>', true)
 
--- buffers navigation
-nmap('H', ':bp<CR>', true)
-nmap('L', ':bn<CR>', true)
--- Use vim-bbye if possible
-if require("lazy.core.config").plugins["vim-bbye"] ~= nil then
-   nmap('<leader>q', ':bp <BAR> Bwipeout #<CR>', true)
-else
-   nmap('<leader>q', ':bp <BAR> bwipeout #<CR>', true)
-end
-nmap('<leader>ls', ':ls<CR>', true)
-
 -- remove trailing white spaces
 -- I don't quite know how to do this in lua
 vim.cmd([[
@@ -302,31 +285,6 @@ nmap('<C-w>;', ':wincmd p<CR>')
 nmap('<C-w>z', ':MaximizerToggle')
 -- open nerdtree
 nmap('<C-n>n', ':NERDTreeToggle<CR>')
-
--- buffer control
-vim.cmd([[
-function! DeleteInactiveBufs()
-    "From tabpagebuflist() help, get a list of all buffers in all tabs
-    let tablist = []
-    for i in range(tabpagenr('$'))
-        call extend(tablist, tabpagebuflist(i + 1))
-    endfor
-
-    "Below originally inspired by Hara Krishna Dara and Keith Roberts
-    "http://tech.groups.yahoo.com/group/vim/message/56425
-    let nWipeouts = 0
-    for i in range(1, bufnr('$'))
-        if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
-        "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
-            silent exec 'bwipeout' i
-            let nWipeouts = nWipeouts + 1
-        endif
-    endfor
-    echomsg nWipeouts . ' buffer(s) wiped out'
-endfunction
-command! OpenOnly :call DeleteInactiveBufs()
-nnoremap <C-w>b :OpenOnly<CR>
-]])
 
 -- terminal mappings and commands
 tmap('<ESC>', '<C-\\><C-n>')
