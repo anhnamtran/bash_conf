@@ -98,7 +98,6 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Ctrl+minus scratchpad show
 bindsym $mod+m [class="Spotify.*"] scratchpad show
 bindsym $mod+c [title="Meet.*"] scratchpad show
-bindsym $mod+o [title=".*Obsidian v.*"] scratchpad show
 
 # navigate workspaces next / previous
 bindsym $mod+Shift+l workspace next
@@ -173,7 +172,7 @@ for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
 for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [title=".*Obsidian v.*"] border pixel 1, move scratchpad
+for_window [title=".*Obsidian v.*"] border pixel 1
 for_window [title=".*Thunderbird*"] move scratchpad
 
 for_window [title="Steam"] border pixel 1
