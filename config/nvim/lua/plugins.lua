@@ -36,7 +36,7 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'mrjones2014/nvim-ts-rainbow',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  { 'neoclide/coc.nvim', branch = 'release', build = ':CocUpdate' },
+  { 'neoclide/coc.nvim', branch = 'dev', build = { 'npm ci', ':CocUpdate' } },
 
   -- System navigation
   { 'nvim-telescope/telescope.nvim', branch = 'master',
