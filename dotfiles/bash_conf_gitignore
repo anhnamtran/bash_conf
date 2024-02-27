@@ -114,6 +114,7 @@ sumneko-lua-*/
 Backup/
 Extracted/
 GPUCache/
+Laki Studios/
 Maildir/
 Themes/
 WiFi/
@@ -144,6 +145,7 @@ config/fish/functions/__kube_prompt.fish
 config/ibus/
 config/kactivitymanagerdrc
 config/kglobalshortcutsrc
+config/lazygit/state.yml
 config/libreoffice/
 config/microsoft-edge-dev/
 config/monero-project/
