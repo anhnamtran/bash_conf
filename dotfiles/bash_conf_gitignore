@@ -141,6 +141,7 @@ Astral Ascent/
 Backup/
 Extracted/
 GPUCache/
+Laki Studios/
 Maildir/
 Themes/
 WiFi/
@@ -185,6 +186,7 @@ config/kactivitymanagerdrc
 config/kde.org/
 config/kdeconnect/
 config/kglobalshortcutsrc
+config/lazygit/state.yml
 config/libreoffice/
 config/mgba/
 config/microsoft-edge-dev/
