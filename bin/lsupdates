@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #!/bin/bash
 CHK=$(checkupdates)
-CHKAUR="$(yay -Qu --color=always --aur --devel=false | sed 's/$/ (AUR)/g')"
+CHKAUR="$(yay -Qu --color=always --aur | sed 's/$/ (AUR)/g')"
 
 if [ ${#CHKAUR} -gt 0 ]; then 
   if [ "$CHK" = "" ]; then
