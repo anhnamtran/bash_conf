@@ -3,6 +3,8 @@ AndrewTran2T
 Steam
 /data/**
 /dev/**
+/home/*/.cargo
+/home/*/.npm
 /home/*/videos/anime
 /home/*/videos/misc
 /home/*/videos/movies

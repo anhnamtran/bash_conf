@@ -7,6 +7,7 @@ inode/directory=org.gnome.Nautilus.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-PHG871.desktop
 message/rfc822=userapp-Thunderbird-PHG871.desktop
 x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop
+x-scheme-handler/discord-443564201349218305=discord-443564201349218305.desktop
 
 [Added Associations]
 application/zip=firefox.desktop;

@@ -37,4 +37,4 @@ mkdir -p "${RESTIC_CACHE_DIR}"
 sudo -E restic unlock
 sudo -E restic backup / --exclude-file="$RESTIC_EXCLUDE_FILE" --tag "${RESTIC_MANUAL_RUN:-scheduled}" "$RESTIC_VERBOSE"
 sudo -E restic check --with-cache --read-data-subset=5G
-sudo -E restic forget --prune --keep-hourly 24 --keep-daily 30 --keep-monthly 6 --keep-weekly 6 --keep-yearly 4
+sudo -E restic forget --prune --keep-hourly 24 --keep-daily 30 --keep-monthly 1 --keep-weekly 1 --keep-yearly 1
