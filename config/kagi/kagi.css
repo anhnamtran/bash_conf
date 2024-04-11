@@ -1,0 +1,144 @@
+:root {
+  --background-color: #282c34;
+  --search-result-title: #61afef;
+  --result-item-title-border: #61afef;
+  --search-result-title-hover: #168df1;
+  --result-item-title-border_hover: #168df1;
+  --primary-visited: #c678dd;
+}
+
+.theme_dark {
+  --app-bg: var(--background-color);
+}
+
+/* Make link colors more visible */
+.__sri-title .__sri_title_link:visited:hover,
+.__srgi-title a:visited:hover {
+  color: var(--primary-visited);
+}
+
+.__sri-title .__sri_title_link:active,
+.__srgi-title a:active {
+  color: #61afef;
+}
+
+/* Move the time to the right */
+.__sri-time {
+  position: absolute;
+  top: -2em;
+  right: 2em;
+}
+
+/* Make everything a bit more cozy */
+.app-content-box {
+  padding: 0 40px;
+}
+.app-header {
+  padding: 0 105px !important;
+}
+.app-content {
+  max-width: initial;
+}
+.center-content-box {
+  min-width: 50%;
+  max-width: 100%;
+}
+.right-content-box {
+  justify-content: flex-end;
+  margin-left: 0px;
+  padding-left: 50px;
+  padding-right: 10px;
+  min-width: 35%;
+  max-width: 35%;
+}
+
+.search-result, .sri-group {
+  margin-bottom:14px;
+}
+
+.widgetContent {
+  padding-top:0px;
+  padding-bottom:0px;
+  margin-bottom:30px;
+}
+
+.sri-group .sr-group {
+  margin-top:0px;
+  margin-bottom:20px;
+}
+
+.__sri-title {
+  margin-top:0px;
+  margin-bottom:0px;
+  padding-bottom:0px;
+}
+
+.__sri-body {
+  margin-bottom:10px;
+}
+
+.__srgi+.__srgi {
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+.widget#dictionary .definition .dict-group {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.widget#dictionary .smw {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.widget .tooltip-trigger .tooltip-item {
+  padding: 0px;
+}
+
+.widgetFooter {
+  padding: 0px;
+}
+
+#inline_map {
+  margin-bottom: 30px;
+  padding-bottom: 0px;
+}
+
+.sri-group .__dl .__srgi {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.results_summary_text_box {
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+._0_results_summary_box {
+  margin-bottom: 15px;
+}
+
+.results_summary_text_box .qa_show_more_buttons {
+  padding: 0px;
+}
+
+/* Remove bottom border from links */
+.__sri_title_link._0_sri_title_link._0_URL {
+  border-bottom: none;
+}
+
+/* Remove underline with nested links */
+.__srgi-title a {
+border-bottom: none; var(--result-item-title-border);
+}
+
+/* Remove underline with News module */
+.newsResultItem .newsResultHeader .newsResultTitle a._0_TITLE {
+  border-bottom: none; var(--result-item-title-border);
+}
+
+/* Remove underline from links in Wikipedia module */
+.wikipediaResult a {
+  border-bottom: none; var(--result-item-title-border);
+}
