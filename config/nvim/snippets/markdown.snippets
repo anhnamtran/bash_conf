@@ -70,8 +70,12 @@ snippet dndmis "DND log: spell or attack miss" b
 > ${1:name} <mark style="background: #FF5582A6;">missed</mark> ${2:target}
 endsnippet
 
-snippet dndsav "DND log: saving throw success or failure" b
-> ${1:name} <mark style="background: #CACFD9A6;">${2:result}</mark> ${3:target}
+snippet dndsav "DND log: saving throw success" b
+> ${1:name} <mark style="background: #BBFABBA6;">succeeded</mark> a saving throw against _${3:target}_
+endsnippet
+
+snippet dndfai "DND log: saving throw failure" b
+> ${1:name} <mark style="background: #FF5582A6;">failed</mark> a saving throw against _${3:target}_
 endsnippet
 
 snippet dndspe "DND log: spell cast" b
