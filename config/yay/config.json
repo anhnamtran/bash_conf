@@ -46,5 +46,6 @@
 	"debug": false,
 	"rpc": true,
 	"doubleconfirm": false,
-	"rebuild": "no"
+	"rebuild": "no",
+  "rebuildtree": true
 }
