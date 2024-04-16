@@ -86,6 +86,10 @@ snippet dndhp "DND log: heal" b
 > ${1:name} <mark style="background: #BBFABBA6;">healed</mark> for _${2:hp}_ hit points
 endsnippet
 
-snippet dndcon "DND log: condition" b
+snippet dndcon "DND log: condition received" b
 > ${1:name} received Condition: _${2:condition}_
+endsnippet
+
+snippet dndlos "DND log: condition lost" b
+> ${1:name} lost Condition: _${2:condition}_
 endsnippet
