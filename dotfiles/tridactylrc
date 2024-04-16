@@ -71,9 +71,8 @@ bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
 
 " Kagi search bindings
 bindurl ^https://kagi.com / focusinput -b
-bindurl ^https://kagi.com f hint -Jc a[class$="_0_URL"]
+bindurl ^https://kagi.com f hint -Jc a[class$="_0_URL"], a[class^="nav_item"]
 bindurl ^https://kagi.com F hint -Jbc a[class$="_0_URL"]
-bindurl ^https://kagi.com S hint -Jc [class="_0_summarize_link"] > a
 bindurl ^https://kagi.com Q hint -Jc [class="_0_summarize_link"] > a
 bindurl ^https://kagi.com S hint -Jc a[class="_0_summarize_page"]
 bindurl ^https://kagi.com o hint -Jc div[class$="k_ui_dropdown"]
