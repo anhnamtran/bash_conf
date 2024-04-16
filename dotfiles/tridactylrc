@@ -88,9 +88,10 @@ set hintmaps.<S-Tab> hint.focusPreviousHint
 autocmd TabEnter .* unfocus
 
 " Google Calendar bindings
-bindurl calendar.google.com/calendar/* e hint -Jc div[class="hnGhZ"] div[role="button"]
+bindurl calendar.google.com/calendar/* e hint -Jc div[class="mDPmMe"] div[role="button"]
 bindurl calendar.google.com/calendar/* A hint -Jc div[class^="jefcFd"]  button, div[class^="jefcFd"] a, div[class^="jefcFd"]  div[role="button"]
 " Select the event element to scroll when entering the tab
-autocmd TabEnter ^https://calendar.google.com/calendar/* hint -;Jc [class="hnGhZ"][role="presentation"]
+autocmd TabEnter ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe"][role="presentation"]
+autocmd DocLoad ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe"][role="presentation"]
 
 " vim: ft=vim
