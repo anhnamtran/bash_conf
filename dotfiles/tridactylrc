@@ -20,6 +20,8 @@ bind j scrollline 5
 bind k scrollline -5
 
 " Tab operations
+set newtab https://kagi.com
+set tabopenpos related
 bind L tabnext
 bind H tabprev
 bind yt tabduplicate
@@ -72,6 +74,11 @@ bindurl ^https://kagi.com / focusinput -b
 bindurl ^https://kagi.com f hint -Jc a[class$="_0_URL"]
 bindurl ^https://kagi.com F hint -Jbc a[class$="_0_URL"]
 bindurl ^https://kagi.com S hint -Jc [class="_0_summarize_link"] > a
+bindurl ^https://kagi.com Q hint -Jc [class="_0_summarize_link"] > a
+bindurl ^https://kagi.com S hint -Jc a[class="_0_summarize_page"]
+bindurl ^https://kagi.com o hint -Jc div[class$="k_ui_dropdown"]
+autocmd TabEnter ^https://kagi.com/search?q=* hint -;Jc div[class="app-box-center"]
+autocmd DocLoad ^https://kagi.com/search?q=* hint -;Jc div[class="app-box-center"]
 
 unbind <Space>
 
