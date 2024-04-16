@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+# Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+
+from __future__ import absolute_import, division, print_function
+
+import argparse
+import re
+import subprocess
+import sys
+import time
+
+def runCmd( cmd ):
+   return subprocess.run( cmd, check=True, stdout=subprocess.PIPE )
+
+def stdoutStr( cmdRes ):
+   return cmdRes.stdout.decode( 'utf-8' )
+
+def stdoutLines( cmdRes ):
+   # Ignore the last line
+   stdout = stdoutStr( cmdRes )
+   removeLastLine = False
+   if stdout and stdout[ -1 ] == '\n':
+      removeLastLine = True
+   lines = stdoutStr( cmdRes ).split( '\n' )
+   if removeLastLine:
+      lines = lines[ : -1 ]
+
+   return lines
+
+def windowIndex():
+   res = runCmd( [ 'tmux', 'display-message', '-p', '#I' ] )
+   lines = stdoutLines( res )
+   for line in lines:
+      if line:
+         return line
+   raise Exception( "Unable to find a valid window" )
+
+window = windowIndex()
+
+def paneIndex( index, allWindows ):
+   global window
+   if allWindows:
+      print( "Tracking all windows with pane {index}".format( index=index ) )
+      return index
+   return "{window}.{index}".format( window=window, index=index )
+
+def paneContent( paneIndex ):
+   res = runCmd( [ 'tmux', 'capture-pane', '-p', '-t', paneIndex ] )
+   return stdoutLines( res )
+
+def currSessionName():
+   res = runCmd( [ 'tmux', 'display-message', '-p', '#S' ] )
+   lines = stdoutLines( res )
+   for line in lines:
+      if line:
+         return line
+   return 'Unknown'
+
+def searchPane( args ):
+   flags = 0
+   if args.ignore_case:
+      flags |= re.IGNORECASE
+   regex = re.compile( args.pattern, flags=flags )
+   pane = paneIndex( args.paneIndex, args.allWindows )
+   lines = paneContent( pane )
+   matched = False
+
+   if args.last_line:
+      for line in reversed( lines ):
+         if line:
+            lines = [ line ]
+            break
+
+   for line in lines:
+      if regex.search( line ):
+         print( line )
+         matched = True
+
+   return matched
+
+def main():
+   parser = argparse.ArgumentParser( description="" )
+   parser.add_argument( 'pattern', metavar='PATTERN', help="A regex pattern" )
+   parser.add_argument( 'paneIndex', metavar='PANE_INDEX',
+                        help="The pane index to search in the current tmux window "
+                             "(use <prefix>+q to show)" )
+   parser.add_argument( '--dont-wait', '-W', action='store_true' )
+   parser.add_argument( '--last-line', '-l', action='store_true' )
+   parser.add_argument( '--ignore-case', '-i', action='store_true' )
+   parser.add_argument( '--duration', '-n', type=float, default=1 )
+   parser.add_argument( '--allWindows', action='store_true',
+                        help="Track the same pane over all windows, "
+                        "not just the current one" )
+   args = parser.parse_args()
+
+   if args.dont_wait:
+      return 0 if searchPane( args ) else 1
+   else:
+      print( "Waiting for '{}' in session {}".format(
+         args.pattern, currSessionName() ) )
+      while not searchPane( args ):
+         time.sleep( args.duration )
+
+if __name__ == '__main__':
+   sys.exit( main() )
