@@ -49,6 +49,8 @@ local function notify_coc_diag(msg, level)
   coc_diag_record = vim.notify(msg, level, notify_opts)
 end
 
+local previous_diag = nil
+
 local function coc_notify_diagnostics()
   local info = vim.b.coc_diagnostic_info
   if info == nil then
@@ -56,31 +58,35 @@ local function coc_notify_diagnostics()
   end
   local msgs = {}
   local level = vim.log.levels.INFO
-  if info.warning ~= nil then
+  if info.warning ~= nil and info.warning > 0 then
     level = vim.log.levels.WARN
   end
-  if info.error ~= nil then
+  if info.error ~= nil and info.error > 0 then
     level = vim.log.levels.ERROR
   end
  
-  if info.error ~= nil then
-    vim.list_extend(msgs, msgs, ' Errors: ' .. info.error)
+  if info.error ~= nil and info.error > 0 then
+    table.insert(msgs, ' Errors: ' .. info.error)
   end
-  if info.warning ~= nil then
-    vim.list_extend(msgs, ' Warnings: ' .. info.warning)
+  if info.warning ~= nil and info.warning > 0 then
+    table.insert(msgs, ' Warnings: ' .. info.warning)
   end
-  if info.information ~= nil then
-    vim.list_extend(msgs, msgs, ' Infos: ' .. info.information)
+  if info.information ~= nil and info.information > 0 then
+    table.insert(msgs, ' Infos: ' .. info.information)
   end
-  if info.hint ~= nil then
-    vim.list_extend(msgs, msgs, ' Hints: ' .. info.hint)
+  if info.hint ~= nil and info.hint > 0 then
+    table.insert(msgs, ' Hints: ' .. info.hint)
   end
 
   local msg = table.concat(msgs, "\n")
+  if msg == previous_diag then
+     return
+  end
   if #msg == 0 then
     msg = ' All OK'
   end
 
+  previous_diag = msg
   notify_coc_diag(msg, level)
 end
 
@@ -120,4 +126,3 @@ vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
   pattern = {"*"},
   callback = function() vim.notify("Buffer reloaded", vim.log.levels.WARN) end
 })
-
