@@ -113,7 +113,7 @@ textbox-prompt-colon {
     str:                         "";
     background-color:            inherit;
     text-color:                  inherit;
-    font: "Iosevka Nerd Font Mono 16";
+    font: "Iosevka 16";
 }
 entry {
     enabled:                     true;

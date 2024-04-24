@@ -108,12 +108,12 @@ prompt {
 }
 textbox-prompt-colon {
     enabled:                     true;
-    padding:                     -5px 0px;
+    padding:                     -3px 0px;
     expand:                      false;
-    str:                         "󰌗";
+    str:                         "󰌗 ";
     background-color:            inherit;
     text-color:                  inherit;
-    font: "Iosevka Nerd Font Mono 16";
+    font: "Iosevka Term 13";
 }
 entry {
     enabled:                     true;

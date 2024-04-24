@@ -55,7 +55,7 @@ hide_tray() {
   debug "Hiding tray"
 
   polybar-msg action tray module_hide &>/dev/null
-  echo "󰄽"
+  echo ""
 
   touch "$CACHE_DIR/$LOCK_FILE"
 }
