@@ -250,7 +250,6 @@ exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/kdeconnect-indicator
 exec --no-startup-id /usr/bin/birdtray
 exec --no-startup-id /usr/bin/obsidian
-exec_always --no-startup-id dunst
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
