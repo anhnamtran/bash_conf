@@ -32,9 +32,6 @@ require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
 
-vim.opt.spell = true
-vim.opt.spelllang = 'en_us'
-
 -- color columns and textwidth
 vim.opt.textwidth = 120
 vim.opt.colorcolumn = '+0'
@@ -243,9 +240,6 @@ imap('<C-s>', '<C-o>:w<CR>', true)
 -- replace ESC in insert mode
 imap('jj', '<ESC>', true)
 imap('qq', '<ESC>:x<CR>', true)
-
--- quickly edit the previous typo
-imap('<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', true)
 
 -- normal mode
 nmap('<CR>', 'o<ESC>', true)
