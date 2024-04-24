@@ -5,6 +5,13 @@ require("notify").setup({
    top_down = false,
    max_width = 50,
    max_height = 5,
+   icons = {
+     DEBUG = " ",
+     ERROR = " ",
+     INFO = " ",
+     TRACE = "✎ ",
+     WARN = " "
+   },
 })
 
 vim.notify = require('notify')
@@ -66,16 +73,16 @@ local function coc_notify_diagnostics()
   end
  
   if info.error ~= nil and info.error > 0 then
-    table.insert(msgs, ' Errors: ' .. info.error)
+    table.insert(msgs, '  Errors: ' .. info.error)
   end
   if info.warning ~= nil and info.warning > 0 then
-    table.insert(msgs, ' Warnings: ' .. info.warning)
+    table.insert(msgs, '  Warnings: ' .. info.warning)
   end
   if info.information ~= nil and info.information > 0 then
-    table.insert(msgs, ' Infos: ' .. info.information)
+    table.insert(msgs, '  Infos: ' .. info.information)
   end
   if info.hint ~= nil and info.hint > 0 then
-    table.insert(msgs, ' Hints: ' .. info.hint)
+    table.insert(msgs, '✎ Hints: ' .. info.hint)
   end
 
   local msg = table.concat(msgs, "\n")
@@ -83,7 +90,7 @@ local function coc_notify_diagnostics()
      return
   end
   if #msg == 0 then
-    msg = ' All OK'
+    msg = '  All OK'
   end
 
   previous_diag = msg
