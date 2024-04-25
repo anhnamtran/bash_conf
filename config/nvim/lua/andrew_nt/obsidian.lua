@@ -37,10 +37,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile', 'VimEnter' }, {
   callback = function ()
     local file_path = vim.api.nvim_buf_get_name(0)
     if string.match(file_path, ".*/obsidian/.*") ~= nil then
-      vim.b.coc_diagnostic_disable = true
       vim.opt_local.textwidth = 0
-      vim.opt_local.spell = true
-      vim.opt_local.spelllang = 'en_ca'
       vim.opt_local.conceallevel = 2
       vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
