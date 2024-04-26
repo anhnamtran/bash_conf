@@ -102,6 +102,8 @@
   "cSpell.allowCompoundWords": true,
   "cSpell.ignoreWords": [
     "clangd",
+    "ekxes",
+    "elturgard",
     "grpc",
     "morra",
     "proj",
@@ -109,7 +111,9 @@
     "pyclient",
     "pylint",
     "pyright",
-    "ssid"
+    "ssid",
+    "yornos",
+    "zephyros"
   ],
   "cSpell.userWords": [
     "",
