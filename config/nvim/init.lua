@@ -304,8 +304,22 @@ vim.cmd([[colorscheme onedark]])
 -- additional scheme and highlighting changes
 -- these need to be after 'colorscheme' incase that clears highlight groups
 vim.opt.pumblend = 15
-vim.cmd([[
-hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
-hi! CocHighlightText ctermbg=242 guibg=#3b3f4c gui=italic ctermfg=225 guifg=#56b6c2
-hi! link CocMenuSel PmenuSel
-]])
+
+local custom_hl_groups = {
+  -- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
+  ObsidianTodo = { bold = true, fg = "#F78C6C" },
+  ObsidianDone = { bold = true, fg = "#89DDFF" },
+  ObsidianRightArrow = { bold = true, fg = "#F78C6C" },
+  ObsidianTilde = { bold = true, fg = "#FF5370" },
+  ObsidianBullet = { bold = true, fg = "#89DDFF" },
+  ObsidianRefText = { underline = true, fg = "#C792EA" },
+  ObsidianExtLinkIcon = { fg = "#C792EA" },
+  ObsidianTag = { italic = true, fg = "#89DDFF" },
+  ObsidianBlockID = { italic = true, fg = "#89DDFF" },
+  ObsidianHighlightText = { bg = "#75662E" },
+
+  PmenuSel = { fg = "#282C34", bg = "#C678DD" },
+
+  CocHighlightText = { fg = "#56B6C2", bg = "#3B3F4C" },
+  CocMenuSel = { link = "PmenuSel" },
+}

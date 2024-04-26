@@ -103,6 +103,7 @@
   "cSpell.ignoreWords": [
     "clangd",
     "grpc",
+    "morra",
     "proj",
     "py",
     "pyclient",
