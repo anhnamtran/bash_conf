@@ -27,7 +27,14 @@ require('obsidian').setup({
     folder = "Daily",
     date_format = "%Y-%m-%d %a",
     template = "Templates/Daily notes.md"
-  }
+  },
+  bullets = { char = "•", hl_group = "ObsidianBullet" },
+  external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+  -- Replace the above with this if you don't have a patched font:
+  -- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+  reference_text = { hl_group = "ObsidianRefText" },
+  highlight_text = { hl_group = "ObsidianHighlightText" },
+  block_ids = { hl_group = "ObsidianBlockID" },
 })
 
 local ObsidianCustomAu = vim.api.nvim_create_augroup('ObsidianCustomAu', {})

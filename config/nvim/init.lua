@@ -26,13 +26,16 @@ require('andrew_nt.dotfiles')
 require('andrew_nt.redir')
 
 -- Syntax plugins configuration
-require('andrew_nt.notify')
 require('andrew_nt.onedark')
+require('andrew_nt.notify')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
+
+-- load colors and colorscheme
+require('andrew_nt.colors')
 
 -- color columns and textwidth
 vim.opt.textwidth = 120
@@ -297,17 +300,3 @@ vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
       vim.opt_local.spell = false
    end
 })
-
------------------------------------ THEMES -------------------------------------
-
-vim.opt.background = 'dark'
-vim.cmd([[colorscheme onedark]])
-
--- additional scheme and highlighting changes
--- these need to be after 'colorscheme' incase that clears highlight groups
-vim.opt.pumblend = 15
-vim.cmd([[
-hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
-hi! CocHighlightText ctermbg=242 guibg=#3b3f4c gui=italic ctermfg=225 guifg=#56b6c2
-hi! link CocMenuSel PmenuSel
-]])
