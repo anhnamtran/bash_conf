@@ -24,13 +24,16 @@ require('andrew_nt.obsidian')
 require('andrew_nt.buffers')
 
 -- Syntax plugins configuration
-require('andrew_nt.notify')
 require('andrew_nt.onedark')
+require('andrew_nt.notify')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
+
+-- load colors and colorscheme
+require('andrew_nt.colors')
 
 -- color columns and textwidth
 vim.opt.textwidth = 120
@@ -295,31 +298,3 @@ vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
       vim.opt_local.spell = false
    end
 })
-
------------------------------------ THEMES -------------------------------------
-
-vim.opt.background = 'dark'
-vim.cmd([[colorscheme onedark]])
-
--- additional scheme and highlighting changes
--- these need to be after 'colorscheme' incase that clears highlight groups
-vim.opt.pumblend = 15
-
-local custom_hl_groups = {
-  -- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
-  ObsidianTodo = { bold = true, fg = "#F78C6C" },
-  ObsidianDone = { bold = true, fg = "#89DDFF" },
-  ObsidianRightArrow = { bold = true, fg = "#F78C6C" },
-  ObsidianTilde = { bold = true, fg = "#FF5370" },
-  ObsidianBullet = { bold = true, fg = "#89DDFF" },
-  ObsidianRefText = { underline = true, fg = "#C792EA" },
-  ObsidianExtLinkIcon = { fg = "#C792EA" },
-  ObsidianTag = { italic = true, fg = "#89DDFF" },
-  ObsidianBlockID = { italic = true, fg = "#89DDFF" },
-  ObsidianHighlightText = { bg = "#75662E" },
-
-  PmenuSel = { fg = "#282C34", bg = "#C678DD" },
-
-  CocHighlightText = { fg = "#56B6C2", bg = "#3B3F4C" },
-  CocMenuSel = { link = "PmenuSel" },
-}
