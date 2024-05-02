@@ -12,4 +12,4 @@ if [ ${#CHKAUR} -gt 0 ]; then
 fi
 
 CHK=$(echo "${CHK}" | sort | uniq)
-echo "${CHK}"
+echo "${CHK}" | bat
