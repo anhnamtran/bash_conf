@@ -1,29 +1,26 @@
 diff --git a/Dribbblish/color.ini b/Dribbblish/color.ini
-index b8c152d..c4bc149 100644
+index a425dd5..511ed61 100644
 --- a/Dribbblish/color.ini
 +++ b/Dribbblish/color.ini
-@@ -177,4 +177,22 @@ button-disabled    = bdae93
- tab-active         = fb4934
- notification       = 8ec07c
- notification-error = d79921
--misc               = BFBFBF
-\ No newline at end of file
-+misc               = BFBFBF
+@@ -306,3 +306,21 @@ tab-active         = 313244 ; Surface0
+ notification       = 313244 ; Surface0
+ notification-error = f38ba8 ; Red
+ misc               = 45475a ; Surface1
 +
 +[onedark]
-+text               = ABB2BF
-+subtext            = ABB2BF
-+sidebar-text       = 282C34
-+main               = 282C34
-+sidebar            = 98C379
-+player             = 282C34
-+card               = 282C34
-+shadow             = 2D3B23
-+selected-row       = C678DD
-+button             = 98C379
-+button-active      = 98C379
-+button-disabled    = 4B5263
-+tab-active         = 98C379
-+notification       = E5C07B
-+notification-error = E06C75
-+misc               = 282C34
++text               = abb2bf
++subtext            = 5c6370
++sidebar-text       = abb2bf
++main               = 282c34
++sidebar            = 282c34
++player             = 282c34
++card               = 282c34
++shadow             = 282c34
++selected-row       = abb2bf
++button             = 5c6370
++button-active      = 98c379
++button-disabled    = 282c34
++tab-active         = 4b5263
++notification       = 282c34
++notification-error = e06c75
++misc               = abb2bf
