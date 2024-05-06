@@ -1,483 +1,391 @@
-//@ts-check
-
 // NAME: Keyboard Shortcut
-// AUTHOR: khanhas
+// AUTHOR: khanhas, OhItsTom
 // DESCRIPTION: Register a few more keybinds to support keyboard-driven navigation in Spotify client.
 
 /// <reference path="../globals.d.ts" />
 
 (function KeyboardShortcut() {
-    if (!Spicetify.Keyboard) {
-        setTimeout(KeyboardShortcut, 1000);
-        return;
-    }
+	if (!Spicetify.Mousetrap) {
+		setTimeout(KeyboardShortcut, 1000);
+		return;
+	}
 
-    const SCROLL_STEP = 50;
-    const PAGE_STEP = 200;
+	// Variables / Conditions
+	const vim = new VimBind();
+	const SCROLL_STEP = 25;
 
-    /**
-     * Register your own keybind with function `registerBind`
-     *
-     * Syntax:
-     *     registerBind(keyName, ctrl, shift, alt, callback)
-     *
-     * ctrl, shift and alt are boolean, true or false
-     *
-     * Valid keyName:
-     * - BACKSPACE       - C               - Y               - F3
-     * - TAB             - D               - Z               - F4
-     * - ENTER           - E               - WINDOW_LEFT     - F5
-     * - SHIFT           - F               - WINDOW_RIGHT    - F6
-     * - CTRL            - G               - SELECT          - F7
-     * - ALT             - H               - NUMPAD_0        - F8
-     * - PAUSE/BREAK     - I               - NUMPAD_1        - F9
-     * - CAPS            - J               - NUMPAD_2        - F10
-     * - ESCAPE          - K               - NUMPAD_3        - F11
-     * - SPACE           - L               - NUMPAD_4        - F12
-     * - PAGE_UP         - M               - NUMPAD_5        - NUM_LOCK
-     * - PAGE_DOWN       - N               - NUMPAD_6        - SCROLL_LOCK
-     * - END             - O               - NUMPAD_7        - ;
-     * - HOME            - P               - NUMPAD_8        - =
-     * - ARROW_LEFT      - Q               - NUMPAD_9        - ,
-     * - ARROW_UP        - R               - MULTIPLY        - -
-     * - ARROW_RIGHT     - S               - ADD             - /
-     * - ARROW_DOWN      - T               - SUBTRACT        - `
-     * - INSERT          - U               - DECIMAL_POINT   - [
-     * - DELETE          - V               - DIVIDE          - \
-     * - A               - W               - F1              - ]
-     * - B               - X               - F2              - "
-     *
-     * Use one of keyName as a string. If key that you want isn't in that list,
-     * you can also put its keycode number in keyName as a number.
-     *
-     * callback is name of function you want your shortcut to bind to. It also
-     * returns one KeyboardEvent parameter.
-     *
-     * Following are my default keybinds, use them as examples.
-     */
+	/**
+	 * Binds a keyboard shortcut using Mousetrap.
+	 * @param {string} key - The Mousetrap keybind.
+	 * @param {boolean | undefined} staticCondition - A static condition.
+	 * @param {(event: KeyboardEvent) => void} callback - Callback function for the event.
+	 */
+	const binds = {
+		// Shutdown Spotify using Ctrl+Q
+		"ctrl+q": { callback: () => Spicetify.CosmosAsync.post("sp://esperanto/spotify.desktop.lifecycle_esperanto.proto.DesktopLifecycle/Shutdown") },
 
-    // Ctrl + Tab and Ctrl + Shift + Tab to switch sidebar items
-    registerBind("TAB", true, false, false, rotateSidebarDown);
-    registerBind("TAB", true, true, false, rotateSidebarUp);
+		// Rotate through sidebar items using Ctrl+Tab and Ctrl+Shift+Tab
+		"ctrl+tab": { callback: () => rotateSidebar(1) },
+		"ctrl+shift+tab": { callback: () => rotateSidebar(-1) },
 
-    // Ctrl + Q to open Queue page
-    registerBind("Q", true, false, false, clickQueueButton);
+		// Focus on the app content before scrolling using Shift+PageUp and Shift+PageDown
+		"shift+pageup": { callback: () => focusOnApp() },
+		"shift+pagedown": { callback: () => focusOnApp() },
 
-    // Shift + H and Shift + L to go back and forward page
-    registerBind("H", false, true, false, clickNavigatingBackButton);
-    registerBind("L", false, true, false, clickNavigatingForwardButton);
+		// Scroll actions using 'j' and 'k' keys
+		j: { callback: () => createScrollCallback(SCROLL_STEP) },
+		k: { callback: () => createScrollCallback(-SCROLL_STEP) },
 
-    // PageUp, PageDown to focus on iframe app before scrolling
-    registerBind("PAGE_UP", false, true, false, focusOnApp);
-    registerBind("PAGE_DOWN", false, true, false, focusOnApp);
+		// Scroll to the top ('g') or bottom ('Shift+g') of the page
+		g: { callback: () => scrollToPosition(0) },
+		"shift+g": { callback: () => scrollToPosition(1) },
 
-    // J and K to vertically scroll app
-    registerBind("J", false, false, false, appScrollDown);
-    registerBind("K", false, false, false, appScrollUp);
+		// Shift + H and Shift + L to go back and forward page
+		"shift+h": { callback: () => Spicetify.Platform.History.goBack() },
+		"shift+l": { callback: () => Spicetify.Platform.History.goForward() },
 
-    // CTRL+E and CTRL+Y to vertically scroll app
-    registerBind("E", true, false, false, appScrollDown);
-    registerBind("Y", true, false, false, appScrollUp);
+		// M to Like/Unlike track
+		m: { callback: () => Spicetify.Player.toggleHeart() },
 
-    // CTRL+D and CTRL+U to vertically scroll app by pages
-    registerBind("D", true, false, false, appPageDown);
-    registerBind("U", true, false, false, appPageUp);
+		// Forward Slash to open search page
+		"/": { callback: () => Spicetify.Platform.History.replace("/search") },
 
-    // G and Shift + G to scroll to top and to bottom
-    registerBind("G", false, false, false, appScrollTop);
-    registerBind("G", false, true, false, appScrollBottom);
+		// CTRL + Arrow Left Next and CTRL + Arrow Right  Previous Song
+		"ctrl+left": { callback: () => Spicetify.Player.prev() },
+		"ctrl+right": { callback: () => Spicetify.Player.next() },
 
-    // M to Like/Unlike track
-    registerBind("M", false, false, false, Spicetify.Player.toggleHeart);
+		// CTRL + Arrow Up Increase Volume CTRL + Arrow Down Decrease Volume
+		"ctrl+up": { callback: () => Spicetify.Player.setVolume(Spicetify.Player.getVolume() - 0.05) },
+		"ctrl+down": { callback: () => Spicetify.Player.setVolume(Spicetify.Player.getVolume() + 0.05) },
 
-    // Forward Slash to open search page
-    registerBind("/", false, false, false, openSearchPage);
+		// Activate Vim mode and set cancel key to 'ESCAPE'
+		f: {
+			callback: event => {
+				vim.activate(event);
+				vim.setCancelKey("ESCAPE");
+			}
+		}
+	};
 
-    if (window.navigator.userAgent.indexOf("Win") === -1) {
-        // CTRL + Arrow Left Next and CTRL + Arrow Right  Previous Song
-        registerBind("ARROW_RIGHT", true, false, false, nextSong);
-        registerBind("ARROW_LEFT", true, false, false, previousSong);
+	// Bind all the keys
+	for (const [key, { staticCondition, callback }] of Object.entries(binds)) {
+		if (typeof staticCondition === "undefined" || staticCondition) {
+			Spicetify.Mousetrap.bind(key, event => {
+				event.preventDefault();
+				if (!vim.isActive) {
+					callback(event);
+				}
+			});
+		}
+	}
 
-        // CTRL + Arrow Up Increase Volume CTRL + Arrow Down Decrease Volume
-        registerBind("ARROW_UP", true, false, false, increaseVolume);
-        registerBind("ARROW_DOWN", true, false, false, decreaseVolume);
-    }
+	// re-render vim on window resize & prevent mouse event while active
+	window.addEventListener(
+		"resize",
+		event => {
+			if (vim.isActive) {
+				vim.activate();
+			}
+		},
+		true
+	);
 
-    // F to activate Link Follow function
-    const vim = new VimBind();
-    registerBind("F", false, false, false, vim.activate.bind(vim));
-    // Esc to cancel Link Follow
-    vim.setCancelKey("ESCAPE");
+	window.addEventListener(
+		"mousedown",
+		event => {
+			if (vim.isActive) {
+				event.stopPropagation();
+			}
+		},
+		true
+	);
 
-    function rotateSidebarDown() {
-        rotateSidebar(1);
-    }
+	// Functions
+	function focusOnApp() {
+		return document.querySelector(".Root__main-view .os-viewport");
+	}
 
-    function rotateSidebarUp() {
-        rotateSidebar(-1);
-    }
+	function createScrollCallback(step) {
+		const app = focusOnApp();
+		if (app) {
+			const scrollInterval = setInterval(() => {
+				app.scrollTop += step;
+			}, 10);
+			document.addEventListener("keyup", () => {
+				clearInterval(scrollInterval);
+			});
+		}
+	}
 
-    function clickQueueButton() {
-        document.querySelector("div.ExtraControls div.control-button-wrapper > button").click();
-    }
+	function scrollToPosition(position) {
+		const app = focusOnApp();
+		app.scroll(0, position === 0 ? 0 : app.scrollHeight);
+	}
 
-    function clickNavigatingBackButton() {
-        document.querySelector(".main-topBar-historyButtons .main-topBar-back").click();
-    }
+	/**
+	 * @returns {number | undefined}
+	 * @param {NodeListOf<Element>} allItems
+	 */
+	function findActiveIndex(allItems) {
+		const activeLink = document.querySelector(".main-yourLibraryX-navLinkActive");
+		const historyURI = Spicetify.Platform.History.location.pathname.replace(/^\//, "spotify:").replace(/\//g, ":");
+		const activePage = document.querySelector(`[aria-describedby="onClickHint${historyURI}"]`);
 
-    function clickNavigatingForwardButton() {
-        document.querySelector(".main-topBar-historyButtons .main-topBar-forward").click();
-    }
+		if (!activeLink && !activePage) {
+			return -1;
+		}
 
-    function appScrollDown() {
-        const app = focusOnApp();
-        if (app) {
-            app.scrollBy(0, SCROLL_STEP);
-        }
-    }
+		let index = 0;
+		for (const item of allItems) {
+			if (item === activeLink || item === activePage) {
+				return index;
+			}
 
-    function appScrollUp() {
-        const app = focusOnApp();
-        if (app) {
-            app.scrollBy(0, -SCROLL_STEP);
-        }
-    }
+			index++;
+		}
+	}
 
-    function appPageDown() {
-        const app = focusOnApp();
-        if (app) {
-            app.scrollBy(0, PAGE_STEP);
-        }
-    }
+	/**
+	 *
+	 * @param {1 | -1} direction
+	 */
+	function rotateSidebar(direction) {
+		const allItems = document.querySelectorAll(
+			"#spicetify-sticky-list .main-yourLibraryX-navLink, .main-yourLibraryX-listItem > div:not(:has([data-skip-in-keyboard-nav])) > div:first-child"
+		);
+		const maxIndex = allItems.length - 1;
 
-    function appPageUp() {
-        const app = focusOnApp();
-        if (app) {
-            app.scrollBy(0, -PAGE_STEP);
-        }
-    }
+		let index = findActiveIndex(allItems) + direction;
+		if (index < 0) index = maxIndex;
+		else if (index > maxIndex) index = 0;
 
-    function appScrollBottom() {
-        const app = focusOnApp();
-        app.scroll(0, app.scrollHeight);
-    }
-
-    function appScrollTop() {
-        const app = focusOnApp();
-        app.scroll(0, 0);
-    }
-
-    function nextSong() {
-        document.querySelector(".main-skipForwardButton-button").click();
-    }
-
-    function previousSong() {
-        document.querySelector(".main-skipBackButton-button").click();
-    }
-
-    function increaseVolume() {
-        Spicetify.Player.origin.setVolume(Spicetify.Player.getVolume() + 0.1);
-    }
-
-    function decreaseVolume() {
-        Spicetify.Player.origin.setVolume(Spicetify.Player.getVolume() - 0.1);
-    }
-
-    /**
-     *
-     * @param {KeyboardEvent} event
-     */
-    function openSearchPage(event) {
-        const searchInput = document.querySelector(".main-topBar-container input");
-        if (searchInput) {
-            searchInput.focus();
-        } else {
-            const sidebarItem = document.querySelector(`.main-navBar-navBar a[href="/search"]`);
-            if (sidebarItem) {
-                sidebarItem.click();
-            }
-        }
-
-        event.preventDefault();
-    }
-
-    /**
-     *
-     * @param {Spicetify.Keyboard.ValidKey} keyName
-     * @param {boolean} ctrl
-     * @param {boolean} shift
-     * @param {boolean} alt
-     * @param {(event: KeyboardEvent) => void} callback
-     */
-    function registerBind(keyName, ctrl, shift, alt, callback) {
-        const key = Spicetify.Keyboard.KEYS[keyName];
-
-        Spicetify.Keyboard.registerShortcut(
-            {
-                key,
-                ctrl,
-                shift,
-                alt,
-            },
-            (event) => {
-                if (!vim.isActive) {
-                    callback(event);
-                }
-            }
-        );
-    }
-
-    function focusOnApp() {
-        return document.querySelector("main .os-viewport");
-    }
-
-    /**
-     * @returns {number}
-     */
-    function findActiveIndex(allItems) {
-        const active = document.querySelector(
-            ".main-navBar-navBarLinkActive, .main-collectionLinkButton-selected, .main-rootlist-rootlistItemLinkActive"
-        );
-        if (!active) {
-            return -1;
-        }
-
-        let index = 0;
-        for (const item of allItems) {
-            if (item === active) {
-                return index;
-            }
-
-            index++;
-        }
-    }
-
-    /**
-     *
-     * @param {1 | -1} direction
-     */
-    function rotateSidebar(direction) {
-        const allItems = document.querySelectorAll(
-            ".main-navBar-navBarLink, .main-collectionLinkButton-collectionLinkButton, .main-rootlist-rootlistItemLink"
-        );
-        const maxIndex = allItems.length - 1;
-        let index = findActiveIndex(allItems) + direction;
-
-        if (index < 0) index = maxIndex;
-        else if (index > maxIndex) index = 0;
-
-        let toClick = allItems[index];
-        if (!toClick.hasAttribute("href")) {
-            toClick = toClick.querySelector(".main-rootlist-rootlistItemLink");
-        }
-
-        toClick.click();
-    }
+		allItems[index].click();
+	}
 })();
 
 function VimBind() {
-    const elementQuery = ["[href]", "button", "td.tl-play", "td.tl-number", "tr.TableRow"].join(",");
+	const elementQuery = ["[href]", "button", ".main-trackList-trackListRow", "[role='button']"].join(",");
 
-    const keyList = "qwertasdfgzxcvyuiophjklbnm".split("");
+	const keyList = "qwertasdfgzxcvyuiophjklbnm".split("");
 
-    const lastKeyIndex = keyList.length - 1;
+	const lastKeyIndex = keyList.length - 1;
 
-    this.isActive = false;
+	this.isActive = false;
 
-    const vimOverlay = document.createElement("div");
-    vimOverlay.id = "vim-overlay";
-    vimOverlay.style.zIndex = "9999";
-    vimOverlay.style.position = "absolute";
-    vimOverlay.style.width = "100%";
-    vimOverlay.style.height = "100%";
-    vimOverlay.style.display = "none";
-    vimOverlay.innerHTML = `<style>
+	const vimOverlay = document.createElement("div");
+	const baseOverlay = document.createElement("div");
+	const tippyOverlay = document.createElement("div");
+	vimOverlay.id = "vim-overlay";
+	baseOverlay.id = "base-overlay";
+	tippyOverlay.id = "tippy-overlay";
+	vimOverlay.style.position = baseOverlay.style.position = tippyOverlay.style.position = "absolute";
+	vimOverlay.style.width = baseOverlay.style.width = tippyOverlay.style.width = "100%";
+	vimOverlay.style.height = baseOverlay.style.height = tippyOverlay.style.height = "100%";
+	baseOverlay.style.zIndex = "9999";
+	tippyOverlay.style.zIndex = "10000";
+	vimOverlay.style.display = "none";
+	vimOverlay.innerHTML = `<style>
 .vim-key {
     position: fixed;
     padding: 3px 6px;
-    background-color: black;
+    background-color: var(--spice-button-disabled);
     border-radius: 3px;
-    border: solid 2px white;
-    color: white;
+    border: solid 2px var(--spice-text);
+    color: var(--spice-text);
     text-transform: lowercase;
     line-height: normal;
     font-size: 14px;
     font-weight: 500;
 }
 </style>`;
-    document.body.append(vimOverlay);
+	vimOverlay.append(baseOverlay);
+	vimOverlay.append(tippyOverlay);
+	document.body.append(vimOverlay);
 
-    const mousetrap = new Spicetify.Mousetrap(document);
-    mousetrap.bind(keyList, listenToKeys.bind(this), "keypress");
-    // Pause mousetrap event emitter
-    const orgStopCallback = mousetrap.stopCallback;
-    mousetrap.stopCallback = () => true;
+	const mousetrap = new Spicetify.Mousetrap(document);
+	mousetrap.bind(keyList, listenToKeys.bind(this), "keypress");
+	// Pause mousetrap event emitter
+	const orgStopCallback = mousetrap.stopCallback;
+	mousetrap.stopCallback = () => true;
 
-    /**
-     *
-     * @param {KeyboardEvent} event
-     */
-    this.activate = function (event) {
-        vimOverlay.style.display = "block";
+	/**
+	 *
+	 * @param {KeyboardEvent} event
+	 */
+	this.activate = function (event) {
+		vimOverlay.style.display = "block";
 
-        const vimkey = getVims();
-        if (vimkey.length > 0) {
-            vimkey.forEach((e) => e.remove());
-            return;
-        }
+		const vimkey = getVims();
+		if (vimkey.length > 0) {
+			for (const e of vimkey) {
+				e.remove();
+			}
+		}
 
-        let firstKey = 0;
-        let secondKey = 0;
+		let firstKey = 0;
+		let secondKey = 0;
 
-        getLinks().forEach((e) => {
-            if (e.style.display === "none" || e.style.visibility === "hidden" || e.style.opacity === "0") {
-                return;
-            }
+		for (const e of getLinks()) {
+			const computed = window.getComputedStyle(e);
+			if (computed.display === "none" || computed.visibility === "hidden" || computed.opacity === "0") {
+				continue;
+			}
 
-            const bound = e.getBoundingClientRect();
-            let owner = document.body;
+			const bound = e.getBoundingClientRect();
+			const owner = document.body;
 
-            let top = bound.top;
-            let left = bound.left;
+			let top = bound.top;
+			let left = bound.left;
 
-            if (
-                bound.bottom > owner.clientHeight ||
-                bound.left > owner.clientWidth ||
-                bound.right < 0 ||
-                bound.top < 0 ||
-                bound.width === 0 ||
-                bound.height === 0
-            ) {
-                return;
-            }
+			if (
+				bound.bottom > owner.clientHeight ||
+				bound.left > owner.clientWidth ||
+				bound.right < 0 ||
+				bound.top < 0 ||
+				bound.width === 0 ||
+				bound.height === 0
+			) {
+				continue;
+			}
 
-            vimOverlay.append(createKey(e, keyList[firstKey] + keyList[secondKey], top, left));
+			// Exclude certain elements from the centering calculation
+			if (e.parentNode.role !== "row") {
+				top = top + bound.height / 2 - 15;
+				left = left + bound.width / 2 - 15;
+			}
 
-            secondKey++;
-            if (secondKey > lastKeyIndex) {
-                secondKey = 0;
-                firstKey++;
-            }
-        });
+			// Append the key to the correct overlay
+			if (e.tagName === "BUTTON" && e.parentNode.tagName === "LI") {
+				tippyOverlay.append(createKey(e, keyList[firstKey] + keyList[secondKey], top, left));
+			} else {
+				baseOverlay.append(createKey(e, keyList[firstKey] + keyList[secondKey], top, left));
+			}
 
-        this.isActive = true;
-        setTimeout(() => (mousetrap.stopCallback = orgStopCallback.bind(mousetrap)), 100);
-    };
+			secondKey++;
+			if (secondKey > lastKeyIndex) {
+				secondKey = 0;
+				firstKey++;
+			}
+		}
 
-    /**
-     *
-     * @param {KeyboardEvent} event
-     */
-    this.deactivate = function (event) {
-        mousetrap.stopCallback = () => true;
-        this.isActive = false;
-        vimOverlay.style.display = "none";
-        getVims().forEach((e) => e.remove());
-    };
+		this.isActive = true;
+		setTimeout(() => {
+			mousetrap.stopCallback = orgStopCallback.bind(mousetrap);
+		}, 100);
+	};
 
-    function getLinks() {
-        const elements = Array.from(document.querySelectorAll(elementQuery));
-        return elements;
-    }
+	/**
+	 *
+	 * @param {KeyboardEvent} event
+	 */
+	this.deactivate = function (event) {
+		mousetrap.stopCallback = () => true;
+		this.isActive = false;
+		vimOverlay.style.display = "none";
+		for (const e of getVims()) {
+			e.remove();
+		}
+	};
 
-    function getVims() {
-        return Array.from(vimOverlay.getElementsByClassName("vim-key"));
-    }
+	function getLinks() {
+		const elements = Array.from(document.querySelectorAll(elementQuery));
+		return elements;
+	}
 
-    /**
-     * @param {KeyboardEvent} event
-     */
-    function listenToKeys(event) {
-        if (!this.isActive) {
-            return;
-        }
+	function getVims() {
+		return Array.from(vimOverlay.getElementsByClassName("vim-key"));
+	}
 
-        const vimkey = getVims();
+	/**
+	 * @param {KeyboardEvent} event
+	 */
+	function listenToKeys(event) {
+		if (!this.isActive) {
+			return;
+		}
 
-        if (vimkey.length === 0) {
-            this.deactivate(event);
-            return;
-        }
+		const vimkey = getVims();
 
-        for (const div of vimkey) {
-            const text = div.innerText.toLowerCase();
-            if (text[0] !== event.key) {
-                div.remove();
-                continue;
-            }
+		if (vimkey.length === 0) {
+			this.deactivate(event);
+			return;
+		}
 
-            const newText = text.slice(1);
-            if (newText.length === 0) {
-                click(div.target);
-                this.deactivate(event);
-                return;
-            }
+		for (const div of vimkey) {
+			const text = div.innerText.toLowerCase();
+			if (text[0] !== event.key) {
+				div.remove();
+				continue;
+			}
 
-            div.innerText = newText;
-        }
+			const newText = text.slice(1);
+			if (newText.length === 0) {
+				interact(div.target);
+				this.deactivate(event);
+				return;
+			}
 
-        if (vimOverlay.childNodes.length === 1) {
-            this.deactivate(event);
-        }
-    }
+			div.innerText = newText;
+		}
 
-    function click(element) {
-        if (element.hasAttribute("href") || element.tagName === "BUTTON") {
-            element.click();
-            return;
-        }
+		if (baseOverlay.childNodes.length === 0 && tippyOverlay.childNodes.length === 0) {
+			this.deactivate(event);
+		}
+	}
 
-        const findButton = element.querySelector(`button[data-ta-id="play-button"]`) || element.querySelector(`button[data-button="play"]`);
-        if (findButton) {
-            findButton.click();
-            return;
-        }
-        alert("Let me know where you found this button, please. I can't click this for you without that information.");
-        return;
-        // TableCell case where play button is hidden
-        // Index number is in first column
-        const index = parseInt(element.firstChild.innerText) - 1;
-        const context = getContextUri();
-        if (index >= 0 && context) {
-            console.log(index);
-            console.log(context);
+	/**
+	 * @param {HTMLElement} element
+	 */
+	function interact(element) {
+		// Hover on contextmenu dropdown list items
+		if (element.tagName === "BUTTON" && element.parentNode.tagName === "LI" && element.ariaExpanded !== null) {
+			const event = new MouseEvent("mouseover", {
+				view: window,
+				bubbles: true,
+				cancelable: true
+			});
 
-            //Spicetify.PlaybackControl.playFromResolver(context, { index }, () => {});
-            return;
-        }
-    }
+			element.dispatchEvent(event);
+			return;
+		}
 
-    function createKey(target, key, top, left) {
-        const div = document.createElement("span");
-        div.classList.add("vim-key");
-        div.innerText = key;
-        div.style.top = top + "px";
-        div.style.left = left + "px";
-        div.target = target;
-        return div;
-    }
+		if (element.hasAttribute("href") || element.tagName === "BUTTON" || element.role === "button" || element.parentNode.role === "row") {
+			element.click();
+			return;
+		}
 
-    function getContextUri() {
-        const username = __spotify.username;
-        const activeApp = localStorage.getItem(username + ":activeApp");
-        if (activeApp) {
-            try {
-                return JSON.parse(activeApp).uri.replace("app:", "");
-            } catch {
-                return null;
-            }
-        }
+		const findButton = element.querySelector(`button[data-ta-id="play-button"]`) || element.querySelector(`button[data-button="play"]`);
+		if (findButton instanceof HTMLButtonElement) {
+			findButton.click();
+			return;
+		}
+		alert("Let me know where you found this button, please. I can't click this for you without that information.");
+		return;
+	}
 
-        return null;
-    }
+	/**
+	 * @param {Element} target
+	 * @param {string} key
+	 * @param {string | number} top
+	 * @param {string | number} left
+	 */
+	function createKey(target, key, top, left) {
+		const div = document.createElement("span");
+		div.classList.add("vim-key");
+		div.innerText = key;
+		div.style.top = `${top}px`;
+		div.style.left = `${left}px`;
+		div.target = target;
+		return div;
+	}
 
-    /**
-     *
-     * @param {Spicetify.Keyboard.ValidKey} key
-     */
-    this.setCancelKey = function (key) {
-        mousetrap.bind(Spicetify.Keyboard.KEYS[key], this.deactivate.bind(this));
-    };
+	/**
+	 *
+	 * @param {Spicetify.Keyboard.ValidKey} key
+	 */
+	this.setCancelKey = function (key) {
+		mousetrap.bind(Spicetify.Keyboard.KEYS[key], this.deactivate.bind(this));
+	};
 
-    return this;
+	return this;
 }
