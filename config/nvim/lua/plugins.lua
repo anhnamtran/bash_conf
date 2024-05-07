@@ -37,6 +37,13 @@ require('lazy').setup({
   { 'mrjones2014/nvim-ts-rainbow',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'neoclide/coc.nvim', branch = 'master', build = { 'npm ci', ':CocUpdate' } },
+  { "dhruvasagar/vim-table-mode",
+    lazy = true,
+    ft = "markdown", -- only load plugin when markdown file opens
+    config = function()
+      vim.g.table_mode_map_prefix = "<leader>T"
+    end,
+  },
 
   -- System navigation
   { 'nvim-telescope/telescope.nvim', branch = 'master',
@@ -58,7 +65,7 @@ require('lazy').setup({
     cmd = { 'NERDTreeToggle' },
     dependencies = { 'preservim/nerdtree' } },
   { 'godlygeek/tabular' },
-  { 'preservim/vim-markdown' },
+  { 'preservim/vim-markdown', dependencies = { 'godlygeek/tabular' } },
 
   -- Session tracking
   'tpope/vim-obsession',
