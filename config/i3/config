@@ -118,14 +118,14 @@ set $ws8 8
 set $ws9 9
 
 # Odd workspaces on horizontal monitor
-workspace $ws1 output DP-1-1 DP-2-1
-workspace $ws3 output DP-1-1 DP-2-1
-workspace $ws5 output DP-1-1 DP-2-1
+workspace $ws1 output DP1-1 DP2-1 DP-1-1 DP-2-1
+workspace $ws3 output DP1-1 DP2-1 DP-1-1 DP-2-1
+workspace $ws5 output DP1-1 DP2-1 DP-1-1 DP-2-1
 
 # Even workspaces on vertical monitor
-workspace $ws2 output HDMI-1
-workspace $ws4 output HDMI-1
-workspace $ws6 output HDMI-1
+workspace $ws2 output HDMI1 HDMI-1
+workspace $ws4 output HDMI1 HDMI-1
+workspace $ws6 output HDMI1 HDMI-1
 
 # Last workspaces for smallest monitor
 workspace $ws7 output eDP1 eDP-1
