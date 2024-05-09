@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile', 'VimEnter' }, {
     end
   end
 })
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufEnter' }, {
+vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
   group = ObsidianCustomAu,
   pattern = '*.md',
   callback = function ()
