@@ -24,6 +24,7 @@ require('obsidian').setup({
   end,
   disable_frontmatter = true,
   open_app_foreground = false,
+  use_advanced_uri = true,
   daily_notes = {
     folder = "Daily",
     date_format = "%Y-%m-%d %a",
