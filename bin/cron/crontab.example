@@ -27,7 +27,7 @@
 # & 59 23 * * 5 $HOME/code/DowntimeMonitor/crontab/log-summary.sh $HOME/docs/logs/network-monitor/connection.log endeavour@automated.andrewnt.com cron@automated.andrewnt.com
 
 # Attempts to compress any logs that gets too big monthly
-# %monthly,erroronlymail(true) * 21-23,0-5 * $HOME/code/DowntimeMonitor/crontab/log-compressor.sh $HOME/docs/logs/network-monitor
+%monthly,erroronlymail(true) * 21-23,0-5 * $HOME/code/DowntimeMonitor/crontab/log-compressor.sh $HOME/docs/logs/network-monitor
 
 # Sends the VPL list of currently running theatre productions
 & 0 9 1 * * $HOME/code/anaconda3/condabin/conda run -n yvr_theatre python /home/andrew_nt/code/yvr_theatre/yvr_theatre.py
