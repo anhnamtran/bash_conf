@@ -40,7 +40,7 @@ require('obsidian').setup({
 })
 
 local ObsidianCustomAu = vim.api.nvim_create_augroup('ObsidianCustomAu', {})
-vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile', 'VimEnter' }, {
+vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile', 'VimEnter', 'BufEnter' }, {
   group = ObsidianCustomAu,
   pattern = '*.md',
   callback = function ()
