@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
 })
 
 -- set to true to always call ObsidianOpen when buffer changes
-vim.g.obsidian_follow_buf = true
+vim.g.obsidian_follow_buf = false
 vim.api.nvim_create_user_command("ObsidianFollow", function (args)
   vim.g.obsidian_follow_buf = not args.bang
 end, { nargs = 0, bang = true })
