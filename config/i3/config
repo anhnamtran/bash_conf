@@ -19,6 +19,8 @@ bindsym $mod+n border normal
 
 font xft:Iosevka 0
 
+focus_on_window_activation none
+
 floating_modifier $mod
 
 bindsym $mod+Return exec --no-startup-id kitty $HOME/bin/mux
