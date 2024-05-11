@@ -101,6 +101,7 @@
   "cSpell.showStatus": false,
   "cSpell.allowCompoundWords": true,
   "cSpell.ignoreWords": [
+    "bobolas",
     "clangd",
     "cyric",
     "domar",
@@ -114,6 +115,7 @@
     "pyclient",
     "pylint",
     "pyright",
+    "sourabh",
     "ssid",
     "torm",
     "tumerand",
