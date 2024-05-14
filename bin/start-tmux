@@ -1,0 +1,29 @@
+#!/bin/bash
+# Small script to start or create a tmux session with a specific layout
+SESSION="$WP"
+SESSION="${SESSION//[._]/-}"
+TERM_ROW=$(stty size | awk '{ print $1 }')
+TERM_COL=$(stty size | awk '{ print $2 }')
+
+export LANG=en_CA.UTF-8
+
+if ! ~/bin/tmux attach ${ATTACH_OPTS:-} -t "$SESSION"; then
+   # Window 0
+   # sets the row and column size for the session so we can change the pane sizes
+   # later. The status line takes 1 row
+   ~/bin/tmux new-session -s "$SESSION" -c "/src" -d -x "$TERM_COL" -y "$((TERM_ROW - 1))"
+   ~/bin/tmux split-window -t "$SESSION:0.0" -h -l 70% -c "/src"
+   ~/bin/tmux select-pane -t "$SESSION:0.1"
+
+   # Window 1
+   ~/bin/tmux new-window -t "$SESSION:1" -n "src" -c "/src"
+
+   # Window 2
+   ~/bin/tmux new-window -t "$SESSION:2" -n "test" -c "/src"
+   ~/bin/tmux split-window -t "$SESSION:2.0" -h -l 50% -c "/src"
+   ~/bin/tmux select-pane -t "$SESSION:2.0"
+
+   # Actual connection
+   ~/bin/tmux select-window -t "$SESSION:0"
+   ~/bin/tmux -2 attach-session -t "$SESSION"
+fi
