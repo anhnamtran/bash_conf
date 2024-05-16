@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+sudo curl -o /etc/ssh/ssh_config.d/00-arista-bus-ssh.conf "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=-"
