@@ -44,6 +44,7 @@
 .gnupg/
 .gtkrc-2.0
 .history
+.icon-theme.cache
 .icons
 .icons/
 .idea*
