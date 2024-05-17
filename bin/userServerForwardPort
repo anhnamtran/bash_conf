@@ -1,11 +1,12 @@
 #!/bin/bash
-server=${1:-us160}
+server=${1:-"bus-home"}
 
 LOG_FILE="/tmp/autossh-$server.log"
 AUTOSSH_PID=$(pgrep autossh)
 if [[ -n "$AUTOSSH_PID" ]]; then
   echo "Autossh already running, restarting child SSH process instead."
-  kill -10 $AUTOSSH_PID
+  ssh "$server" 'sudo netstat -talnp | grep "8888.*CLOSE_WAIT" | awk "{ print $7 }" | cut -f1 -d/ | uniq | xargs kill -9 &>/dev/null'
+  kill -USR1 $AUTOSSH_PID
   exit 0
 fi
 
@@ -13,4 +14,4 @@ set -x
 AUTOSSH_LOGLEVEL=7 \
 AUTOSSH_LOGFILE="$LOG_FILE" \
 AUTOSSH_POLL=300 \
-  autossh -M0 -f -nNC -R 8888:localhost:22 us160 & disown
+  autossh -M0 -f -nNC -R 8888:localhost:22 "$server" & disown
