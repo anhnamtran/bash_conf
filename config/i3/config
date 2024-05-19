@@ -234,6 +234,7 @@ exec --no-startup-id 1password --silent
 exec --no-startup-id $HOME/bin/xsetwacom.sh
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/kdeconnect-indicator
+exec --no-startup-id /usr/bin/blueman-applet
 exec_always --no-startup-id dunst
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
