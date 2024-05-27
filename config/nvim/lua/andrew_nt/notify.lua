@@ -126,3 +126,15 @@ vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
   pattern = {"*"},
   callback = function() vim.notify("Buffer reloaded", vim.log.levels.WARN) end
 })
+
+-- notify clipboard copy
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup("osc52-au", {}),
+  callback = function(opts)
+    local force = opts.data ~= nil and opts.data.force ~= nil and opts.data.force
+    if force or (vim.v.event.operator == 'y' and (vim.v.event.regname == '+' or vim.v.event.regname == '*')) then
+      -- schedule to avoid this notify call from interacting with vim fast events
+      vim.schedule(function () vim.notify("Text copied into clipboard", vim.log.levels.INFO) end)
+    end
+  end
+})

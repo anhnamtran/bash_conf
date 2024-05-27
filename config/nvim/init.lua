@@ -11,6 +11,7 @@ require('plugins')
 -- Utility plugins configuration
 require('andrew_nt.obsession')
 require('andrew_nt.startify')
+require('andrew_nt.notify')
 require('andrew_nt.neoscroll')
 require('andrew_nt.hop')
 require('andrew_nt.nvim-tmux-navigation')
@@ -25,7 +26,6 @@ require('andrew_nt.buffers')
 
 -- Syntax plugins configuration
 require('andrew_nt.onedark')
-require('andrew_nt.notify')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
 require('andrew_nt.lualine')
