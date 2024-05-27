@@ -9,21 +9,6 @@ require('nvim-treesitter.configs').setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-  -- Requires nvim-ts-rainbow
-  rainbow = {
-    enable = function()
-      local excluded_filetypes = { 'log', 'qt', 'wiki' }
-      local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-      for index, value in ipairs(excluded_filetypes) do
-        if value == filetype then
-          return false
-        end
-      end
-      return true
-    end,
-    extended_mode = true,
-    max_file_lines = 1000000,
-  },
   -- Requires nvim-treesitter/playground
   playground = {
     enable = true,
