@@ -34,7 +34,7 @@ require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   { 'nvim-treesitter/playground',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  { 'mrjones2014/nvim-ts-rainbow',
+  { 'HiPhish/rainbow-delimiters.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'neoclide/coc.nvim', branch = 'master', build = { 'npm ci', ':CocUpdate' } },
   { "dhruvasagar/vim-table-mode",
