@@ -115,6 +115,7 @@
     "pyclient",
     "pylint",
     "pyright",
+    "recmp",
     "sourabh",
     "ssid",
     "torm",

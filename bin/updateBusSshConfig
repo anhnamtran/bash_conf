@@ -1,5 +1,3 @@
 #!/usr/bin/bash
 # sudo curl -o /etc/ssh/ssh_config.d/00-arista-bus-ssh.conf "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=-"
-OUT="00-arista-bus-ssh.conf"
-$HOME/go/bin/b5 bus ssh-config -g /tmp/"$OUT"
-sudo mv /tmp/"$OUT" /etc/ssh/ssh_config.d/00-arista-bus-ssh.conf
+sudo curl -o /etc/ssh/ssh_config.d/00-arista-bus-ssh.conf "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=:"
