@@ -1,7 +1,7 @@
 #!/bin/bash
 SUB_CMD_HELP="""
   shell: ssh into the home bus. Can be interactive and not.
-  most: mosh into the home bus. Interactive only
+  mosh: mosh into the home bus. Interactive only
   create: create a new home bus
   delete: delete an existing home bus
   status: view the status of the home bus
@@ -154,13 +154,20 @@ check_b5() {
   fi
 }
 
+bus_run() {
+  b5 bus "$@"
+}
+
 bus_status() {
-  local status=$(bus_run show | jq ".status" | sed -e 's/"//g')
-  case $status in
+  local status=$(bus_run show --by-nickname home 2>/dev/null | jq ".status" | sed -e 's/"//g')
+  case "$status" in
     Ready|Pending)
       echo "$status"
       ;;
-    *)
+    "")
+      echo "Deleted"
+      ;;
+    null)
       echo "Unknown"
       ;;
   esac
@@ -192,10 +199,6 @@ _update_ssh_config() {
   sudo curl -o "$ssh_conf" "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=:"
 }
 
-bus_run() {
-  b5 bus "$@"
-}
-
 bus_shell() {
   _bus_state "Ready"
   ssh "$BUS" "$*"
@@ -207,19 +210,22 @@ bus_mosh() {
 }
 
 bus_create() {
-  run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
+  set -e
+  bus_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
   _update_ssh_config
 }
 
 bus_delete() {
   bus_run delete --force --by-nickname home
-  _bus_state "Unknown"
+  _bus_state "Deleted"
 }
+
 bus_update() {
+  _bus_state "Ready"
   bus_run update --by-nickname home
 }
 
-bus_$_arg_command "$_arg_leftovers"
+bus_$_arg_command "${_arg_leftovers[@]}"
 
 #  <-- neded because of Argbash
 # ] <-- needed because of Argbash
