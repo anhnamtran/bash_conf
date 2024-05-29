@@ -168,7 +168,7 @@ bus_status() {
       echo "Deleted"
       ;;
     null)
-      echo "Unknown"
+      echo "Pending"
       ;;
   esac
 }
@@ -177,13 +177,13 @@ _bus_state() {
   local state="$1"
   local waited="off"
   local frames=(
-    "Waiting for bus to be $state.  "
-    "Waiting for bus to be $state.. "
-    "Waiting for bus to be $state..."
+    "Waiting for bus to be ${state}.  "
+    "Waiting for bus to be ${state}.. "
+    "Waiting for bus to be ${state}..."
   )
   local frame=0
-  while [[ "$(bus_status)" -ne "$state" ]]; do
-    echo -en "${frames[$frame]}"
+  while [[ "$(bus_status)" != "$state" ]]; do
+    echo -en "${frames[$frame]}\r"
     ((frame < ${#frames[@]})) && frame=$((frame + 1)) || frame=0
     waited="on"
     sleep 1
@@ -210,7 +210,6 @@ bus_mosh() {
 }
 
 bus_create() {
-  set -e
   bus_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
   _update_ssh_config
 }
