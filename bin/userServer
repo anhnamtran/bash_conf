@@ -4,5 +4,5 @@ if [[ -f /tmp/.tmux_local_mode ]]; then
   fish
 else
   tmux rename-window "$server"
-  mosh --experimental-remote-ip=remote --server "/home/andrew_nt/.local/bin/mosh-server" $server
+  mosh --experimental-remote-ip=remote $server
 fi
