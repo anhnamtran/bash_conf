@@ -192,7 +192,7 @@ _bus_state() {
 }
 
 _update_ssh_config() {
-  local ssh_conf=/etc/ss/ssh_config.d/00-arista-bus-ssh.conf
+  local ssh_conf=/etc/ss/ssh_config.d/002-arista-bus-ssh.conf
 
   _bus_state "Ready"
   echo "Downloading ssh config to $ssh_conf"
