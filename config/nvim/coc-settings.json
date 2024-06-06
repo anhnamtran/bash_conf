@@ -101,14 +101,17 @@
   "cSpell.showStatus": false,
   "cSpell.allowCompoundWords": true,
   "cSpell.ignoreWords": [
+    "arnet",
     "bobolas",
     "clangd",
     "cyric",
     "domar",
+    "ecmp",
     "ekxes",
     "elturel",
     "elturgard",
     "grpc",
+    "helper",
     "morra",
     "proj",
     "py",
@@ -116,8 +119,10 @@
     "pylint",
     "pyright",
     "recmp",
+    "resilient",
     "sourabh",
     "ssid",
+    "template",
     "torm",
     "tumerand",
     "yornos",
@@ -126,7 +131,8 @@
   "cSpell.userWords": [
     "",
     "abuild",
-    "todoist"
+    "todoist",
+    "vxlan"
   ],
   "Lua.telemetry.enable": true
 }
