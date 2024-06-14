@@ -232,7 +232,6 @@ exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.p
 # Requires NAndLib fork and branch excludable
 exec_always --no-startup-id autotiling -E focus -E move
 exec --no-startup-id 1password --silent
-exec_always --no-startup-id dunst
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
 exec_always --no-startup-id nitrogen --restore
 
