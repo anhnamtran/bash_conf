@@ -34,6 +34,8 @@ require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   { 'nvim-treesitter/playground',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+  { 'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'HiPhish/rainbow-delimiters.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'neoclide/coc.nvim', branch = 'master', build = { 'npm ci', ':CocUpdate' } },
