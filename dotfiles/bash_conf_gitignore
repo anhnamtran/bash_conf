@@ -31,6 +31,7 @@
 .dircolors
 .dmrc
 .fehbg
+.fltk/
 .gconf/
 .gimp-2.8/
 .git
@@ -43,6 +44,7 @@
 .icons
 .icons/
 .idea*
+.inSync/
 .java/
 .kube/
 .latexmkrc
@@ -69,6 +71,7 @@
 .ssh/
 .steam*
 .sudo_as_admin_successful
+.terminfo/
 .themes/
 .thumbnails/
 .thunderbird/
@@ -83,6 +86,7 @@
 .vimrc
 .vnc/
 .vscode/
+.w3m/
 .wget-hsts
 .x2go/
 .xinitrc
@@ -155,12 +159,14 @@ config/nvim/lazy-lock.json
 config/nvim/plugin/
 config/obsdian-html
 config/pulse/
+config/spicetify/Themes
 config/tabletdblocalrc
 config/yay/
 docs/
 downloads/
 external/
 go/
+interviews/
 obsidian/
 opt/
 pics/
