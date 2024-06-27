@@ -110,6 +110,7 @@ require('lazy').setup({
       "BufNewFile " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md"
     },
     dependencies = { "nvim-lua/plenary.nvim" },
+    dev = true,
   },
   { 'moll/vim-bbye' },
   { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
@@ -123,5 +124,9 @@ require('lazy').setup({
 }, {
   ui = {
     border = 'rounded'
-  }
+  },
+  dev = {
+    path = vim.fn.stdpath("data") .. "/lazy/dev",
+    fallback = true,
+  },
 })
