@@ -76,6 +76,7 @@
      "reportOptionalMemberAccess": "none",
      "reportOptionalSubscript": "none"
   },
+  "pyright.disableCompletion": true,
   "pyright.inlayHints.enable": true,
 
   "sumneko-lua.enableNvimLuaDev": true,
@@ -101,6 +102,7 @@
   "cSpell.showStatus": false,
   "cSpell.allowCompoundWords": true,
   "cSpell.ignoreWords": [
+    "",
     "arnet",
     "bobolas",
     "btest",
@@ -131,6 +133,7 @@
   ],
   "cSpell.userWords": [
     "",
+    "Guffin",
     "abuild",
     "todoist",
     "vxlan"
