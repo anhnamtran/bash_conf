@@ -223,7 +223,6 @@ mode "resize" {
 }
 
 # Autostart applications
-exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
