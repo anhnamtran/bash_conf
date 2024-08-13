@@ -165,10 +165,14 @@ bus_status() {
     Ready|Pending)
       if [[ "$status" == "Ready" ]]; then
         # Could be updating if an update job is in the job list
-        local update_finished=$(bus_run jobs --by-nickname home --output-format=json 2>/dev/null \
-                                | jq '.[] | select(.["job type"] == "update" and .status == "Complete")')
-        if [[ -z "$update_finished" ]]; then
-          status="Updating"
+        local jobs=$(bus_run jobs --by-nickname home --output-format=json 2>/dev/null)
+        local updating=$(echo "$jobs" | jq '.[] | select(.["job type"] == "update")')
+        if [[ -n "$updating" ]]; then
+          local update_finished=$(echo "$jobs" \
+                                  | jq '.[] | select(.["job type"] == "update" and .status == "Complete")')
+          if [[ -z "$update_finished" ]]; then
+            status="Updating"
+          fi
         fi
       fi
       echo "$status"
@@ -186,13 +190,15 @@ _bus_state() {
   local state="$1"
   local waited="off"
   local frames=(
-    "Waiting for bus to be ${state}.  "
-    "Waiting for bus to be ${state}.. "
-    "Waiting for bus to be ${state}..."
+    ".  "
+    ".. "
+    "..."
   )
   local frame=0
-  while [[ "$(bus_status)" =~ "$state" ]]; do
-    echo -en "${frames[$frame]}\r"
+  local status=$(bus_status)
+  while ! [[ "$status" =~ $state ]]; do
+    status="$(bus_status)"
+    echo -en "Waiting for bus to ${state} ($status)${frames[$frame]}\r"
     ((frame < ${#frames[@]})) && frame=$((frame + 1)) || frame=0
     waited="on"
     sleep 1
