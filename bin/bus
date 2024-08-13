@@ -7,11 +7,12 @@ SUB_CMD_HELP="""
   status: view the status of the home bus
   update: update the home bus
   run: run arbitrary b5 commands
+  jobs: show the list of jobs that have been run on a bus
 """
 # Argument parsing generated using argbash
 #
 # ARG_POSITIONAL_SINGLE([command],[one of the valid commands])
-# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run])
+# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs])
 # ARG_DEFAULTS_POS([])
 # ARG_POSITIONAL_DOUBLEDASH([])
 # ARG_LEFTOVERS([any subcommand for either b5 or shell, ignored otherwise])
@@ -35,12 +36,12 @@ die()
 
 command()
 {
-	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run") _seeking="$1"
+	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs") _seeking="$1"
 	for element in "${_allowed[@]}"
 	do
 		test "$element" = "$_seeking" && echo "$element" && return 0
 	done
-	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update' and 'run'" 4
+	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run' and 'jobs'" 4
 }
 
 
@@ -62,7 +63,7 @@ print_help()
 {
 	printf '%s\n' "Interact with home buses more easily"
 	printf 'Usage: %s [-h|--help] [--] <command> ... \n' "$0"
-	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update' and 'run'"
+	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run' and 'jobs'"
 	printf '\t%s\n' "... : any subcommand for either b5 or shell, ignored otherwise"
 	printf '\t%s\n' "-h, --help: Prints help"
 	printf '\n%s\n' "$SUB_CMD_HELP"
@@ -162,6 +163,14 @@ bus_status() {
   local status=$(bus_run show --by-nickname home 2>/dev/null | jq ".status" | sed -e 's/"//g')
   case "$status" in
     Ready|Pending)
+      if [[ "$status" == "Ready" ]]; then
+        # Could be updating if an update job is in the job list
+        local update_finished=$(bus_run jobs --by-nickname home --output-format=json 2>/dev/null \
+                                | jq '.[] | select(.["job type"] == "update" and .status == "Complete")')
+        if [[ -z "$update_finished" ]]; then
+          status="Updating"
+        fi
+      fi
       echo "$status"
       ;;
     "")
@@ -223,6 +232,12 @@ bus_update() {
   _bus_state "Ready"
   bus_run update --by-nickname home
 }
+
+bus_jobs() {
+  _bus_state "Ready"
+  bus_run jobs --by-nickname home
+}
+
 
 bus_$_arg_command "${_arg_leftovers[@]}"
 
