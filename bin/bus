@@ -191,7 +191,7 @@ _bus_state() {
     "Waiting for bus to be ${state}..."
   )
   local frame=0
-  while [[ "$(bus_status)" != "$state" ]]; do
+  while [[ "$(bus_status)" =~ "$state" ]]; do
     echo -en "${frames[$frame]}\r"
     ((frame < ${#frames[@]})) && frame=$((frame + 1)) || frame=0
     waited="on"
@@ -209,12 +209,12 @@ _update_ssh_config() {
 }
 
 bus_shell() {
-  _bus_state "Ready"
+  _bus_state "Ready|Updating"
   ssh "$BUS" "$*"
 }
 
 bus_mosh() {
-  _bus_state "Ready"
+  _bus_state "Ready|Updating"
   mosh --experimental-remote-ip=remote "$BUS"
 }
 
@@ -234,7 +234,7 @@ bus_update() {
 }
 
 bus_jobs() {
-  _bus_state "Ready"
+  _bus_state "Ready|Updating"
   bus_run jobs --by-nickname home
 }
 
