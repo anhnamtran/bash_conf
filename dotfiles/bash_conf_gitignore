@@ -105,6 +105,7 @@
 .vscode/
 .w3m/
 .wget-hsts
+.wine/
 .x2go*
 .xinitrc
 .xprofile
@@ -176,6 +177,7 @@ config/birdtray-config.json
 config/cef_user_data/
 config/chromium/
 config/coc/
+config/configstore/
 config/dconf/
 config/discord/
 config/fontforge/
@@ -189,6 +191,7 @@ config/kdeconnect/
 config/kglobalshortcutsrc
 config/lazygit/state.yml
 config/libreoffice/
+config/manuskript/
 config/mgba/
 config/microsoft-edge-dev/
 config/monero-project/
