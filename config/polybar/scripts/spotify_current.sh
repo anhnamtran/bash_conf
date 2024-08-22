@@ -27,4 +27,9 @@ else
   BY="$ALBUM"
 fi
 
+if [[ -z "$TITLE" ]]; then
+  echo "Not playing."
+  exit 0
+fi
+
 printf '"%s" - "%s"\n' "$TITLE" "$BY"
