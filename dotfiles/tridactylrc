@@ -6,8 +6,8 @@ set hintnames numeric
 set incsearch true
 set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
-set followpagepatterns.next ^(next|newer)\b|»|>>|more|>
-set followpagepatterns.prev ^(prev(ious)?|older)\b|«|<<|<
+set followpagepatterns.next ^([Nn]ext|[Nn]ewer)\b|»|>>|more|>
+set followpagepatterns.prev ^([Pp]rev(ious)?|[Oo]lder)\b|«|<<|<
 
 " i to go to ignore mode
 " Ctrl+Enter to leave ignore mode
@@ -45,6 +45,10 @@ bind N findnext --search-from-view --reverse
 bind gn findselect
 bind gN composite findnext --search-from-view --reverse; findselect
 bind ,<Space> nohlsearch
+
+" undo
+" Only repopen tabs of the current window if using u
+bind u undo tab_strict
 
 " general browsing
 bind <C-]> forward
