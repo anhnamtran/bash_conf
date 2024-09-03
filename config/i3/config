@@ -226,6 +226,7 @@ mode "resize" {
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/bin/inSync
 exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
 # Requires NAndLib fork and branch excludable
 exec_always --no-startup-id autotiling -E focus -E move
