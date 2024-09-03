@@ -293,6 +293,67 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+mode "Mouse" {
+        # set your three speeds here
+        set $slow 5
+        set $quick 20
+        set $fast 100
+
+        # Mouse movement (quicker) -- vim keybindings
+        bindsym h exec xdotool mousemove_relative -- -$quick 0
+        bindsym j exec xdotool mousemove_relative 0 $quick
+        bindsym k exec xdotool mousemove_relative -- 0 -$quick
+        bindsym l exec xdotool mousemove_relative $quick 0
+
+        # Mouse movement (slow/fine-tuned) -- vim keybindings
+        bindsym Shift+h exec xdotool mousemove_relative -- -$slow 0
+        bindsym Shift+j exec xdotool mousemove_relative 0 $slow
+        bindsym Shift+k exec xdotool mousemove_relative -- 0 -$slow
+        bindsym Shift+l exec xdotool mousemove_relative $slow 0
+
+        # Mouse movement (fast) -- vim keybindings
+        bindsym Shift+Mod1+h exec xdotool mousemove_relative -- -$fast 0
+        bindsym Shift+Mod1+j exec xdotool mousemove_relative 0 $fast
+        bindsym Shift+Mod1+k exec xdotool mousemove_relative -- 0 -$fast
+        bindsym Shift+Mod1+l exec xdotool mousemove_relative $fast 0
+
+        # Left Click
+        bindsym f exec xdotool click 1
+
+        # Middle Click
+        bindsym d exec xdotool click 2
+
+        # Right Click
+        bindsym s exec xdotool click 3
+
+        # Left Click-and-drag
+        bindsym Shift+f exec xdotool mousedown 1
+
+        # Middle Click-and-drag
+        bindsym Shift+d exec xdotool mousedown 2
+
+        # Right Click-and-drag
+        bindsym Shift+s exec xdotool mousedown 3
+
+        # Left Drag release
+        bindsym Mod1+f exec xdotool mouseup 1
+
+        # Middle Drag release
+        bindsym Mod1+d exec xdotool mouseup 2
+
+        # Right Drag release
+        bindsym Mod1+s exec xdotool mouseup 3
+
+        # Scroll up and down
+        bindsym Mod1+k exec xdotool click --clearmodifiers 4
+        bindsym Mod1+j exec xdotool click --clearmodifiers 5
+
+        # return to normal keybindings -- IMPORTANT!!
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m mode "Mouse"
+
 # Spotify bindings, require https://gist.github.com/streetturtle/fa6258f3ff7b17747ee3
 bindsym $mod+shift+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp next
 bindsym $mod+shift+comma exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp prev
