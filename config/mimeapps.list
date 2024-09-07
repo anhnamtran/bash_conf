@@ -9,6 +9,7 @@ message/rfc822=userapp-Thunderbird-PHG871.desktop
 x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop
 x-scheme-handler/discord-443564201349218305=discord-443564201349218305.desktop
 application/x-gnome-saved-search=nemo.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
 
 [Added Associations]
 application/zip=firefox.desktop;
@@ -16,3 +17,4 @@ x-scheme-handler/mailto=userapp-Thunderbird-PHG871.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop;
 text/plain=firefox.desktop;
 text/calendar=firefox.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;
