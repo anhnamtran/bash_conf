@@ -19,6 +19,7 @@
 		<config key="DisplayMessageAfterHotkeyDismount">0</config>
 		<config key="BackgroundTaskEnabled">1</config>
 		<config key="ForceAutoDismount">1</config>
+		<config key="Language">system</config>
 		<config key="LastSelectedSlotNumber">1</config>
 		<config key="MaxVolumeIdleTime">60</config>
 		<config key="MountDevicesOnLogon">0</config>
