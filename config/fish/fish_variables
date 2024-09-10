@@ -1,6 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR DISPLAY:\x3a0
 SETUVAR __fish_initialized:3400
 SETUVAR __kube_ps_enabled:0
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
