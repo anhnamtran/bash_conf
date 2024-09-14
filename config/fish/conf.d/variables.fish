@@ -22,3 +22,4 @@ set -gx PYTHONWARNINGS "ignore"
 set -gx fish_escape_delay_ms 10
 
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANROFFOPT "-c"

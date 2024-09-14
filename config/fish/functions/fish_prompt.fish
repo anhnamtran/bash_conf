@@ -6,7 +6,7 @@ function fish_prompt
    set -l time (date +%H:%M:%S)
    set -l dir (prompt_pwd -d 0)
    set -l promptEnd "󰫍 "
-   set -l userAndHost "$USER"@(prompt_hostname)
+   set -l userAndHost (set_color normal) (set_color green) "$USER" (set_color normal) @ (set_color magenta) (prompt_hostname) (set_color normal)
 
    if functions -q fish_is_root_user; and fish_is_root_user
       set promptEnd "#"
@@ -16,20 +16,22 @@ function fish_prompt
    set -g __fish_git_prompt_show_informative_status 1
 
    set -g __fish_git_prompt_showstashstate 1
+   set -g __fish_git_prompt_showuntrackedfiles 1
 
    set -g __fish_git_prompt_color_branch yellow
    set -g __fish_git_prompt_showupstream "informative"
-   set -g __fish_git_prompt_char_upstream_ahead " "
-   set -g __fish_git_prompt_char_upstream_behind " "
-   set -g __fish_git_prompt_char_upstream_prefix ""
+   set -g __fish_git_prompt_char_upstream_ahead "  "
+   set -g __fish_git_prompt_char_upstream_behind "  "
+   set -g __fish_git_prompt_char_upstream_diverged "󱀝 "
+   set -g __fish_git_prompt_char_upstream_prefix " "
 
-   set -g __fish_git_prompt_char_stateseparator " 〉"
-   set -g __fish_git_prompt_char_stagedstate " "
-   set -g __fish_git_prompt_char_dirtystate "󰐕 "
-   set -g __fish_git_prompt_char_untrackedfiles " "
-   set -g __fish_git_prompt_char_conflictedstate " "
-   set -g __fish_git_prompt_char_cleanstate " "
-   set -g __fish_git_prompt_char_stashstate "󰆢 "
+   set -g __fish_git_prompt_char_stateseparator "〉"
+   set -g __fish_git_prompt_char_stagedstate " "
+   set -g __fish_git_prompt_char_dirtystate " 󰐕"
+   set -g __fish_git_prompt_char_untrackedfiles " "
+   set -g __fish_git_prompt_char_invalidstate " "
+   set -g __fish_git_prompt_char_cleanstate " "
+   set -g __fish_git_prompt_char_stashstate " 󰆢"
 
    set -g __fish_git_prompt_color_dirtystate blue
    set -g __fish_git_prompt_color_stagedstate green
@@ -59,7 +61,7 @@ function fish_prompt
 
 
    if [ -d $dir/.git ] || git rev-parse --git-dir >/dev/null 2>&1
-      set gitPrompt (fish_git_prompt '%s')
+      set gitPrompt (fish_git_prompt '%s ')
       set gitDir (basename (git rev-parse --show-toplevel))
       set repoName (basename -s .git (git config --get remote.origin.url) 2>/dev/null || hostname)
       set gitStart "git@$repoName:"
@@ -70,5 +72,5 @@ function fish_prompt
    end
 
    echo -es $topPromptStart $gitStart (set_color --bold blue) $dir (set_color normal) ' ' $gitPrompt
-   echo -es $bottomPromptStart $modeIndicator $time (set_color --bold purple) ' ' $userAndHost ' ' $statusColor (set_color --bold) $promptEnd (set_color normal) ' '
+   echo -es $bottomPromptStart $modeIndicator $time ' ' $userAndHost ' ' $statusColor $promptEnd (set_color normal) ' '
 end
