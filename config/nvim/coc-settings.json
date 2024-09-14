@@ -70,7 +70,6 @@
   "python.analysis.useLibraryCodeForTypes": true,
   "python.analysis.autoSearchPaths": true,
   "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "/usr/local/bin/yapf",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.analysis.diagnosticSeverityOverrides": {
@@ -108,5 +107,6 @@
     "abuild",
     "todoist"
   ],
-  "Lua.telemetry.enable": true
+  "Lua.telemetry.enable": true,
+  "snippets.ultisnips.pythonPrompt": false
 }

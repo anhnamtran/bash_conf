@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     'python',
     'rust',
     'typescript',
-    'tacc',
+    'tac',
     'vim',
   },
   callback = function ()
@@ -113,6 +113,8 @@ local mappings = {
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
         -- Make <CR> either confirm completion or call nvim-autopairs enter
         {'<CR>',  'v:lua.multi_cr()', { expr = true, noremap = true }},
+        -- Quickly fix previous diagnostic issue while typing
+        {'<C-l>', '<c-g>u<Esc><CMD>call CocAction("diagnosticPrevious")<CR><CMD>call CocAction("doQuickfix")<CR>`]a<c-g>u', { noremap = true }},
 	},
 	n = { -- Normal mode
         {"K", '<CMD>lua _G.show_docs()<CR>', { silent = true }},
@@ -133,7 +135,7 @@ local mappings = {
 
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-F>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-B>"', { expr = true, silent = true, nowait = true }},
-
+        {'<leader>f', '<Plug>(coc-fix-current)', { noremap = false }},
 	},
 }
 

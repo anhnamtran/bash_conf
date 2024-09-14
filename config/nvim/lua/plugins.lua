@@ -34,9 +34,18 @@ require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   { 'nvim-treesitter/playground',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  { 'mrjones2014/nvim-ts-rainbow',
+  { 'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  { 'neoclide/coc.nvim', branch = 'release', build = ':CocUpdate' },
+  { 'HiPhish/rainbow-delimiters.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+  { 'neoclide/coc.nvim', branch = 'master', build = { 'npm ci', ':CocUpdate' } },
+  { "dhruvasagar/vim-table-mode",
+    lazy = true,
+    ft = "markdown", -- only load plugin when markdown file opens
+    config = function()
+      vim.g.table_mode_map_prefix = "<leader>T"
+    end,
+  },
 
   -- System navigation
   { 'nvim-telescope/telescope.nvim', branch = 'master',
@@ -58,7 +67,7 @@ require('lazy').setup({
     cmd = { 'NERDTreeToggle' },
     dependencies = { 'preservim/nerdtree' } },
   { 'godlygeek/tabular' },
-  { 'preservim/vim-markdown' },
+  { 'preservim/vim-markdown', dependencies = { 'godlygeek/tabular' } },
 
   -- Session tracking
   'tpope/vim-obsession',
@@ -101,11 +110,23 @@ require('lazy').setup({
       "BufNewFile " .. vim.fn.expand( "~") .. "/obsidian/Primary/**.md"
     },
     dependencies = { "nvim-lua/plenary.nvim" },
+    dev = true,
   },
   { 'moll/vim-bbye' },
   { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+  },
 }, {
   ui = {
     border = 'rounded'
-  }
+  },
+  dev = {
+    path = vim.fn.stdpath("data") .. "/lazy/dev",
+    fallback = true,
+  },
 })

@@ -11,6 +11,7 @@ require('plugins')
 -- Utility plugins configuration
 require('andrew_nt.obsession')
 require('andrew_nt.startify')
+require('andrew_nt.notify')
 require('andrew_nt.neoscroll')
 require('andrew_nt.hop')
 require('andrew_nt.nvim-tmux-navigation')
@@ -21,18 +22,21 @@ require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
 require('andrew_nt.vim-markdown')
 require('andrew_nt.obsidian')
+require('andrew_nt.buffers')
+require('andrew_nt.dotfiles')
+require('andrew_nt.redir')
 
 -- Syntax plugins configuration
-require('andrew_nt.notify')
 require('andrew_nt.onedark')
 require('andrew_nt.treesitter')
 require('andrew_nt.indent_blankline')
+-- require('andrew_nt.rainbow')
 require('andrew_nt.lualine')
 require('andrew_nt.gitsigns')
 require('andrew_nt.coc')
 
-vim.opt.spell = true
-vim.opt.spelllang = 'en_us'
+-- load colors and colorscheme
+require('andrew_nt.colors')
 
 -- color columns and textwidth
 vim.opt.textwidth = 120
@@ -105,10 +109,6 @@ vim.api.nvim_create_autocmd({'FocusGained', 'BufEnter'}, {
   pattern = {"*"},
   command = "if mode() != 'c' | checktime | endif"
 })
-vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
-  pattern = {"*"},
-  command = 'echohl WarningMsg | echo "Buffer reloaded." | echohl None'
-})
 
 -- handle files with long lines, can cause issues if there are too many long
 -- lines
@@ -132,9 +132,6 @@ vim.opt.smartcase = true
 -- make grep use ripgrep instead
 vim.opt.grepprg = 'rg --vimgrep'
 vim.opt.grepformat:prepend { '%f:%l:%c:%m' }
-
--- make buffer switching use opened, tabbed, or last buffer
-vim.opt.switchbuf = {'useopen', 'usetab', 'uselast'}
 
 -- highlight the current line
 vim.opt.cursorline = true
@@ -250,9 +247,6 @@ imap('<C-s>', '<C-o>:w<CR>', true)
 imap('jj', '<ESC>', true)
 imap('qq', '<ESC>:x<CR>', true)
 
--- quickly edit the previous typo
-imap('<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', true)
-
 -- normal mode
 nmap('<CR>', 'o<ESC>', true)
 -- allow ENTER to be used in command window and quickfix windows
@@ -276,17 +270,6 @@ nmap('tl', ':tabn<CR>', true)
 nmap('th', ':tabp<CR>', true)
 nmap('tc', ':tabc<CR>', true)
 
--- buffers navigation
-nmap('H', ':bp<CR>', true)
-nmap('L', ':bn<CR>', true)
--- Use vim-bbye if possible
-if require("lazy.core.config").plugins["vim-bbye"] ~= nil then
-   nmap('<leader>q', ':bp <BAR> Bwipeout #<CR>', true)
-else
-   nmap('<leader>q', ':bp <BAR> bwipeout #<CR>', true)
-end
-nmap('<leader>ls', ':ls<CR>', true)
-
 -- remove trailing white spaces
 -- I don't quite know how to do this in lua
 vim.cmd([[
@@ -303,31 +286,6 @@ nmap('<C-w>z', ':MaximizerToggle')
 -- open nerdtree
 nmap('<C-n>n', ':NERDTreeToggle<CR>')
 
--- buffer control
-vim.cmd([[
-function! DeleteInactiveBufs()
-    "From tabpagebuflist() help, get a list of all buffers in all tabs
-    let tablist = []
-    for i in range(tabpagenr('$'))
-        call extend(tablist, tabpagebuflist(i + 1))
-    endfor
-
-    "Below originally inspired by Hara Krishna Dara and Keith Roberts
-    "http://tech.groups.yahoo.com/group/vim/message/56425
-    let nWipeouts = 0
-    for i in range(1, bufnr('$'))
-        if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
-        "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
-            silent exec 'bwipeout' i
-            let nWipeouts = nWipeouts + 1
-        endif
-    endfor
-    echomsg nWipeouts . ' buffer(s) wiped out'
-endfunction
-command! OpenOnly :call DeleteInactiveBufs()
-nnoremap <C-w>b :OpenOnly<CR>
-]])
-
 -- terminal mappings and commands
 tmap('<ESC>', '<C-\\><C-n>')
 tmap('<C-l>', '<C-\\><C-n><Cmd>NvimTmuxNavigateRight<CR>')
@@ -343,17 +301,3 @@ vim.api.nvim_create_autocmd({'BufWinEnter', 'WinEnter', 'FocusGained'}, {
       vim.opt_local.spell = false
    end
 })
-
------------------------------------ THEMES -------------------------------------
-
-vim.opt.background = 'dark'
-vim.cmd([[colorscheme onedark]])
-
--- additional scheme and highlighting changes
--- these need to be after 'colorscheme' incase that clears highlight groups
-vim.opt.pumblend = 15
-vim.cmd([[
-hi! PmenuSel ctermfg=235 ctermbg=170 guifg=#282C34 guibg=#C678DD
-hi! CocHighlightText ctermbg=242 guibg=#3b3f4c gui=italic ctermfg=225 guifg=#56b6c2
-hi! link CocMenuSel PmenuSel
-]])

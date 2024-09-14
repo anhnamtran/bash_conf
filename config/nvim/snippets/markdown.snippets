@@ -59,14 +59,6 @@ ${1:name} - ${2:initiative} - ${3:hp}
 endsnippet
 
 snippet dndact "DND log: Action in combat" b
-BLUE #ADCCFFA6
-<mark style="background: #ADCCFFA6;">
-
-GREEN #BBFABBA6
-<mark style="background: #BBFABBA6;">
-
-RED #FF5582A6
-<mark style="background: #FF5582A6;">
 ${1:name} used <mark style="background: #CACFD9A6;">_${2:attack}_</mark> on ${3:target}
 endsnippet
 
@@ -88,4 +80,12 @@ endsnippet
 
 snippet dndcon "DND log: condition" b
 > ${1:name} received Condition: _${2:condition}_
+endsnippet
+
+snippet dndsuc "DND log: success check" b
+> ${1:name} suceeded a saving throw against _${2:condition}_
+endsnippet
+
+snippet dndfai "DND log: failed check" b
+> ${1:name} failed a saving throw against _${2:condition}_
 endsnippet
