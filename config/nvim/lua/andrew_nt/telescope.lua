@@ -23,8 +23,7 @@ require('telescope').load_extension('fzf')
 
 -- Configuration for built-ins
 local builtin = require('telescope.builtin')
-local utils = require('telescope.utils')
-vim.keymap.set('n', '_', function() builtin.find_files( { cwd = utils.buffer_dir() } ) end, {})
+vim.keymap.set('n', '_', function() builtin.find_files( { cwd = vim.fn.expand('%:p:h') } ) end, {})
 vim.keymap.set('n', '<leader>F', builtin.find_files, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', function() builtin.buffers( { ignore_current_buffer = true, sort_lastused = true } ) end, {})

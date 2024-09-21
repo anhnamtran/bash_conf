@@ -52,10 +52,8 @@
 	  "default": ""
   },
 
-  "snippets.userSnippetsDirectory": "$HOME/.config/nvim/snippets",
   "snippets.snipmate.enable": false,
-  "snippets.trace": "verbose",
-  "snippets.ultisnips.trace": true,
+  "snippets.userSnippetsDirectory": "$HOME/.config/nvim/snippets",
 
    "floatFactory.floatConfig": {
       "winblend": 15,
@@ -77,6 +75,7 @@
      "reportOptionalMemberAccess": "none",
      "reportOptionalSubscript": "none"
   },
+  "pyright.disableCompletion": true,
   "pyright.inlayHints.enable": true,
 
   "sumneko-lua.enableNvimLuaDev": true,
@@ -107,6 +106,5 @@
     "abuild",
     "todoist"
   ],
-  "Lua.telemetry.enable": true,
-  "snippets.ultisnips.pythonPrompt": false
+  "Lua.telemetry.enable": true
 }

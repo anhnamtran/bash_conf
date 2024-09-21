@@ -46,7 +46,8 @@ snippet dndcom "DND log: Combat start" b
 ## Combat: ${1:encouter}
 $0
 
-> COMBAT FINISHED
+> [!info] COMBAT FINISHED
+---
 endsnippet
 
 snippet dndrou "DND log: Round number" b
@@ -59,33 +60,37 @@ ${1:name} - ${2:initiative} - ${3:hp}
 endsnippet
 
 snippet dndact "DND log: Action in combat" b
-${1:name} used <mark style="background: #CACFD9A6;">_${2:attack}_</mark> on ${3:target}
+${1:name} used _<mark class="hltr-grey">${2:attack}</mark>_ on ${3:target}
 endsnippet
 
 snippet dndhit "DND log: spell or attack hit" b
-> ${1:name} was <mark style="background: #BBFABBA6;">hit</mark> for _${2:amount} ${3:type} damage_
+${1:name} was <mark class="hltr-green">hit</mark> for _${2:amount} ${3:type} damage_
 endsnippet
 
 snippet dndmis "DND log: spell or attack miss" b
-> ${1:name} <mark style="background: #FF5582A6;">missed</mark> ${2:target}
+${1:name} <mark class="hltr-red">missed</mark> ${2:target}
+endsnippet
+
+snippet dndsav "DND log: saving throw success" b
+${1:name} <mark class="hltr-green">succeeded</mark> a saving throw against _${3:target}_
+endsnippet
+
+snippet dndfai "DND log: saving throw failure" b
+${1:name} <mark class="hltr-red">failed</mark> a saving throw against _${3:target}_
 endsnippet
 
 snippet dndspe "DND log: spell cast" b
-${1:name} cast <mark style="background: #ADCCFFA6;">_${2:spell}_</mark> on ${3:target}
+${1:name} cast _<mark class="hltr-blue">${2:spell}</mark>_ on ${3:target}
 endsnippet
 
 snippet dndhp "DND log: heal" b
-> ${1:name} <mark style="background: #BBFABBA6;">healed</mark> for _${2:hp}_ hit points
+${1:name} <mark class="hltr-green">healed</mark> for _${2:hp}_ hit points
 endsnippet
 
-snippet dndcon "DND log: condition" b
-> ${1:name} received Condition: _${2:condition}_
+snippet dndcon "DND log: condition received" b
+${1:name} received Condition: _<mark class="hltr-grey">${2:condition}</mark>_
 endsnippet
 
-snippet dndsuc "DND log: success check" b
-> ${1:name} suceeded a saving throw against _${2:condition}_
-endsnippet
-
-snippet dndfai "DND log: failed check" b
-> ${1:name} failed a saving throw against _${2:condition}_
+snippet dndlos "DND log: condition lost" b
+${1:name} lost Condition: _<mark class="hltr-grey">${2:condition}</mark>_
 endsnippet
