@@ -196,6 +196,7 @@ config/mgba/
 config/microsoft-edge-dev/
 config/monero-project/
 config/nautilus/
+config/nemo/
 config/nordvpn/
 config/nvim/lazy-lock.json
 config/nvim/plugin/
