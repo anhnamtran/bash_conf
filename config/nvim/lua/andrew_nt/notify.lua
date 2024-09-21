@@ -5,13 +5,6 @@ require("notify").setup({
    top_down = false,
    max_width = 50,
    max_height = 5,
-   icons = {
-     DEBUG = " ",
-     ERROR = " ",
-     INFO = " ",
-     TRACE = "✎ ",
-     WARN = " "
-   },
 })
 
 vim.notify = require('notify')
