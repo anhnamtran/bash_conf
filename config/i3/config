@@ -1,5 +1,8 @@
 set $mod Mod4
 
+################################################################################
+# General configuration
+################################################################################
 hide_edge_borders none
 focus_follows_mouse no
 mouse_warping none
@@ -11,13 +14,16 @@ default_floating_border normal
 client.focused          #98c379 #282C34 #abb2bf #98c379   #98c379
 client.unfocused        #4b5263 #282C34 #4b5263 #4b5263   #4b5263
 
-bindsym $mod+0 border none
-bindsym $mod+p border pixel 1
-bindsym $mod+n border normal
-
 font xft:Iosevka 0
 
 floating_modifier $mod
+
+################################################################################
+# Keybindings
+################################################################################
+bindsym $mod+0 border none
+bindsym $mod+p border pixel 1
+bindsym $mod+n border normal
 
 bindsym $mod+Return exec --no-startup-id kitty $HOME/bin/mux
 bindsym $mod+Shift+t exec --no-startup-id kitty
@@ -108,7 +114,9 @@ bindsym $mod+Shift+h workspace prev
 # create a new workspace with the next index
 bindsym $mod+Shift+n exec --no-startup-id $HOME/bin/i3NewSpace.py
 
-# workspaces
+################################################################################
+# Workspaces
+################################################################################
 set $ws1 1
 set $ws2 2
 set $ws3 3
@@ -163,108 +171,15 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
-# Open specific applications in floating mode
-for_window [title="File Transfer*"] floating enable
-for_window [title="Authenticate.*"] floating enable, border pixel
-for_window [class="Nitrogen"] floating enable, sticky enable
-for_window [class="(?i)System-config-printer.py"] floating enable
-for_window [class="(?i)virtualbox"] floating enable, border normal
-for_window [class="Xfburn"] floating enable
-for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
-
-for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
-# Handle floating dialogs
-for_window [window_role="About"] floating enable
-for_window [window_role="Organizer"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="page-info"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="toolbox"] floating enable
-for_window [window_role="webconsole"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
-
-for_window [class="^(?i)steamwebhelper$"] border pixel 1
-for_window [title=".*(?i)mpv.*"] border pixel 1
-
-# Zoom specific window settings
-for_window [instance="^zoom(\.|$|\s)" title="^Zoom($|\s)"] floating disable, border pixel
-for_window [instance="^zoom(\.|$|\s)" title="^zoom"] floating enable, border none, no_focus
-for_window [instance="^join\?action=join" title="^Zoom($|\s)"] floating disable, border pixel
-for_window [instance="^join\?action=join" title="^join\?action=join"] floating enable, border none, no_focus
-for_window [instance="^start\?action=start" title="^Zoom($|\s)"] floating disable, border pixel
-for_window [instance="^start\?action=start" title="^start\?action=start"] floating enable, border none, no_focus
-
-# switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym l resize grow width 5 px or 1 ppt
-        bindsym j resize grow height 5 px or 1 ppt
-        bindsym k resize shrink height 5 px or 1 ppt
-        bindsym h resize shrink width 5 px or 1 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # exit resize mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-# Autostart applications
-exec --no-startup-id udiskie -F
-exec --no-startup-id picom -b
-exec --no-startup-id unclutter
-exec --no-startup-id ibus-daemon --xim -d
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-exec --no-startup-id veracrypt --background-task
-exec --no-startup-id blueman-applet
-# needed for redshift
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id 1password --silent
-# map wacom tablet to monitor
-exec --no-startup-id $HOME/bin/xsetwacom.sh
-exec --no-startup-id /usr/lib/kdeconnectd
-exec --no-startup-id /usr/bin/kdeconnect-indicator
-exec --no-startup-id /usr/bin/obsidian
-exec_always --no-startup-id autotiling
-exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
-exec_always --no-startup-id nitrogen --restore
-exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
-
-# Screenlock and timeout
-# DPMS settings to turn screen off after 10 minutes
-exec --no-startup-id xset dpms 0 0 600
-# After 5 minutes, the "screensaver" triggers the notification from xss-lock
-# After 30 seconds (the second parameter), the screen is then locked
-exec --no-startup-id xset s 300 30
-# Triggers the screenlock
-exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
-
-# Touchpad settings
-exec_always --no-startup-id /home/andrew_nt/bin/xinput_config 1
-
+################################################################################
 # Gaps
+################################################################################
 set $default_gaps_inner 10
 set $default_gaps_outer 0
 
@@ -309,11 +224,16 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+################################################################################
 # Spotify bindings, require https://gist.github.com/streetturtle/fa6258f3ff7b17747ee3
+################################################################################
 bindsym $mod+shift+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp next
 bindsym $mod+shift+comma exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp prev
 bindsym $mod+period exec --no-startup-id [ -e $HOME/bin/sp ] && $HOME/bin/sp play
 
+################################################################################
+# Volume controls
+################################################################################
 bindsym $mod+F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+F2 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym $mod+F3 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -322,6 +242,120 @@ bindsym $mod+F3 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false &&
 bindsym --whole-window $mod+button5 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -1%
 bindsym --whole-window $mod+button4 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +1%
 
+################################################################################
 # Printscreen
+################################################################################
 bindsym Print exec --no-startup-id flameshot gui
 bindsym $mod+Print exec --no-startup-id flameshot screen
+
+################################################################################
+# Resize window (you can also use the mouse for that)
+################################################################################
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym l resize grow width 5 px or 1 ppt
+        bindsym j resize grow height 5 px or 1 ppt
+        bindsym k resize shrink height 5 px or 1 ppt
+        bindsym h resize shrink width 5 px or 1 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+################################################################################
+# Window rules and behaviour
+################################################################################
+# Open specific applications in floating mode
+for_window [title="File Transfer*"] floating enable
+for_window [title="Authenticate.*"] floating enable, border pixel
+for_window [class="Nitrogen"] floating enable, sticky enable
+for_window [class="(?i)System-config-printer.py"] floating enable
+for_window [class="(?i)virtualbox"] floating enable, border normal
+for_window [class="Xfburn"] floating enable
+for_window [class="(?i)firefox" instance="^(?!Navigator$)"] floating enable
+
+for_window [class="(?i)Firefox.*" title="Meet.*"] sticky enable
+# Handle floating dialogs
+for_window [window_role="About"] floating enable
+for_window [window_role="Organizer"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="page-info"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="toolbox"] floating enable
+for_window [window_role="webconsole"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+for_window [class="^(?i)steamwebhelper$"] border pixel 1
+for_window [title=".*(?i)mpv.*"] border pixel 1
+
+# Zoom specific window settings
+for_window [instance="^zoom(\.|$|\s)" title="^Zoom($|\s)"] floating disable, border pixel
+for_window [instance="^zoom(\.|$|\s)" title="^zoom"] floating enable, border none, no_focus
+for_window [instance="^join\?action=join" title="^Zoom($|\s)"] floating disable, border pixel
+for_window [instance="^join\?action=join" title="^join\?action=join"] floating enable, border none, no_focus
+for_window [instance="^start\?action=start" title="^Zoom($|\s)"] floating disable, border pixel
+for_window [instance="^start\?action=start" title="^start\?action=start"] floating enable, border none, no_focus
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+################################################################################
+# Autostart applications
+################################################################################
+## apps hidden on startup ##
+exec --no-startup-id udiskie -F
+exec --no-startup-id picom -b
+exec --no-startup-id unclutter
+exec --no-startup-id ibus-daemon --xim -d
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+exec --no-startup-id veracrypt --background-task
+exec --no-startup-id blueman-applet
+# needed for redshift
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id 1password --silent
+# map wacom tablet to monitor
+exec --no-startup-id $HOME/bin/xsetwacom.sh
+exec --no-startup-id /usr/lib/kdeconnectd
+exec --no-startup-id /usr/bin/kdeconnect-indicator
+
+## apps not hidden on startup ##
+exec --no-startup-id /usr/bin/obsidian
+exec --no-startup-id /home/andrew_nt/appimages/Todoist-linux-9.8.0-beta.3-x86_64-beta.AppImage
+
+## apps that needs to restart whenever i3 reloads ##
+exec_always --no-startup-id autotiling
+exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
+exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id betterlockscreen -u "$HOME/pics/wallpapers/onedark.png"
+
+################################################################################
+# Screenlock and timeout
+################################################################################
+# DPMS settings to turn screen off after 10 minutes
+exec --no-startup-id xset dpms 0 0 600
+# After 5 minutes, the "screensaver" triggers the notification from xss-lock
+# After 30 seconds (the second parameter), the screen is then locked
+exec --no-startup-id xset s 300 30
+# Triggers the screenlock
+exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
+
+################################################################################
+# Touchpad settings
+################################################################################
+exec_always --no-startup-id /home/andrew_nt/bin/xinput_config 1
