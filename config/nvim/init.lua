@@ -23,6 +23,8 @@ require('andrew_nt.scratch')
 require('andrew_nt.vim-markdown')
 require('andrew_nt.obsidian')
 require('andrew_nt.buffers')
+require('andrew_nt.dotfiles')
+require('andrew_nt.redir')
 
 -- Syntax plugins configuration
 require('andrew_nt.onedark')
