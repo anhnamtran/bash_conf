@@ -239,10 +239,10 @@ exec_always --no-startup-id nitrogen --restore
 
 # Screenlock and timeout
 # DPMS settings to turn screen off after 10 minutes
-exec_always --no-startup-id xset dpms 0 0 600
+exec --no-startup-id xset dpms 0 0 600
 # After 5 minutes, the "screensaver" triggers the notification from xss-lock
 # After 30 seconds (the second parameter), the screen is then locked
-exec_always --no-startup-id xset s 300 30
+exec --no-startup-id xset s 300 30
 # Triggers the screenlock
 exec --no-startup-id xss-lock -n "$HOME/bin/notify_lock" -l -- betterlockscreen --lock
 
