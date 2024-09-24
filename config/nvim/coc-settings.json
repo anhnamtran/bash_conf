@@ -6,7 +6,8 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.autoRefresh": true,
-
+  "inlayHint.position": "eol",
+  "inlayHint.refreshOnInsertMode": true,
   "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.acceptSuggestionOnCommitCharacter": false,
@@ -16,10 +17,10 @@
   "suggest.localityBonus": true,
   "suggest.languageSourcePriority": 99,
   "suggest.floatConfig": {
-     "border": true,
-     "rounded": true,
-     "winblend": 15,
-     "focusable": false
+    "border": true,
+    "rounded": true,
+    "winblend": 15,
+    "focusable": false
   },
   "suggest.disableMenuShortcut": true,
   "suggest.lowPrioritySourceLimit": 5,
@@ -67,13 +68,15 @@
   "python.analysis.extraPaths": [ "/usr/lib", "/usr" ],
   "python.analysis.useLibraryCodeForTypes": true,
   "python.analysis.autoSearchPaths": true,
+  "python.analysis.autoImportCompletions": true,
   "python.formatting.provider": "yapf",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
+  "python.linting.mypyEnabled": true,
   "python.analysis.diagnosticSeverityOverrides": {
-     "reportGeneralTypeIssues": "none",
-     "reportOptionalMemberAccess": "none",
-     "reportOptionalSubscript": "none"
+    "reportGeneralTypeIssues": "none",
+    "reportOptionalMemberAccess": "none",
+    "reportOptionalSubscript": "none"
   },
   "pyright.disableCompletion": true,
   "pyright.inlayHints.enable": true,
