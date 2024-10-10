@@ -198,7 +198,7 @@ _bus_state() {
   local status=$(bus_status)
   while ! [[ "$status" =~ $state ]]; do
     status="$(bus_status)"
-    echo -en "Waiting for bus to ${state} ($status)${frames[$frame]}\r"
+    echo -en "\rWaiting for bus to ${state} ($status)${frames[$frame]}"
     ((frame < ${#frames[@]})) && frame=$((frame + 1)) || frame=0
     waited="on"
     sleep 1
