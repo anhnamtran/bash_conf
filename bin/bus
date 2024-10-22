@@ -223,7 +223,7 @@ bus_shell() {
 
 bus_mosh() {
   _bus_state "Ready|Updating"
-  mosh --experimental-remote-ip=remote "$BUS"
+  mosh "$BUS"
 }
 
 bus_create() {
