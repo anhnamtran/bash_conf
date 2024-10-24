@@ -44,6 +44,7 @@
 .gnupg/
 .gtkrc-2.0
 .history
+.hplip/
 .icon-theme.cache
 .icons
 .icons/
@@ -208,6 +209,7 @@ config/pavucontrol.ini
 config/pulse/
 config/qBittorrent/
 config/rclone/
+config/simple-scan/
 config/spotify/
 config/tabletdblocalrc
 config/termshark/
