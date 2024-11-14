@@ -7,7 +7,7 @@ AUTOSSH_PID="$(cat "$PID_FILE")"
 if kill -0 "$AUTOSSH_PID" &>/dev/null; then
   echo "Autossh already running, restarting child SSH process instead." | tee -a "$LOG_FILE"
   ssh "$server" 'sudo netstat -talnp | grep "8888.*CLOSE_WAIT" | awk "{ print $7 }" | cut -f1 -d/ | uniq | xargs kill -9 &>/dev/null' &>> "$LOG_FILE"
-  kill -SIGALRM "$AUTOSSH_PID"
+  kill -USR1 "$AUTOSSH_PID"
   exit 0
 fi
 
