@@ -336,7 +336,7 @@ exec --no-startup-id /usr/bin/kdeconnect-indicator
 
 ## apps not hidden on startup ##
 exec --no-startup-id /usr/bin/obsidian
-exec --no-startup-id /home/andrew_nt/appimages/Todoist-linux-9.8.0-beta.3-x86_64-beta.AppImage
+exec --no-startup-id /home/andrew_nt/appimages/Todoist-*.AppImage
 
 ## apps that needs to restart whenever i3 reloads ##
 exec_always --no-startup-id autotiling
