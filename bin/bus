@@ -8,11 +8,13 @@ SUB_CMD_HELP="""
   update: update the home bus
   run: run arbitrary b5 commands
   jobs: show the list of jobs that have been run on a bus
+  push: push files to home bus
+  pull: pull files from home bus
 """
 # Argument parsing generated using argbash
 #
 # ARG_POSITIONAL_SINGLE([command],[one of the valid commands])
-# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs])
+# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull])
 # ARG_DEFAULTS_POS([])
 # ARG_POSITIONAL_DOUBLEDASH([])
 # ARG_LEFTOVERS([any subcommand for either b5 or shell, ignored otherwise])
@@ -36,12 +38,12 @@ die()
 
 command()
 {
-	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs") _seeking="$1"
+	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull") _seeking="$1"
 	for element in "${_allowed[@]}"
 	do
 		test "$element" = "$_seeking" && echo "$element" && return 0
 	done
-	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run' and 'jobs'" 4
+	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push' and 'pull'" 4
 }
 
 
@@ -63,7 +65,7 @@ print_help()
 {
 	printf '%s\n' "Interact with home buses more easily"
 	printf 'Usage: %s [-h|--help] [--] <command> ... \n' "$0"
-	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run' and 'jobs'"
+	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push' and 'pull'"
 	printf '\t%s\n' "... : any subcommand for either b5 or shell, ignored otherwise"
 	printf '\t%s\n' "-h, --help: Prints help"
 	printf '\n%s\n' "$SUB_CMD_HELP"
@@ -147,7 +149,7 @@ _arg_command="$(command "$_arg_command" "command")" || exit 1
 
 # Needed because of a b5 bug
 export LC_ALL=en_US.UTF-8
-BUS="bus:home"
+BUS="bus-home"
 
 check_b5() {
   if ! which b5 &>/dev/null; then
@@ -213,7 +215,7 @@ _update_ssh_config() {
 
   _bus_state "Ready"
   echo "Downloading ssh config to $ssh_conf"
-  sudo curl -o "$ssh_conf" "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=:"
+  sudo curl -o "$ssh_conf" "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=-"
 }
 
 bus_shell() {
@@ -246,6 +248,19 @@ bus_jobs() {
   bus_run jobs --by-nickname home
 }
 
+bus_push() {
+  local src="$1"
+  local dst="$2"
+  _bus_state "Ready|Updating"
+  rsync -azP "$src" "$BUS:$dst"
+}
+
+bus_pull() {
+  local src="$1"
+  local dst="$2"
+  _bus_state "Ready|Updating"
+  rsync -azP "$BUS:$src" "$dst"
+}
 
 bus_$_arg_command "${_arg_leftovers[@]}"
 
