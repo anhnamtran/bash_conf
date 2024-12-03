@@ -1,5 +1,5 @@
 #!/bin/bash
-server=${1:-"bus:home"}
+server=${1:-"bus-home"}
 
 LOG_FILE="/tmp/autossh-$server.log"
 PID_FILE="/tmp/autossh-$server.pid"
