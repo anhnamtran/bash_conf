@@ -338,6 +338,9 @@ exec --no-startup-id /usr/bin/kdeconnect-indicator
 exec --no-startup-id /usr/bin/obsidian
 exec --no-startup-id /home/andrew_nt/appimages/Todoist-*.AppImage
 
+## other autostart apps based off of XDG desktop entries
+exec --no-startup-id /usr/bin/dex --autostart --search-paths $HOME/config/autostart
+
 ## apps that needs to restart whenever i3 reloads ##
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id $HOME/.config/polybar/launcher.sh
