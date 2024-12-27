@@ -334,6 +334,8 @@ exec --no-startup-id 1password --silent
 exec --no-startup-id $HOME/bin/xsetwacom.sh
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/kdeconnect-indicator
+# enable caffeine to prevent sleep lock during fullscreened videos
+exec --no-startup-id /usr/bin/caffeine
 
 ## apps not hidden on startup ##
 exec --no-startup-id /usr/bin/obsidian
