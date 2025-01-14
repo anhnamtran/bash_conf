@@ -328,7 +328,6 @@ for_window [urgent=latest] focus
 # Autostart applications
 ################################################################################
 ## apps hidden on startup ##
-exec --no-startup-id picom -b
 exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id /usr/lib/mate-polkit/polkit-gnome-authentication-agent-1
