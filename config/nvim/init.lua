@@ -6,7 +6,6 @@ vim.opt.encoding = 'utf-8'
 vim.opt.termguicolors = true
 
 -- load plugins from lazy.nvim
-require('arista')
 require('plugins')
 
 -- Utility plugins configuration
