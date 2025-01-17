@@ -101,6 +101,7 @@
   "cSpell.showStatus": false,
   "cSpell.allowCompoundWords": true,
   "cSpell.ignoreWords": [
+    "bazelfy",
     "clangd",
     "grpc",
     "proj",
@@ -112,6 +113,7 @@
   ],
   "cSpell.userWords": [
     "abuild",
+    "bazel",
     "todoist"
   ],
   "Lua.telemetry.enable": true,
