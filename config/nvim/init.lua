@@ -20,7 +20,11 @@ require('andrew_nt.nvim-autopairs')
 require('andrew_nt.other')
 require('andrew_nt.nvim-osc52')
 require('andrew_nt.scratch')
+require('andrew_nt.vim-markdown')
+require('andrew_nt.obsidian')
 require('andrew_nt.buffers')
+require('andrew_nt.dotfiles')
+require('andrew_nt.redir')
 
 -- Syntax plugins configuration
 require('andrew_nt.onedark')
@@ -35,9 +39,7 @@ require('andrew_nt.coc')
 require('andrew_nt.colors')
 
 -- color columns and textwidth
-if vim.g.arista_vim ~= 1 then
-  vim.opt.textwidth = 80
-end
+vim.opt.textwidth = 120
 vim.opt.colorcolumn = '+0'
 -- unset colorcolumn for inactive windows
 vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
@@ -52,24 +54,15 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
   end
 })
 
--- diagnostics
-vim.diagnostic.config({
-   -- disable virtual text
-   virtual_text = false,
-})
-
 -- tabbing and indentation
-if vim.g.arista_vim ~= 1 then
-  vim.opt.tabstop = 2
-  vim.opt.shiftwidth = 2
-end
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smarttab = true
 
 -- Workaround for editing files that have been installed via symlink
 vim.opt.backupdir = { '/home/andrew_nt/.local/state/nvim/backup/' }
-vim.opt.directory = { '/tmp' }
 
 -- wildmenu settings
 vim.opt.wildmenu = true
