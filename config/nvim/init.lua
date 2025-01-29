@@ -54,6 +54,12 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
   end
 })
 
+-- diagnostics
+vim.diagnostic.config({
+   -- disable virtual text
+   virtual_text = false,
+})
+
 -- tabbing and indentation
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -63,6 +69,7 @@ vim.opt.smarttab = true
 
 -- Workaround for editing files that have been installed via symlink
 vim.opt.backupdir = { '/home/andrew_nt/.local/state/nvim/backup/' }
+vim.opt.directory = { '/tmp' }
 
 -- wildmenu settings
 vim.opt.wildmenu = true
