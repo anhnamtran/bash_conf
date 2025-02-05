@@ -32,10 +32,10 @@ run_speedtest() {
 
 handle_signal() {
   if (( $SLEEP_PID != 0 )); then
-    kill "$SLEEP_PID" &>/dev/null
+    kill -9 "$SLEEP_PID" &>/dev/null
   fi
   if (( $TEST_PID != 0 )); then
-    kill "$TEST_PID" &>/dev/null
+    kill -9 "$TEST_PID" &>/dev/null
     SHOULD_SLEEP=0
   fi
 }
