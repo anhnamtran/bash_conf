@@ -44,16 +44,16 @@ blue_devices() {
       local dbus_query="--print-reply=literal --system --dest=org.bluez \
                         $bluez_dev \
                         org.freedesktop.DBus.Properties.Get \
-                        string:\"org.bluez.Battery1\" \
-                        string:\"Percentage\"
+                        string:org.bluez.Battery1 \
+                        string:Percentage
                        "
       local batt_percentage="Unknown"
-      local dbus_out=$(dbus-send $dbus_query 2>/dev/null)
+      local dbus_out=$(dbus-send $dbus_query)
       if [ -n "$dbus_out" ]; then
         batt_percentage=$(echo "$dbus_out" | awk '{ print $3 }' )
       fi
 
-      printf "$fmt" "$name" "$batt_percentage"
+      printf "$fmt" "$name" "$batt_percentage%"
       return 0
     fi
   done
