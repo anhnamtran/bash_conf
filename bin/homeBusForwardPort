@@ -17,4 +17,11 @@ AUTOSSH_LOGLEVEL=7 \
 AUTOSSH_LOGFILE="$LOG_FILE" \
 AUTOSSH_POLL=30 \
 AUTOSSH_PIDFILE="$PID_FILE" \
-  autossh -M20000 -f -vvv -nNC -A -R 8888:localhost:22 "$server"
+  autossh -M0 -f -vvv \
+    -o "ServerAliveInterval 10" \
+    -o "ServerAliveCountMax 1" \
+    -o "ControlMaster=no" \
+    -o "SendEnv=SYMLINK_AUTH_SOCK" \
+    -nNC -A \
+    -R 8888:localhost:22 \
+    "$server"
