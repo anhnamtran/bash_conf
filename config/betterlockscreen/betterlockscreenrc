@@ -13,36 +13,36 @@ wallpaper_cmd="feh --bg-fill"
 quiet=false
 
 # default theme
-loginbox=282c3466
-loginshadow=282c34ff
+loginbox=282c34
+loginshadow=282c34
 locktext="$USER"
 font="Iosevka:style=Bold"
-ringcolor=abb2bfff
-insidecolor=282c34ff
-separatorcolor=abb2bfff
-ringvercolor=61afefff
-insidevercolor=282c34ff
-ringwrongcolor=e06c75ff
-insidewrongcolor=282c34ff
-timecolor=abb2bfff
+ringcolor=abb2bf
+insidecolor=282c34
+separatorcolor=abb2bf
+ringvercolor=61afef
+insidevercolor=282c34
+ringwrongcolor=e06c75
+insidewrongcolor=282c34
+timecolor=abb2bf
 time_format="%H:%M:%S"
-greetercolor=abb2bfff
-layoutcolor=abb2bfff
-keyhlcolor=282c34ff
-bshlcolor=e06c75ff
+greetercolor=abb2bf
+layoutcolor=abb2bf
+keyhlcolor=282c34
+bshlcolor=e06c75
 veriftext="Verifying..."
-verifcolor=abb2bfff
+verifcolor=abb2bf
 wrongtext="Failure!"
-wrongcolor=e06c75ff
-modifcolor=e06c75ff
-bgcolor=282c3466
+wrongcolor=e06c75
+modifcolor=e06c75
+bgcolor=282c34
 
 
 #
 # expert options (change at own risk!)
 #
 
-i3lockcolor_bin="/usr/bin/i3lock"   # Manually set command for i3lock-color
+i3lockcolor_bin="/usr/local/bin/i3lock"   # Manually set command for i3lock-color
 # suspend_command="systemctl suspend" # Manually change action e.g. hibernate/suspend-command
 
 # i3lock-color - custom arguments
