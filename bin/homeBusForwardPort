@@ -8,7 +8,12 @@ if kill -0 "$AUTOSSH_PID" &>/dev/null; then
   echo "Autossh already running, restarting child SSH process instead." | tee -a "$LOG_FILE"
   ssh "$server" 'sudo netstat -talnp | grep "8888.*CLOSE_WAIT" | awk "{ print $7 }" | cut -f1 -d/ | uniq | xargs sudo kill -9 &>/dev/null' &>> "$LOG_FILE"
   kill -10 "$AUTOSSH_PID"
-  exit 0
+  sleep 1
+  if ! kill -0 "$AUTOSSH_PID" &>/dev/null; then
+    echo "Autossh exited, restarting"
+  else
+    exit 0
+  fi
 fi
 
 set -x
@@ -22,6 +27,7 @@ AUTOSSH_PIDFILE="$PID_FILE" \
     -o "ServerAliveCountMax 1" \
     -o "ControlMaster=no" \
     -o "SendEnv=SYMLINK_AUTH_SOCK" \
-    -nNC -A \
+    -o "ExitOnForwardFailure=yes" \
+    -nNA \
     -R 8888:localhost:22 \
     "$server"
