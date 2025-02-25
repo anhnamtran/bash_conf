@@ -10,11 +10,12 @@ SUB_CMD_HELP="""
   jobs: show the list of jobs that have been run on a bus
   push: push files to home bus
   pull: pull files from home bus
+  reboot: reboot the bus
 """
 # Argument parsing generated using argbash
 #
 # ARG_POSITIONAL_SINGLE([command],[one of the valid commands])
-# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull])
+# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull,reboot])
 # ARG_DEFAULTS_POS([])
 # ARG_POSITIONAL_DOUBLEDASH([])
 # ARG_LEFTOVERS([any subcommand for either b5 or shell, ignored otherwise])
@@ -38,12 +39,12 @@ die()
 
 command()
 {
-	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull") _seeking="$1"
+	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot") _seeking="$1"
 	for element in "${_allowed[@]}"
 	do
 		test "$element" = "$_seeking" && echo "$element" && return 0
 	done
-	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push' and 'pull'" 4
+	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull' and 'reboot'" 4
 }
 
 
@@ -65,7 +66,7 @@ print_help()
 {
 	printf '%s\n' "Interact with home buses more easily"
 	printf 'Usage: %s [-h|--help] [--] <command> ... \n' "$0"
-	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push' and 'pull'"
+	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull' and 'reboot'"
 	printf '\t%s\n' "... : any subcommand for either b5 or shell, ignored otherwise"
 	printf '\t%s\n' "-h, --help: Prints help"
 	printf '\n%s\n' "$SUB_CMD_HELP"
@@ -157,17 +158,45 @@ check_b5() {
   fi
 }
 
-bus_run() {
+b5_run() {
   b5 bus "$@"
 }
 
+api_run() {
+  local method="$1"
+  shift
+  local path="$@"
+  local bus_name=$(b5_run show --by-nickname home 2>/dev/null | jq ".name" | sed -e 's/"//g')
+  local uri="https://barney-bbm.infra.corp.arista.io/bus/${bus_name}"
+
+  if ! which -s ow; then
+    echo "'ow' needed for API operations with buses"
+    exit 1
+  fi
+
+  local request;
+  case "$method" in
+    get)
+      request="-X GET"
+      ;;
+    post)
+      request="-X POST"
+      ;;
+    *)
+      echo "Unsupported method $method"
+      exit 1
+      ;;
+  esac
+  ow curl -L -s $request "${uri}/${path}"
+}
+
 bus_status() {
-  local status=$(bus_run show --by-nickname home 2>/dev/null | jq ".status" | sed -e 's/"//g')
+  local status=$(b5_run show --by-nickname home 2>/dev/null | jq ".status" | sed -e 's/"//g')
   case "$status" in
-    Ready|Pending|*NotReady*)
+    Ready|Pending|*NotReady*|Rebooting)
       if [[ "$status" == "Ready" ]]; then
         # Could be updating if an update job is in the job list
-        local jobs=$(bus_run jobs --by-nickname home --output-format=json 2>/dev/null)
+        local jobs=$(b5_run jobs --by-nickname home --output-format=json 2>/dev/null)
         local updating=$(echo "$jobs" | jq '.[] | select(.["job type"] == "update")')
         if [[ -n "$updating" ]]; then
           local update_finished=$(echo "$jobs" \
@@ -229,23 +258,23 @@ bus_mosh() {
 }
 
 bus_create() {
-  bus_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
+  b5_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
   _update_ssh_config
 }
 
 bus_delete() {
-  bus_run delete --force --by-nickname home
+  b5_run delete --force --by-nickname home
   _bus_state "Deleted"
 }
 
 bus_update() {
   _bus_state "Ready"
-  bus_run update --by-nickname home
+  b5_run update --by-nickname home
 }
 
 bus_jobs() {
   _bus_state "Ready|Updating"
-  bus_run jobs --by-nickname home
+  b5_run jobs --by-nickname home
 }
 
 bus_push() {
@@ -260,6 +289,18 @@ bus_pull() {
   local dst="$2"
   _bus_state "Ready|Updating"
   rsync -azP "$BUS:$src" "$dst"
+}
+
+bus_reboot() {
+  read -p "Rebooting bus, this will take several minutes, proceed? [y/N] " do_reboot
+  if ! [[ "$do_reboot" = "y" ]]; then
+    echo "Aborting."
+    exit 1
+  fi
+  echo "Rebooting bus"
+  api_run post reboot
+  _bus_state "Ready|Updating"
+  _update_ssh_config
 }
 
 bus_$_arg_command "${_arg_leftovers[@]}"
