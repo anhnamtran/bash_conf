@@ -18,6 +18,11 @@ input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='check
   display: none;
 }
 
+/* Hide the sidebar header for all sidebars */
+#sidebar-header {
+  display: none;
+}
+
 /* remove maximum/minimum width restriction of sidebar */
 #sidebar-box {
   max-width: none !important;

@@ -79,25 +79,19 @@ local function coc_notify_diagnostics()
   end
 
   local msg = table.concat(msgs, "\n")
-  if msg == previous_diag then
-     return
-  end
   if #msg == 0 then
     msg = '  All OK'
   end
 
-  previous_diag = msg
   notify_coc_diag(msg, level)
 end
 
-local previous_status = nil
 local function coc_notify_status()
   local status = vim.g.coc_status
   local level = vim.log.levels.INFO
-  if status == nil or status == "" or status == previous_status then
+  if status == nil or status == "" then
      return
   end
-  previous_status = status
   notify_coc_status(status, level)
 end
 

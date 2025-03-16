@@ -26,7 +26,7 @@ local function DeleteInactiveBufs()
   end
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     -- The buffer is valid, is not modified, and exists in the buffer list
-    if vim.api.nvim_buf_is_loaded(buf) and not vim.api.nvim_get_option_value("modified", { buf = buf }) and not vim.tbl_contains(visiblebufs, buf) then
+    if not vim.api.nvim_get_option_value("modified", { buf = buf }) and not vim.tbl_contains(visiblebufs, buf) then
       if require("lazy.core.config").plugins["vim-bbye"] ~= nil then
         vim.cmd["Bwipeout"](buf)
       else

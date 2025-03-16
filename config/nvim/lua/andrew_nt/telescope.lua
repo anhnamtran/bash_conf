@@ -2,7 +2,7 @@
 require('telescope').setup({
   pickers = {
     buffers = {
-      mappings = { i = { ["<CR>"] = require('telescope.actions').select_tab_drop } }
+      mappings = { i = { ["<CR>"] = require('telescope.actions').select_drop } }
     },
     builtin = {
       tags = {
@@ -28,6 +28,7 @@ vim.keymap.set('n', '<leader>F', builtin.find_files, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', function() builtin.buffers( { ignore_current_buffer = true, sort_lastused = true } ) end, {})
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
 
 vim.api.nvim_create_user_command("Files",
   function (opts)

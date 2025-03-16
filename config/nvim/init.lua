@@ -54,6 +54,11 @@ vim.api.nvim_create_autocmd({'WinEnter', 'WinLeave'}, {
   end
 })
 
+-- disable inline diagnostics
+vim.diagnostic.config({
+  virtual_text = false
+})
+
 -- tabbing and indentation
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
