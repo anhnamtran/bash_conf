@@ -28,6 +28,6 @@ AUTOSSH_PIDFILE="$PID_FILE" \
     -o "ControlMaster=no" \
     -o "SendEnv=SYMLINK_AUTH_SOCK" \
     -o "ExitOnForwardFailure=yes" \
-    -nNA \
     -R 8888:localhost:22 \
+    -A \
     "$server"
