@@ -11,11 +11,12 @@ SUB_CMD_HELP="""
   push: push files to home bus
   pull: pull files from home bus
   reboot: reboot the bus
+  sshd: update the ssh configuration file
 """
 # Argument parsing generated using argbash
 #
 # ARG_POSITIONAL_SINGLE([command],[one of the valid commands])
-# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull,reboot])
+# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull,reboot,sshd])
 # ARG_DEFAULTS_POS([])
 # ARG_POSITIONAL_DOUBLEDASH([])
 # ARG_LEFTOVERS([any subcommand for either b5 or shell, ignored otherwise])
@@ -39,12 +40,12 @@ die()
 
 command()
 {
-	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot") _seeking="$1"
+	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot" "sshd") _seeking="$1"
 	for element in "${_allowed[@]}"
 	do
 		test "$element" = "$_seeking" && echo "$element" && return 0
 	done
-	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull' and 'reboot'" 4
+	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot' and 'sshd'" 4
 }
 
 
@@ -66,7 +67,7 @@ print_help()
 {
 	printf '%s\n' "Interact with home buses more easily"
 	printf 'Usage: %s [-h|--help] [--] <command> ... \n' "$0"
-	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull' and 'reboot'"
+	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot' and 'sshd'"
 	printf '\t%s\n' "... : any subcommand for either b5 or shell, ignored otherwise"
 	printf '\t%s\n' "-h, --help: Prints help"
 	printf '\n%s\n' "$SUB_CMD_HELP"
@@ -240,7 +241,7 @@ _bus_state() {
 }
 
 _update_ssh_config() {
-  local ssh_conf=/etc/ssh/ssh_config.d/002-arista-bus-ssh.conf
+  local ssh_conf="$HOME/.ssh/ssh_config.d/00-arista-bus-ssh.conf"
 
   _bus_state "Ready"
   echo "Downloading ssh config to $ssh_conf"
@@ -300,6 +301,10 @@ bus_reboot() {
   echo "Rebooting bus"
   api_run post reboot
   _bus_state "Ready|Updating"
+  _update_ssh_config
+}
+
+bus_sshd() {
   _update_ssh_config
 }
 
