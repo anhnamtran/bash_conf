@@ -337,6 +337,7 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id 1password --silent
 # enable caffeine to prevent sleep lock during fullscreened videos
 exec --no-startup-id /usr/bin/caffeine
+exec --no-startup-id /usr/bin/caffeine-indicator
 
 ## apps not hidden on startup ##
 exec --no-startup-id /usr/bin/obsidian
