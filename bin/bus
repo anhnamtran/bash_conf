@@ -13,11 +13,12 @@ SUB_CMD_HELP="""
   reboot: reboot the bus
   sshd: update the ssh configuration file
   forward: creates a reverse SSH tunnel with autossh
+  api: make a request directly to the barney bus API
 """
 # Argument parsing generated using argbash
 #
 # ARG_POSITIONAL_SINGLE([command],[one of the valid commands])
-# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull,reboot,sshd,forward])
+# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull,reboot,sshd,forward,api])
 # ARG_DEFAULTS_POS([])
 # ARG_POSITIONAL_DOUBLEDASH([])
 # ARG_LEFTOVERS([any subcommand for either b5 or shell, ignored otherwise])
@@ -41,12 +42,12 @@ die()
 
 command()
 {
-	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot" "sshd" "forward") _seeking="$1"
+	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot" "sshd" "forward" "api") _seeking="$1"
 	for element in "${_allowed[@]}"
 	do
 		test "$element" = "$_seeking" && echo "$element" && return 0
 	done
-	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd' and 'forward'" 4
+	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd', 'forward' and 'api'" 4
 }
 
 
@@ -68,7 +69,7 @@ print_help()
 {
 	printf '%s\n' "Interact with home buses more easily"
 	printf 'Usage: %s [-h|--help] [--] <command> ... \n' "$0"
-	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd' and 'forward'"
+	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd', 'forward' and 'api'"
 	printf '\t%s\n' "... : any subcommand for either b5 or shell, ignored otherwise"
 	printf '\t%s\n' "-h, --help: Prints help"
 	printf '\n%s\n' "$SUB_CMD_HELP"
@@ -154,27 +155,30 @@ _arg_command="$(command "$_arg_command" "command")" || exit 1
 export LC_ALL=en_US.UTF-8
 BUS="bus-home"
 
-check_b5() {
+b5_run() {
   if ! which b5 &>/dev/null; then
     die 'b5 not installed, most bus operations will not work. Run the following to install the portable version:\ncurl -fS "https://barney-api.infra.corp.arista.io/download/client?system=$(uname -s | tr A-Z a-z)&arch=$(uname -m | sed -e s/x86_64/amd64/ -e s/aarch64/arm64/)" > b5 && chmod 755 b5'
   fi
-}
-
-b5_run() {
   b5 bus "$@"
 }
 
-api_run() {
-  local method="$1"
-  shift
-  local path="$@"
-  local bus_name=$(b5_run show --by-nickname home 2>/dev/null | jq ".name" | sed -e 's/"//g')
-  local uri="https://barney-bbm.infra.corp.arista.io/bus/${bus_name}"
+_curl() {
+  ow curl -L -s "$@"
+}
 
+api_run() {
   if ! which -s ow; then
     echo "'ow' needed for API operations with buses"
     exit 1
   fi
+
+  local method="$1"
+  shift
+  local path="$@"
+  local endpoint="https://barney-bbm.infra.corp.arista.io/bus"
+  local bus_name=$(_curl -X GET ${endpoint} \
+                   | jq ".[] | select(.owner == \"$USER\" and .nickname == \"home\") | .name" | sed -e 's/"//g')
+  local uri="${endpoint}/${bus_name}"
 
   local request;
   case "$method" in
@@ -189,20 +193,24 @@ api_run() {
       exit 1
       ;;
   esac
-  ow curl -L -s $request "${uri}/${path}"
+  if [[ -z "$path" ]]; then
+    ow curl -L -s $request "${uri}"
+  else
+    ow curl -L -s $request "${uri}/${path}"
+  fi
 }
 
 bus_status() {
-  local status=$(b5_run show --by-nickname home 2>/dev/null | jq ".status" | sed -e 's/"//g')
+  local status=$(api_run get | jq ".status" | sed -e 's/"//g')
   case "$status" in
     Ready|Pending|*NotReady*|Rebooting)
       if [[ "$status" == "Ready" ]]; then
         # Could be updating if an update job is in the job list
-        local jobs=$(b5_run jobs --by-nickname home --output-format=json 2>/dev/null)
-        local updating=$(echo "$jobs" | jq '.[] | select(.["job type"] == "update")')
+        local jobs=$(api_run get job)
+        local updating=$(echo "$jobs" | jq '.[] | select(.["jobType"] == "update")')
         if [[ -n "$updating" ]]; then
           local update_finished=$(echo "$jobs" \
-                                  | jq '.[] | select(.["job type"] == "update" and .status == "Complete")')
+                                  | jq '.[] | select(.["jobType"] == "update" and .status == "Complete")')
           if [[ -z "$update_finished" ]]; then
             status="Updating"
           fi
@@ -276,7 +284,7 @@ bus_update() {
 
 bus_jobs() {
   _bus_state "Ready|Updating"
-  b5_run jobs --by-nickname home
+  api_run get job
 }
 
 bus_push() {
@@ -342,6 +350,10 @@ bus_forward() {
       -R 8888:localhost:22 \
       -A \
       "$BUS"
+}
+
+bus_api() {
+  api_run "$@"
 }
 
 bus_$_arg_command "${_arg_leftovers[@]}"
