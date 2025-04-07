@@ -8,6 +8,8 @@ function fish_user_key_bindings
    bind -M insert \c] 'accept-autosuggestion'
    bind -M insert \ce 'edit_command_buffer'
    bind -M insert \eh 'fish_commandline_append " --help &| bat -l help"'
+   bind -M default \r 'repaint-mode' 'execute'
+   bind -M insert \r 'repaint-mode' 'execute'
 
    fzf_key_bindings
 end
