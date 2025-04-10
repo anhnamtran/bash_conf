@@ -1,7 +1,1 @@
 auto_login: true
-VaultConfig:
-  secret_engine: ssh-secondary
-  provisioner:
-    name: google
-    mount_path: google
-    role: user-google
