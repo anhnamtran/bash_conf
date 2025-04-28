@@ -27,6 +27,8 @@ bind H tabprev
 bind yt tabduplicate
 bind ;t tabdetach
 bind ;T composite tabduplicate; tabdetach
+" copies page title and url into markdown formatted text
+bind ;m clipboard yankmd
 
 alias tg tabgrab
 alias tabc tabclose
