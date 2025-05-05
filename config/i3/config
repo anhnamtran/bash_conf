@@ -337,7 +337,7 @@ exec --no-startup-id /usr/bin/caffeine
 
 ## apps not hidden on startup ##
 exec --no-startup-id /usr/bin/obsidian
-exec --no-startup-id /home/andrew_nt/appimages/Todoist-*.AppImage
+exec --no-startup-id /usr/bin/ticktick
 
 ## other autostart apps based off of XDG desktop entries
 exec --no-startup-id /usr/bin/dex --autostart --search-paths $HOME/config/autostart
