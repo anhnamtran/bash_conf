@@ -154,6 +154,7 @@ _arg_command="$(command "$_arg_command" "command")" || exit 1
 # Needed because of a b5 bug
 export LC_ALL=en_US.UTF-8
 BUS="bus-home"
+BUS_CACHE_DIR="$HOME/.cache/homebus"
 
 b5_run() {
   if ! which b5 &>/dev/null; then
@@ -166,6 +167,20 @@ _curl() {
   ow curl -L -s "$@"
 }
 
+_clear_cache() {
+  rm -rf "$BUS_CACHE_DIR/*"
+}
+
+_bus_name() {
+  local cache="$BUS_CACHE_DIR/name"
+  if ! [[ -f "$cache" ]]; then
+    mkdir -p "$BUS_CACHE_DIR"
+    _curl -X GET ${endpoint} \
+      | jq ".[] | select(.owner == \"$USER\" and .nickname == \"home\") | .name" | sed -e 's/"//g' > "$cache"
+  fi
+  cat "$cache"
+}
+
 api_run() {
   if ! which -s ow; then
     echo "'ow' needed for API operations with buses"
@@ -176,9 +191,7 @@ api_run() {
   shift
   local path="$@"
   local endpoint="https://barney-bbm.infra.corp.arista.io/bus"
-  local bus_name=$(_curl -X GET ${endpoint} \
-                   | jq ".[] | select(.owner == \"$USER\" and .nickname == \"home\") | .name" | sed -e 's/"//g')
-  local uri="${endpoint}/${bus_name}"
+  local uri="${endpoint}/$(_bus_name)"
 
   local request;
   case "$method" in
@@ -270,16 +283,19 @@ bus_mosh() {
 bus_create() {
   b5_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
   _update_ssh_config
+  _clear_cache
 }
 
 bus_delete() {
   b5_run delete --force --by-nickname home
   _bus_state "Deleted"
+  _clear_cache
 }
 
 bus_update() {
   _bus_state "Ready"
-  b5_run update --by-nickname home
+  echo "Run the following inside the bus itself"
+  echo 'sudo dnf distro-sync --disableplugin verifyprovenance --exclude "poppler*" --exclude "EosKernel*"'
 }
 
 bus_jobs() {
@@ -311,6 +327,7 @@ bus_reboot() {
   api_run post reboot
   _bus_state "Ready|Updating"
   _update_ssh_config
+  _clear_cache
 }
 
 bus_sshd() {
