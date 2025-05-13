@@ -1,10 +1,11 @@
 -- Settings and configuration for plugins to use nvim-notify
 require("notify").setup({
-   fps = 30,
+   fps = 24,
    stages = "slide",
    top_down = false,
    max_width = 50,
    max_height = 5,
+   timeout = 250,
 })
 
 vim.notify = require('notify')
@@ -17,6 +18,10 @@ local function reset_coc_status_record(window)
 end
 
 local function notify_coc_status(msg, level)
+  -- don't notify in insert mode
+  if string.match( vim.fn.mode(), "i%a+" ) ~= nil then
+    return
+  end
   local notify_opts = {
     title = "LSP Status",
     timeout = 500,
@@ -37,6 +42,10 @@ local function reset_coc_diag_record(window)
 end
 
 local function notify_coc_diag(msg, level)
+  -- don't notify in insert mode
+  if string.match( vim.fn.mode(), "i%a+" ) ~= nil then
+    return
+  end
   local notify_opts = {
     title = "LSP Diagnostics",
     timeout = 500,
@@ -53,7 +62,7 @@ local previous_diag = nil
 
 local function coc_notify_diagnostics()
   local info = vim.b.coc_diagnostic_info
-  if info == nil then
+  if info == nil or info:gsub("%s+", "") == "" then
      return
   end
   local msgs = {}
@@ -82,14 +91,17 @@ local function coc_notify_diagnostics()
   if #msg == 0 then
     msg = '  All OK'
   end
-
+  if previous_diag ~= nil and previous_diag == msg then
+     return
+  end
+  previous_diag = msg
   notify_coc_diag(msg, level)
 end
 
 local function coc_notify_status()
   local status = vim.g.coc_status
   local level = vim.log.levels.INFO
-  if status == nil or status == "" then
+  if status == nil or status:gsub("%s+", "") == "" then
      return
   end
   notify_coc_status(status, level)
@@ -118,7 +130,7 @@ vim.api.nvim_create_autocmd({'User'}, {
 -- Buffer notification
 vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
   pattern = {"*"},
-  callback = function() vim.notify("Buffer reloaded", vim.log.levels.WARN) end
+  callback = function() vim.notify("Buffer reloaded", vim.log.levels.WARN ) end
 })
 
 -- notify clipboard copy
