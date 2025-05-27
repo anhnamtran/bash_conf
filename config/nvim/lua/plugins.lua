@@ -31,7 +31,7 @@ require('lazy').setup({
   'rcarriga/nvim-notify',
 
   -- Syntax handling
-  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', branch = 'master' },
   { 'nvim-treesitter/playground',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'nvim-treesitter/nvim-treesitter-context',
