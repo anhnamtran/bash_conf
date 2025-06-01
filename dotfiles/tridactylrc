@@ -94,7 +94,9 @@ bindurl calendar.google.com/calendar/* A hint -Jc div[class^="jefcFd"]  button, 
 autocmd TabEnter ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe"][role="presentation"]
 autocmd DocLoad ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe"][role="presentation"]
 
-" some sites end up in a refresh loop with tridactyl on
+" some sites end up in a refresh loop or is too slow with tridactyl on
 seturl ^https?://animekai.* superignore true
+seturl ^https?://.*tangerine.* superignore true
+seturl ^https?://.*royalbank.* superignore true
 
 " vim: ft=vim
