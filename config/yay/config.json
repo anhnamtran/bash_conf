@@ -45,7 +45,6 @@
 	"separatesources": true,
 	"debug": false,
 	"rpc": true,
-	"doubleconfirm": false,
 	"rebuild": "Installed",
   "rebuildtree": true
 }
