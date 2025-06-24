@@ -168,7 +168,8 @@ _curl() {
 }
 
 _clear_cache() {
-  rm -rf "$BUS_CACHE_DIR/*"
+  echo "Clearing bus name cache"
+  rm -rf "$BUS_CACHE_DIR"/*
 }
 
 _bus_name() {
@@ -233,11 +234,8 @@ bus_status() {
       fi
       echo "$status"
       ;;
-    "")
-      echo "Deleted"
-      ;;
     null)
-      echo "Pending"
+      echo "Deleted"
       ;;
   esac
 }
@@ -254,7 +252,7 @@ _bus_state() {
   local status=$(bus_status)
   while ! [[ "$status" =~ $state ]]; do
     status="$(bus_status)"
-    echo -en "\rWaiting for bus to ${state} ($status)${frames[$frame]}"
+    echo -en "\rWaiting for bus to be ${state} ($status)${frames[$frame]}"
     ((frame < ${#frames[@]})) && frame=$((frame + 1)) || frame=0
     waited="on"
     sleep 1
@@ -267,7 +265,7 @@ _update_ssh_config() {
 
   _bus_state "Ready"
   echo "Downloading ssh config to $ssh_conf"
-  sudo curl -o "$ssh_conf" "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=-"
+  curl -o "$ssh_conf" "https://barney-bbm.infra.corp.arista.io/bus/${USER}/ssh-config?global-config=true&delimiter=-"
 }
 
 bus_shell() {
@@ -281,9 +279,9 @@ bus_mosh() {
 }
 
 bus_create() {
+  _clear_cache
   b5_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
   _update_ssh_config
-  _clear_cache
 }
 
 bus_delete() {
