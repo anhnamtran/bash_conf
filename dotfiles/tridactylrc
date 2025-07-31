@@ -1,5 +1,4 @@
 " General settings
-set smoothscroll true
 set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
@@ -98,5 +97,6 @@ autocmd DocLoad ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe
 seturl ^https?://animekai.* superignore true
 seturl ^https?://.*tangerine.* superignore true
 seturl ^https?://.*royalbank.* superignore true
+seturl ^https?://.*kagi.com/assistant.* superignore true
 
 " vim: ft=vim
