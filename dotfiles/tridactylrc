@@ -1,5 +1,4 @@
 " General settings
-set smoothscroll true
 set theme dark
 set hintfiltermode vimperator-reflow
 set hintnames numeric
@@ -102,6 +101,7 @@ autocmd DocLoad ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe
 
 " Enter ignore mode on the following pages
 seturl .*\.coderpad\.io\/.* superignore true
+seturl ^https?://.*kagi.com/assistant.* superignore true
 
 " Arista domains
 set searchurls.go https://go/%s
