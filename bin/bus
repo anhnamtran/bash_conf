@@ -153,7 +153,7 @@ _arg_command="$(command "$_arg_command" "command")" || exit 1
 
 # Needed because of a b5 bug
 export LC_ALL=en_US.UTF-8
-BUS="bus-home"
+BUS="bus-homebus"
 BUS_CACHE_DIR="$HOME/.cache/homebus"
 
 b5_run() {
@@ -250,7 +250,6 @@ bus_status() {
 }
 
 _bus_state() {
-  set -e
   local state waited frames frame status
   state="$1"
   waited="off"
@@ -281,6 +280,7 @@ _update_ssh_config() {
 }
 
 bus_shell() {
+  set -x
   _bus_state "Ready|Updating"
   ssh "$BUS" "$*"
 }
