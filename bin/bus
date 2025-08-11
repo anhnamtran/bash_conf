@@ -173,28 +173,34 @@ _clear_cache() {
 }
 
 _bus_name() {
-  local cache="$BUS_CACHE_DIR/name"
-  if ! [[ -f "$cache" ]]; then
+  local cache endpoint
+  cache="$BUS_CACHE_DIR/name"
+  endpoint="https://barney-bbm.infra.corp.arista.io/bus"
+  if ! [[ -f "$cache" ]] || [[ -z "$(cat $cache)" ]]; then
     mkdir -p "$BUS_CACHE_DIR"
     _curl -X GET ${endpoint} \
-      | jq ".[] | select(.owner == \"$USER\" and .nickname == \"home\") | .name" | sed -e 's/"//g' > "$cache"
+      | jq ".[] | select(.owner == \"$USER\" and .nickname == \"homebus\") | .name" | sed -e 's/"//g' > "$cache"
   fi
   cat "$cache"
 }
 
 api_run() {
+  local method path endpoint name uri request
   if ! which -s ow; then
-    echo "'ow' needed for API operations with buses"
-    exit 1
+    die "'ow' needed for API operations with buses"
   fi
 
-  local method="$1"
+  method="$1"
   shift
-  local path="$@"
-  local endpoint="https://barney-bbm.infra.corp.arista.io/bus"
-  local uri="${endpoint}/$(_bus_name)"
+  path="$@"
+  endpoint="https://barney-bbm.infra.corp.arista.io/bus"
 
-  local request;
+  name="$(_bus_name)"
+  if [[ -z "$name" ]]; then
+    die "No bus found"
+  fi
+
+  uri="${endpoint}/$name"
   case "$method" in
     get)
       request="-X GET"
@@ -203,27 +209,30 @@ api_run() {
       request="-X POST"
       ;;
     *)
-      echo "Unsupported method $method"
-      exit 1
+      die "Unsupported method $method"
       ;;
   esac
   if [[ -z "$path" ]]; then
-    ow curl -L -s $request "${uri}"
+    _curl $request "${uri}"
   else
-    ow curl -L -s $request "${uri}/${path}"
+    _curl $request "${uri}/${path}"
   fi
 }
 
 bus_status() {
-  local status=$(api_run get | jq ".status" | sed -e 's/"//g')
+  set -e
+  local api_out status jobs updating update_finished
+
+  api_out=$(api_run get)
+  status=$(echo "$api_out" | jq ".status" | sed -e 's/"//g')
   case "$status" in
     Ready|Pending|*NotReady*|Rebooting)
       if [[ "$status" == "Ready" ]]; then
         # Could be updating if an update job is in the job list
-        local jobs=$(api_run get job)
-        local updating=$(echo "$jobs" | jq '.[] | select(.["jobType"] == "update")')
+        jobs=$(api_run get job)
+        updating=$(echo "$jobs" | jq '.[] | select(.["jobType"] == "update")')
         if [[ -n "$updating" ]]; then
-          local update_finished=$(echo "$jobs" \
+          update_finished=$(echo "$jobs" \
                                   | jq '.[] | select(.["jobType"] == "update" and .status == "Complete")')
           if [[ -z "$update_finished" ]]; then
             status="Updating"
@@ -241,15 +250,17 @@ bus_status() {
 }
 
 _bus_state() {
-  local state="$1"
-  local waited="off"
-  local frames=(
+  set -e
+  local state waited frames frame status
+  state="$1"
+  waited="off"
+  frames=(
     ".  "
     ".. "
     "..."
   )
-  local frame=0
-  local status=$(bus_status)
+  frame=0
+  status=$(bus_status)
   while ! [[ "$status" =~ $state ]]; do
     status="$(bus_status)"
     echo -en "\rWaiting for bus to be ${state} ($status)${frames[$frame]}"
@@ -261,7 +272,8 @@ _bus_state() {
 }
 
 _update_ssh_config() {
-  local ssh_conf="$HOME/.ssh/ssh_config.d/00-arista-bus-ssh.conf"
+  local ssh_conf
+  ssh_conf="$HOME/.ssh/ssh_config.d/00-arista-bus-ssh.conf"
 
   _bus_state "Ready"
   echo "Downloading ssh config to $ssh_conf"
@@ -302,15 +314,17 @@ bus_jobs() {
 }
 
 bus_push() {
-  local src="$1"
-  local dst="$2"
+  local src dst
+  src="$1"
+  dst="$2"
   _bus_state "Ready|Updating"
   rsync -azP "$src" "$BUS:$dst"
 }
 
 bus_pull() {
-  local src="$1"
-  local dst="$2"
+  local src dst
+  src="$1"
+  dst="$2"
   _bus_state "Ready|Updating"
   rsync -azP "$BUS:$src" "$dst"
 }
@@ -319,7 +333,7 @@ bus_reboot() {
   read -p "Rebooting bus, this will take several minutes, proceed? [y/N] " do_reboot
   if ! [[ "$do_reboot" = "y" ]]; then
     echo "Aborting."
-    exit 1
+    die "Aborting."
   fi
   echo "Rebooting bus"
   api_run post reboot
