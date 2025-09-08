@@ -351,16 +351,18 @@ bus_forward() {
 
   LOG_FILE="/tmp/autossh-$BUS.log"
   PID_FILE="/tmp/autossh-$BUS.pid"
-  AUTOSSH_PID="$(cat "$PID_FILE")"
-  if kill -0 "$AUTOSSH_PID" &>/dev/null; then
-    echo "Autossh already running, restarting child SSH process instead." | tee -a "$LOG_FILE"
-    ssh "$BUS" 'sudo netstat -talnp | grep "8888.*CLOSE_WAIT" | awk "{ print $7 }" | cut -f1 -d/ | uniq | xargs sudo kill -9 &>/dev/null' &>> "$LOG_FILE"
-    kill -10 "$AUTOSSH_PID"
-    sleep 1
-    if ! kill -0 "$AUTOSSH_PID" &>/dev/null; then
-      echo "Autossh exited, restarting"
-    else
-      exit 0
+  if [[ -f "$PID_FILE" ]]; then
+    AUTOSSH_PID="$(cat "$PID_FILE")"
+    if kill -0 "$AUTOSSH_PID" &>/dev/null; then
+      echo "Autossh already running, restarting child SSH process instead." | tee -a "$LOG_FILE"
+      ssh "$BUS" 'sudo netstat -talnp | grep "8888.*CLOSE_WAIT" | awk "{ print $7 }" | cut -f1 -d/ | uniq | xargs sudo kill -9 &>/dev/null' &>> "$LOG_FILE"
+      kill -10 "$AUTOSSH_PID"
+      sleep 1
+      if ! kill -0 "$AUTOSSH_PID" &>/dev/null; then
+        echo "Autossh exited, restarting"
+      else
+        exit 0
+      fi
     fi
   fi
 
