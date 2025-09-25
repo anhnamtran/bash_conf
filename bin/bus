@@ -280,7 +280,6 @@ _update_ssh_config() {
 }
 
 bus_shell() {
-  set -x
   _bus_state "Ready|Updating"
   ssh "$BUS" "$*"
 }
