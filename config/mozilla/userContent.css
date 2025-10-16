@@ -27,4 +27,5 @@ input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='check
 #sidebar-box {
   max-width: none !important;
   min-width: 0px !important;
+  width: 200px !important;
 }
