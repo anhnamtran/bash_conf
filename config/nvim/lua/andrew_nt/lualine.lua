@@ -5,13 +5,27 @@ end
 local function LuaLineObsession()
   return vim.fn.ObsessionStatus("$", "")
 end
+local function LuaLineGitDir()
+  if vim.fn.FugitiveGitDir() ~= nil then
+    return vim.fs.basename(vim.fn.FugitiveWorkTree())
+  else
+    return ""
+  end
+end
 require("lualine").setup {
   options = {
     theme = 'onedark',
   },
   sections = {
     lualine_a = { LuaLineWinNum, 'mode' },
-    lualine_b = { 'branch', 'diff' },
+    lualine_b = { 'filename',
+      { 'branch', separator = { left = '' } },
+      { LuaLineGitDir,
+        padding = { right = 1, left = 0 },
+        color = { fg = '#e5c07b' },
+        align = 'left'
+      },
+      'diff' },
     lualine_c = { 'b:coc_current_function' },
     lualine_x = { 'diagnostics', 'filetype' },
     lualine_y = { 'progress' },

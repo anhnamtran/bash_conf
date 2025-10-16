@@ -28,7 +28,7 @@ require('lazy').setup({
   'lewis6991/gitsigns.nvim',
   'mhinz/vim-startify',
   'lukas-reineke/indent-blankline.nvim',
-  'rcarriga/nvim-notify',
+  { 'rcarriga/nvim-notify', tag = 'v3.14.1' },
 
   -- Syntax handling
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', branch = 'master' },
@@ -38,7 +38,11 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   { 'HiPhish/rainbow-delimiters.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-  { 'neoclide/coc.nvim', branch = 'master', build = { 'npm ci', ':CocUpdate' } },
+  {
+    'neoclide/coc.nvim',
+    branch = 'master',
+    build = { 'npm ci', ':CocUpdate' }
+  },
   { "dhruvasagar/vim-table-mode",
     lazy = true,
     ft = "markdown", -- only load plugin when markdown file opens
