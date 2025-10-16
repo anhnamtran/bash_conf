@@ -23,6 +23,9 @@ local custom_hl_groups = {
 
   CocHighlightText = { fg = "#56B6C2", bg = "#3B3F4C" },
   CocMenuSel = { link = "PmenuSel" },
+  CocInlayHint = { link = "Comment" },
+
+  NvimTreeNormal = { link = "Normal" }
 }
 for hl_group, opts in pairs(custom_hl_groups) do
   vim.api.nvim_set_hl(0, hl_group, opts)

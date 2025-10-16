@@ -34,14 +34,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     end
   end
 })
-vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained' }, {
-  group = CocCustomAu,
-  pattern = '*',
-  callback = function ()
-    vim.fn.CocActionAsync("ensureDocument")
-    vim.fn.CocActionAsync("refreshSource")
-  end
-})
+
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = CocCustomAu,
   pattern = {

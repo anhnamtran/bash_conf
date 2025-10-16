@@ -1,6 +1,49 @@
 -- Setup for treesitter and treesitter related plugins
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'c', 'cpp', 'bash', 'vim', 'json', 'python', 'go', 'comment', 'rust' },
+  ensure_installed = {
+    'bash',
+    'c',
+    'comment',
+    'cpp',
+    'css',
+    'diff',
+    'dockerfile',
+    'git_config',
+    'git_rebase',
+    'gitattributes',
+    'gitcommit',
+    'gitignore',
+    'go',
+    'html',
+    'http',
+    'javascript',
+    'jq',
+    'json',
+    'json5',
+    'lua',
+    'luadoc',
+    'markdown',
+    'markdown_inline',
+    'ninja',
+    'nix',
+    'objdump',
+    'printf',
+    'python',
+    'regex',
+    'requirements',
+    'rust',
+    'scheme',
+    'ssh_config',
+    'starlark',
+    'strace',
+    'toml',
+    'tsv',
+    'typescript',
+    'vim',
+    'vimdoc',
+    'yaml',
+    'yang',
+  },
   highlight = {
     enable = true,              -- false will disable the whole extension
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -46,3 +89,5 @@ require('treesitter-context').setup {
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
+ 
+vim.treesitter.language.register("starlark", "bazel")
