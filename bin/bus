@@ -365,6 +365,20 @@ bus_forward() {
     fi
   fi
 
+  TUNNELS=(
+    # main port for reverse communication
+    -R 8888:localhost:22
+    # common OAuth callback ports
+    -L 8084:localhost:8084
+    -L 8085:localhost:8085
+    -L 8086:localhost:8086
+    -L 8087:localhost:8087
+    -L 8088:localhost:8088
+    -L 8089:localhost:8089
+    -L 8090:localhost:8090
+    -L 8091:localhost:8091
+  )
+
   set -x
   SYMLINK_AUTH_SOCK=1 \
   AUTOSSH_LOGLEVEL=7 \
@@ -377,7 +391,7 @@ bus_forward() {
       -o "ControlMaster=no" \
       -o "SendEnv=SYMLINK_AUTH_SOCK" \
       -o "ExitOnForwardFailure=yes" \
-      -R 8888:localhost:22 \
+      ${TUNNELS[@]} \
       -A \
       "$BUS"
 }
