@@ -5,7 +5,7 @@ lastLoadedInputPreset=improvedMic
 inputDevice=alsa_input.usb-3142_FIFINE_K669_Microphone-00.mono-fallback
 mostUsedPresets=improvedMic
 plugins=gate#0,compressor#0,filter#0,deesser#0,rnnoise#0,limiter#0,stereo_tools#0
-usedPresets=improvedMic:26
+usedPresets=improvedMic:27
 
 [StreamOutputs]
 blocklist=Firefox
