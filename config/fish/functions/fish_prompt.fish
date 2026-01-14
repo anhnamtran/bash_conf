@@ -1,3 +1,12 @@
+function __fish_git_prompt_ready --description "Returns false on slower file systems"
+  # Check filesystem type
+  set -l mount_type (df -T . 2>/dev/null | tail -1 | awk '{print $2}')
+  if not contains -- $mount_type fuse.sshfs sshfs nfs cifs smb fuse.rclone
+    true
+  end
+  false
+end
+
 # Customized prompt
 function fish_prompt
    set -l lastStatus $status
