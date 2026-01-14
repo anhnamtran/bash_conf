@@ -2,9 +2,9 @@ function __fish_git_prompt_ready --description "Returns false on slower file sys
   # Check filesystem type
   set -l mount_type (df -T . 2>/dev/null | tail -1 | awk '{print $2}')
   if not contains -- $mount_type fuse.sshfs sshfs nfs cifs smb fuse.rclone
-    true
+    return 0
   end
-  false
+  return 1
 end
 
 # Customized prompt

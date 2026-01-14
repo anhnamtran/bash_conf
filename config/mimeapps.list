@@ -22,7 +22,7 @@ application/x-extension-xhtml=userapp-Firefox-D820X2.desktop
 application/x-extension-xht=userapp-Firefox-D820X2.desktop
 
 [Added Associations]
-application/zip=firefox.desktop;
+application/zip=org.gnome.FileRoller.desktop;firefox.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-PHG871.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-PHG871.desktop;
 text/plain=firefox.desktop;
