@@ -20,6 +20,7 @@ application/x-extension-shtml=userapp-Firefox-D820X2.desktop
 application/xhtml+xml=userapp-Firefox-D820X2.desktop
 application/x-extension-xhtml=userapp-Firefox-D820X2.desktop
 application/x-extension-xht=userapp-Firefox-D820X2.desktop
+x-scheme-handler/nxm=modorganizer2-nxm-handler.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;firefox.desktop;
