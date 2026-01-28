@@ -30,6 +30,8 @@
 .dbus/
 .dircolors
 .dmrc
+.docker/
+.dotnet/
 .fehbg
 .fltk/
 .gconf/
@@ -51,6 +53,7 @@
 .lesshst
 .local/
 .masterpdfeditor/
+.mongodb/
 .mozilla/
 .muttrc
 .nanorc
