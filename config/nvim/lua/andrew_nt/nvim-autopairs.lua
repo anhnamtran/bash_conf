@@ -2,7 +2,7 @@
 require('nvim-autopairs').setup {
   disable_filetype = { "TelescopePrompt", "log", "qt" },
   map_cr = false,
-  ignored_next_char = "[%w%.]" -- will ignore alphanumeric and `.` symbol
+  check_ts = true, -- use treesitter to check for pairs
 }
 
 -- Add space in between brackets

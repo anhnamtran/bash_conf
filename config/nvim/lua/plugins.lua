@@ -97,7 +97,7 @@ require('lazy').setup({
     end,
     dependencies = { 'inkarkat/vim-ingo-library' } },
   'windwp/nvim-autopairs',
-  { 'NAndLib/hop.nvim', branch = 'master' },
+  { "folke/flash.nvim", lazy = true },
   'karb94/neoscroll.nvim',
   'ojroques/nvim-osc52',
   { 'norcalli/nvim-colorizer.lua',
@@ -125,6 +125,7 @@ require('lazy').setup({
         "nvim-lua/plenary.nvim",
     },
   },
+  { "folke/which-key.nvim", lazy = true },
 }, {
   ui = {
     border = 'rounded'
