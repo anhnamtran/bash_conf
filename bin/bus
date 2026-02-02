@@ -153,7 +153,8 @@ _arg_command="$(command "$_arg_command" "command")" || exit 1
 
 # Needed because of a b5 bug
 export LC_ALL=en_US.UTF-8
-BUS="bus-homebus"
+NICKNAME=home
+BUS="bus-$NICKNAME"
 BUS_CACHE_DIR="$HOME/.cache/homebus"
 
 b5_run() {
@@ -179,7 +180,7 @@ _bus_name() {
   if ! [[ -f "$cache" ]] || [[ -z "$(cat $cache)" ]]; then
     mkdir -p "$BUS_CACHE_DIR"
     _curl -X GET ${endpoint} \
-      | jq ".[] | select(.owner == \"$USER\" and .nickname == \"homebus\") | .name" | sed -e 's/"//g' > "$cache"
+      | jq ".[] | select(.owner == \"$USER\" and .nickname == \"$NICKNAME\") | .name" | sed -e 's/"//g' > "$cache"
   fi
   cat "$cache"
 }
@@ -291,12 +292,12 @@ bus_mosh() {
 
 bus_create() {
   _clear_cache
-  b5_run create --nickname home --topic home --image "code.arista.io/infra/home-bus%bus/eos"
+  b5_run create --nickname $NICKNAME --topic home --image "code.arista.io/infra/home-bus%bus/eos"
   _update_ssh_config
 }
 
 bus_delete() {
-  b5_run delete --force --by-nickname home
+  b5_run delete --force --by-nickname $NICKNAME
   _bus_state "Deleted"
   _clear_cache
 }
