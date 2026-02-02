@@ -8,4 +8,4 @@ outputDevice=alsa_output.pci-0000_00_1f.3.analog-stereo
 [Window]
 height=992
 visiblePage=inputPage
-width=598
+width=905
