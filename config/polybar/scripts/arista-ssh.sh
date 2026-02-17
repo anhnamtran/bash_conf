@@ -8,7 +8,7 @@ assh() {
 }
 
 assh_check_auth() {
-  assh check-auth | grep -q "valid" && echo "󰕥 " || echo "󰫜 "
+  assh check-auth 2>/dev/null | grep -q "valid" && echo "󰕥 " || echo "󰫜 "
 }
 
 assh_login() {
