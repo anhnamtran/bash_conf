@@ -42,7 +42,7 @@ bgcolor=282c34
 # expert options (change at own risk!)
 #
 
-i3lockcolor_bin="/usr/local/bin/i3lock"   # Manually set command for i3lock-color
+#i3lockcolor_bin="/usr/local/bin/i3lock"   # Manually set command for i3lock-color
 # suspend_command="systemctl suspend" # Manually change action e.g. hibernate/suspend-command
 
 # i3lock-color - custom arguments
