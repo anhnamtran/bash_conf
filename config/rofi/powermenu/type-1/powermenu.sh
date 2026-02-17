@@ -18,11 +18,11 @@ uptime="`uptime -p | sed -e 's/up //g'`"
 host=`hostname`
 
 # Options
-shutdown='襤 Shutdown'
+shutdown='󰐥 Shutdown'
 reboot=' Reboot'
 lock=' Lock'
 suspend=' Suspend'
-logout=' Logout'
+logout='󰿅 Logout'
 yes=' Yes'
 no=' No'
 
