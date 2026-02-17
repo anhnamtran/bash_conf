@@ -29,9 +29,9 @@ URxvt*internalBorder: 5
 URxvt*geometry: 70x19
 
 rofi.theme: onedark
-rofi.terminal: terminator
+rofi.terminal: kitty
 
-Xft.dpi: 125
+Xft.dpi: 144
 Xft.rgba: rgb
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
