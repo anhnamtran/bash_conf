@@ -5,9 +5,6 @@ require('flash').setup({
     incremental = true,
   },
   modes = {
-    search = {
-       enabled = true,
-    },
     char = {
        enabled = false,
     }
