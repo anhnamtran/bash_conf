@@ -1,5 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:4300
-SETUVAR __kube_ps_enabled:0
-SETUVAR fish_user_paths:/usr/local/bin\x1e/home/andrew_nt/go/bin\x1e/home/andrew_nt/bin\x1e/home/andrew_nt/code/fzf/bin\x1e/usr/lib/go/bin\x1e/home/andrew_nt/\x2ecargo/bin\x1e/home/andrew_nt/\x2elocal/bin
+SETUVAR __kube_ps_enabled:1
+SETUVAR fish_user_paths:/usr/local/bin\x1e/home/andrew_nt/go/bin\x1e/home/andrew_nt/bin\x1e/home/andrew_nt/code/fzf/bin\x1e/usr/lib/go/bin\x1e/home/andrew_nt/\x2elocal/bin\x1e/home/andrew_nt/\x2ecargo/bin
