@@ -102,7 +102,6 @@ autocmd DocLoad ^https://calendar.google.com/calendar/* hint -;Jc [class="mDPmMe
 " Enter ignore mode on the following pages
 seturl .*\.coderpad\.io\/.* superignore true
 seturl ^https?://.*kagi.com/assistant.* superignore true
-seturl ^https?://.*gerrit.corp.arista.io/c/.*/\+/[0-9]+ superignore true
 
 " Arista domains
 set searchurls.go https://go/%s
