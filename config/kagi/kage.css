@@ -103,7 +103,7 @@
 body,
 html {
   background-color: var(--bg-primary);
-  font-family: Lufga, system-ui
+  font-family: var(--font-main);
 }
 
 .my-7 {
