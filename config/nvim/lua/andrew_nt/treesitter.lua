@@ -1,93 +1,98 @@
--- Setup for treesitter and treesitter related plugins
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    'bash',
-    'c',
-    'comment',
-    'cpp',
-    'css',
-    'diff',
-    'dockerfile',
-    'git_config',
-    'git_rebase',
-    'gitattributes',
-    'gitcommit',
-    'gitignore',
-    'go',
-    'html',
-    'http',
-    'javascript',
-    'jq',
-    'json',
-    'json5',
-    'lua',
-    'luadoc',
-    'markdown',
-    'markdown_inline',
-    'ninja',
-    'nix',
-    'objdump',
-    'printf',
-    'python',
-    'regex',
-    'requirements',
-    'rust',
-    'scheme',
-    'ssh_config',
-    'starlark',
-    'strace',
-    'toml',
-    'tsv',
-    'typescript',
-    'vim',
-    'vimdoc',
-    'yaml',
-    'yang',
-  },
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  -- Requires nvim-treesitter/playground
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
-    },
-  }
+-- Setup for nvim-treesitter (main branch)
+-- nvim-treesitter (main branch)
+-- Pattern: install parsers once at startup, enable highlighting per-filetype
+-- using vim.treesitter.language.add() as a guard (no install() in FileType).
+
+local ensure_installed = {
+  'bash',
+  'c',
+  'comment',
+  'cpp',
+  'css',
+  'diff',
+  'dockerfile',
+  'git_config',
+  'git_rebase',
+  'gitattributes',
+  'gitcommit',
+  'gitignore',
+  'go',
+  'html',
+  'http',
+  'javascript',
+  'jq',
+  'json',
+  'json5',
+  'lua',
+  'luadoc',
+  'markdown',
+  'markdown_inline',
+  'ninja',
+  'nix',
+  'objdump',
+  'printf',
+  'python',
+  'regex',
+  'requirements',
+  'rust',
+  'scheme',
+  'ssh_config',
+  'starlark',
+  'strace',
+  'toml',
+  'tsv',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+  'yang',
 }
-require('treesitter-context').setup {
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 40, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-  line_numbers = true,
-  multiline_threshold = 5, -- Maximum number of lines to show for a single context
-  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  mode = 'topline',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  separator = nil,
-  zindex = 20, -- The Z-index of the context window
-  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-}
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt.foldenable = false
- 
-vim.treesitter.language.register("starlark", "bazel")
+
+-- Install missing parsers. vim.schedule() defers this out of the startup
+-- critical path. install() is a no-op for already-installed parsers.
+vim.schedule(function()
+  local ok, ts = pcall(require, 'nvim-treesitter')
+  if not ok then return end
+  local installed = ts.get_installed()
+  local to_install = vim.tbl_filter(function(p)
+    return not vim.tbl_contains(installed, p)
+  end, ensure_installed)
+  if #to_install > 0 then
+    ts.install(to_install)
+  end
+end)
+-- Enable treesitter features per-filetype.
+-- Uses vim.treesitter.language.add() as a guard: returns false if the parser
+-- is not installed, so we never call start() for unsupported filetypes.
+-- No install() call here — it's async and the parser won't be ready in time.
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function(ev)
+    local buf  = ev.buf
+    local ft   = ev.match
+    local lang = vim.treesitter.language.get_lang(ft) or ft
+
+    -- add() returns false if the parser is not installed; bail out silently.
+    if not vim.treesitter.language.add(lang) then return end
+
+    -- Parser is installed and loaded — safe to start highlighting.
+    vim.treesitter.start(buf, lang)
+
+    -- Treesitter-based indentation (nvim-treesitter main provides indentexpr)
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+    -- Treesitter-based folding (built-in Neovim core API)
+    vim.wo.foldmethod = 'expr'
+    vim.wo.foldexpr   = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo.foldenable = false
+  end,
+})
+
+-- Register custom filetype → language mappings (Neovim core API, unchanged)
+vim.treesitter.language.register('starlark', 'bazel')
+
+-- NOTE: nvim-treesitter/playground is deprecated.
+-- Use :InspectTree  (replaces TSPlaygroundToggle)
+-- Use :Inspect      (shows highlight groups under cursor)
+-- Use :EditQuery    (replaces the query editor)
+
