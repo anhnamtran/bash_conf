@@ -31,11 +31,9 @@ require('lazy').setup({
   { 'rcarriga/nvim-notify', tag = 'v3.14.1' },
 
   -- Syntax handling
-  { 'nvim-treesitter/nvim-treesitter', branch = 'master', build = ':TSUpdate' },
-  { 'nvim-treesitter/playground',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', branch = 'main', lazy = false },
   { 'nvim-treesitter/nvim-treesitter-context',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }, branch = 'master' },
   { 'HiPhish/rainbow-delimiters.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   {
