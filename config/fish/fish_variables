@@ -1,4 +1,4 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/usr/local/bin\x1e/home/andrew_nt/\x2espicetify\x1e/home/andrew_nt/bin\x1e/home/andrew_nt/\x2elocal/bin\x1e/home/andrew_nt/\x2ecargo/bin
+SETUVAR fish_user_paths:/usr/local/bin\x1e/home/andrew_nt/\x2espicetify\x1e/home/andrew_nt/bin\x1e/home/andrew_nt/\x2elocal/bin\x1e/home/andrew_nt/\x2ecargo/bin\x1e/home/andrew_nt/\x2enpm\x2dglobal/bin
