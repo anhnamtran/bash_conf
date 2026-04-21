@@ -1,5 +1,5 @@
 [StreamInputs]
-inputDevice=easyeffects_sink
+inputDevice=alsa_input.usb-3142_FIFINE_K669_Microphone-00.mono-fallback
 visiblePage=pluginsPage
 
 [StreamOutputs]
