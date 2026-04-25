@@ -159,7 +159,9 @@ a {
   border: 1px solid var(--text-dark);
   backdrop-filter: blur(12px) saturate(50%);
   -webkit-backdrop-filter: blur(12px) saturate(50%);
-  border: 0
+  border: 0;
+  right: 0 !important;
+  left: auto !important
 }
 
 .promptOptionsSelector .custom-assistants li.option[aria-selected=true]:hover .center,
