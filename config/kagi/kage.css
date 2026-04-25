@@ -755,7 +755,7 @@ dialog {
   border-bottom: none !important
 }
 
-.__sri_more_menu._0_k_ui_dropdown .k_ui_dropdown_data_list {
+.__sri_more_menu .k_ui_dropdown_data_list {
   left: 60px !important
 }
 
@@ -1089,6 +1089,12 @@ sup a .tooltip {
 
 .ranked-box-overlay {
   position: absolute !important
+}
+
+.search-result:has([aria-expanded=true],.ranked-box-overlay.--open),
+.sri-group:has([aria-expanded=true],.ranked-box-overlay.--open) {
+  position: relative;
+  z-index: 100
 }
 
 .ranked-box-overlay.--open {
@@ -2016,5 +2022,23 @@ body:has(#settings_showStatsPanel:checked) ._0_more_search_options_box .show {
   }
   #m_wiki {
     background-color: var(--bg-tertiary)
+  }
+
+}
+
+@media (max-width:1150px) {
+  body:has(.__sri_more_menu[aria-expanded=true]) .right-content-box,
+  body:has(.ranked-box-overlay.--open) .right-content-box {
+    margin-left: 0 !important
+  }
+
+  .__sri_more_menu .k_ui_dropdown_data_list {
+    left: auto !important;
+    right: 0
+  }
+
+  .ranked-box-overlay.--open {
+    left: auto !important;
+    right: 0
   }
 }
