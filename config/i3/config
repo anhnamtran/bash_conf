@@ -329,7 +329,6 @@ exec --no-startup-id veracrypt --background-task
 exec --no-startup-id blueman-applet
 # needed for redshift
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id 1password --silent
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/kdeconnect-indicator
