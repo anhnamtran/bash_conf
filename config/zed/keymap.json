@@ -71,5 +71,17 @@
     "bindings": {
       "ctrl-enter": "tab_switcher::OpenInActivePane"
     }
+  },
+  {
+    "context": "vim_mode == insert || vim_mode == replace",
+    "bindings": {
+      "j j": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "vim_mode == normal && VimControl && !menu",
+    "bindings": {
+      "_": "tab_switcher::ToggleAll"
+    }
   }
 ]
