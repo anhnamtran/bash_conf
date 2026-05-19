@@ -65,5 +65,11 @@
     "unbind": {
       "ctrl-w k": "workspace::ActivatePaneUp"
     }
+  },
+  {
+    "context": "TabSwitcher",
+    "bindings": {
+      "ctrl-enter": "tab_switcher::OpenInActivePane"
+    }
   }
 ]

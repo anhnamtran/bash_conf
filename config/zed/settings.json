@@ -7,6 +7,19 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "on_last_window_closed": "quit_app",
+  "when_closing_with_no_tabs": "close_window",
+  "tabs": {
+    "file_icons": true
+  },
+  "active_pane_modifiers": {
+    "border_size": 1.0,
+    "inactive_opacity": 0.9
+  },
+  "window_decorations": "client",
+  "status_bar": {
+    "show_active_file": true
+  },
   "project_panel": {
     "dock": "left"
   },
@@ -81,8 +94,8 @@
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "dark",
-    "light": "One Light",
-    "dark": "One Dark",
+    "mode": "system",
+    "light": "One Dark",
+    "dark": "One Dark"
   },
 }
