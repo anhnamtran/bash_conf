@@ -1,0 +1,88 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "project_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "tree_view": true
+  },
+  "ssh_connections": [
+    {
+      "host": "andrew-nt-bazel-gazelle",
+      "username": "andrew_nt",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "andrew-nt-bazel-gdb",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ]
+    }
+  ],
+  "format_on_save": "off",
+  "proxy": "",
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "title_bar": {
+    "show_branch_status_icon": true
+  },
+  "colorize_brackets": true,
+  "inlay_hints": {
+    "enabled": true
+  },
+  "completion_detail_alignment": "right",
+  "indent_guides": {
+    "coloring": "indent_aware"
+  },
+  "tab_size": 2,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
+  },
+  "which_key": {
+    "enabled": true
+  },
+  "autosave": "on_window_change",
+  "ui_font_family": "Iosevka",
+  "buffer_font_family": "Iosevka Term",
+  "use_system_prompts": true,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "base_keymap": "VSCode",
+  "icon_theme": "Zed (Default)",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+}
