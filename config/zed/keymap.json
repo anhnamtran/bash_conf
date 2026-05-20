@@ -95,4 +95,15 @@
       "ctrl-enter": "tab_switcher::OpenInActivePane"
     }
   },
+  // Global bindings
+  {
+    "bindings": {
+      "shift-f4": "debugger::Start"
+    }
+  },
+  {
+    "unbind": {
+      "f4": "debugger::Start"
+    }
+  }
 ]
