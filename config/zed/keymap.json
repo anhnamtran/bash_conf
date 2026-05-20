@@ -83,5 +83,23 @@
     "bindings": {
       "_": "tab_switcher::ToggleAll"
     }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-w ctrl-enter": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "context": "Terminal && vim_mode != normal",
+    "bindings": {
+      "ctrl-\\ ctrl-e": "editor::ToggleFocus"
+    }
   }
 ]

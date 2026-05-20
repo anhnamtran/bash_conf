@@ -7,6 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "soft_wrap": "prefer_line",
+  "terminal": {
+    "dock": "bottom"
+  },
+  "cli_default_open_behavior": "existing_window",
+  "edit_predictions": {
+    "allow_data_collection": "no"
+  },
+  "show_edit_predictions": false,
+  "agent": {
+    "play_sound_when_agent_done": "always",
+    "favorite_models": [],
+    "single_file_review": true,
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "favorite_config_option_values": {
+        "mode": [
+          "auto"
+        ]
+      },
+      "type": "registry",
+      "env": {
+        "ANTHROPIC_BASE_URL": "https://ai-proxy.infra.corp.arista.io/",
+      },
+    }
+  },
   "on_last_window_closed": "quit_app",
   "when_closing_with_no_tabs": "close_window",
   "tabs": {
@@ -71,6 +99,7 @@
   },
   "tab_size": 2,
   "vim": {
+    "use_system_clipboard": "on_yank",
     "use_smartcase_find": true,
     "toggle_relative_line_numbers": true
   },
