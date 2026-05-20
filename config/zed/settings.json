@@ -9,6 +9,8 @@
 {
   "semantic_tokens": "off",
   "soft_wrap": "prefer_line",
+  "show_wrap_guides": true,
+  "preferred_line_length": 80,
   "terminal": {
     "dock": "bottom"
   },

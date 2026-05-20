@@ -105,5 +105,17 @@
     "unbind": {
       "f4": "debugger::Start"
     }
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "f2": "project_panel::Rename"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "f2": "editor::Rename"
+    }
   }
 ]
