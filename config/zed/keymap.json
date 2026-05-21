@@ -71,6 +71,10 @@
     "bindings": {
       "ctrl-\\ ctrl-e": "editor::ToggleFocus",
       "ctrl-\\ ctrl-]": "terminal::ToggleViMode",
+      "ctrl-\\ ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-\\ ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-\\ ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-\\ ctrl-l": "workspace::ActivatePaneRight",
       // workaround for ctrl+w delay in vim mode
       "ctrl-w": "editor::DeleteToPreviousWordStart",
     }
