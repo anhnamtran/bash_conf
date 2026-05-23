@@ -1,0 +1,125 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // Workspace bindings
+  {
+    "context": "Workspace",
+    "bindings": {
+      "\\ f": "file_finder::Toggle",
+      "ctrl-w ctrl-enter": "terminal_panel::Toggle",
+      "f2": "workspace::ToggleBottomDock",
+      "f3": "workspace::ToggleLeftDock",
+      "f4": "workspace::ToggleRightDock"
+    },
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle",
+      "ctrl-j": "workspace::ToggleBottomDock",
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-alt-b": "workspace::ToggleRightDock"
+    }
+  },
+  // Vim bindings
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    },
+    "unbind": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == insert || vim_mode == replace)",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+      // workaround for ctrl+w delay in vim mode
+      "ctrl-w": "editor::DeleteToPreviousWordStart"
+    },
+  },
+  {
+    "context": "(VimControl && !menu) && vim_mode == normal",
+    "bindings": {
+      "_": "tab_switcher::ToggleAll"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": "vim::PushAddSurrounds"
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "\\ w": "vim::HelixJumpToWord"
+    }
+  },
+  // Terminal bindings
+  {
+    "context": "Terminal && !vi_mode",
+    "bindings": {
+      "ctrl-\\ ctrl-e": "editor::ToggleFocus",
+      "ctrl-\\ ctrl-]": "terminal::ToggleViMode",
+      "ctrl-\\ ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-\\ ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-\\ ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-\\ ctrl-l": "workspace::ActivatePaneRight",
+      // workaround for ctrl+w delay in vim mode
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+    }
+  },
+  {
+    "context": "Terminal && vi_mode",
+    "bindings": {
+      "A": [ "action::Sequence", [ "terminal::ScrollToBottom", "terminal::ToggleViMode" ] ] ,
+      "q": [ "action::Sequence", [ "terminal::ScrollToBottom", "terminal::ToggleViMode" ] ] ,
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-e": "terminal::ScrollLineDown",
+      "ctrl-y": "terminal::ScrollLineUp"
+    }
+  },
+  // Tab bindings
+  {
+    "context": "TabSwitcher",
+    "bindings": {
+      "ctrl-enter": "tab_switcher::OpenInActivePane"
+    }
+  },
+  // Global bindings
+  {
+    "bindings": {
+      "shift-f4": "debugger::Start"
+    }
+  },
+  {
+    "unbind": {
+      "f4": "debugger::Start"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "f2": "project_panel::Rename"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "f2": "editor::Rename"
+    }
+  }
+]
