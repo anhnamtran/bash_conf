@@ -7,6 +7,19 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ssh_connections": [
+    {
+      "host": "andrewnt-droplet",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/andrew_nt"
+          ]
+        }
+      ]
+    }
+  ],
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 400.0,
   "semantic_tokens": "off",
@@ -31,6 +44,12 @@
   },
   "show_edit_predictions": false,
   "agent": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6-latest",
+      "enable_thinking": true,
+      "effort": "high"
+    },
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
     "single_file_review": true,
@@ -108,7 +127,7 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Catppuccin Frappé",
-    "dark": "Catppuccin Frappé"
+    "dark": "Catppuccin Macchiato"
   },
   "ui_font_size": 16,
   "buffer_font_size": 15,
