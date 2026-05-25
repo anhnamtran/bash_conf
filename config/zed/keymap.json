@@ -121,5 +121,12 @@
     "unbind": {
       "f2": "editor::Rename"
     }
-  }
+  },
+  {
+  "context": "(ProjectSearchBar > Editor) || (BufferSearchBar > Editor) || (Picker > Editor)",
+  "bindings": {
+    // workaround for ctrl+w delay in vim mode
+    "ctrl-w": "editor::DeleteToPreviousWordStart"
+  },
+},
 ]
