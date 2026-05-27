@@ -14,6 +14,9 @@
   "show_wrap_guides": true,
   "preferred_line_length": 80,
   "lsp_highlight_debounce": 500,
+  "global_lsp_settings": {
+    "request_timeout": 300,
+  },
   "inlay_hints": {
     "enabled": true,
     "edit_debounce_ms": 1500,
@@ -83,6 +86,28 @@
     },
     {
       "host": "andrew-nt-bazel-gdb",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "andrew-nt-view",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "andrew-nt-bazel-amake-auto-pkg",
       "args": [],
       "projects": [
         {
