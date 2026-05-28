@@ -20,6 +20,11 @@
       ]
     }
   ],
+  "languages": {
+    "Git Commit": {
+      "preferred_line_length": 85,
+      "soft_wrap": "prefer_line"
+  },
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 400.0,
   "semantic_tokens": "off",
@@ -27,12 +32,16 @@
   "show_wrap_guides": true,
   "preferred_line_length": 80,
   "lsp_highlight_debounce": 500,
+  "global_lsp_settings": {
+    "request_timeout": 300,
+  },
   "inlay_hints": {
     "enabled": true,
     "edit_debounce_ms": 1500,
     "scroll_debounce_ms": 500
   },
   "terminal": {
+    "shell": "system",
     "font_weight": 400.0,
     "font_size": 15.0,
     "font_family": "Iosevka Term",
@@ -71,6 +80,7 @@
   "on_last_window_closed": "quit_app",
   "when_closing_with_no_tabs": "close_window",
   "tabs": {
+    "git_status": true,
     "file_icons": true
   },
   "active_pane_modifiers": {
@@ -82,14 +92,17 @@
     "show_active_file": true
   },
   "project_panel": {
+    "git_status_indicator": true,
     "dock": "left"
   },
   "git_panel": {
+    "commit_title_max_length": 85,
     "tree_view": true
   },
   "format_on_save": "off",
   "proxy": "",
   "git": {
+    "gutter_debounce": 500,
     "inline_blame": {
       "enabled": false
     }
@@ -124,11 +137,7 @@
   },
   "vim_mode": true,
   "base_keymap": "VSCode",
-  "icon_theme": {
-    "mode": "dark",
-    "light": "Catppuccin Frappé",
-    "dark": "Catppuccin Macchiato"
-  },
+  "icon_theme": "Catppuccin Frappé",
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
