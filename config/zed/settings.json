@@ -7,23 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "ssh_connections": [
-    {
-      "host": "andrewnt-droplet",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/home/andrew_nt"
-          ]
-        }
-      ]
-    }
-  ],
   "languages": {
     "Git Commit": {
       "preferred_line_length": 85,
       "soft_wrap": "prefer_line"
+    }
   },
   "buffer_line_height": "comfortable",
   "buffer_font_weight": 400.0,
@@ -53,12 +41,6 @@
   },
   "show_edit_predictions": false,
   "agent": {
-    "default_model": {
-      "provider": "anthropic",
-      "model": "claude-sonnet-4-6-latest",
-      "enable_thinking": true,
-      "effort": "high"
-    },
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
     "single_file_review": true,
@@ -99,6 +81,62 @@
     "commit_title_max_length": 85,
     "tree_view": true
   },
+  "ssh_connections": [
+    {
+      "host": "andrew-nt-bazel-gazelle",
+      "username": "andrew_nt",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ],
+      "nickname": "bazel-gazelle"
+    },
+    {
+      "host": "andrew-nt-bazel-gdb",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ],
+      "nickname": "bazel-gdb"
+    },
+    {
+      "host": "andrew-nt-view",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/andrew_nt/bin/gitar"
+          ]
+        },
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ],
+      "nickname": "view"
+    },
+    {
+      "host": "andrew-nt-bazel-amake-auto-pkg",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ],
+      "nickname": "bazel-amake-auto-pkg"
+    }
+  ],
   "format_on_save": "off",
   "proxy": "",
   "git": {

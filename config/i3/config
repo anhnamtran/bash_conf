@@ -125,7 +125,9 @@ set $ws5 5
 set $ws6 6
 set $ws7 7
 set $ws8 8
-set $ws8 9
+set $ws9 9
+# Special dev only workspace
+set $ws_dev dev
 
 # Odd workspaces on first monitor
 workspace $ws1 output DP-3
@@ -140,6 +142,9 @@ workspace $ws4 output DP-1
 workspace $ws6 output DP-1
 workspace $ws8 output DP-1
 
+# Dev workspace always on primary monitor
+workspace $ws_dev output primary
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -149,7 +154,8 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+d workspace $ws_dev
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -160,6 +166,7 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
@@ -170,6 +177,8 @@ bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Ctrl+d move container to workspace $ws_dev; workspace $ws_dev
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -315,6 +324,9 @@ for_window [instance="^start\?action=start" title="^start\?action=start"] floati
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
+
+# Zed specific rules
+assign [class="dev.zed.Zed"] $ws_dev
 
 ################################################################################
 # Autostart applications
