@@ -9,8 +9,13 @@
 	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [alias]
 	compactdiff = diff --compact-summary
+	fixup = commit --fixup
+	last = log -1 HEAD
 	patch = commit -p
+	resolve = mergetool
 	sync = "!git fetch $1 $2:$2; #"
+  pop = stash pop
+  signoff = rebase --exec \"git commit --amend --no-edit -n -S\" -i
 [credential]
 	helper = store
 [core]
