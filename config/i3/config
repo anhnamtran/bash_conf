@@ -14,7 +14,7 @@ default_floating_border normal
 client.focused          #98c379 #282C34 #abb2bf #98c379   #98c379
 client.unfocused        #4b5263 #282C34 #4b5263 #4b5263   #4b5263
 
-font xft:Iosevka 0
+font xft:Iosevka 1
 
 floating_modifier $mod
 
