@@ -46,19 +46,6 @@
     "single_file_review": true,
     "model_parameters": []
   },
-  "agent_servers": {
-    "claude-acp": {
-      "favorite_config_option_values": {
-        "mode": [
-          "auto"
-        ]
-      },
-      "type": "registry",
-      "env": {
-        "ANTHROPIC_BASE_URL": "https://ai-proxy.infra.corp.arista.io/",
-      },
-    }
-  },
   "on_last_window_closed": "quit_app",
   "when_closing_with_no_tabs": "close_window",
   "tabs": {
@@ -81,62 +68,6 @@
     "commit_title_max_length": 85,
     "tree_view": true
   },
-  "ssh_connections": [
-    {
-      "host": "andrew-nt-bazel-gazelle",
-      "username": "andrew_nt",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/src"
-          ]
-        }
-      ],
-      "nickname": "bazel-gazelle"
-    },
-    {
-      "host": "andrew-nt-bazel-gdb",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/src"
-          ]
-        }
-      ],
-      "nickname": "bazel-gdb"
-    },
-    {
-      "host": "andrew-nt-view",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/home/andrew_nt/bin/gitar"
-          ]
-        },
-        {
-          "paths": [
-            "/src"
-          ]
-        }
-      ],
-      "nickname": "view"
-    },
-    {
-      "host": "andrew-nt-bazel-amake-auto-pkg",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/src"
-          ]
-        }
-      ],
-      "nickname": "bazel-amake-auto-pkg"
-    }
-  ],
   "format_on_save": "off",
   "proxy": "",
   "git": {
@@ -176,8 +107,8 @@
   "vim_mode": true,
   "base_keymap": "VSCode",
   "icon_theme": "Catppuccin Frappé",
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "ui_font_size": 14.0,
+  "buffer_font_size": 12.0,
   "theme": {
     "mode": "dark",
     "light": "One Dark",
