@@ -77,6 +77,10 @@
       "ctrl-\\ ctrl-l": "workspace::ActivatePaneRight",
       // workaround for ctrl+w delay in vim mode
       "ctrl-w": "editor::DeleteToPreviousWordStart",
+      "ctrl-h": ["terminal::SendKeystroke", "ctrl-h"],
+      "ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
+      "ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
+      "ctrl-l": ["terminal::SendKeystroke", "ctrl-l"],
     }
   },
   {
@@ -98,6 +102,16 @@
     "bindings": {
       "ctrl-enter": "tab_switcher::OpenInActivePane"
     }
+  },
+  // Agent binding
+  {
+    "context": "AgentPanel > Terminal",
+    "bindings": {
+      "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+    },
+    "unbind": {
+      "ctrl-t": "project_symbols::Toggle",
+    },
   },
   // Global bindings
   {
