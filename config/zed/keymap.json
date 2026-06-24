@@ -65,6 +65,12 @@
       "\\ w": "vim::HelixJumpToWord"
     }
   },
+  {
+    "context": "Picker > Editor",
+    "bindings": {
+      "ctrl-e": "menu::Cancel"
+    }
+  },
   // Terminal bindings
   {
     "context": "Terminal && !vi_mode",
@@ -77,6 +83,10 @@
       "ctrl-\\ ctrl-l": "workspace::ActivatePaneRight",
       // workaround for ctrl+w delay in vim mode
       "ctrl-w": "editor::DeleteToPreviousWordStart",
+      "ctrl-h": ["workspace::SendKeystrokes", "ctrl-h"],
+      "ctrl-j": ["workspace::SendKeystrokes", "ctrl-j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-k"],
+      "ctrl-l": ["workspace::SendKeystrokes", "ctrl-l"],
     }
   },
   {

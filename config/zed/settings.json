@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ensure_final_newline_on_save": false,
   "languages": {
     "Git Commit": {
       "preferred_line_length": 85,
@@ -47,8 +48,18 @@
     "model_parameters": []
   },
   "agent_servers": {
+    "LCodex": {
+      "type": "custom",
+      "command": "/home/andrew_nt/.local/bin/lcodex"
+    },
     "claude-acp": {
+      "default_config_options": {
+        "effort": "high"
+      },
       "favorite_config_option_values": {
+        "effort": [
+          "high"
+        ],
         "mode": [
           "auto"
         ]
@@ -92,7 +103,8 @@
             "/src"
           ]
         }
-      ]
+      ],
+      "nickname": "bazel-gazelle"
     },
     {
       "host": "andrew-nt-bazel-gdb",
@@ -103,7 +115,8 @@
             "/src"
           ]
         }
-      ]
+      ],
+      "nickname": "bazel-gdb"
     },
     {
       "host": "andrew-nt-view",
@@ -111,10 +124,16 @@
       "projects": [
         {
           "paths": [
+            "/home/andrew_nt/bin/gitar"
+          ]
+        },
+        {
+          "paths": [
             "/src"
           ]
         }
-      ]
+      ],
+      "nickname": "view"
     },
     {
       "host": "andrew-nt-bazel-amake-auto-pkg",
@@ -125,7 +144,37 @@
             "/src"
           ]
         }
-      ]
+      ],
+      "nickname": "bazel-amake-auto-pkg"
+    },
+    {
+      "host": "andrew-nt-bazel-runfiles",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        },
+        {
+          "paths": [
+            "/tmp"
+          ]
+        }
+      ],
+      "nickname": "bazel-runfiles"
+    },
+    {
+      "host": "andrew-nt-bazel-convert",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ],
+      "nickname": "bazel-convert"
     }
   ],
   "format_on_save": "off",
@@ -151,9 +200,10 @@
     "toggle_relative_line_numbers": true
   },
   "which_key": {
+    "delay_ms": 500,
     "enabled": true
   },
-  "autosave": "on_window_change",
+  "autosave": "on_focus_change",
   "ui_font_family": "Iosevka",
   "buffer_font_family": "Iosevka Term",
   "use_system_prompts": true,
