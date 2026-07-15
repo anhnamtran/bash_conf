@@ -12,6 +12,7 @@
     "bindings": {
       "\\ f": "file_finder::Toggle",
       "ctrl-w ctrl-enter": "terminal_panel::Toggle",
+      "ctrl-alt-shift-a": "agent::Toggle",
       "f2": "workspace::ToggleBottomDock",
       "f3": "workspace::ToggleLeftDock",
       "f4": "workspace::ToggleRightDock"
@@ -114,6 +115,7 @@
     "context": "AgentPanel > Terminal",
     "bindings": {
       "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+      "ctrl-w ctrl-enter": "terminal_panel::Toggle",
     },
     "unbind": {
       "ctrl-t": "project_symbols::Toggle",
