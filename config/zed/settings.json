@@ -175,6 +175,17 @@
         }
       ],
       "nickname": "bazel-convert"
+    },
+    {
+      "host": "andrew-nt-volga-rel",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ]
     }
   ],
   "format_on_save": "off",
