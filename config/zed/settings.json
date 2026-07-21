@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "scan_symlinks": "always",
+  "always_treat_brackets_as_autoclosed": true,
   "ensure_final_newline_on_save": false,
   "languages": {
     "Git Commit": {
@@ -189,7 +191,6 @@
     }
   ],
   "format_on_save": "off",
-  "proxy": "",
   "git": {
     "gutter_debounce": 500,
     "inline_blame": {
