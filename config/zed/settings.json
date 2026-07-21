@@ -44,6 +44,12 @@
   },
   "show_edit_predictions": false,
   "agent": {
+    "default_model": {
+      "provider": "Codex",
+      "model": "gpt-5.6-sol",
+      "enable_thinking": true,
+      "effort": "high"
+    },
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
     "single_file_review": true,
@@ -127,6 +133,11 @@
         {
           "paths": [
             "/home/andrew_nt/bin/gitar"
+          ]
+        },
+        {
+          "paths": [
+            "/home/andrew_nt/code/ardc-config"
           ]
         },
         {
