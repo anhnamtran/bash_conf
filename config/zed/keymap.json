@@ -150,5 +150,11 @@
     // workaround for ctrl+w delay in vim mode
     "ctrl-w": "editor::DeleteToPreviousWordStart"
   },
-},
+  },
+  {
+    "context": "Editor || Markdown",
+    "bindings": {
+      "shift-escape": "workspace::ToggleEditorZoom",
+    },
+  },
 ]
