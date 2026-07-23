@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "search": {
+    "include_ignored": false
+  },
+  "proxy": "",
   "scan_symlinks": "always",
   "always_treat_brackets_as_autoclosed": true,
   "ensure_final_newline_on_save": false,
@@ -49,17 +53,33 @@
       "provider": "Codex",
       "model": "gpt-5.6-sol",
       "enable_thinking": true,
-      "effort": "high"
+      "effort": "medium"
     },
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
     "single_file_review": true,
     "model_parameters": []
   },
+  "language_models": {
+    "anthropic": {
+      "api_url": "https://ai-proxy.infra.corp.arista.io",
+    },
+    "google": {
+      "api_url": "https://ai-proxy.infra.corp.arista.io",
+    },
+    "openai": {
+      "api_url": "https://ai-proxy.infra.corp.arista.io",
+    },
+  },
   "agent_servers": {
-    "LCodex": {
-      "type": "custom",
-      "command": "/home/andrew_nt/.local/bin/lcodex"
+    "codex-acp": {
+      "default_config_options": {
+        "mode": "agent-full-access"
+      },
+      "type": "registry",
+      "env": {
+        "PATH": "/home/andrew_nt/bin:/home/andrew_nt/.local/bin:$PATH",
+      },
     },
     "claude-acp": {
       "default_config_options": {
