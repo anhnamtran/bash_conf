@@ -44,6 +44,8 @@
   },
   "show_edit_predictions": false,
   "agent": {
+    "flexible": false,
+    },
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
     "single_file_review": true,
