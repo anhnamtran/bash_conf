@@ -7,6 +7,7 @@ set wordpattern [^\s\/]+
 set escapehatchsidebarhack false
 set followpagepatterns.next ^(next|newer)\b|»|>>|more|>
 set followpagepatterns.prev ^(prev(ious)?|older)\b|«|<<|<
+smoothscrollwizard
 
 " i to go to ignore mode
 " Ctrl+Enter to leave ignore mode
