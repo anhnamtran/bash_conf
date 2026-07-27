@@ -34,7 +34,7 @@
   "terminal": {
     "shell": "system",
     "font_weight": 400.0,
-    "font_size": 15.0,
+    "font_size": 12.0,
     "font_family": "Iosevka Term",
     "dock": "bottom"
   },
@@ -45,7 +45,6 @@
   "show_edit_predictions": false,
   "agent": {
     "flexible": false,
-    },
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
     "single_file_review": true,
