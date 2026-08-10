@@ -15,7 +15,7 @@
       "ctrl-alt-shift-a": "agent::Toggle",
       "f2": "workspace::ToggleBottomDock",
       "f3": "workspace::ToggleLeftDock",
-      "f4": "workspace::ToggleRightDock"
+      "f4": "workspace::ToggleRightDock",
     },
     "unbind": {
       "ctrl-`": "terminal_panel::Toggle",
@@ -31,13 +31,15 @@
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-w q": "pane::JoinIntoNext",
     },
     "unbind": {
       "ctrl-w h": "workspace::ActivatePaneLeft",
       "ctrl-w j": "workspace::ActivatePaneDown",
       "ctrl-w k": "workspace::ActivatePaneUp",
-      "ctrl-w l": "workspace::ActivatePaneRight"
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w q": "pane::CloseActiveItem",
     }
   },
   {
@@ -51,7 +53,7 @@
   {
     "context": "(VimControl && !menu) && vim_mode == normal",
     "bindings": {
-      "_": "tab_switcher::ToggleAll"
+      "_": "tab_switcher::OpenInActivePane"
     }
   },
   {
