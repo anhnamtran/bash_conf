@@ -121,7 +121,8 @@
     "context": "AgentPanel > Terminal",
     "bindings": {
       "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
-      "ctrl-w ctrl-enter": "terminal_panel::Toggle",
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+      "ctrl-alt-shift-t": "terminal_panel::Toggle",
     },
     "unbind": {
       "ctrl-t": "project_symbols::Toggle",
