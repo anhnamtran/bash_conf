@@ -84,7 +84,11 @@
       "ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
       "ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
       "ctrl-l": ["terminal::SendKeystroke", "ctrl-l"],
-    }
+      "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+    },
+    "unbind": {
+      "ctrl-t": "project_symbols::Toggle",
+    },
   },
   {
     "context": "Terminal && vi_mode",
