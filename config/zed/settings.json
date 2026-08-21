@@ -7,6 +7,15 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "claude-acp": {
+      "default_config_options": {
+        "effort": "medium",
+        "mode": "auto"
+      },
+      "type": "registry"
+    }
+  },
   "scan_symlinks": "always",
   "always_treat_brackets_as_autoclosed": true,
   "ensure_final_newline_on_save": false,
@@ -44,6 +53,12 @@
   },
   "show_edit_predictions": false,
   "agent": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-6",
+      "enable_thinking": true,
+      "effort": "medium"
+    },
     "flexible": false,
     "play_sound_when_agent_done": "always",
     "favorite_models": [],
