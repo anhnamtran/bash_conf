@@ -1,0 +1,4 @@
+[Icon Theme]
+Name="Brushbuddy-cursors"
+Comment="Brushbuddy animated cursors (falls back to Nordzy-cursors)"
+Inherits="Nordzy-cursors"
