@@ -1,23 +1,19 @@
 #!/bin/bash
-if [[ -n $(pgrep 'restic' | grep 'restic backup') ]]; then
-  echo 'restic is already running...' 1>&2
+if pgrep -f "restic backup" > /dev/null 2>&1; then
+  echo 'restic backup is already running...' 1>&2
   exit 0
 fi
-set -e
 
 export RESTIC_REPOSITORY="$(head -n+1 $HOME/.secrets/restic)"
 export RESTIC_PASSWORD="$(tail -n1 $HOME/.secrets/restic)"
 export RESTIC_COMPRESSION="auto"
 export RESTIC_CACHE_DIR="$HOME/.cache/restic"
 export RESTIC_EXCLUDE_FILE="$HOME/.config/restic/exclude.txt"
-
-if [[ $- == *i* ]]; then
-  echo "Running in interactive mode."
-  export RESTIC_MANUAL_RUN=manual
-  export RESTIC_VERBOSE="--verbose"
-fi
+export RESTIC_PACK_SIZE=128
+export RESTIC_NO_SCAN="--no-scan"
 
 MOUNT_TIMEOUT=300
+MOUNT_WAIT_ELAPSED=0
 if ! [[ -d "$RESTIC_REPOSITORY" ]]; then
   echo -n "Waiting $MOUNT_TIMEOUT second(s) for $RESTIC_REPOSITORY to exist"
   while ! [[ -d "$RESTIC_REPOSITORY" ]]; do
@@ -34,7 +30,63 @@ fi
 
 mkdir -p "${RESTIC_CACHE_DIR}"
 
-sudo -E restic unlock
-sudo -E restic backup / --exclude-file="$RESTIC_EXCLUDE_FILE" --tag "${RESTIC_MANUAL_RUN:-scheduled}" "$RESTIC_VERBOSE"
-sudo -E restic check --with-cache --read-data-subset=5G
-sudo -E restic forget --prune --keep-hourly 24 --keep-daily 30 --keep-monthly 1 --keep-weekly 1 --keep-yearly 1
+restic_run() {
+  sudo -E restic "$@"
+}
+
+restic_unlock() {
+  restic_run unlock "$@"
+}
+
+restic_backup() {
+  restic_run backup / \
+    --one-file-system \
+    --exclude-caches \
+    --exclude-file="$RESTIC_EXCLUDE_FILE" \
+    --tag "${RESTIC_MANUAL_RUN:-scheduled}" \
+    --skip-if-unchanged \
+    $RESTIC_NO_SCAN \
+    $RESTIC_VERBOSE \
+    "$@"
+}
+
+restic_check() {
+  restic_run check --with-cache --read-data-subset=5G "$@"
+}
+
+restic_forget() {
+  restic_run forget \
+    --prune \
+    --repack-smaller-than 128 \
+    --keep-hourly 24 \
+    --keep-daily 14 \
+    --keep-weekly 4 \
+    --keep-monthly 1 \
+    --keep-yearly 1 "$@"
+}
+
+restic_all() {
+  restic_unlock "$@"
+  restic_backup "$@"
+  restic_check "$@"
+  restic_forget "$@"
+}
+
+OPTIONS="backup|forget|all|run"
+CMD="$1"
+shift 1
+
+if [[ $CMD =~ $OPTIONS ]]; then
+  if [[ -t 0 ]]; then
+    echo "Running in interactive mode."
+    export RESTIC_MANUAL_RUN=manual
+    export RESTIC_VERBOSE="--verbose"
+    unset RESTIC_NO_SCAN
+    set -x
+  fi
+  set -e
+  restic_"$CMD" "$@"
+else
+  echo "Usage: restic-backup $OPTIONS [ARGS...]"
+  exit 1
+fi

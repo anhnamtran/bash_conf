@@ -1,41 +1,81 @@
-AndrewTran
-AndrewTran2T
-Steam
-/data/**
-/dev/**
-/home/*/code/**
+# ── Python ───────────────────────────────────────────
+**/*.pyc
+**/__pycache__/**
+**/.pyenv
+**/.uv
+**/.venv
+
+# ── JavaScript / Node ────────────────────────────────
+**/.bun
+**/.npm
+**/.yarn
+**/node_modules/**
+
+# ── Rust ─────────────────────────────────────────────
+**/.rustup
+/home/*/.cargo/**
+/home/*/.rustup/**
+
+# ── General caches ───────────────────────────────────
+**/.cache
+/var/cache/**
+
+# ── Named external drives (wherever they're mounted) ─
+**/AndrewTran/**
+**/AndrewTran2T/**
+
+# ── Large reconstructable app data ───────────────────
+**/Steam
+**/Trash
+/home/*/.local/lib/python*/site-packages/**
+/home/*/.mozilla/firefox/*/Cache/**
+/home/*/.thunderbird/**
 /home/*/docs/virtualbox/**
+
+# ── Media (not worth backing up to a 2TB drive) ──────
 /home/*/media/**
 /home/*/videos/anime/**
 /home/*/videos/misc/**
 /home/*/videos/movies/**
-/home/*/videos/shows/**
 /home/*/videos/porn/**
-/home/*/**/*.pyc
-/home/*/**/__pycache__/**
-/home/*/**/node_modules/**
-/home/*/.cache/**
-/home/*/.local/lib/python*/site-packages/**
-/home/*/.mozilla/firefox/*/Cache/**
-/home/*/.rustup/**
-/home/*/.cargo/**
-/home/*/.npm/**
-/home/*/.thunderbird/**
-/home/.secrets/**
+/home/*/videos/shows/**
+
+# ── Source code (cloned repos — confirm all pushed) ──
+/home/*/code/**
+
+# ── Virtual filesystems — never back up ──────────────
+/dev/**
+/proc/**
+/run/**
+/sys/**
+/tmp/**
+/var/run/**
+/var/lock/**
 /lost+found/**
 /media/**
 /mnt/**
-/proc/**
-/root/**
-/run/**
-/srv/**
-/swapfile
-/sys/**
-/tmp/**
-/var/cache/**
-/var/cache/pacman/pkg/**
+
+# ── System state — large & reconstructable ───────────
 /var/lib/docker/**
+/var/lib/flatpak/**
 /var/lib/libvirt/**
-/var/lock/**
 /var/log/**
-/var/run/**
+/swapfile
+
+# ── Directories excluded by design ───────────────────
+/data/**
+/opt/**
+/root/**
+/srv/**
+
+# ── Snap packages (reconstructable) ───────────────────────────
+/snap/**
+/var/lib/snapd/**
+
+# ── Recently used / runtime junk ──────────────────────────────
+/home/*/.local/share/recently-used.xbel
+/home/*/.local/share/gvfs-metadata/**
+
+# ── Crash dumps ───────────────────────────────────────────────
+/var/lib/systemd/coredump/**
+/home/*/.local/share/core/**
