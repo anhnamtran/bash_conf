@@ -1,6 +1,6 @@
 #!/bin/bash
-if pgrep -f "restic backup" > /dev/null 2>&1; then
-  echo 'restic backup is already running...' 1>&2
+if pgrep -f "restic_run" > /dev/null 2>&1; then
+  echo 'restic is already running...' >&2
   exit 0
 fi
 
@@ -10,7 +10,11 @@ export RESTIC_COMPRESSION="auto"
 export RESTIC_CACHE_DIR="$HOME/.cache/restic"
 export RESTIC_EXCLUDE_FILE="$HOME/.config/restic/exclude.txt"
 export RESTIC_PACK_SIZE=128
+export RESTIC_READ_CONCURRENCY=1
 export RESTIC_NO_SCAN="--no-scan"
+
+export RESTIC_CHECK_STATE="${RESTIC_CACHE_DIR}/check_subset"
+export RESTIC_CHECK_SUBSETS="16"
 
 MOUNT_TIMEOUT=300
 MOUNT_WAIT_ELAPSED=0
@@ -30,15 +34,36 @@ fi
 
 mkdir -p "${RESTIC_CACHE_DIR}"
 
+# Print a section header in interactive mode only.
+# Usage: banner "label"
+banner() {
+  [[ -z "$RESTIC_MANUAL_RUN" ]] && return
+  local label=" $* "
+  local width
+  width=$(tput cols 2>/dev/null || echo 72)
+  local label_len=${#label}
+  local total_dashes=$(( width - label_len ))
+  local left_dashes=$(( total_dashes / 2 ))
+  local right_dashes=$(( total_dashes - left_dashes ))
+  printf '%s%s%s\n' \
+    "$(printf '─%.0s' $(seq 1 $left_dashes))" \
+    "$label" \
+    "$(printf '─%.0s' $(seq 1 $right_dashes))"
+  echo "  $(date '+%Y-%m-%d %H:%M:%S')"
+}
+
 restic_run() {
+  [[ -n "$RESTIC_MANUAL_RUN" ]] && set -x
   sudo -E restic "$@"
 }
 
 restic_unlock() {
-  restic_run unlock "$@"
+  banner "restic unlock"
+  restic_run unlock $RESTIC_VERBOSE "$@"
 }
 
 restic_backup() {
+  banner "restic backup"
   restic_run backup / \
     --one-file-system \
     --exclude-caches \
@@ -51,28 +76,106 @@ restic_backup() {
 }
 
 restic_check() {
-  restic_run check --with-cache --read-data-subset=5G "$@"
+  local current
+  local exit_code
+  local next
+
+  current=$(cat "$RESTIC_CHECK_STATE" 2>/dev/null || echo 1)
+  (( current < 1 || current > RESTIC_CHECK_SUBSETS )) && current=1
+
+  banner "restic check (subset ${current}/${RESTIC_CHECK_SUBSETS})"
+
+  restic_run check --with-cache \
+    --read-data-subset="${current}/${RESTIC_CHECK_SUBSETS}" \
+    $RESTIC_VERBOSE \
+    "$@"
+  exit_code=$?
+
+  next=$(( current % RESTIC_CHECK_SUBSETS + 1 ))
+  echo "$next" > "$RESTIC_CHECK_STATE"
+
+  return $exit_code
 }
 
 restic_forget() {
+  banner "restic forget + prune"
   restic_run forget \
     --prune \
     --repack-smaller-than 128 \
-    --keep-hourly 24 \
+    --keep-hourly 48 \
     --keep-daily 14 \
-    --keep-weekly 4 \
+    --keep-weekly 8 \
     --keep-monthly 1 \
-    --keep-yearly 1 "$@"
+    --keep-yearly 1 \
+    $RESTIC_VERBOSE \
+    "$@"
+}
+
+restic_repair() {
+  banner "restic repair"
+  local check_json
+  local broken_packs
+  local msg
+  # In interactive mode, let check's stderr flow to the terminal so progress
+  # is visible. In cron, suppress it so only the captured JSON matters.
+  local stderr_dest
+  stderr_dest=$( [[ -n "$RESTIC_MANUAL_RUN" ]] && echo "/dev/stderr" || echo "/dev/null" )
+
+  # Step 1: full data check to identify all broken pack IDs.
+  # --json routes the summary to stdout for parsing; restic's own progress
+  # and error lines go to stderr and are left unredirected so they reach
+  # the terminal (interactive) or cron log (scheduled) naturally.
+  # $RESTIC_VERBOSE is intentionally omitted: with --json, --verbose emits
+  # extra JSON progress objects on stdout that pollute the jq parse.
+  echo "Running full data verification, this will take a while..." >&2
+  check_json=$(restic_run check --read-data --json)
+  broken_packs=$(printf '%s' "$check_json" | jq -r '.broken_packs // [] | .[]')
+
+  if [[ -z "$broken_packs" ]]; then
+    # Structural error only (no corrupt data) — repair the index and continue
+    echo "No broken packs found; repairing index..." >&2
+    restic_run repair index $RESTIC_VERBOSE
+    return 0
+  fi
+
+  # Step 2: repair the broken packs — safe, no snapshot data modified
+  echo "Repairing broken packs:" >&2
+  echo "$broken_packs" | sed 's/^/  /' >&2
+  # shellcheck disable=SC2086
+  restic_run repair packs $broken_packs $RESTIC_VERBOSE
+
+  # Step 3: full verification to confirm repair succeeded
+  echo "Verifying repair..." >&2
+  if restic_run check --read-data $RESTIC_VERBOSE 2>"$stderr_dest"; then
+    echo "Repository repaired successfully. Prune will now run." >&2
+    return 0
+  fi
+
+  # Step 4: blobs are genuinely missing — requires human decision
+  # DO NOT run repair snapshots --forget automatically: it causes data loss.
+  msg="RESTIC: Repository still damaged after repair packs."$'\n'
+  msg+="Affected packs:"$'\n'
+  msg+="$(echo "$broken_packs" | sed 's/^/  /')"$'\n'
+  msg+="Manual action required: restic repair snapshots --forget (causes data loss)."$'\n'
+  msg+="Prune has been skipped."
+  echo "$msg" >&2
+  return 1
 }
 
 restic_all() {
   restic_unlock "$@"
+
   restic_backup "$@"
-  restic_check "$@"
+
+  # restic_check prints its own banner (includes current subset number)
+  if ! restic_check "$@"; then
+    restic_repair || return 1
+  fi
+
   restic_forget "$@"
 }
 
-OPTIONS="backup|forget|all|run"
+OPTIONS="backup|forget|all|run|check|repair"
 CMD="$1"
 shift 1
 
@@ -80,9 +183,8 @@ if [[ $CMD =~ $OPTIONS ]]; then
   if [[ -t 0 ]]; then
     echo "Running in interactive mode."
     export RESTIC_MANUAL_RUN=manual
-    export RESTIC_VERBOSE="--verbose"
+    export RESTIC_VERBOSE="--verbose=2"
     unset RESTIC_NO_SCAN
-    set -x
   fi
   set -e
   restic_"$CMD" "$@"
