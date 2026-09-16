@@ -392,6 +392,7 @@ bus_forward() {
       -o "ControlMaster=no" \
       -o "SendEnv=SYMLINK_AUTH_SOCK" \
       -o "ExitOnForwardFailure=yes" \
+      -o "ClearAllForwardings=no" \
       ${TUNNELS[@]} \
       -A \
       "$BUS"
