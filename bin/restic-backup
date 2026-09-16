@@ -103,7 +103,7 @@ restic_forget() {
   banner "restic forget + prune"
   restic_run forget \
     --prune \
-    --repack-smaller-than 128 \
+    --repack-smaller-than 128M \
     --keep-hourly 48 \
     --keep-daily 14 \
     --keep-weekly 8 \
@@ -121,10 +121,6 @@ restic_repair() {
   # In interactive mode, let check's stderr flow to the terminal so progress
   # is visible. In cron, suppress it so only the captured JSON matters.
   local stderr_dest
-  # local.connections=3: sweet spot for HDD (default=2, ~20% faster) [issue #4537]
-  # --no-cache: no benefit for data pack reads on a local backend
-  local check_opts
-  check_opts="--no-cache -o local.connections=3"
 
   stderr_dest=$( [[ -n "$RESTIC_MANUAL_RUN" ]] && echo "/dev/stderr" || echo "/dev/null" )
 
@@ -135,7 +131,7 @@ restic_repair() {
   # $RESTIC_VERBOSE is intentionally omitted: with --json, --verbose emits
   # extra JSON progress objects on stdout that pollute the jq parse.
   echo "Running full data verification, this will take a while..." >&2
-  check_json=$(restic_run check --read-data --json $check_opts)
+  check_json=$(restic_run check --read-data --json)
   broken_packs=$(printf '%s' "$check_json" | jq -r '.broken_packs // [] | .[]')
 
   if [[ -z "$broken_packs" ]]; then
@@ -153,7 +149,7 @@ restic_repair() {
 
   # Step 3: full verification to confirm repair succeeded
   echo "Verifying repair..." >&2
-  if restic_run check --read-data $check_opts $RESTIC_VERBOSE 2>"$stderr_dest"; then
+  if restic_run check --read-data $RESTIC_VERBOSE 2>"$stderr_dest"; then
     echo "Repository repaired successfully. Prune will now run." >&2
     return 0
   fi
