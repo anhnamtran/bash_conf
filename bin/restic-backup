@@ -1,6 +1,8 @@
 #!/bin/bash
-if pgrep -f "restic_run" > /dev/null 2>&1; then
-  echo 'restic is already running...' >&2
+RESTIC_LOCKFILE="/tmp/restic-backup.lock"
+exec 9>"$RESTIC_LOCKFILE"
+if ! flock -n 9; then
+  echo "restic is already running (lock held: $RESTIC_LOCKFILE)" >&2
   exit 0
 fi
 
@@ -119,6 +121,11 @@ restic_repair() {
   # In interactive mode, let check's stderr flow to the terminal so progress
   # is visible. In cron, suppress it so only the captured JSON matters.
   local stderr_dest
+  # local.connections=3: sweet spot for HDD (default=2, ~20% faster) [issue #4537]
+  # --no-cache: no benefit for data pack reads on a local backend
+  local check_opts
+  check_opts="--no-cache -o local.connections=3"
+
   stderr_dest=$( [[ -n "$RESTIC_MANUAL_RUN" ]] && echo "/dev/stderr" || echo "/dev/null" )
 
   # Step 1: full data check to identify all broken pack IDs.
@@ -128,7 +135,7 @@ restic_repair() {
   # $RESTIC_VERBOSE is intentionally omitted: with --json, --verbose emits
   # extra JSON progress objects on stdout that pollute the jq parse.
   echo "Running full data verification, this will take a while..." >&2
-  check_json=$(restic_run check --read-data --json)
+  check_json=$(restic_run check --read-data --json $check_opts)
   broken_packs=$(printf '%s' "$check_json" | jq -r '.broken_packs // [] | .[]')
 
   if [[ -z "$broken_packs" ]]; then
@@ -146,7 +153,7 @@ restic_repair() {
 
   # Step 3: full verification to confirm repair succeeded
   echo "Verifying repair..." >&2
-  if restic_run check --read-data $RESTIC_VERBOSE 2>"$stderr_dest"; then
+  if restic_run check --read-data $check_opts $RESTIC_VERBOSE 2>"$stderr_dest"; then
     echo "Repository repaired successfully. Prune will now run." >&2
     return 0
   fi
@@ -167,10 +174,11 @@ restic_all() {
 
   restic_backup "$@"
 
-  # restic_check prints its own banner (includes current subset number)
-  if ! restic_check "$@"; then
-    restic_repair || return 1
-  fi
+  # Run check; on failure log a warning but always continue to prune.
+  # Repair is a manual step: restic-backup repair
+  restic_check "$@" || \
+    echo "RESTIC WARNING: check failed — repository may need repair." \
+         "Run: restic-backup repair" >&2
 
   restic_forget "$@"
 }
@@ -186,7 +194,7 @@ if [[ $CMD =~ $OPTIONS ]]; then
     export RESTIC_VERBOSE="--verbose=2"
     unset RESTIC_NO_SCAN
   fi
-  set -e
+  set -eo pipefail
   restic_"$CMD" "$@"
 else
   echo "Usage: restic-backup $OPTIONS [ARGS...]"
