@@ -12,7 +12,7 @@ export RESTIC_COMPRESSION="auto"
 export RESTIC_CACHE_DIR="$HOME/.cache/restic"
 export RESTIC_EXCLUDE_FILE="$HOME/.config/restic/exclude.txt"
 export RESTIC_PACK_SIZE=128
-export RESTIC_READ_CONCURRENCY=1
+export RESTIC_READ_CONCURRENCY=2
 export RESTIC_NO_SCAN="--no-scan"
 
 export RESTIC_CHECK_STATE="${RESTIC_CACHE_DIR}/check_subset"
@@ -87,7 +87,10 @@ restic_check() {
 
   banner "restic check (subset ${current}/${RESTIC_CHECK_SUBSETS})"
 
-  restic_run check --with-cache \
+  # sequential reads — no seek thrash on USB HDD
+  restic_run check \
+    --with-cache \
+    -o local.connections=4 \
     --read-data-subset="${current}/${RESTIC_CHECK_SUBSETS}" \
     $RESTIC_VERBOSE \
     "$@"
@@ -104,6 +107,7 @@ restic_forget() {
   restic_run forget \
     --prune \
     --repack-smaller-than 128M \
+    -o local.connections=4 \
     --keep-hourly 48 \
     --keep-daily 14 \
     --keep-weekly 8 \
@@ -118,11 +122,6 @@ restic_repair() {
   local check_json
   local broken_packs
   local msg
-  # In interactive mode, let check's stderr flow to the terminal so progress
-  # is visible. In cron, suppress it so only the captured JSON matters.
-  local stderr_dest
-
-  stderr_dest=$( [[ -n "$RESTIC_MANUAL_RUN" ]] && echo "/dev/stderr" || echo "/dev/null" )
 
   # Step 1: full data check to identify all broken pack IDs.
   # --json routes the summary to stdout for parsing; restic's own progress
@@ -131,7 +130,7 @@ restic_repair() {
   # $RESTIC_VERBOSE is intentionally omitted: with --json, --verbose emits
   # extra JSON progress objects on stdout that pollute the jq parse.
   echo "Running full data verification, this will take a while..." >&2
-  check_json=$(restic_run check --read-data --json)
+  check_json=$(restic_run check --with-cache --read-data --json -o local.connections=4)
   broken_packs=$(printf '%s' "$check_json" | jq -r '.broken_packs // [] | .[]')
 
   if [[ -z "$broken_packs" ]]; then
@@ -149,7 +148,7 @@ restic_repair() {
 
   # Step 3: full verification to confirm repair succeeded
   echo "Verifying repair..." >&2
-  if restic_run check --read-data $RESTIC_VERBOSE 2>"$stderr_dest"; then
+  if restic_run check --with-cache --read-data -o local.connections=4 $RESTIC_VERBOSE 2>"$stderr_dest"; then
     echo "Repository repaired successfully. Prune will now run." >&2
     return 0
   fi
