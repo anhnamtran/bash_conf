@@ -57,6 +57,7 @@ banner() {
 restic_run() {
   [[ -n "$RESTIC_MANUAL_RUN" ]] && set -x
   sudo -E restic "$@"
+  set +x
 }
 
 restic_unlock() {
