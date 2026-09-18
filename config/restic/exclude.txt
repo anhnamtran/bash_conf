@@ -4,21 +4,50 @@
 **/.pyenv
 **/.uv
 **/.venv
+/home/*/.local/share/uv/**
+/home/*/.local/share/virtualenvs/**
 
 # ── JavaScript / Node ────────────────────────────────
 **/.bun
 **/.npm
 **/.yarn
 **/node_modules/**
+/home/*/.local/share/pnpm/**
+/home/*/.npm-global/**
+/home/*/.pkg-cache/**
 
 # ── Rust ─────────────────────────────────────────────
 **/.rustup
 /home/*/.cargo/**
 /home/*/.rustup/**
 
+# ── .NET ──────────────────────────────────────────────
+/home/*/.local/share/NuGet/**
+/home/*/.nuget/**
+
+# ── JVM (Gradle) ──────────────────────────────────────
+/home/*/.gradle/**
+
+# ── Go ────────────────────────────────────────────────
+/home/*/go/pkg/mod/**
+
+# ── Dart / Flutter ────────────────────────────────────
+/home/*/.pub-cache/**
+
+# ── Editor / dev-tool caches ─────────────────────────
+/home/*/.local/share/nvim/lazy/**
+/home/*/.local/share/nvimbak/**
+/home/*/.local/share/zed/external_agents/**
+/home/*/.local/share/zed/extensions/**
+/home/*/.local/share/zed/languages/**
+/home/*/.local/share/zed/node/**
+/home/*/.local/share/zed/prettier/**
+
 # ── General caches ───────────────────────────────────
-**/.cache
+**/.cache/**
+**/Cache/**
 /var/cache/**
+/home/*/.nv/**
 
 # ── Named external drives (wherever they're mounted) ─
 **/AndrewTran/**
@@ -28,8 +57,17 @@
 **/Steam
 **/Trash
 /home/*/.local/lib/python*/site-packages/**
-/home/*/.mozilla/firefox/*/Cache/**
+/home/*/.local/opt/tor-browser/**
+/home/*/.local/share/Android/**
+/home/*/.local/share/BitwigStudio/Installed Bitwig Packs/**
+/home/*/.local/share/darktable/models/**
+/home/*/.local/share/foundryvtt/**
+/home/*/.local/share/FoundryVTT/Backups/**
+/home/*/.phoronix-test-suite/download-cache/**
+/home/*/.phoronix-test-suite/installed-tests/**
+/home/*/.steam/**
 /home/*/.thunderbird/**
+/home/*/.wine/drive_c/windows/**
 /home/*/docs/virtualbox/**
 
 # ── Media (not worth backing up to a 2TB drive) ──────
@@ -51,6 +89,7 @@
 /tmp/**
 /var/run/**
 /var/lock/**
+/var/tmp/**
 /lost+found/**
 /media/**
 /mnt/**
@@ -59,6 +98,8 @@
 /var/lib/docker/**
 /var/lib/flatpak/**
 /var/lib/libvirt/**
+/var/lib/monero/**
+/var/lib/pacman/sync/**
 /var/log/**
 /swapfile
 
