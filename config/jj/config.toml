@@ -1,11 +1,6 @@
 [user]
 name = "Andrew Tran"
-email = "andrew_nt@arista.com"
-
-[signing]
-behavior = "drop"
-backend = "gpg"
-key = "0AEE9545AE0298E3E4980216A3227B8ECEB2AEC3"
+email = "andremail03@gmail.com"
 
 [ui]
 pager = "bat"
