@@ -1,0 +1,30 @@
+[user]
+name = "Andrew Tran"
+email = "andrew_nt@arista.com"
+
+[signing]
+behavior = "drop"
+backend = "gpg"
+key = "0AEE9545AE0298E3E4980216A3227B8ECEB2AEC3"
+
+[ui]
+pager = "bat"
+editor = "nvim"
+diff-editor = ":builtin"
+show-cryptographic-signatures = true
+
+[snapshot]
+auto-update-stale = true
+
+[templates]
+commit_trailers = '''
+format_signed_off_by_trailer(self)
+++ if(!trailers.contains_key("Change-Id"), format_gerrit_change_id_trailer(self))'''
+
+[template-aliases]
+'format_short_cryptographic_signature(sig)' = '''
+  if(sig,
+    sig.key() ++ " (" ++ sig.status() ++ ")",
+    "(no sig)",
+  )
+'''
