@@ -3,8 +3,9 @@ set -gx fish_greeting
 
 set -gx me (whoami)
 set -gx EDITOR nvim
-set -gx VISUAL $EDITOR
+set -gx VISUAL nvim
 set -gx DIFFPROG "$EDITOR -d"
+set -gx PAGER "bat"
 
 set -gx GIT_DISCOVERY_ACROSS_FILESYSTEM 1
 
@@ -20,5 +21,6 @@ set -gx PYTHONWARNINGS "ignore"
 
 # Lower fish escape delay
 set -gx fish_escape_delay_ms 10
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANROFFOPT "-c"
 
-set -gx MANPAGER "sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
