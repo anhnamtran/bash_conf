@@ -2,6 +2,7 @@
 SUB_CMD_HELP="""
   shell: ssh into the home bus. Can be interactive and not.
   mosh: mosh into the home bus. Interactive only
+  codex: pulls bus codex configs and start a local instance
   create: create a new home bus
   delete: delete an existing home bus
   status: view the status of the home bus
@@ -18,7 +19,7 @@ SUB_CMD_HELP="""
 # Argument parsing generated using argbash
 #
 # ARG_POSITIONAL_SINGLE([command],[one of the valid commands])
-# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,create,delete,status,update,run,jobs,push,pull,reboot,sshd,forward,api])
+# ARG_TYPE_GROUP_SET([command],[COMMAND],[command],[shell,mosh,codex,create,delete,status,update,run,jobs,push,pull,reboot,sshd,forward,api])
 # ARG_DEFAULTS_POS([])
 # ARG_POSITIONAL_DOUBLEDASH([])
 # ARG_LEFTOVERS([any subcommand for either b5 or shell, ignored otherwise])
@@ -42,12 +43,12 @@ die()
 
 command()
 {
-	local _allowed=("shell" "mosh" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot" "sshd" "forward" "api") _seeking="$1"
+	local _allowed=("shell" "mosh" "codex" "create" "delete" "status" "update" "run" "jobs" "push" "pull" "reboot" "sshd" "forward" "api") _seeking="$1"
 	for element in "${_allowed[@]}"
 	do
 		test "$element" = "$_seeking" && echo "$element" && return 0
 	done
-	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd', 'forward' and 'api'" 4
+	die "Value '$_seeking' (of argument '$2') doesn't match the list of allowed values: 'shell', 'mosh', 'codex', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd', 'forward' and 'api'" 4
 }
 
 
@@ -69,7 +70,7 @@ print_help()
 {
 	printf '%s\n' "Interact with home buses more easily"
 	printf 'Usage: %s [-h|--help] [--] <command> ... \n' "$0"
-	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd', 'forward' and 'api'"
+	printf '\t%s\n' "<command>: one of the valid commands. Can be one of: 'shell', 'mosh', 'codex', 'create', 'delete', 'status', 'update', 'run', 'jobs', 'push', 'pull', 'reboot', 'sshd', 'forward' and 'api'"
 	printf '\t%s\n' "... : any subcommand for either b5 or shell, ignored otherwise"
 	printf '\t%s\n' "-h, --help: Prints help"
 	printf '\n%s\n' "$SUB_CMD_HELP"
@@ -325,8 +326,59 @@ bus_pull() {
   local src dst
   src="$1"
   dst="$2"
+  shift 2
   _bus_state "Ready|Updating"
-  rsync -azP "$BUS:$src" "$dst"
+  rsync -azP "$@" "$BUS:$src" "$dst"
+}
+
+bus_codex() {
+  local local_codex_home real_codex status path
+  local -a portable_files portable_directories pull_options
+
+  local_codex_home="$HOME/.codex"
+  real_codex="$HOME/.local/bin/lcodex"
+  portable_files=(
+    AGENTS.md
+    config.toml
+    hooks.json
+    notify-hook.sh
+    spinner-verbs.md
+  )
+  portable_directories=(
+    agents
+    bin
+    prompts
+    rules
+    skills
+    tests
+  )
+
+  status=""
+  if ! status="$(bus_status 2>&1)"; then
+    echo "bus codex: homebus status check failed; using local files" >&2
+  elif [[ "$status" != "Ready" && "$status" != "Updating" ]]; then
+    echo "bus codex: homebus is ${status:-unknown}; using local files" >&2
+  else
+    pull_options=()
+    for path in "${portable_files[@]}"; do
+      pull_options+=("--include=/$path")
+    done
+    for path in "${portable_directories[@]}"; do
+      pull_options+=("--include=/$path/***")
+    done
+    pull_options+=("--exclude=*")
+
+    if ! bus_pull ".codex/" "$local_codex_home/" "${pull_options[@]}"; then
+      echo "bus codex: failed to pull portable Codex files; continuing with local files" >&2
+    fi
+  fi
+
+  if [[ ! -x "$real_codex" ]]; then
+    echo "bus codex: executable not found at $real_codex" >&2
+    return 127
+  fi
+
+  exec "$real_codex" "$@"
 }
 
 bus_reboot() {
