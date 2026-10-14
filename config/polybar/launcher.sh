@@ -5,7 +5,9 @@ set -x
 
 flock 200
 
-killall -s 9 -w -e polybar
+# SIGTERM lets polybar stop its tail=true script modules; SIGKILL orphans them.
+# Fall back to SIGKILL only if polybar hangs on shutdown.
+timeout 5 killall -q -w -e polybar || killall -q -s 9 -w -e polybar
 
 PRIMARY_MONITOR=$(xrandr --query | grep " connected" | grep " primary" | cut -d " " -f 1)
 if type "xrandr"; then
