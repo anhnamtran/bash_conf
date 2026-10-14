@@ -8,4 +8,4 @@ Type=simple
 ExecStart=%h/bin/reload_sounds
 
 [Install]
-WantedBy=resume@%u.service
+WantedBy=resume@%u.target
