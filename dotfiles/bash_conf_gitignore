@@ -129,6 +129,7 @@
 .zoom/
 **.sav
 **.vdf
+**/*_history
 **/mpv/watch_later/
 *.AppImage
 *.JPEG
@@ -175,14 +176,17 @@ code/
 config/1Password/
 config/BraveSoftware/
 config/Code\ Industry/
+config/Deezer/
 config/Electron/
 config/Foundry\ Virtual\ Tabletop/
 config/GIMP/
+config/Google/
 config/Meltytech/
 config/QtProject.conf
 config/QtProject/
 config/Signal/
 config/Todoist/
+config/Upscayl/
 config/VirtualBox/
 config/Yubico/
 config/appimagelauncher.cfg
@@ -191,10 +195,15 @@ config/betterlockscreenrc
 config/birdtray-config.json
 config/cef_user_data/
 config/chromium/
+config/claude/
 config/coc/
 config/configstore/
+config/darktable/
 config/dconf/
+config/deezer-desktop/
 config/discord/
+config/easyeffects/db/
+config/easyeffectsrc
 config/ente/
 config/flutter
 config/fontforge/
@@ -202,6 +211,9 @@ config/gthumb/
 config/hakuneko-desktop/
 config/homebank/
 config/ibus/
+config/jellium-desktop/
+config/jj/repos/
+config/jj/workspaces/
 config/kactivitymanagerdrc
 config/kde.org/
 config/kdeconnect/
@@ -212,7 +224,9 @@ config/lsp-plugins/
 config/manuskript/
 config/mgba/
 config/microsoft-edge-dev/
+config/modorganizer2/
 config/monero-project/
+config/mozilla/firefox/
 config/nautilus/
 config/nemo/
 config/nordvpn/
@@ -226,20 +240,24 @@ config/pavucontrol.ini
 config/pulse/
 config/qBittorrent/
 config/rclone/
+config/sandustry/
 config/simple-scan/
 config/spotify/
+config/systemd/user/openclaw-gateway.service
 config/tabletdblocalrc
 config/termshark/
 config/ticktick
 config/todoist/
 config/unity3d/
 config/vlc/
+config/xfce4/
 docs/
 downloads/
 emulator/
 external/
 go/
 music/
+node_modules/
 obsidian/
 opt/
 pics/
