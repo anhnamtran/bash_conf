@@ -1,1 +1,1 @@
-export QT_QPA_PLATFORMTHEME=qt5ct
+# QT_QPA_PLATFORMTHEME is set to qt5ct:qt6ct in /etc/environment
