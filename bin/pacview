@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+# This uses fzf to present a two-pane view listing all packages with package info shown on the right. 
+fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
