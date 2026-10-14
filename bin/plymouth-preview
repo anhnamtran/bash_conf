@@ -1,0 +1,38 @@
+#!/bin/bash
+# Preview the current Plymouth theme in an X11 window.
+# Safe on X11 + NVIDIA: with DISPLAY set, plymouthd uses the x11 renderer
+# instead of grabbing the DRM device (which blanks the desktop to a tty).
+# Usage: plymouth-preview [seconds]   (default 5; then a test password prompt)
+set -euo pipefail
+
+secs="${1:-5}"
+renderer=/usr/lib/plymouth/renderers/x11.so
+
+if [[ -z "${DISPLAY:-}" ]]; then
+  echo "DISPLAY is not set; run this from inside the X session" >&2
+  exit 1
+fi
+if [[ ! -e "$renderer" ]]; then
+  echo "missing $renderer; plymouthd would fall back to DRM and blank the screen" >&2
+  exit 1
+fi
+
+sudo -v
+if sudo plymouth --ping 2>/dev/null; then
+  echo "plymouthd is already running; quit it first with: sudo plymouth --quit" >&2
+  exit 1
+fi
+
+cleanup() { sudo plymouth --quit 2>/dev/null || true; }
+trap cleanup EXIT
+
+echo "Theme: $(plymouth-set-default-theme)"
+
+# Root authenticates to X with this user's cookie (sudo strips both vars).
+sudo env DISPLAY="$DISPLAY" XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" plymouthd
+sudo plymouth --show-splash
+sleep "$secs"
+
+echo "Type anything + Enter in the splash window to test the password prompt (Esc to skip)"
+# Discard stdout: ask-for-password echoes whatever was typed.
+sudo plymouth ask-for-password --prompt "Test passphrase" >/dev/null || true
