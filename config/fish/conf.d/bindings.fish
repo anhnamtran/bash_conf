@@ -1,4 +1,6 @@
 # Change to Vi mode
+set -g fish_key_bindings fish_vi_key_bindings
+
 function fish_user_key_bindings
    fish_vi_key_bindings insert
    # disabled for "jj-vcs" usage

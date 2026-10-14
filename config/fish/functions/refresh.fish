@@ -1,4 +1,4 @@
 function refresh
-   exec fish
    reload_completions
+   exec fish
 end

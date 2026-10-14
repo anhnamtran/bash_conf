@@ -1,1 +1,0 @@
-/home/andrew_nt/bin/fish-a-completions/completions/a.fish
