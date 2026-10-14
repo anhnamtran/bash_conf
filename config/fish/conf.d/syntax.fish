@@ -23,3 +23,12 @@ set -g fish_color_host normal
 set -g fish_color_cancel -r
 set -g fish_color_option brwhite
 set -g fish_color_keyword magenta
+set -g fish_color_host_remote yellow
+set -g fish_color_status red
+
+# pager colors (moved from fish 4.3's fish_frozen_theme.fish)
+set -g fish_pager_color_completion normal
+set -g fish_pager_color_description B3A06D yellow -i
+set -g fish_pager_color_prefix normal --bold --underline
+set -g fish_pager_color_progress brwhite --background=cyan
+set -g fish_pager_color_selected_background -r
