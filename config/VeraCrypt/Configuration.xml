@@ -25,6 +25,7 @@
 		<config key="MountDevicesOnLogon">0</config>
 		<config key="MountFavoritesOnLogon">0</config>
 		<config key="MountVolumesReadOnly">0</config>
+		<config key="MountNtfsWithKernelDriver">0</config>
 		<config key="MountVolumesRemovable">0</config>
 		<config key="NoHardwareCrypto">0</config>
 		<config key="NoKernelCrypto">0</config>

@@ -67,7 +67,7 @@ restic_unlock() {
 
 restic_backup() {
   banner "restic backup"
-  restic_run backup / \
+  restic_run backup / /boot \
     --one-file-system \
     --exclude-caches \
     --exclude-file="$RESTIC_EXCLUDE_FILE" \
