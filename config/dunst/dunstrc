@@ -246,8 +246,6 @@
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 50
 
-    # Paths to default icons (only necessary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/:/home/andrew_nt/icons/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
