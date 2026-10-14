@@ -6,13 +6,10 @@ require('obsidian').setup({
       path = "~/obsidian/Primary"
     }
   },
-  completion = {
-    -- If using nvim-cmp, set to true
-    nvim_cmp = false,
-  },
+  legacy_commands = false,
   new_notes_location = "current_dir",
   templates = {
-    subdir = "Templates",
+    folder = "Templates",
     substitutions = {
       ["date:YYYY-MM-DD"] = function()
         return os.date("%Y-%m-%d", os.time())
@@ -22,9 +19,8 @@ require('obsidian').setup({
   note_id_func = function(title)
     return title
   end,
-  disable_frontmatter = true,
-  open_app_foreground = false,
-  use_advanced_uri = true,
+  frontmatter = { enabled = false },
+  open = { use_advanced_uri = true },
   daily_notes = {
     folder = "Daily",
     date_format = "%Y-%m-%d %a",
@@ -54,7 +50,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile', 'VimEnter', 'BufEnter'
       -- Set keymaps
       vim.api.nvim_buf_set_keymap(0, 'n',
         '<leader>o',
-        '<CMD>ObsidianOpen<CR>', { noremap = true })
+        '<CMD>Obsidian open<CR>', { noremap = true })
     end
   end
 })
@@ -65,13 +61,13 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
     local file_path = vim.api.nvim_buf_get_name(0)
     if string.match(file_path, ".*/obsidian/.*") ~= nil then
       if vim.g.obsidian_follow_buf ~= nil and vim.g.obsidian_follow_buf then
-        vim.cmd("ObsidianOpen")
+        vim.cmd("Obsidian open")
       end
     end
   end
 })
 
--- set to true to always call ObsidianOpen when buffer changes
+-- set to true to always call `Obsidian open` when buffer changes
 vim.g.obsidian_follow_buf = false
 vim.api.nvim_create_user_command("ObsidianFollow", function (args)
   vim.g.obsidian_follow_buf = not args.bang
