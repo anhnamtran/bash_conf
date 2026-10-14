@@ -1,13 +1,31 @@
 #!/bin/bash
-# Preview the current Plymouth theme in an X11 window.
+# Preview the current Plymouth theme in a nested X server, replaying a boot.
 # Safe on X11 + NVIDIA: with DISPLAY set, plymouthd uses the x11 renderer
 # instead of grabbing the DRM device (which blanks the desktop to a tty).
-# Usage: plymouth-preview [seconds]   (default 5; then a test password prompt)
+# It draws into Xephyr, never the real display: the renderer's unmanaged
+# fullscreen windows confuse i3 when drawn on the live session.
+#
+# Usage: plymouth-preview [seconds]   (default 5)
+#   1. splash alone                          seconds
+#   2. LUKS prompt, auto-typed + submitted   seconds
+#   3. this boot's services/targets, in      2 x seconds
+#      start order (sampled to 40)
+#      (sent as status updates, like systemd does, and as messages, since
+#       many themes only draw messages)
+# Works with any theme; it only uses the client API.
 set -euo pipefail
 
 secs="${1:-5}"
 renderer=/usr/lib/plymouth/renderers/x11.so
+cache=/var/lib/plymouth/boot-duration
+cache_bak=/run/plymouth-preview.boot-duration
+max_units=40
+screen=1280x720
 
+if [[ ! "$secs" =~ ^[1-9][0-9]*$ ]]; then
+  echo "seconds must be a positive whole number, got: $secs" >&2
+  exit 1
+fi
 if [[ -z "${DISPLAY:-}" ]]; then
   echo "DISPLAY is not set; run this from inside the X session" >&2
   exit 1
@@ -16,23 +34,135 @@ if [[ ! -e "$renderer" ]]; then
   echo "missing $renderer; plymouthd would fall back to DRM and blank the screen" >&2
   exit 1
 fi
+for cmd in Xephyr xauth mcookie xdotool timeout; do
+  command -v "$cmd" >/dev/null || { echo "missing $cmd" >&2; exit 1; }
+done
+
+# Units this boot started, in order, up to the default target (when the
+# display manager takes over from plymouth). Lines: "<id>\t<description>".
+cutoff=$(systemctl show -p ActiveEnterTimestampMonotonic --value "$(systemctl get-default)")
+mapfile -t units < <(
+  systemctl show --type=service,target --state=active \
+    -p Id -p Description -p ActiveEnterTimestampMonotonic |
+  awk -v RS= -F'\n' -v cut="$cutoff" '{
+      id = desc = ""; ts = 0
+      for (i = 1; i <= NF; i++) {
+        split($i, kv, "=")
+        v = substr($i, length(kv[1]) + 2)
+        if (kv[1] == "Id") id = v
+        else if (kv[1] == "Description") desc = v
+        else if (kv[1] == "ActiveEnterTimestampMonotonic") ts = v
+      }
+      if (ts > 0 && (cut == 0 || ts <= cut)) printf "%s\t%s\t%s\n", ts, id, desc
+    }' |
+  sort -n | cut -f2- |
+  # Sample evenly down to max_units so each message stays readable.
+  awk -v max="$max_units" '{ l[NR] = $0 }
+    END { step = NR > max ? NR / max : 1
+          for (i = 1; i <= NR; i += step) print l[int(i)] }'
+)
+if ((${#units[@]} == 0)); then
+  echo "found no units to replay" >&2
+  exit 1
+fi
+interval=$(awk -v t=$((secs * 2)) -v n=${#units[@]} 'BEGIN { printf "%.3f", t / n }')
+
+# Root LUKS mapping name from cryptdevice=<dev>:<name>, as the encrypt hook
+# shows it; falls back to a generic name.
+cryptname=$(sed -nE 's/.*cryptdevice=[^: ]+:([^: ]+).*/\1/p' /proc/cmdline)
+cryptname="${cryptname:-root}"
 
 sudo -v
-if sudo plymouth --ping 2>/dev/null; then
+if sudo timeout 5 plymouth --ping 2>/dev/null; then
   echo "plymouthd is already running; quit it first with: sudo plymouth --quit" >&2
   exit 1
 fi
 
-cleanup() { sudo plymouth --quit 2>/dev/null || true; }
+# Nested X server with its own cookie, on the first free display number.
+n=10
+while [[ -e /tmp/.X11-unix/X$n || -e /tmp/.X$n-lock ]]; do n=$((n + 1)); done
+nested=":$n"
+authf=$(mktemp --tmpdir plymouth-preview.XXXXXX)
+xauth -q -f "$authf" add "$nested" . "$(mcookie)"
+Xephyr "$nested" -auth "$authf" -screen "$screen" -title plymouth-preview \
+  -no-host-grab -nolisten tcp >/dev/null 2>&1 &
+xephyr_pid=$!
+for _ in {1..50}; do [[ -S /tmp/.X11-unix/X$n ]] && break; sleep 0.1; done
+if [[ ! -S /tmp/.X11-unix/X$n ]]; then
+  echo "Xephyr did not start on $nested" >&2
+  kill "$xephyr_pid" 2>/dev/null || true
+  rm -f "$authf"
+  exit 1
+fi
+# A tiled Xephyr window would crop its fixed-size screen; float it on i3.
+if pgrep -xu "$USER" i3 >/dev/null; then
+  i3-msg -q "[title=\"^plymouth-preview\"] floating enable, move position center" || true
+fi
+nx() { DISPLAY="$nested" XAUTHORITY="$authf" "$@"; }
+
+# Root-side teardown: quit the daemon, close Xephyr, then restore the
+# boot-duration cache (plymouthd may rewrite it on quit, which would skew the
+# real boot's progress estimate).
+teardown="timeout 5 plymouth --wait quit; kill $xephyr_pid 2>/dev/null; [ -f $cache_bak ] && cp -p $cache_bak $cache && rm -f $cache_bak"
+[[ -f "$cache" ]] && sudo cp -p "$cache" "$cache_bak"
+
+cleanup() {
+  sudo sh -c "$teardown" 2>/dev/null || true
+  rm -f "$authf"
+}
 trap cleanup EXIT
+
+# Watchdog: tears down even if this script is SIGKILLed.
+sudo -b sh -c "sleep $((secs * 4 + 20)); $teardown" >/dev/null 2>&1
 
 echo "Theme: $(plymouth-set-default-theme)"
 
-# Root authenticates to X with this user's cookie (sudo strips both vars).
-sudo env DISPLAY="$DISPLAY" XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" plymouthd
-sudo plymouth --show-splash
+# Root authenticates to Xephyr with its cookie (sudo strips both vars).
+sudo env DISPLAY="$nested" XAUTHORITY="$authf" plymouthd --mode=boot
+sudo timeout 5 plymouth show-splash
+
+echo "[1/3] splash (${secs}s)"
 sleep "$secs"
 
-echo "Type anything + Enter in the splash window to test the password prompt (Esc to skip)"
-# Discard stdout: ask-for-password echoes whatever was typed.
-sudo plymouth ask-for-password --prompt "Test passphrase" >/dev/null || true
+echo "[2/3] password prompt for '$cryptname' (${secs}s, typed automatically)"
+sudo plymouth ask-for-password \
+  --prompt="A password is required to access the ${cryptname} volume" >/dev/null 2>&1 &
+ask_pid=$!
+sleep "$(awk -v t="$secs" 'BEGIN { printf "%.3f", t / 2 }')"
+
+# Type a dummy passphrase into the splash window. Everything here targets the
+# nested display, so keystrokes can never reach a window on the real desktop.
+win=$(nx xdotool search --onlyvisible --pid "$(pgrep -xo plymouthd)" 2>/dev/null | head -n1 || true)
+typed=0
+if [[ -n "$win" ]]; then
+  nx xdotool windowfocus "$win" 2>/dev/null || true
+  sleep 0.3
+  if [[ "$(nx xdotool getwindowfocus 2>/dev/null)" == "$win" ]]; then
+    nx xdotool type --delay 120 "preview"
+    sleep 0.5
+    nx xdotool key Return
+    typed=1
+  fi
+fi
+if ((typed == 0)); then
+  echo "  could not focus the splash window; cancelling the prompt instead" >&2
+  kill "$ask_pid" 2>/dev/null || true
+fi
+timeout 3 tail --pid="$ask_pid" -f /dev/null 2>/dev/null || kill "$ask_pid" 2>/dev/null || true
+
+echo "[3/3] replaying ${#units[@]} units ($((secs * 2))s)"
+# One root shell for the whole replay instead of a sudo per unit.
+sudo sh -c '
+  interval=$1; shift
+  msg=
+  for line in "$@"; do
+    id=${line%%	*}; desc=${line#*	}
+    timeout 2 plymouth update --status="$id"
+    # The daemon keeps every displayed message until hidden, so replace.
+    [ -n "$msg" ] && timeout 2 plymouth hide-message --text="$msg"
+    msg="Starting ${desc}..."
+    timeout 2 plymouth display-message --text="$msg"
+    sleep "$interval"
+  done
+  [ -n "$msg" ] && timeout 2 plymouth hide-message --text="$msg"
+' sh "$interval" "${units[@]}"
