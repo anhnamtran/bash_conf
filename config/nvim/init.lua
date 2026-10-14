@@ -1,7 +1,3 @@
--- be iMproved and encoding settings
-vim.opt.compatible = false
-vim.opt.encoding = 'utf-8'
-
 -- enable termguicolors
 vim.opt.termguicolors = true
 
@@ -81,7 +77,7 @@ vim.opt.wildmode = 'longest,full'
 vim.opt.updatetime = 100
 
 -- diff view settings
-vim.opt.diffopt = 'filler,context:5'
+vim.opt.diffopt:append('context:5')
 vim.opt.foldopen:remove { 'search' }
 
 -- make jumplist behave like tag stack
@@ -144,20 +140,13 @@ vim.opt.grepformat:prepend { '%f:%l:%c:%m' }
 -- highlight the current line
 vim.opt.cursorline = true
 
--- disable Backgorund Color Erase and enable 24-bit colors
-vim.cmd([[
-if &term =~ '256color'
-  set t_ut=
-endif
-]])
-
 -- highlight trailing whitespaces
 vim.api.nvim_create_autocmd(
   {'BufWinEnter', 'BufWinLeave', 'InsertEnter', 'InsertLeave', 'TermOpen'}, {
   group = vim.api.nvim_create_augroup('ExtraWhiteSpaceHi', {}),
   pattern = '*',
   callback = function(args)
-    local is_terminal = vim.api.nvim_buf_get_option(0, 'buftype') == 'terminal'
+    local is_terminal = vim.bo[0].buftype == 'terminal'
     vim.cmd([[match DiffDelete /\s\+$/]])
     if args.event == 'InsertEnter' then
       vim.cmd([[match DiffDelete /\s\+\%#\@<!$/]])
@@ -290,7 +279,7 @@ nmap('<leader>cd', ':lcd %:p:h<CR>', true)
 -- jump to the last window
 nmap('<C-w>;', ':wincmd p<CR>')
 -- maximize the current window
-nmap('<C-w>z', ':MaximizerToggle')
+nmap('<C-w>z', ':MaximizerToggle<CR>')
 -- open nerdtree
 nmap('<C-n>n', ':NERDTreeToggle<CR>')
 

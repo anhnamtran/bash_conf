@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*',
   callback = function ()
     local excluded_filetypes = { 'log', 'qt' }
-    local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+    local filetype = vim.bo[0].filetype
     for index, value in ipairs(excluded_filetypes) do
       if value == filetype then
         vim.b.coc_enabled = false

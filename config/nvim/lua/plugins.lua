@@ -2,7 +2,7 @@
 
 -- Only required if you have packer configured as `opt`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -17,18 +17,17 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- nvim companion plugins
   'nvim-lua/plenary.nvim',
-  'nvim-lua/popup.nvim',
 
   -- Themes
   'navarasu/onedark.nvim',
 
   -- GUIs elements
   'nvim-lualine/lualine.nvim',
-  'kyazdani42/nvim-web-devicons',
+  'nvim-tree/nvim-web-devicons',
   'lewis6991/gitsigns.nvim',
   'mhinz/vim-startify',
   'lukas-reineke/indent-blankline.nvim',
-  { 'rcarriga/nvim-notify', tag = 'v3.14.1' },
+  'rcarriga/nvim-notify',
 
   -- Syntax handling
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', branch = 'main', lazy = false },
@@ -97,14 +96,13 @@ require('lazy').setup({
   'windwp/nvim-autopairs',
   { "folke/flash.nvim", lazy = true },
   'karb94/neoscroll.nvim',
-  'ojroques/nvim-osc52',
-  { 'norcalli/nvim-colorizer.lua',
+  { 'brenoprata10/nvim-highlight-colors',
     config = function()
-      require('colorizer').setup()
+      require('nvim-highlight-colors').setup({})
     end },
 
   { 'sakhnik/nvim-gdb', build = './install.sh' },
-  { 'epwalsh/obsidian.nvim',
+  { 'obsidian-nvim/obsidian.nvim',
     version = '*',
     lazy = true,
     event = {
