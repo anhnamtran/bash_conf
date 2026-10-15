@@ -7,6 +7,7 @@ pager = "bat"
 editor = "nvim"
 diff-editor = ":builtin"
 show-cryptographic-signatures = true
+default-command = "log"
 
 [snapshot]
 auto-update-stale = true
