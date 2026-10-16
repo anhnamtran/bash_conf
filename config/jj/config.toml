@@ -8,10 +8,28 @@ backend = "gpg"
 key = "0AEE9545AE0298E3E4980216A3227B8ECEB2AEC3"
 
 [ui]
-pager = "bat"
+pager = ["hunk", "pager"]
 editor = "nvim"
-diff-editor = ":builtin"
+diff-editor = "oyui"
+diff-formatter = ":git"
+diff-instructions = false
+merge-editor = "nvimdiff"
 show-cryptographic-signatures = true
+default-command = "log"
+
+[merge-tools.nvimdiff]
+program = "nvim"
+merge-args = [
+  "-d", "$output", "$left", "$base", "$right",
+  "-c", "wincmd J",
+  "-c", "norm ]c",
+]
+merge-tool-edits-conflict-markers = true
+conflict-marker-style = "git"
+
+[merge-tools.oyui]
+program = "oyui"
+edit-args = ["diff", "$left", "$right"]
 
 [snapshot]
 auto-update-stale = true
