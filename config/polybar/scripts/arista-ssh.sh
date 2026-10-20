@@ -6,7 +6,11 @@ assh() {
   if ! type arista-ssh &>/dev/null; then
     exit 1
   fi
-  arista-ssh "$@"
+  if [ "$1" = "login" ]; then
+    timeout -k 30 30 arista-ssh "$@"
+  else
+    arista-ssh "$@"
+  fi
 }
 
 assh_check_auth() {
@@ -17,7 +21,7 @@ assh_login() {
   notify-send -a "polybar" "Arista SSH" "Logging in..."
   echo "󰂪 "
 
-  timeout 30 -k 30 assh login &>/dev/null
+  assh login &>/dev/null
 
   if [ "$sleep_pid" -ne 0 ]; then
     kill $sleep_pid >/dev/null 2>&1
