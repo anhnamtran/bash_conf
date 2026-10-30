@@ -24,3 +24,6 @@ format_signed_off_by_trailer(self)
     "(no sig)",
   )
 '''
+
+[aliases]
+ed = ["editor"]
