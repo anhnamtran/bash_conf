@@ -46,6 +46,12 @@ user_pref("toolkit.telemetry.unified", false);
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
+// Firefox's built-in captcha (incl. Turnstile) pass/fail monitoring
+user_pref("captchadetection.actor.enabled", false);
+// Extension recommendations in about:addons
+user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
+// Connectivity check to Mozilla's servers on every network change
+user_pref("network.connectivity-service.enabled", false);
 
 // --- Performance ------------------------------------------------------------
 
