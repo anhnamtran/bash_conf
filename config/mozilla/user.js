@@ -37,6 +37,16 @@ user_pref("network.prefetch-next", false);
 user_pref("network.http.speculative-parallel-limit", 0);
 user_pref("privacy.resistFingerprinting.reduceTimerPrecision.jitter", false);
 
+// --- Telemetry / remote experiments -----------------------------------------
+
+// Normandy + Shield studies can flip prefs remotely (e.g. sidebar.nimbus rollouts)
+user_pref("app.normandy.enabled", false);
+user_pref("app.shield.optoutstudies.enabled", false);
+user_pref("toolkit.telemetry.unified", false);
+user_pref("toolkit.telemetry.archive.enabled", false);
+user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.telemetry", false);
+
 // --- Performance ------------------------------------------------------------
 
 user_pref("layers.gpu-process.enabled", true);
