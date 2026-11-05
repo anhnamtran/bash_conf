@@ -25,6 +25,7 @@ user_pref("browser.touchmode.auto", true);
 user_pref("full-screen-api.warning.timeout", 500);
 user_pref("widget.gtk.native-emoji-dialog", false);
 user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
+user_pref("browser.urlbar.resultMenu.keyboardAccessible", false)
 user_pref("browser.fixup.dns_first_for_single_words", true);
 user_pref("browser.translations.enable", false);
 user_pref("browser.tabs.groups.smart.enabled", false);
