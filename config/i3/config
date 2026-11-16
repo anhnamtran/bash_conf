@@ -341,13 +341,12 @@ assign [class="dev.zed.Zed"] $ws_dev
 ################################################################################
 ## apps hidden on startup ##
 exec --no-startup-id unclutter
-exec --no-startup-id picom
+# exec --no-startup-id picom
 exec --no-startup-id ibus-daemon --xim -d
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/bin/inSync
 exec --no-startup-id blueman-applet
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id 1password --silent
 # enable caffeine to prevent sleep lock during fullscreened videos
 exec --no-startup-id /usr/bin/caffeine
 exec --no-startup-id /usr/bin/caffeine-indicator
