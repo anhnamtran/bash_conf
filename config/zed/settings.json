@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cursor_shape": "block",
+  "agent_ui_font_size": 14.0,
   "search": {
     "include_ignored": false
   },
@@ -38,7 +40,7 @@
   "terminal": {
     "shell": "system",
     "font_weight": 400.0,
-    "font_size": 15.0,
+    "font_size": 12.0,
     "font_family": "Iosevka Term",
     "dock": "bottom"
   },
@@ -73,13 +75,7 @@
   },
   "agent_servers": {
     "codex-acp": {
-      "default_config_options": {
-        "mode": "agent-full-access"
-      },
-      "type": "registry",
-      "env": {
-        "PATH": "/home/andrew_nt/bin:/home/andrew_nt/.local/bin:$PATH",
-      },
+      "type": "registry"
     },
     "claude-acp": {
       "default_config_options": {
@@ -129,7 +125,8 @@
       "projects": [
         {
           "paths": [
-            "/src"
+            "/src",
+            "/home/andrew_nt/code/gazelle_arista"
           ]
         }
       ],
@@ -154,6 +151,11 @@
         {
           "paths": [
             "/home/andrew_nt/bin/gitar"
+          ]
+        },
+        {
+          "paths": [
+            "/home/andrew_nt/code/ai_plugins"
           ]
         },
         {
@@ -189,11 +191,6 @@
           "paths": [
             "/src"
           ]
-        },
-        {
-          "paths": [
-            "/tmp"
-          ]
         }
       ],
       "nickname": "bazel-runfiles"
@@ -212,6 +209,39 @@
     },
     {
       "host": "andrew-nt-volga-rel",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/src"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "andrew-nt-pesto-test",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/andrew_nt/code/ai_plugins"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "andrew-nt-esc-rotation-web",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/andrew_nt/code/ardc-config"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "andrew-nt-auto-pkg-v2",
       "args": [],
       "projects": [
         {
@@ -261,8 +291,8 @@
   "vim_mode": true,
   "base_keymap": "VSCode",
   "icon_theme": "Catppuccin Frappé",
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "ui_font_size": 14.0,
+  "buffer_font_size": 12.0,
   "theme": {
     "mode": "dark",
     "light": "One Dark",

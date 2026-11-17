@@ -91,6 +91,7 @@
       "ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
       "ctrl-l": ["terminal::SendKeystroke", "ctrl-l"],
       "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+      "shift-enter": ["terminal::SendText", "\u001b[13;2u"],
     },
     "unbind": {
       "ctrl-t": "project_symbols::Toggle",
@@ -106,7 +107,7 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-e": "terminal::ScrollLineDown",
-      "ctrl-y": "terminal::ScrollLineUp"
+      "ctrl-y": "terminal::ScrollLineUp",
     }
   },
   // Tab bindings
@@ -123,6 +124,7 @@
       "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
       "ctrl-w": "editor::DeleteToPreviousWordStart",
       "ctrl-alt-shift-t": "terminal_panel::Toggle",
+      "shift-enter": ["terminal::SendText", "\u001b[13;2u"],
     },
     "unbind": {
       "ctrl-t": "project_symbols::Toggle",
@@ -164,4 +166,9 @@
       "shift-escape": "workspace::ToggleEditorZoom",
     },
   },
+  {
+    "unbind": {
+      "ctrl-alt-shift-o": "dev::ResetFrameOverlayStats"
+    }
+  }
 ]
