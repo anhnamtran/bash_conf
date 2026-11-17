@@ -58,8 +58,8 @@ bind <C-[> back
 " Have ZZ correctly restore multiple windows
 bind ZZ !s killall firefox-bin
 
-unbind --mode=normal <C-b>
-bind --mode=browser <C-b> tab #
+unbind --mode=browser <C-b>
+bind --mode=normal <C-b> tab #
 
 bind --mode=ex <C-w> text.backward_kill_word
 bind --mode=input <C-w> text.backward_kill_word
