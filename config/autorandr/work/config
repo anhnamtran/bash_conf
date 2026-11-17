@@ -28,24 +28,20 @@ output eDP-1
 off
 output DP-4-1-5
 crtc 2
-filter bilinear
 mode 3840x2160
-pos 4800x0
+pos 3840x0
 rate 60.00
 rotate right
-transform 1.250000,0.000000,0.000000,0.000000,1.250000,0.000000,0.000000,0.000000,1.000000
 x-prop-audio auto
 x-prop-broadcast_rgb Automatic
 x-prop-max_bpc 12
 x-prop-non_desktop 0
 output DP-4-2
 crtc 0
-filter bilinear
 mode 3840x2160
-pos 0x922
+pos 0x738
 primary
 rate 60.00
-transform 1.250000,0.000000,0.000000,0.000000,1.250000,0.000000,0.000000,0.000000,1.000000
 x-prop-audio auto
 x-prop-broadcast_rgb Automatic
 x-prop-max_bpc 12
